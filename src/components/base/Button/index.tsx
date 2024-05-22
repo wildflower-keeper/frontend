@@ -1,17 +1,16 @@
 "use client";
 
-import React from "react";
-import { ButtonHTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes } from "react";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({
+const Button: React.FC<ButtonProps> = ({
   className,
   onClick,
   type = "button",
   children,
   ...props
-}: ButtonProps) => {
+}) => {
   return (
     <button className={className} type={type} onClick={onClick} {...props}>
       {children}

@@ -10,8 +10,16 @@ module.exports = {
     "plugin:jsx-a11y/recommended",
     "prettier",
     "plugin:@tanstack/eslint-plugin-query/recommended",
+    "eslint:recommended",
+    "plugin:prettier/recommended",
   ],
-  plugins: ["@typescript-eslint", "react", "react-hooks", "jsx-a11y"],
+  plugins: [
+    "@typescript-eslint",
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "prettier",
+  ],
   settings: {
     react: {
       version: "detect",
@@ -38,6 +46,7 @@ module.exports = {
     node: true,
   },
   rules: {
+    "prettier/prettier": "error",
     "react/jsx-filename-extension": [
       1,
       { extensions: [".js", ".jsx", ".ts", ".tsx"] },
@@ -51,6 +60,19 @@ module.exports = {
         tsx: "never",
       },
     ],
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        some: ["nesting", "id"],
+      },
+    ],
+    "react/jsx-props-no-spreading": [0],
+    "react/button-has-type": [0],
+    "react/function-component-definition": [
+      2,
+      { namedComponents: "arrow-function" },
+    ],
+    "arrow-body-style": ["error", "always"],
   },
   globals: {
     NodeJS: true,

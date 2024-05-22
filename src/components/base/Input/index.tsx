@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import { InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes } from "react";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement>;
 
