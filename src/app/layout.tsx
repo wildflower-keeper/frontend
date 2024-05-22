@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "@/styles/globals.css";
+import localFont from "next/font/local";
 
-const inter = Inter({ subsets: ["latin"] });
-
+const pretendard = localFont({
+  src: "./fonts/PretendardVariable.woff2",
+  display: "swap",
+  weight: "45 920",
+});
 export const metadata: Metadata = {
-  title: "들꽃지기 어드민",
+  title: "들꽃지기",
   description: "관리자 페이지",
 };
 
@@ -16,7 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr">
-      <body className={inter.className}>{children}</body>
+      <body className={pretendard.className}>
+        <div className="h-screen">{children}</div>
+      </body>
     </html>
   );
 }
