@@ -20,7 +20,7 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({
   isRequired = false,
 }) => {
   return (
-    <div className="flex flex-col gap-2 w-60">
+    <div className="flex flex-col gap-2 w-64">
       <label htmlFor={id} className={`smallFont ${isRequired && "relative"}`}>
         {isRequired && (
           <p className="absolute -top-3 -left-3 text-2xl text-red-400 w-fit h-fit">
