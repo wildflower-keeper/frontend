@@ -9,3 +9,27 @@
     text-wrap: balance;
   }
 }
+
+select option[value=""][disabled] {
+	display: none;
+}
+
+select:required:invalid {
+  @apply text-fontWeak
+}
+
+body {
+  @apply text-lg text-fontDefault
+}
+
+.headerFont {
+  @apply text-xl font-semibold
+}
+
+.primaryButtonDefault {
+  @apply bg-primary text-white rounded-md w-64 py-2 mx-auto
+}
+
+.smallFont {
+  @apply text-base
+}

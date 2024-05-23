@@ -12,16 +12,18 @@ export const metadata: Metadata = {
   description: "관리자 페이지",
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="kr">
       <body className={pretendard.className}>
-        <div className="h-screen">{children}</div>
+        <div className="flex flex-col min-h-screen h-auto">{children}</div>
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

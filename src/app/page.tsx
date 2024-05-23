@@ -1,8 +1,11 @@
-import Login from "@/components/pages/Login";
-import React from "react";
+import { redirect } from "next/navigation";
+
+const isLogin = false;
 
 const Home = () => {
-  return <Login />;
+  if (!isLogin) {
+    redirect("/auth");
+  }
 };
 
 export default Home;
