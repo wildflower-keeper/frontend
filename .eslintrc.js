@@ -73,6 +73,7 @@ module.exports = {
       { namedComponents: "arrow-function" },
     ],
     "arrow-body-style": ["error", "always"],
+    "react/require-default-props": [0],
   },
   globals: {
     NodeJS: true,
