@@ -1,7 +1,8 @@
+import FindPwd from "@/components/client/FindPwd";
 import React from "react";
 
-const Loss = () => {
-  return <div>비밀번호 찾기 페이지</div>;
+const AuthFindPwd = () => {
+  return <FindPwd />;
 };
 
-export default Loss;
+export default AuthFindPwd;
