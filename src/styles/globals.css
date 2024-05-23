@@ -33,3 +33,7 @@ body {
 .smallFont {
   @apply text-base
 }
+
+.authHeader {
+  @apply h-32 flex justify-center items-center headerFont text-center
+}
