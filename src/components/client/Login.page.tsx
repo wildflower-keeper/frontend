@@ -4,9 +4,9 @@ import Header from "../base/Header";
 
 const Login = () => {
   return (
-    <div className="flex-grow flex flex-col gap-14">
-      <Header className="h-32 flex justify-center items-center">
-        <h1 className="flex flex-col headerFont justify-center items-center">
+    <>
+      <Header className="authHeader">
+        <h1>
           <p>센터 관리자 Web서비스</p>
           <p>로그인</p>
         </h1>
@@ -14,7 +14,7 @@ const Login = () => {
       <div className="flex-grow flex justify-center">
         <LoginForm />
       </div>
-    </div>
+    </>
   );
 };
 

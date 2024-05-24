@@ -30,6 +30,14 @@ body {
   @apply bg-primary text-white rounded-md w-64 py-2 mx-auto
 }
 
+.primaryButtonSmall {
+  @apply bg-primary text-white w-14 h-9 my-auto ml-auto rounded-md
+}
+
 .smallFont {
   @apply text-base
+}
+
+.authHeader {
+  @apply h-32 flex justify-center items-center headerFont text-center
 }
