@@ -1,8 +1,8 @@
-import Login from "@/components/client/Login";
+import Login from "@/components/client/Login.page";
 import React from "react";
 
-const Auth = () => {
+const AuthLoginPage = () => {
   return <Login />;
 };
 
-export default Auth;
+export default AuthLoginPage;

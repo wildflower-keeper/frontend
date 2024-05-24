@@ -1,8 +1,8 @@
-import FindPwd from "@/components/client/FindPwd";
+import FindPwd from "@/components/client/FindPwd.page";
 import React from "react";
 
-const AuthFindPwd = () => {
+const AuthFindPwdPage = () => {
   return <FindPwd />;
 };
 
-export default AuthFindPwd;
+export default AuthFindPwdPage;
