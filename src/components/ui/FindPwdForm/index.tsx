@@ -2,9 +2,16 @@
 
 import InputWithLabel from "@/components/InputWithLabel";
 import Button from "@/components/base/Button";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const FindPwdForm = () => {
+  const router = useRouter();
+
+  const handleAuth = () => {
+    router.push("/auth/findpwd/authphone");
+  };
+
   return (
     <div className="w-80">
       <form
@@ -27,9 +34,7 @@ const FindPwdForm = () => {
               labelName="전화번호"
               type="tel"
             />
-            <Button className=" bg-primary text-white w-14 h-9 my-auto ml-auto rounded-md">
-              찾기
-            </Button>
+            <Button className="primaryButtonSmall">찾기</Button>
           </div>
 
           <InputWithLabel
@@ -46,7 +51,11 @@ const FindPwdForm = () => {
           />
         </div>
 
-        <Button type="submit" className="primaryButtonDefault">
+        <Button
+          type="submit"
+          className="primaryButtonDefault"
+          onClick={handleAuth}
+        >
           인증하기
         </Button>
       </form>
