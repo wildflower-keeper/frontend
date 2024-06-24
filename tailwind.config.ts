@@ -15,7 +15,7 @@ const config: Config = {
         fontWeak: "#999999",
         secondary: "#FFBA0A",
         borderDefault: "#EEEEEE",
-        dashboardBackgroundColor: "#EEF2F4",
+        dashboardBackgroundColor: "#F5F5F5",
         graphCardBackgroundColor: "#98A4B9",
       },
     },

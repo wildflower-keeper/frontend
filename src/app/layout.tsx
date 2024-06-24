@@ -20,7 +20,9 @@ const RootLayout = ({
   return (
     <html lang="kr">
       <body className={pretendard.className}>
-        <div className="flex flex-col min-h-screen h-auto">{children}</div>
+        <div className="flex flex-col min-h-screen h-auto mainBackGround">
+          {children}
+        </div>
       </body>
     </html>
   );

@@ -3,7 +3,6 @@
 @tailwind utilities;
 @import "reset.css";
 
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -11,33 +10,37 @@
 }
 
 select option[value=""][disabled] {
-	display: none;
+  display: none;
 }
 
 select:required:invalid {
-  @apply text-fontWeak
+  @apply text-fontWeak;
 }
 
 body {
-  @apply text-lg text-fontDefault
+  @apply text-lg text-fontDefault;
 }
 
 .headerFont {
-  @apply text-xl font-semibold
+  @apply text-xl font-semibold;
 }
 
 .primaryButtonDefault {
-  @apply bg-primary text-white rounded-md w-64 py-2 mx-auto
+  @apply bg-primary text-white rounded-md w-64 py-2 mx-auto;
 }
 
 .primaryButtonSmall {
-  @apply bg-primary text-white w-14 h-9 my-auto ml-auto rounded-md
+  @apply bg-primary text-white w-14 h-9 my-auto ml-auto rounded-md;
 }
 
 .smallFont {
-  @apply text-base
+  @apply text-base;
 }
 
 .authHeader {
-  @apply h-32 flex justify-center items-center headerFont text-center
+  @apply h-32 flex justify-center items-center headerFont text-center;
+}
+
+.mainBackGround {
+  @apply bg-gradient-to-b from-white to-[#ECF9EF];
 }
