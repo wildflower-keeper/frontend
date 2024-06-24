@@ -30,6 +30,7 @@ module.exports = {
     "import/resolver": {
       typescript: "./tsconfig.json",
     },
+    "import/core-modules": ["@mui/x-charts"],
   },
   parserOptions: {
     project: "./tsconfig.json",
