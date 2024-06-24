@@ -8,7 +8,7 @@ const pretendard = localFont({
   weight: "45 920",
 });
 export const metadata: Metadata = {
-  title: "들꽃지기",
+  title: "들꽃가드닝",
   description: "관리자 페이지",
 };
 
