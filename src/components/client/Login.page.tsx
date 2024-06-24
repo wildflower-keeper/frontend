@@ -1,8 +1,14 @@
 import React from "react";
+import customAxios from "@/utils/api/axios";
 import LoginForm from "../ui/LoginForm";
 import Header from "../base/Header";
 
-const Login = () => {
+const Login = async () => {
+  const res = await customAxios({
+    method: "GET",
+    url: "/api/v1/shared/shelters",
+  });
+  const shelters = res.data;
   return (
     <>
       <Header className="authHeader">
@@ -12,7 +18,7 @@ const Login = () => {
         </h1>
       </Header>
       <div className="flex-grow flex justify-center">
-        <LoginForm />
+        <LoginForm shelters={shelters} />
       </div>
     </>
   );
