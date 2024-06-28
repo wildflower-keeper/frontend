@@ -2,7 +2,7 @@
 
 import InputWithLabel from "@/components/InputWithLabel";
 import Button from "@/components/base/Button";
-import customAxios from "@/utils/api/axios";
+// import customAxios from "@/utils/api/axios";
 import Link from "next/link";
 import React, { useState } from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
@@ -34,23 +34,21 @@ const LoginForm = ({ shelters }: LoginFormType) => {
     setLoginInfo({ ...loginInfo, shelterId: e.target.value });
   };
 
-  const handleLoginSubmit = async () => {
-    try {
-      const submitData = {
-        ...loginInfo,
-        shelterId: parseInt(loginInfo.shelterId, 10),
-      };
-      const res = await customAxios({
-        method: "POST",
-        url: "/api/v1/shelter-admin/login",
-        data: JSON.stringify(submitData),
-      });
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
+  // const handleLoginSubmit = async () => {
+  //   try {
+  //     const submitData = {
+  //       ...loginInfo,
+  //       shelterId: parseInt(loginInfo.shelterId, 10),
+  //     };
+  //     const res = await customAxios({
+  //       method: "POST",
+  //       url: "/api/v1/shelter-admin/login",
+  //       data: JSON.stringify(submitData),
+  //     });
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // };
   return (
     <div className="w-80">
       <form
@@ -116,7 +114,7 @@ const LoginForm = ({ shelters }: LoginFormType) => {
         <Button
           type="submit"
           className="primaryButtonDefault"
-          onClick={handleLoginSubmit}
+          //onClick={handleLoginSubmit}
         >
           로그인
         </Button>

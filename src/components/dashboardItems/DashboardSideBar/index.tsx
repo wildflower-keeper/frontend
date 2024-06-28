@@ -3,7 +3,6 @@
 import Button from "@/components/base/Button";
 import useDashboardStore from "@/store/useDashboard";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";

@@ -30,7 +30,7 @@ const GraphCard = ({
             value={60}
             startAngle={-90}
             endAngle={90}
-            sx={(theme) => {
+            sx={() => {
               return {
                 [`& .${gaugeClasses.valueText}`]: {
                   fontSize: 40,

@@ -3,13 +3,6 @@
 import React from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 
-const mookReasons = {
-  가족: 11,
-  모임: 22,
-  일: 11,
-  기타: 5,
-};
-
 const PieChartContainer = () => {
   return (
     <div className="flex flex-col gap-1 w-fit">

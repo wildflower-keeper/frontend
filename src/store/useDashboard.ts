@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 type userDashboardStoreType = {
   dashboard: "dashboard" | "management";
-  setDashboard: (userInfo: "dashboard" | "management") => void;
+  setDashboard: (newDashboard: "dashboard" | "management") => void;
 };
 
 const useDashboardStore = create<userDashboardStoreType>((set) => ({
