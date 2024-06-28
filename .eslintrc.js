@@ -30,6 +30,7 @@ module.exports = {
     "import/resolver": {
       typescript: "./tsconfig.json",
     },
+    "import/core-modules": ["@mui/x-charts"],
   },
   parserOptions: {
     project: "./tsconfig.json",
@@ -46,7 +47,12 @@ module.exports = {
     node: true,
   },
   rules: {
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto",
+      },
+    ],
     "react/jsx-filename-extension": [
       1,
       { extensions: [".js", ".jsx", ".ts", ".tsx"] },
