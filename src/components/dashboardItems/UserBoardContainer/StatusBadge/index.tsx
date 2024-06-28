@@ -26,10 +26,10 @@ const statusClassName = {
 const StatusBadge = ({ type }: StatusBadgeType) => {
   return (
     <div
-      className={`flex text-sm rounded-3xl px-3 w-[84px] py-2 border font-semibold ${statusClassName[type]}`}
+      className={`flex text-sm rounded-3xl px-2 w-[74px] py-1 border font-semibold border-solid ${statusClassName[type]}`}
     >
       <GoDotFill size={18} color={statusColor[type]} className="my-auto" />
-      <p className="w-full text-center">{status[type]}</p>
+      <p className="w-fit text-center mx-auto">{status[type]}</p>
     </div>
   );
 };
