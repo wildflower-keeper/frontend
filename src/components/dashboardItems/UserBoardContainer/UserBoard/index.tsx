@@ -7,7 +7,11 @@ type UserBoardType = {
   size?: "default" | "large";
 };
 
-const temp = [
+type tempItemType = {
+  type: "outting" | "inSelter" | "unknown";
+};
+
+const temp: tempItemType[] = [
   {
     type: "outting",
   },
@@ -29,8 +33,8 @@ const UserBoard = ({ size = "default" }: UserBoardType) => {
       className={`${size === "default" && "w-[460px]"} ${size === "large" && "w-full"}`}
     >
       <UserBoardHeader size={size} />
-      {temp.map(({ type, idx }) => {
-        return <UserBoardItem key={`${idx}${type}`} type={type} size={size} />;
+      {temp.map(({ type }) => {
+        return <UserBoardItem key={`${type}`} type={type} size={size} />;
       })}
     </div>
   );
