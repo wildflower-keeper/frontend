@@ -111,11 +111,7 @@ const LoginForm = ({ shelters }: LoginFormType) => {
           </div>
         </div>
 
-        <Button
-          type="submit"
-          className="primaryButtonDefault"
-          //onClick={handleLoginSubmit}
-        >
+        <Button type="submit" className="primaryButtonDefault">
           로그인
         </Button>
       </form>

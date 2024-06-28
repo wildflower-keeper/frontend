@@ -25,14 +25,18 @@ const DashboardSideBar = () => {
           <AiFillHome
             size={26}
             color={dashboard === "dashboard" ? "#666666" : "#CCCCCC"}
-            onClick={() => setDashboard("dashboard")}
+            onClick={() => {
+              setDashboard("dashboard");
+            }}
           />
         </Button>
         <Button>
           <FaUser
             size={26}
             color={dashboard === "management" ? "#666666" : "#CCCCCC"}
-            onClick={() => setDashboard("management")}
+            onClick={() => {
+              setDashboard("management");
+            }}
           />
         </Button>
       </div>

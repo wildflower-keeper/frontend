@@ -17,4 +17,5 @@ const dateInfo = () => {
   return `${today.getMonth() + 1}월 ${today.getDate()}일 (${days[today.getDay()]}) ${String(today.getHours()).padStart(2, "0")}:${String(today.getUTCMinutes()).padStart(2, "0")}`;
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export { dateInfo };

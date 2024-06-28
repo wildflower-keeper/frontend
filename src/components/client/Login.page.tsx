@@ -1,14 +1,16 @@
 import React from "react";
-import customAxios from "@/utils/api/axios";
 import LoginForm from "../ui/LoginForm";
 import Header from "../base/Header";
 
 const Login = async () => {
-  const res = await customAxios({
-    method: "GET",
-    url: "/api/v1/shared/shelters",
-  });
-  const shelters = res.data;
+  // const res = await customAxios({
+  //   method: "GET",
+  //   url: "/api/v1/shared/shelters",
+  // });
+  const shelters = [
+    { shelterId: 1, shelterName: "쉼터" },
+    { shelterId: 2, shelterName: "놀이터" },
+  ];
   return (
     <>
       <Header className="authHeader">
