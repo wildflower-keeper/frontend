@@ -2,10 +2,17 @@ import React from "react";
 
 const ManagerInfo = () => {
   return (
-    <div className="flex-col items-end">
-      <p className="font-semibold text-xl">비전트레이닝센터</p>
-      <p className="">책임자 ○○○ (010-3333-4444)</p>
-      <p>당직자 ○○○ (010-5555-6666)</p>
+    <div className="flex flex-col items-end gap-2">
+      <div className="flex gap-2">
+        <span className="font-semibold">책임자</span>
+        <span>○○○</span>
+        <span className="text-fontWeak">010-3333-4444</span>
+      </div>
+      <div className="flex gap-2">
+        <span className="font-semibold">당직자</span>
+        <span>○○○</span>
+        <span className="text-fontWeak">010-5555-6666</span>
+      </div>
     </div>
   );
 };

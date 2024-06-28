@@ -3,9 +3,9 @@ import CurrentCard from "./CurrentCard";
 
 const UserCurrentSituation = () => {
   return (
-    <div className="w-full">
+    <div>
       <div className=" mb-2">
-        <p className="font-bold">이용자 현황</p>
+        <p className="font-bold text-xl">이용자 현황</p>
       </div>
       <div className="flex gap-3">
         <CurrentCard

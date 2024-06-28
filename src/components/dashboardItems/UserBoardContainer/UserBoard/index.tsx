@@ -4,6 +4,7 @@ import UserBoardHeader from "../../UserBoardHeader";
 
 type UserBoardType = {
   //  type: "outting" | "inSelter" | "unknown";
+  size?: "default" | "large";
 };
 
 const temp = [
@@ -22,12 +23,14 @@ const temp = [
   },
 ];
 
-const UserBoard = ({}: UserBoardType) => {
+const UserBoard = ({ size = "default" }: UserBoardType) => {
   return (
-    <div className=" w-[460px]">
-      <UserBoardHeader />
+    <div
+      className={`${size === "default" && "w-[460px]"} ${size === "large" && "w-full"}`}
+    >
+      <UserBoardHeader size={size} />
       {temp.map(({ type, idx }) => {
-        return <UserBoardItem key={`${idx}${type}`} type={type} />;
+        return <UserBoardItem key={`${idx}${type}`} type={type} size={size} />;
       })}
     </div>
   );

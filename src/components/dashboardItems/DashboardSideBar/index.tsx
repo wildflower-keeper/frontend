@@ -1,9 +1,18 @@
+"use client";
+
+import Button from "@/components/base/Button";
+import useDashboardStore from "@/store/useDashboard";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import React from "react";
+import { AiFillHome } from "react-icons/ai";
+import { FaUser } from "react-icons/fa";
 
 const DashboardSideBar = () => {
+  const { dashboard, setDashboard } = useDashboardStore();
+
   return (
-    <div className="flex-col h-min-full bg-white pt-5 w-24">
+    <div className="flex flex-col h-min-full bg-white pt-5 w-24">
       <div className=" w-10 h-10 mx-auto">
         <Image
           src="/assets/logos/wildflower_logo.png"
@@ -11,6 +20,22 @@ const DashboardSideBar = () => {
           width={40}
           height={40}
         />
+      </div>
+      <div className="grow flex flex-col justify-center items-center gap-8">
+        <Button>
+          <AiFillHome
+            size={26}
+            color={dashboard === "dashboard" ? "#666666" : "#CCCCCC"}
+            onClick={() => setDashboard("dashboard")}
+          />
+        </Button>
+        <Button>
+          <FaUser
+            size={26}
+            color={dashboard === "management" ? "#666666" : "#CCCCCC"}
+            onClick={() => setDashboard("management")}
+          />
+        </Button>
       </div>
     </div>
   );
