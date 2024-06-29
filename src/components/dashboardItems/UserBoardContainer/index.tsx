@@ -1,5 +1,3 @@
-/* eslint-disable import/no-cycle */
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -8,22 +6,10 @@ import { formatDateTime } from "@/utils/date/date";
 import { getCookie } from "@/utils/cookie";
 import SearchInput from "./SearchInput";
 import SearchSelector from "./SearchSelector";
-import UserBoard from "./UserBoard";
+import UserBoard, { userItemType } from "./UserBoard";
 
 type UserBoardContainerType = {
   type?: "manageBoard" | "userSimpleBoard";
-};
-
-export type userItemType = {
-  id: number;
-  name: string;
-  room: string;
-  birthDate: string;
-  targetDateSleepover: boolean;
-  lastLocationStatus: "outting" | "IN_SHELTER" | "unknown";
-  lastLocationTrackedAt: string;
-  phoneNumber: string;
-  admissionDate: string;
 };
 
 export type userItemListType = userItemType[];
@@ -32,19 +18,7 @@ const UserBoardContainer = ({
   type = "userSimpleBoard",
 }: UserBoardContainerType) => {
   const [filter] = useState("NONE");
-  const [userItemList, setUserItemList] = useState<userItemListType>([
-    {
-      id: 0,
-      name: "",
-      room: "",
-      birthDate: "",
-      targetDateSleepover: false,
-      lastLocationStatus: "IN_SHELTER",
-      lastLocationTrackedAt: "",
-      phoneNumber: "",
-      admissionDate: "",
-    },
-  ]);
+  const [userItemList, setUserItemList] = useState<userItemListType>([]);
   useEffect(() => {
     const fetchUser = async () => {
       const res = await customAxios({

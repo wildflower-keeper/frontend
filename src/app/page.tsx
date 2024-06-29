@@ -7,7 +7,6 @@ import { useEffect } from "react";
 
 const Home = () => {
   const { isLogin, setIsLogin } = useLoginStore();
-  console.log(isLogin);
   useEffect(() => {
     if (!isLogin) {
       if (getCookie("authToken")) {

@@ -1,46 +1,40 @@
-/* eslint-disable import/no-cycle */
-
 "use client";
 
 import React, { useEffect, useState } from "react";
 import customAxios from "@/utils/api/axios";
 import { getCookie, removeCookie } from "@/utils/cookie";
 import axios from "axios";
-import PinNumberInfo from "./PinNumberInfo";
-import ManagerInfo from "./ManagerInfo";
-import DateInfo from "./DateInfo";
 import useLoginStore from "@/store/useLogin";
 import { redirect } from "next/navigation";
-
-export type chiefOfficersType = {
-  chiefOfficerId: number;
-  name: string;
-  phoneNumber: string;
-};
-
-export type dutyOfficersType = chiefOfficersType & { targetDate: string };
+import PinNumberInfo from "./PinNumberInfo";
+import ManagerInfo, { chiefOfficerType, dutyOfficerType } from "./ManagerInfo";
+import DateInfo from "./DateInfo";
 
 type adminInfoType = {
   shelterName: string;
-  chiefOfficers: chiefOfficersType;
-  dutyOfficers: dutyOfficersType;
+  chiefOfficers: chiefOfficerType[];
+  dutyOfficers: dutyOfficerType[];
 };
 
 const AdminInfoContainer = () => {
   const { isLogin, setIsLogin } = useLoginStore();
   const [adminInfo, setAdminInfo] = useState<adminInfoType>({
     shelterName: "",
-    chiefOfficers: {
-      chiefOfficerId: 0,
-      name: "",
-      phoneNumber: "",
-    },
-    dutyOfficers: {
-      chiefOfficerId: 0,
-      name: "",
-      phoneNumber: "",
-      targetDate: "",
-    },
+    chiefOfficers: [
+      {
+        chiefOfficerId: 0,
+        name: "",
+        phoneNumber: "",
+      },
+    ],
+    dutyOfficers: [
+      {
+        chiefOfficerId: 0,
+        name: "",
+        phoneNumber: "",
+        targetDate: "",
+      },
+    ],
   });
   useEffect(() => {
     const fetchAdminInfo = async () => {
@@ -58,7 +52,6 @@ const AdminInfoContainer = () => {
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.status === 403) {
-            console.log(error);
             removeCookie("authToken");
             setIsLogin(false);
           }
@@ -69,7 +62,7 @@ const AdminInfoContainer = () => {
   }, []);
 
   useEffect(() => {
-    if (!isLogin) {
+    if (!isLogin && !getCookie("authToken")) {
       redirect("/auth");
     }
   }, [isLogin]);
@@ -77,11 +70,11 @@ const AdminInfoContainer = () => {
   return (
     <div className="w-full flex justify-between">
       <DateInfo />
-      <div className="flex min-w-96 items-center rounded-lg border border-dashed border-[#CCCCCC] px-5 py-4 justify-between">
+      <div className="flex items-center rounded-lg border border-dashed border-[#CCCCCC] px-5 py-4 justify-between gap-6">
         <PinNumberInfo shelterName={adminInfo.shelterName} />
         <ManagerInfo
-          chiefOfficers={adminInfo.chiefOfficers}
-          dutyOfficers={adminInfo.dutyOfficers}
+          chiefOfficer={adminInfo.chiefOfficers[0]}
+          dutyOfficer={adminInfo.dutyOfficers[0]}
         />
       </div>
     </div>

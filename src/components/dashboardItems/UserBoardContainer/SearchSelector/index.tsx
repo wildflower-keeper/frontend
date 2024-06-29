@@ -9,10 +9,7 @@ const SearchSelector = () => {
         <option value="" disabled selected>
           필터
         </option>
-        <option>상태</option>
         <option>이름</option>
-        <option>호실</option>
-        <option>전화번호</option>
       </select>
     </div>
   );
