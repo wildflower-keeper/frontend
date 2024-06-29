@@ -27,7 +27,7 @@ const PinNumberInfo = ({ shelterName }: PinNumberInfoType) => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 min-w-60">
       <p className="font-semibold text-xl">{shelterName}</p>
       <div className="flex gap-1">
         <span className="text-fontWeak">오늘의 핀번호</span>

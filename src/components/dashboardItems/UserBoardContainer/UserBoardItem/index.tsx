@@ -4,7 +4,7 @@ import StatusBadge from "../StatusBadge";
 
 type UserBoardItemType = {
   name: string;
-  lastLocationStatus: "outting" | "IN_SHELTER" | "unknown";
+  lastLocationStatus: "OUTING" | "IN_SHELTER" | "UNKNOWN";
   room: string;
   phoneNumber: string;
   size: "default" | "large";
@@ -23,9 +23,9 @@ const UserBoardItem = ({
 }: UserBoardItemType) => {
   return (
     <div
-      className={`rounded-2xl px-7 py-3 bg-white mb-3 grid ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}
+      className={`rounded-2xl px-7 py-3 bg-white mb-3 grid ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-7"}`}
     >
-      <StatusBadge type={lastLocationStatus} />
+      {size === "default" && <StatusBadge type={lastLocationStatus} />}
       <div className="h-fit my-auto text-center">{name}</div>
       <div className="h-fit my-auto text-center">{room}</div>
       <div

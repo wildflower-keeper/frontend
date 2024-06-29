@@ -2,24 +2,24 @@ import React from "react";
 import { GoDotFill } from "react-icons/go";
 
 type StatusBadgeType = {
-  type: "outting" | "IN_SHELTER" | "unknown";
+  type: "OUTING" | "IN_SHELTER" | "UNKNOWN";
 };
 
 const statusColor = {
-  outting: "#FFC200",
-  unknown: "#D9D9D9",
+  OUTING: "#FFC200",
+  UNKNOWN: "#D9D9D9",
   IN_SHELTER: "#00B226",
 } as const;
 
 const status = {
-  outting: "외출",
-  unknown: "미확인",
+  OUTING: "외출",
+  UNKNOWN: "미확인",
   IN_SHELTER: "재실",
 };
 
 const statusClassName = {
-  outting: "bg-[#FFC200]/10 text-[#FFC200] border-[#FFC200]",
-  unknown: "bg-[#D9D9D9]/10 text-[#D9D9D9] border-[#D9D9D9]",
+  OUTING: "bg-[#FFC200]/10 text-[#FFC200] border-[#FFC200]",
+  UNKNOWN: "bg-[#D9D9D9]/10 text-[#D9D9D9] border-[#D9D9D9]",
   IN_SHELTER: "bg-[#00B226]/10 text-[#00B226] border-[#00B226]",
 };
 

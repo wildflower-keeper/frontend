@@ -3,20 +3,9 @@
 import React, { useEffect, useState } from "react";
 import customAxios from "@/utils/api/axios";
 import { getCookie } from "@/utils/cookie";
-// eslint-disable-next-line import/no-cycle
-import UserBoard from "../UserBoardContainer/UserBoard";
+import UserBoard, { sleepoverItemType } from "../UserBoardContainer/UserBoard";
 import SearchInput from "../UserBoardContainer/SearchInput";
 import SearchSelector from "../UserBoardContainer/SearchSelector";
-
-export type sleepoverItemType = {
-  sleepoverId: number;
-  homelessId: number;
-  homelessName: string;
-  homelessPhoneNumber: string;
-  startDate: string;
-  endDate: string;
-  createdAt: string;
-};
 
 export type sleepoverListType = sleepoverItemType[];
 

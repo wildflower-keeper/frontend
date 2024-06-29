@@ -7,9 +7,11 @@ type UserBoardHeaderType = {
 const UserBoardHeader = ({ size }: UserBoardHeaderType) => {
   return (
     <div
-      className={`px-7 py-3 grid ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}
+      className={`px-7 py-3 grid ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-7"}`}
     >
-      <div className="h-fit my-auto text-center">상태</div>
+      {size === "default" && (
+        <div className="h-fit my-auto text-center">상태</div>
+      )}
       <div className="h-fit my-auto text-center">이름</div>
       <div className="h-fit my-auto text-center">호실</div>
       <div
