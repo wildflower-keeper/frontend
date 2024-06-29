@@ -22,6 +22,12 @@ const RootLayout = ({
   return (
     <ReactCookieProvider>
       <html lang="kr">
+        <head>
+          <meta
+            httpEquiv="Content-Security-Policy"
+            content="upgrade-insecure-requests"
+          />
+        </head>
         <body className={pretendard.className}>
           <div className="flex flex-col min-h-screen h-auto mainBackGround">
             {children}
