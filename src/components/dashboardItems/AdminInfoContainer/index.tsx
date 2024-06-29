@@ -6,6 +6,8 @@ import React, { useEffect, useState } from "react";
 import customAxios from "@/utils/api/axios";
 import { getCookie, removeCookie } from "@/utils/cookie";
 import axios from "axios";
+import useLoginStore from "@/store/useLogin";
+import { redirect } from "next/navigation";
 import PinNumberInfo from "./PinNumberInfo";
 import ManagerInfo from "./ManagerInfo";
 import DateInfo from "./DateInfo";
@@ -25,6 +27,7 @@ type adminInfoType = {
 };
 
 const AdminInfoContainer = () => {
+  const { isLogin, setIsLogin } = useLoginStore();
   const [adminInfo, setAdminInfo] = useState<adminInfoType>({
     shelterName: "",
     chiefOfficers: {
@@ -55,13 +58,21 @@ const AdminInfoContainer = () => {
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.status === 403) {
+            console.log(error);
             removeCookie("authToken");
+            setIsLogin(false);
           }
         }
       }
     };
     fetchAdminInfo();
   }, []);
+
+  useEffect(() => {
+    if (!isLogin) {
+      redirect("/auth");
+    }
+  }, [isLogin]);
 
   return (
     <div className="w-full flex justify-between">
