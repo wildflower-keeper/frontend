@@ -1,7 +1,24 @@
+"use client";
+
+import useLoginStore from "@/store/useLogin";
+import { getCookie } from "@/utils/cookie";
 import { redirect } from "next/navigation";
+import { useEffect } from "react";
 
 const Home = () => {
-  redirect("/auth");
+  const { isLogin, setIsLogin } = useLoginStore();
+  console.log(isLogin);
+  useEffect(() => {
+    if (!isLogin) {
+      if (getCookie("authToken")) {
+        setIsLogin(true);
+        redirect("/dashboard");
+      }
+      if (!getCookie("authToken")) {
+        redirect("/auth");
+      }
+    }
+  }, [isLogin, getCookie]);
 };
 
 export default Home;
