@@ -1,10 +1,8 @@
 import axios from "axios";
 
 const customAxios = axios.create({
-  baseURL: "http://localhost:8080",
-  withCredentials: true,
+  baseURL: "http://api.wildflower-gardening.com",
   headers: {
-    "Content-Type": "application/json",
     accept: "*/*",
   },
 });

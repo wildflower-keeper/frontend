@@ -2,9 +2,12 @@
 
 import InputWithLabel from "@/components/InputWithLabel";
 import Button from "@/components/base/Button";
-// import customAxios from "@/utils/api/axios";
+import useLoginStore from "@/store/useLogin";
+import customAxios from "@/utils/api/axios";
+import { setCookie } from "@/utils/cookie";
 import Link from "next/link";
-import React, { useState } from "react";
+import { redirect } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 
 type shelterType = {
@@ -22,67 +25,82 @@ type loginInfoType = {
 };
 
 const LoginForm = ({ shelters }: LoginFormType) => {
+  const { isLogin, setIsLogin } = useLoginStore();
   const [loginInfo, setLoginInfo] = useState<loginInfoType>({
     shelterId: "",
     password: "password_example",
   });
-
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginInfo({ ...loginInfo, password: e.target.value });
   };
   const handleShelterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setLoginInfo({ ...loginInfo, shelterId: e.target.value });
   };
-
-  // const handleLoginSubmit = async () => {
-  //   try {
-  //     const submitData = {
-  //       ...loginInfo,
-  //       shelterId: parseInt(loginInfo.shelterId, 10),
-  //     };
-  //     const res = await customAxios({
-  //       method: "POST",
-  //       url: "/api/v1/shelter-admin/login",
-  //       data: JSON.stringify(submitData),
-  //     });
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // };
+  useEffect(() => {
+    if (isLogin) {
+      redirect("dashboard");
+    }
+  }, [isLogin]);
+  const handleLoginSubmit = async () => {
+    try {
+      const submitData = {
+        id: parseInt(loginInfo.shelterId, 10),
+        pw: loginInfo.password,
+      };
+      console.log(submitData);
+      const res = await customAxios({
+        method: "POST",
+        url: "/api/v1/shelter-admin/login",
+        data: JSON.stringify(submitData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      console.log(res);
+      if (res.status === 200) {
+        setCookie("authToken", res.data.authToken);
+        setIsLogin(true);
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
   return (
     <div className="w-80">
       <form
         className="flex flex-col gap-14"
         onSubmit={(e) => {
-          return e.preventDefault();
+          e.preventDefault();
         }}
       >
-        <div className="flex flex-col gap-10">
-          <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col gap-10 items-center">
+          <div className="flex flex-col gap-2 w-fit">
             <label htmlFor="centerSelector" className="smallFont">
               센터명
             </label>
-            <select
-              id="centerSelector"
-              className="py-1"
-              onChange={handleShelterChange}
-              value={loginInfo.shelterId}
-              required
-            >
-              <option value="" disabled selected>
-                센터를 선택해주세요.
-              </option>
-              {shelters?.map(({ shelterId, shelterName }) => {
-                return (
-                  <option key={shelterId} value={shelterId}>
-                    {shelterName}
-                  </option>
-                );
-              })}
-            </select>
+            <div className="py-2 bg-white w-fit rounded-lg">
+              <select
+                id="centerSelector"
+                onChange={handleShelterChange}
+                value={loginInfo.shelterId}
+                required
+              >
+                <option value="" disabled selected>
+                  센터를 선택해주세요.
+                </option>
+                {shelters?.map(({ shelterId, shelterName }) => {
+                  return (
+                    <option key={shelterId} value={shelterId}>
+                      {shelterName}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 w-fit">
             <InputWithLabel
               value={loginInfo.password}
               onChange={(e) => {
@@ -111,7 +129,11 @@ const LoginForm = ({ shelters }: LoginFormType) => {
           </div>
         </div>
 
-        <Button type="submit" className="primaryButtonDefault">
+        <Button
+          type="submit"
+          className="primaryButtonDefault"
+          onClick={handleLoginSubmit}
+        >
           로그인
         </Button>
       </form>

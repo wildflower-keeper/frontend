@@ -1,6 +1,7 @@
 import React from "react";
 import UserBoardItem from "../UserBoardItem";
 import UserBoardHeader from "../../UserBoardHeader";
+import { v4 as uuidv4 } from "uuid";
 
 type UserBoardType = {
   //  type: "outting" | "inSelter" | "unknown";
@@ -34,7 +35,7 @@ const UserBoard = ({ size = "default" }: UserBoardType) => {
     >
       <UserBoardHeader size={size} />
       {temp.map(({ type }) => {
-        return <UserBoardItem key={`${type}`} type={type} size={size} />;
+        return <UserBoardItem key={uuidv4()} type={type} size={size} />;
       })}
     </div>
   );

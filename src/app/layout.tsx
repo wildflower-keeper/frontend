@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
 import localFont from "next/font/local";
+import { CookiesProvider } from "react-cookie";
+import ReactCookieProvider from "@/components/ReactCookieProvider";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -10,6 +12,7 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: "들꽃가드닝",
   description: "관리자 페이지",
+  icons: "/assets/logos/wildflower_logo.png",
 };
 
 const RootLayout = ({
@@ -18,13 +21,15 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang="kr">
-      <body className={pretendard.className}>
-        <div className="flex flex-col min-h-screen h-auto mainBackGround">
-          {children}
-        </div>
-      </body>
-    </html>
+    <ReactCookieProvider>
+      <html lang="kr">
+        <body className={pretendard.className}>
+          <div className="flex flex-col min-h-screen h-auto mainBackGround">
+            {children}
+          </div>
+        </body>
+      </html>
+    </ReactCookieProvider>
   );
 };
 
