@@ -4,12 +4,14 @@ import StatusBadge from "../StatusBadge";
 
 type UserBoardItemType = {
   name: string;
-  lastLocationStatus: "OUTING" | "IN_SHELTER" | "UNKNOWN";
+  lastLocationStatus?: "OUTING" | "IN_SHELTER" | "UNKNOWN";
   room: string;
   phoneNumber: string;
   size: "default" | "large";
   startDate?: string;
   endDate?: string;
+  reason?: string;
+  emergencyContact?: string;
 };
 
 const UserBoardItem = ({
@@ -20,12 +22,16 @@ const UserBoardItem = ({
   phoneNumber,
   startDate,
   endDate,
+  reason,
+  emergencyContact,
 }: UserBoardItemType) => {
   return (
     <div
-      className={`rounded-2xl px-7 py-3 bg-white mb-3 grid ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-7"}`}
+      className={`rounded-2xl  py-3 bg-white grid ${size === "default" && "grid-cols-5 px-7"} ${size === "large" && "grid-cols-7 pr-7"}`}
     >
-      {size === "default" && <StatusBadge type={lastLocationStatus} />}
+      {size === "default" && lastLocationStatus && (
+        <StatusBadge type={lastLocationStatus} />
+      )}
       <div className="h-fit my-auto text-center">{name}</div>
       <div className="h-fit my-auto text-center">{room}</div>
       <div
@@ -38,8 +44,10 @@ const UserBoardItem = ({
           <div className="h-fit my-auto text-center col-span-2">
             {`${startDate?.split("-").join(".")} ~ ${endDate?.split("-").join(".")}`}{" "}
           </div>
-          <div className="h-fit my-auto text-center">모임</div>
-          <div className="h-fit my-auto text-center">010-8888-4444</div>
+          <div className="h-fit my-auto text-center">{reason}</div>
+          <div className="h-fit my-auto text-center">
+            {emergencyContact && formatPhoneNumber(emergencyContact)}
+          </div>
         </>
       )}
     </div>

@@ -21,19 +21,19 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({
   isRequired = false,
 }) => {
   return (
-    <div className="flex flex-col gap-2 w-fit">
+    <div className="flex flex-col gap-2">
       <label htmlFor={id} className={`smallFont ${isRequired && "relative"}`}>
         {isRequired && (
-          <p className="absolute -top-3 -left-3 text-2xl text-red-400 w-fit h-fit">
+          <p className="absolute -top-3 -left-3 text-2xl text-red-400 h-fit">
             •
           </p>
         )}
         <p>{labelName}</p>
       </label>
-      <div className="bg-white rounded-lg px-1 w-fit">
+      <div className="bg-white rounded-lg px-1 shadow-sm shadow-primary/30">
         <Input
           id={id}
-          className="py-1 placeholder:text-fontWeak"
+          className="py-1 px-2 placeholder:text-fontWeak w-full"
           placeholder={placeholder}
           type={type}
           value={value}

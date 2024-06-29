@@ -10,6 +10,9 @@ export type sleepoverItemType = {
   homelessId: number;
   homelessName: string;
   homelessPhoneNumber: string;
+  homelessRoom: string;
+  emergencyContact: string;
+  reason: string;
   startDate: string;
   endDate: string;
   createdAt: string;
@@ -40,39 +43,56 @@ const UserBoard = ({
 }: UserBoardType) => {
   return (
     <div
-      className={`${size === "default" && "w-[560px]"} ${size === "large" && "w-full"}`}
+      className={` ${size === "default" && "w-[560px]"} ${size === "large" && "w-full"}`}
     >
       <UserBoardHeader size={size} />
-      {size === "default" &&
-        userItemList?.map(({ name, lastLocationStatus, room, phoneNumber }) => {
-          return (
-            <UserBoardItem
-              key={uuidv4()}
-              name={name}
-              lastLocationStatus={lastLocationStatus ?? "UNKNOWN"}
-              size={size}
-              room={room}
-              phoneNumber={phoneNumber}
-            />
-          );
-        })}
-      {size === "large" &&
-        sleepoverList?.map(
-          ({ homelessName, homelessPhoneNumber, startDate, endDate }) => {
-            return (
-              <UserBoardItem
-                key={uuidv4()}
-                name={homelessName}
-                lastLocationStatus="OUTING"
-                size={size}
-                room="101"
-                phoneNumber={homelessPhoneNumber}
-                startDate={startDate}
-                endDate={endDate}
-              />
-            );
-          },
-        )}
+      <div>
+        <ul className="flex flex-col gap-4 h-[420px]">
+          {size === "default" &&
+            userItemList?.map(
+              ({ name, lastLocationStatus, room, phoneNumber }) => {
+                return (
+                  <li key={uuidv4()}>
+                    <UserBoardItem
+                      name={name}
+                      lastLocationStatus={lastLocationStatus ?? "UNKNOWN"}
+                      size={size}
+                      room={room}
+                      phoneNumber={phoneNumber}
+                    />
+                  </li>
+                );
+              },
+            )}
+          {size === "large" &&
+            sleepoverList?.map(
+              ({
+                homelessName,
+                homelessPhoneNumber,
+                homelessRoom,
+                emergencyContact,
+                reason,
+                startDate,
+                endDate,
+              }) => {
+                return (
+                  <li key={uuidv4()}>
+                    <UserBoardItem
+                      name={homelessName}
+                      size={size}
+                      room={homelessRoom}
+                      phoneNumber={homelessPhoneNumber}
+                      startDate={startDate}
+                      reason={reason}
+                      endDate={endDate}
+                      emergencyContact={emergencyContact}
+                    />
+                  </li>
+                );
+              },
+            )}
+        </ul>
+      </div>
     </div>
   );
 };
