@@ -26,9 +26,9 @@ const ManagerInfo = ({ chiefOfficer, dutyOfficer }: ManagerInfoType) => {
       </div>
       <div className="flex gap-2 min-w-64 justify-start">
         <span className="font-semibold">당직자</span>
-        <span>{dutyOfficer.name}</span>
+        <span>{dutyOfficer?.name}</span>
         <span className="text-fontWeak">
-          {formatPhoneNumber(dutyOfficer.phoneNumber)}
+          {formatPhoneNumber(dutyOfficer?.phoneNumber)}
         </span>
       </div>
     </div>
