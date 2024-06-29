@@ -2,6 +2,9 @@
 
 import InputWithLabel from "@/components/InputWithLabel";
 import Button from "@/components/base/Button";
+import CustomSelectBox, {
+  shelterType,
+} from "@/components/base/CustomSelectBox";
 import useLoginStore from "@/store/useLogin";
 import customAxios from "@/utils/api/axios";
 import { setCookie } from "@/utils/cookie";
@@ -9,11 +12,6 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-
-type shelterType = {
-  shelterId: number;
-  shelterName: string;
-};
 
 type LoginFormType = {
   shelters: shelterType[];
@@ -33,8 +31,8 @@ const LoginForm = ({ shelters }: LoginFormType) => {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginInfo({ ...loginInfo, password: e.target.value });
   };
-  const handleShelterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setLoginInfo({ ...loginInfo, shelterId: e.target.value });
+  const handleShelterChange = (value: number) => {
+    setLoginInfo({ ...loginInfo, shelterId: String(value) });
   };
   useEffect(() => {
     if (isLogin) {
@@ -72,32 +70,17 @@ const LoginForm = ({ shelters }: LoginFormType) => {
         }}
       >
         <div className="flex flex-col gap-10 items-center">
-          <div className="flex flex-col gap-2 w-fit">
+          <div className="flex flex-col gap-2 w-full">
             <label htmlFor="centerSelector" className="smallFont">
               센터명
             </label>
-            <div className="py-2 bg-white w-fit rounded-lg">
-              <select
-                id="centerSelector"
-                onChange={handleShelterChange}
-                value={loginInfo.shelterId}
-                required
-              >
-                <option value="" disabled selected>
-                  센터를 선택해주세요.
-                </option>
-                {shelters?.map(({ shelterId, shelterName }) => {
-                  return (
-                    <option key={shelterId} value={shelterId}>
-                      {shelterName}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
+            <CustomSelectBox
+              shelters={shelters}
+              handleShelterChange={handleShelterChange}
+            />
           </div>
 
-          <div className="flex flex-col gap-3 w-fit">
+          <div className="flex flex-col gap-3 w-full">
             <InputWithLabel
               value={loginInfo.password}
               onChange={(e) => {
@@ -107,7 +90,6 @@ const LoginForm = ({ shelters }: LoginFormType) => {
               placeholder="비밀번호"
               labelName="비밀번호"
               type="password"
-              isRequired
             />
             <div className="flex gap-1">
               <AiOutlineInfoCircle
