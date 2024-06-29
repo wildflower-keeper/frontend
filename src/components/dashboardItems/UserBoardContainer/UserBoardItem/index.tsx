@@ -1,6 +1,6 @@
 import React from "react";
-import StatusBadge from "../StatusBadge";
 import formatPhoneNumber from "@/utils/common";
+import StatusBadge from "../StatusBadge";
 
 type UserBoardItemType = {
   name: string;

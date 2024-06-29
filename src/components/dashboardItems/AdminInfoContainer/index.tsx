@@ -1,13 +1,14 @@
+/* eslint-disable import/no-cycle */
+
 "use client";
 
 import React, { useEffect, useState } from "react";
-import DateInfo from "./DateInfo";
-import ManagerInfo from "./ManagerInfo";
-import PinNumberInfo from "./PinNumberInfo";
 import customAxios from "@/utils/api/axios";
 import { getCookie, removeCookie } from "@/utils/cookie";
 import axios from "axios";
-import { redirect } from "next/navigation";
+import PinNumberInfo from "./PinNumberInfo";
+import ManagerInfo from "./ManagerInfo";
+import DateInfo from "./DateInfo";
 
 export type chiefOfficersType = {
   chiefOfficerId: number;
