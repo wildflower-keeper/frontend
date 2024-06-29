@@ -1,7 +1,7 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 import UserBoardItem from "../UserBoardItem";
 import UserBoardHeader from "../../UserBoardHeader";
-import { v4 as uuidv4 } from "uuid";
 
 type UserBoardType = {
   //  type: "outting" | "inSelter" | "unknown";

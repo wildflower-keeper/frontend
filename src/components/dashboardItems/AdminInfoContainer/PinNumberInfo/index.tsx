@@ -5,8 +5,7 @@ import { getCookie } from "@/utils/cookie";
 import React, { useEffect, useState } from "react";
 
 const PinNumberInfo = () => {
-  const [pinNumber, setPinNumber] = useState<number>();
-  console.log("token", getCookie("authToken"));
+  const [pinNumber, setPinNumber] = useState<number>(0);
   useEffect(() => {
     const fetchPinNumber = async () => {
       const res = await customAxios({
@@ -15,13 +14,11 @@ const PinNumberInfo = () => {
         headers: {
           "auth-token": getCookie("authToken"),
         },
-        withCredentials: true,
       });
-      const data = res.data;
-      console.log(data);
-      setPinNumber(data.pin);
+      if (res.status === 200) {
+        setPinNumber(res.data.pin);
+      }
     };
-
     fetchPinNumber();
   }, []);
 

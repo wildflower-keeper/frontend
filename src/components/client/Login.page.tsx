@@ -1,7 +1,7 @@
 import React from "react";
+import customAxios from "@/utils/api/axios";
 import LoginForm from "../ui/LoginForm";
 import Header from "../base/Header";
-import customAxios from "@/utils/api/axios";
 
 const Login = async () => {
   const res = await customAxios({

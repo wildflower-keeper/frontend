@@ -11,7 +11,7 @@ const Layout: React.FC<pageLayoutProps> = ({ children }) => {
       <div>
         <div className="w-40 h-10 m-3">
           <Image
-            src={"/assets/logos/wildflower_logo_with_name.png"}
+            src="/assets/logos/wildflower_logo_with_name.png"
             width={150}
             height={40}
             alt="로고"

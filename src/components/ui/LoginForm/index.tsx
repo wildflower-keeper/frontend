@@ -42,28 +42,22 @@ const LoginForm = ({ shelters }: LoginFormType) => {
     }
   }, [isLogin]);
   const handleLoginSubmit = async () => {
-    try {
-      const submitData = {
-        id: parseInt(loginInfo.shelterId, 10),
-        pw: loginInfo.password,
-      };
-      console.log(submitData);
-      const res = await customAxios({
-        method: "POST",
-        url: "/api/v1/shelter-admin/login",
-        data: JSON.stringify(submitData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
-      console.log(res);
-      if (res.status === 200) {
-        setCookie("authToken", res.data.authToken);
-        setIsLogin(true);
-      }
-    } catch (error) {
-      throw error;
+    const submitData = {
+      id: parseInt(loginInfo.shelterId, 10),
+      pw: loginInfo.password,
+    };
+
+    const res = await customAxios({
+      method: "POST",
+      url: "/api/v1/shelter-admin/login",
+      data: JSON.stringify(submitData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.status === 200) {
+      setCookie("authToken", res.data.authToken);
+      setIsLogin(true);
     }
   };
   return (

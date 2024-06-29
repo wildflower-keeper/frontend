@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
 import localFont from "next/font/local";
-import { CookiesProvider } from "react-cookie";
 import ReactCookieProvider from "@/components/ReactCookieProvider";
 
 const pretendard = localFont({
