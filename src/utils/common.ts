@@ -1,7 +1,4 @@
 function formatPhoneNumber(phoneNumber: string) {
-  if (!phoneNumber) {
-    return "";
-  }
   const pattern =
     phoneNumber.length === 11
       ? /(\d{3})(\d{4})(\d{4})/
