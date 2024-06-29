@@ -40,7 +40,7 @@ const UserBoard = ({
 }: UserBoardType) => {
   return (
     <div
-      className={`${size === "default" && "w-[500px]"} ${size === "large" && "w-full"}`}
+      className={`${size === "default" && "w-[560px]"} ${size === "large" && "w-full"}`}
     >
       <UserBoardHeader size={size} />
       {size === "default" &&
