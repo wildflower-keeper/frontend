@@ -21,7 +21,7 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({
   isRequired = false,
 }) => {
   return (
-    <div className="flex flex-col gap-2 w-64">
+    <div className="flex flex-col gap-2 w-fit">
       <label htmlFor={id} className={`smallFont ${isRequired && "relative"}`}>
         {isRequired && (
           <p className="absolute -top-3 -left-3 text-2xl text-red-400 w-fit h-fit">
@@ -30,14 +30,16 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({
         )}
         <p>{labelName}</p>
       </label>
-      <Input
-        id={id}
-        className="py-1 placeholder:text-fontWeak"
-        placeholder={placeholder}
-        type={type}
-        value={value}
-        onChange={onChange}
-      />
+      <div className="bg-white rounded-lg px-1 w-fit">
+        <Input
+          id={id}
+          className="py-1 placeholder:text-fontWeak"
+          placeholder={placeholder}
+          type={type}
+          value={value}
+          onChange={onChange}
+        />
+      </div>
     </div>
   );
 };

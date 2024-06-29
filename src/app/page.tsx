@@ -1,12 +1,7 @@
 import { redirect } from "next/navigation";
 
-const isLogin = true;
-
 const Home = () => {
-  if (!isLogin) {
-    redirect("/auth");
-  }
-  redirect("/dashboard");
+  redirect("/auth");
 };
 
 export default Home;

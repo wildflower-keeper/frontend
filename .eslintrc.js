@@ -80,6 +80,8 @@ module.exports = {
     ],
     "arrow-body-style": ["error", "always"],
     "react/require-default-props": [0],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
   },
   globals: {
     NodeJS: true,
