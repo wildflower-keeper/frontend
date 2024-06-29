@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 import customAxios from "@/utils/api/axios";
 import { getCookie, removeCookie } from "@/utils/cookie";
 import axios from "axios";
-import useLoginStore from "@/store/useLogin";
-import { redirect } from "next/navigation";
 import PinNumberInfo from "./PinNumberInfo";
 import ManagerInfo, { chiefOfficerType, dutyOfficerType } from "./ManagerInfo";
 import DateInfo from "./DateInfo";
+import useLoginStore from "@/store/useLogin";
+import { redirect } from "next/navigation";
 
 type adminInfoType = {
   shelterName: string;
