@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import customAxios from "@/utils/api/axios";
 import { formatDateTime } from "@/utils/date/date";
 import { getCookie } from "@/utils/cookie";
+import totalPagesMaker from "@/utils/pagenation";
 import SearchInput from "./SearchInput";
 import SearchSelector from "./SearchSelector";
 import UserBoard, { userItemType } from "./UserBoard";
-import totalPagesMaker from "@/utils/pagenation";
 import PagenationButtonContainer from "./PagenationButtonContainer";
 
 export type userItemListType = userItemType[];

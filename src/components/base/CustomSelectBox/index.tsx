@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import Button from "../Button";
 import { v4 as uuidv4 } from "uuid";
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
+import Button from "../Button";
 
 export type shelterType = {
   shelterId: number;
@@ -61,7 +61,9 @@ const CustomSelectBox = ({
           return (
             <li key={uuidv4()} className="w-full">
               <Button
-                onClick={() => selectShelterHandler(shelterId, shelterName)}
+                onClick={() => {
+                  selectShelterHandler(shelterId, shelterName);
+                }}
                 className="w-full"
               >
                 <p className="w-fit">{shelterName}</p>

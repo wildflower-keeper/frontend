@@ -3,11 +3,11 @@
 import React, { useEffect, useState } from "react";
 import customAxios from "@/utils/api/axios";
 import { getCookie } from "@/utils/cookie";
+import totalPagesMaker from "@/utils/pagenation";
 import UserBoard, { sleepoverItemType } from "../UserBoardContainer/UserBoard";
 import SearchInput from "../UserBoardContainer/SearchInput";
 import SearchSelector from "../UserBoardContainer/SearchSelector";
 import PagenationButtonContainer from "../UserBoardContainer/PagenationButtonContainer";
-import totalPagesMaker from "@/utils/pagenation";
 
 export type sleepoverListType = sleepoverItemType[];
 
