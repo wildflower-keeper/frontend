@@ -1,28 +1,42 @@
 import React from "react";
+import formatPhoneNumber from "@/utils/common";
 import StatusBadge from "../StatusBadge";
 
 type UserBoardItemType = {
-  type: "outting" | "inSelter" | "unknown";
+  name: string;
+  lastLocationStatus: "outting" | "IN_SHELTER" | "unknown";
+  room: string;
+  phoneNumber: string;
   size: "default" | "large";
+  startDate?: string;
+  endDate?: string;
 };
 
-const UserBoardItem = ({ type, size }: UserBoardItemType) => {
+const UserBoardItem = ({
+  name,
+  size,
+  lastLocationStatus,
+  room,
+  phoneNumber,
+  startDate,
+  endDate,
+}: UserBoardItemType) => {
   return (
     <div
       className={`rounded-2xl px-7 py-3 bg-white mb-3 grid ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}
     >
-      <StatusBadge type={type} />
-      <div className="h-fit my-auto text-center">이름이</div>
-      <div className="h-fit my-auto text-center">101</div>
+      <StatusBadge type={lastLocationStatus} />
+      <div className="h-fit my-auto text-center">{name}</div>
+      <div className="h-fit my-auto text-center">{room}</div>
       <div
         className={`h-fit my-auto text-center ${size === "default" && "col-span-2"}`}
       >
-        010-2222-4444
+        {formatPhoneNumber(phoneNumber)}
       </div>
       {size === "large" && (
         <>
           <div className="h-fit my-auto text-center col-span-2">
-            2024.05.17 ~ 2024.05.24
+            {`${startDate?.split("-").join(".")} ~ ${endDate?.split("-").join(".")}`}{" "}
           </div>
           <div className="h-fit my-auto text-center">모임</div>
           <div className="h-fit my-auto text-center">010-8888-4444</div>

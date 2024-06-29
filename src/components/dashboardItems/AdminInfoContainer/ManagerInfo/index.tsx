@@ -1,17 +1,24 @@
+/* eslint-disable import/no-cycle */
 import React from "react";
+import { chiefOfficersType, dutyOfficersType } from "..";
 
-const ManagerInfo = () => {
+type ManagerInfoType = {
+  chiefOfficers: chiefOfficersType;
+  dutyOfficers: dutyOfficersType;
+};
+
+const ManagerInfo = ({ chiefOfficers, dutyOfficers }: ManagerInfoType) => {
   return (
     <div className="flex flex-col items-end gap-2">
       <div className="flex gap-2">
         <span className="font-semibold">책임자</span>
-        <span>○○○</span>
-        <span className="text-fontWeak">010-3333-4444</span>
+        <span>{chiefOfficers.name}</span>
+        <span className="text-fontWeak">{chiefOfficers.phoneNumber}</span>
       </div>
       <div className="flex gap-2">
         <span className="font-semibold">당직자</span>
-        <span>○○○</span>
-        <span className="text-fontWeak">010-5555-6666</span>
+        <span>{dutyOfficers.name}</span>
+        <span className="text-fontWeak">{dutyOfficers.phoneNumber}</span>
       </div>
     </div>
   );
