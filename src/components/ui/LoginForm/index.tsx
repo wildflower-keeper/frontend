@@ -28,7 +28,7 @@ const LoginForm = ({ shelters }: LoginFormType) => {
   const { isLogin, setIsLogin } = useLoginStore();
   const [loginInfo, setLoginInfo] = useState<loginInfoType>({
     shelterId: "",
-    password: "password_example",
+    password: "",
   });
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginInfo({ ...loginInfo, password: e.target.value });
@@ -56,7 +56,10 @@ const LoginForm = ({ shelters }: LoginFormType) => {
       },
     });
     if (res.status === 200) {
-      setCookie("authToken", res.data.authToken);
+      setCookie("authToken", res.data.authToken, {
+        path: "/",
+        expires: new Date(res.data.expiredAt),
+      });
       setIsLogin(true);
     }
   };

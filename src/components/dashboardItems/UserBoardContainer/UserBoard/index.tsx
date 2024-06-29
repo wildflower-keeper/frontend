@@ -1,42 +1,58 @@
+"use client";
+
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import UserBoardItem from "../UserBoardItem";
 import UserBoardHeader from "../../UserBoardHeader";
+import { userItemListType } from "..";
+import { sleepoverListType } from "../../ManagementContainer";
 
 type UserBoardType = {
-  //  type: "outting" | "inSelter" | "unknown";
   size?: "default" | "large";
+  userItemList?: userItemListType;
+  sleepoverList?: sleepoverListType;
 };
 
-type tempItemType = {
-  type: "outting" | "inSelter" | "unknown";
-};
-
-const temp: tempItemType[] = [
-  {
-    type: "outting",
-  },
-  { type: "inSelter" },
-  { type: "unknown" },
-  {
-    type: "outting",
-  },
-  { type: "inSelter" },
-  { type: "unknown" },
-  {
-    type: "outting",
-  },
-];
-
-const UserBoard = ({ size = "default" }: UserBoardType) => {
+const UserBoard = ({
+  size = "default",
+  userItemList,
+  sleepoverList,
+}: UserBoardType) => {
   return (
     <div
       className={`${size === "default" && "w-[460px]"} ${size === "large" && "w-full"}`}
     >
       <UserBoardHeader size={size} />
-      {temp.map(({ type }) => {
-        return <UserBoardItem key={uuidv4()} type={type} size={size} />;
-      })}
+      {size === "default" &&
+        userItemList?.map(({ name, lastLocationStatus, room, phoneNumber }) => {
+          return (
+            <UserBoardItem
+              key={uuidv4()}
+              name={name}
+              lastLocationStatus={lastLocationStatus}
+              size={size}
+              room={room}
+              phoneNumber={phoneNumber}
+            />
+          );
+        })}
+      {size === "large" &&
+        sleepoverList?.map(
+          ({ homelessName, homelessPhoneNumber, startDate, endDate }) => {
+            return (
+              <UserBoardItem
+                key={uuidv4()}
+                name={homelessName}
+                lastLocationStatus="outting"
+                size={size}
+                room="101"
+                phoneNumber={homelessPhoneNumber}
+                startDate={startDate}
+                endDate={endDate}
+              />
+            );
+          },
+        )}
     </div>
   );
 };

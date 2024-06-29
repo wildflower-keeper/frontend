@@ -1,9 +1,41 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import customAxios from "@/utils/api/axios";
+import { getCookie } from "@/utils/cookie";
 import UserBoard from "../UserBoardContainer/UserBoard";
 import SearchInput from "../UserBoardContainer/SearchInput";
 import SearchSelector from "../UserBoardContainer/SearchSelector";
 
+export type sleepoverItemType = {
+  sleepoverId: number;
+  homelessId: number;
+  homelessName: string;
+  homelessPhoneNumber: string;
+  startDate: string;
+  endDate: string;
+  createdAt: string;
+};
+
+export type sleepoverListType = sleepoverItemType[];
+
 const ManagementContainer = () => {
+  const [sleepoverList, setSleepoverList] = useState<sleepoverListType>([]);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await customAxios({
+        url: `/api/v1/shelter-admin/sleepovers?pageNumber=1&pageSize=7`,
+        method: "GET",
+        headers: {
+          "auth-token": getCookie("authToken"),
+        },
+      });
+      if (res.status === 200) {
+        setSleepoverList([...res.data.items]);
+      }
+    };
+    fetchUser();
+  }, []);
   return (
     <div className="flex flex-col gap-5">
       <div className="flex justify-between items-center">
@@ -14,7 +46,7 @@ const ManagementContainer = () => {
         </div>
       </div>
       <div>
-        <UserBoard size="large" />
+        <UserBoard size="large" sleepoverList={sleepoverList} />
       </div>
     </div>
   );

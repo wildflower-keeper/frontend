@@ -4,7 +4,11 @@ import customAxios from "@/utils/api/axios";
 import { getCookie } from "@/utils/cookie";
 import React, { useEffect, useState } from "react";
 
-const PinNumberInfo = () => {
+type PinNumberInfoType = {
+  shelterName: string;
+};
+
+const PinNumberInfo = ({ shelterName }: PinNumberInfoType) => {
   const [pinNumber, setPinNumber] = useState<number>(0);
   useEffect(() => {
     const fetchPinNumber = async () => {
@@ -24,7 +28,7 @@ const PinNumberInfo = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <p className="font-semibold text-xl">센터이름</p>
+      <p className="font-semibold text-xl">{shelterName}</p>
       <div className="flex gap-1">
         <span className="text-fontWeak">오늘의 핀번호</span>
         <span className="font-semibold">{pinNumber}</span>
