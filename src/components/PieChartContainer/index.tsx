@@ -14,10 +14,10 @@ const PieChartContainer = () => {
           series={[
             {
               data: [
-                { id: 0, value: 10, label: "가족", color: "#04C066" },
-                { id: 1, value: 15, label: "모임", color: "#8C7CFF" },
-                { id: 2, value: 10, label: "일", color: "#FFC200" },
-                { id: 3, value: 15, label: "기타", color: "#FF6838" },
+                { id: 0, value: 8, label: "가족", color: "#04C066" },
+                { id: 1, value: 18, label: "모임", color: "#8C7CFF" },
+                { id: 2, value: 7, label: "일", color: "#FFC200" },
+                { id: 3, value: 6, label: "기타", color: "#FF6838" },
               ],
               innerRadius: 55,
               outerRadius: 75,

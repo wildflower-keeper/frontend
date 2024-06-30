@@ -1,8 +1,11 @@
+"use client";
+
 import PieChartContainer from "@/components/PieChartContainer";
 import Button from "@/components/base/Button";
 import React from "react";
 import { TbReportAnalytics } from "react-icons/tb";
 import ProgressContainer from "../ProgressContainer";
+import excelDownloader from "@/utils/excel";
 
 const MonthlyReport = () => {
   return (
@@ -14,7 +17,10 @@ const MonthlyReport = () => {
           <ProgressContainer />
         </div>
         <div className="flex flex-col gap-3 justify-center items-center">
-          <Button className="flex gap-2 border rounded-lg border-solid border-borderDefault px-2 py-1 items-center w-fit">
+          <Button
+            className="flex gap-2 border rounded-lg border-solid border-borderDefault px-2 py-1 items-center w-fit"
+            onClick={excelDownloader}
+          >
             <TbReportAnalytics size={24} color="#828282" />
 
             <span className="text-fontWeak text-base">보고서 생성</span>
