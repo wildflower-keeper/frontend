@@ -16,6 +16,7 @@ export type sleepoverItemType = {
   startDate: string;
   endDate: string;
   createdAt: string;
+  sleepoverSituation: "SCHEDULED" | "ONGOING" | "CLOSED";
 };
 
 export type userItemType = {
@@ -74,10 +75,12 @@ const UserBoard = ({
                 reason,
                 startDate,
                 endDate,
+                sleepoverSituation,
               }) => {
                 return (
                   <li key={uuidv4()}>
                     <UserBoardItem
+                      sleepoverSituation={sleepoverSituation}
                       name={homelessName}
                       size={size}
                       room={homelessRoom}

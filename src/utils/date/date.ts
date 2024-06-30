@@ -38,4 +38,17 @@ const formatDateTime = (date: Date, option?: "simple" | undefined) => {
     ? `${year}-${month}-${day}`
     : `${year}-${month}-${day} ${hours}%3A${minutes}%3A${seconds}.000000`;
 };
-export { dateInfo, formatDateTime, formatUpdateTime };
+
+const dateComparison = (startDay: Date, endDay: Date) => {
+  const today = new Date();
+  if (startDay > today) {
+    return "SCHEDULED";
+  }
+  if (endDay < today) {
+    return "CLOSED";
+  }
+  if (startDay <= today && endDay >= today) {
+    return "ONGOING";
+  }
+};
+export { dateInfo, formatDateTime, formatUpdateTime, dateComparison };

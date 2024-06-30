@@ -5,9 +5,10 @@ import customAxios from "@/utils/api/axios";
 import { getCookie } from "@/utils/cookie";
 import totalPagesMaker from "@/utils/pagenation";
 import UserBoard, { sleepoverItemType } from "../UserBoardContainer/UserBoard";
-import SearchInput from "../UserBoardContainer/SearchInput";
-import SearchSelector from "../UserBoardContainer/SearchSelector";
 import PagenationButtonContainer from "../UserBoardContainer/PagenationButtonContainer";
+import { TbReportAnalytics } from "react-icons/tb";
+import Button from "@/components/base/Button";
+import { dateComparison } from "@/utils/date/date";
 
 export type sleepoverListType = sleepoverItemType[];
 
@@ -24,7 +25,19 @@ const ManagementContainer = () => {
       },
     });
     if (res.status === 200) {
-      setSleepoverList([...res.data.items]);
+      if (res.data.items) {
+        const addStatus = res.data.items.map((item: sleepoverItemType) => {
+          const sleepoverSituation = dateComparison(
+            new Date(item.startDate),
+            new Date(item.endDate),
+          );
+          return { ...item, sleepoverSituation };
+        });
+        setSleepoverList([...addStatus]);
+      }
+      if (!res.data.items) {
+        setSleepoverList([]);
+      }
       setTotalPages(totalPagesMaker(res.data.pagination.lastPageNumber));
     }
   };
@@ -40,10 +53,10 @@ const ManagementContainer = () => {
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <p className="font-semibold text-xl">외박자 관리</p>
-        <div className="flex gap-4">
-          <SearchSelector />
-          <SearchInput />
-        </div>
+        <Button className="flex gap-2 border rounded-lg border-solid border-fontWeak px-10 py-2 items-center w-fit mr-3">
+          <TbReportAnalytics size={24} color="#828282" />
+          <span className="text-fontWeak">보고서 생성</span>
+        </Button>
       </div>
       <div>
         <UserBoard size="large" sleepoverList={sleepoverList} />
