@@ -80,7 +80,7 @@ const LoginForm = ({ shelters }: LoginFormType) => {
             />
           </div>
 
-          <div className="flex flex-col gap-3 w-full">
+          <div className="flex flex-col gap-5 w-full">
             <InputWithLabel
               value={loginInfo.password}
               onChange={(e) => {
