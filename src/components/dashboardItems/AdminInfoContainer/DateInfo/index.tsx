@@ -1,11 +1,12 @@
 "use client";
 
+import useUpdateTimer from "@/store/useUpdateTimer";
 import { dateInfo } from "@/utils/date/date";
 import React, { useEffect, useState } from "react";
 
 const DateInfo = () => {
   const [timeStamp, setTimeStamp] = useState<string>(dateInfo());
-
+  const { updateTimer } = useUpdateTimer();
   useEffect(() => {
     setInterval(() => {
       setTimeStamp(dateInfo());
@@ -15,7 +16,7 @@ const DateInfo = () => {
   return (
     <div className="flex flex-col h-fit my-auto gap-1">
       <p className="text-xl font-bold">{timeStamp}</p>
-      <p className="text-fontWeak">5월 22일 22시 30분에 업데이트 되었습니다.</p>
+      <p className="text-fontWeak">{updateTimer}</p>
     </div>
   );
 };
