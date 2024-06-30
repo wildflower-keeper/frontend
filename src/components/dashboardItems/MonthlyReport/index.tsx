@@ -2,14 +2,16 @@ import PieChartContainer from "@/components/PieChartContainer";
 import Button from "@/components/base/Button";
 import React from "react";
 import { TbReportAnalytics } from "react-icons/tb";
+import ProgressContainer from "../ProgressContainer";
 
 const MonthlyReport = () => {
   return (
     <div className="flex flex-col gap-2">
       <p className="font-bold text-xl">월간 누적 보고서</p>
       <div className="flex flex-col gap-4 bg-white rounded-lg py-4">
-        <div>
+        <div className="flex gap-2">
           <PieChartContainer />
+          <ProgressContainer />
         </div>
         <div className="flex flex-col gap-3 justify-center items-center">
           <Button className="flex gap-2 border rounded-lg border-solid border-borderDefault px-2 py-1 items-center w-fit">
