@@ -51,6 +51,7 @@ const CurrentCardContainer = () => {
           "auth-token": getCookie("authToken"),
         },
       });
+
       if (res.status === 200) {
         setCurrentUserInfo(res.data);
       }
@@ -70,7 +71,7 @@ const CurrentCardContainer = () => {
         type="outingCount"
         bgColor="blue"
         count={currentUserInfo.sleepoverCount.count}
-        description="외박중인 인원수"
+        description="금일 외박 인원수"
       />
       <CurrentCard
         type="emergencyCount"

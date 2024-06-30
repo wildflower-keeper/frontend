@@ -7,6 +7,7 @@ const Login = async () => {
   const res = await customAxios({
     method: "GET",
     url: "/api/v1/shared/shelters",
+    headers: { accept: "*/*" },
   });
   const shelters = res.data;
 

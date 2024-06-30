@@ -6,6 +6,8 @@ import { getCookie, removeCookie } from "@/utils/cookie";
 import axios from "axios";
 import useLoginStore from "@/store/useLogin";
 import { redirect } from "next/navigation";
+import useUpdateTimer from "@/store/useUpdateTimer";
+import { formatUpdateTime } from "@/utils/date/date";
 import PinNumberInfo from "./PinNumberInfo";
 import ManagerInfo, { chiefOfficerType, dutyOfficerType } from "./ManagerInfo";
 import DateInfo from "./DateInfo";
@@ -18,6 +20,7 @@ type adminInfoType = {
 
 const AdminInfoContainer = () => {
   const { isLogin, setIsLogin } = useLoginStore();
+  const { setUpdateTimer } = useUpdateTimer();
   const [adminInfo, setAdminInfo] = useState<adminInfoType>({
     shelterName: "",
     chiefOfficers: [
@@ -48,6 +51,7 @@ const AdminInfoContainer = () => {
         });
         if (res.status === 200) {
           setAdminInfo({ ...res.data });
+          setUpdateTimer(formatUpdateTime(new Date()));
         }
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {

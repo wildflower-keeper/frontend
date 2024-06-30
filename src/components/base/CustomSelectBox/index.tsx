@@ -38,12 +38,14 @@ const CustomSelectBox = ({
   };
   return (
     <div className={`flex flex-col gap-2 ${opened && "relative"}`}>
-      <div className="py-1 px-2 bg-white w-full rounded-lg shadow-sm shadow-primary/30">
+      <div className="p-2 bg-white w-full rounded-lg shadow-sm shadow-primary/30">
         <Button
           onClick={openedHandler}
           className="flex justify-between items-center w-full"
         >
-          <p className={`${isDefault ? "text-fontWeak" : "text-black"}`}>
+          <p
+            className={`${isDefault ? "text-fontWeak" : "text-black"} text-base`}
+          >
             {selectValue}
           </p>
           {opened ? (
@@ -55,7 +57,7 @@ const CustomSelectBox = ({
       </div>
 
       <ul
-        className={`bg-white rounded-lg px-2 py-1 shadow-sm w-full shadow-primary/30 ${!opened ? "hidden" : "absolute top-10"}`}
+        className={`bg-white rounded-lg p-2 shadow-sm w-full shadow-primary/30 ${!opened ? "hidden" : "absolute top-12"}`}
       >
         {shelters?.map(({ shelterId, shelterName }) => {
           return (
@@ -66,7 +68,7 @@ const CustomSelectBox = ({
                 }}
                 className="w-full"
               >
-                <p className="w-fit">{shelterName}</p>
+                <p className="w-fit text-base">{shelterName}</p>
               </Button>
             </li>
           );
