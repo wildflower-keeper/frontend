@@ -38,7 +38,7 @@ const CustomSelectBox = ({
   };
   return (
     <div className={`flex flex-col gap-2 ${opened && "relative"}`}>
-      <div className="p-3 bg-white w-full rounded-lg shadow-sm shadow-primary/30">
+      <div className="p-2 bg-white w-full rounded-lg shadow-sm shadow-primary/30">
         <Button
           onClick={openedHandler}
           className="flex justify-between items-center w-full"
@@ -57,7 +57,7 @@ const CustomSelectBox = ({
       </div>
 
       <ul
-        className={`bg-white rounded-lg p-3 shadow-sm w-full shadow-primary/30 ${!opened ? "hidden" : "absolute top-10"}`}
+        className={`bg-white rounded-lg p-2 shadow-sm w-full shadow-primary/30 ${!opened ? "hidden" : "absolute top-12"}`}
       >
         {shelters?.map(({ shelterId, shelterName }) => {
           return (

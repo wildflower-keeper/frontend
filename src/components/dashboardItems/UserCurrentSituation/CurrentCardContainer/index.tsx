@@ -63,7 +63,7 @@ const CurrentCardContainer = () => {
       <CurrentCard
         type="inShelterCount"
         bgColor="green"
-        count={currentUserInfo.locationTrackingCount.inShelterCount}
+        count={currentUserInfo.totalHomelessCount}
         description="센터 내 총 인원수"
       />
       <CurrentCard
