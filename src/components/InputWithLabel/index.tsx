@@ -30,10 +30,10 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({
         )}
         <p>{labelName}</p>
       </label>
-      <div className="bg-white rounded-lg px-1 shadow-sm shadow-primary/30">
+      <div className="bg-white px-1 rounded-lg shadow-sm shadow-primary/30">
         <Input
           id={id}
-          className="py-1 px-2 placeholder:text-fontWeak w-full"
+          className="py-[6px] px-1 placeholder:text-fontWeak w-full placeholder:text-base"
           placeholder={placeholder}
           type={type}
           value={value}
