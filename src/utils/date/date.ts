@@ -50,5 +50,6 @@ const dateComparison = (startDay: Date, endDay: Date) => {
   if (startDay <= today && endDay >= today) {
     return "ONGOING";
   }
+  return "";
 };
 export { dateInfo, formatDateTime, formatUpdateTime, dateComparison };

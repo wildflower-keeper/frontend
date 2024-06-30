@@ -3,7 +3,6 @@ import { GoDotFill } from "react-icons/go";
 
 type StatusBadgeType = {
   lastLocationStatus?: "OUTING" | "IN_SHELTER" | "UNKNOWN";
-  size?: "default" | "large";
   sleepoverSituation?: "SCHEDULED" | "ONGOING" | "CLOSED";
 };
 

@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 import customAxios from "@/utils/api/axios";
 import { getCookie } from "@/utils/cookie";
 import totalPagesMaker from "@/utils/pagenation";
-import UserBoard, { sleepoverItemType } from "../UserBoardContainer/UserBoard";
-import PagenationButtonContainer from "../UserBoardContainer/PagenationButtonContainer";
 import { TbReportAnalytics } from "react-icons/tb";
 import Button from "@/components/base/Button";
 import { dateComparison } from "@/utils/date/date";
+import PagenationButtonContainer from "../UserBoardContainer/PagenationButtonContainer";
+import UserBoard, { sleepoverItemType } from "../UserBoardContainer/UserBoard";
 
 export type sleepoverListType = sleepoverItemType[];
 

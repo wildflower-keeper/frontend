@@ -28,7 +28,9 @@ const SearchInput = ({ value, onChange, onSubmit }: SearchInputType) => {
           placeholder="검색"
           className=" w-28 placeholder:text-fontWeak"
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => {
+            onChange(e.target.value);
+          }}
         />
       </form>
     </div>

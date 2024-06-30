@@ -16,7 +16,9 @@ const SearchSelector = ({ onChange, value }: SearchSelectorProps) => {
       <MdOutlineFilterList size={22} color="#828282" />
       <select
         className="py-1"
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          onChange(e.target.value);
+        }}
         value={value}
       >
         <option defaultValue="NONE" value="NONE" selected>
