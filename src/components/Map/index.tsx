@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-new */
+
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -7,7 +10,6 @@ const Maps = () => {
   const mapRef = useRef(null);
 
   useEffect(() => {
-    console.log(mapRef);
     if (mapRef.current) {
       new naver.maps.Map(mapRef.current, {
         center: new naver.maps.LatLng(37.71344096516783, 126.8666797982575),
