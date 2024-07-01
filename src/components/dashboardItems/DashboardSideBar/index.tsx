@@ -6,7 +6,6 @@ import Image from "next/image";
 import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
-import { IoMdRefresh } from "react-icons/io";
 import { TbRefreshAlert } from "react-icons/tb";
 
 const DashboardSideBar = () => {

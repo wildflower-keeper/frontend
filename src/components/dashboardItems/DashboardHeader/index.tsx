@@ -8,6 +8,7 @@ import { AiOutlineBell, AiOutlineReload } from "react-icons/ai";
 const headerName = {
   dashboard: "대시보드",
   management: "외박 신청 내역",
+  emergency: "긴급 상황 내역",
 };
 
 const DashboardHeader = () => {
