@@ -8,10 +8,8 @@ import CustomSelectBox, {
 import useLoginStore from "@/store/useLogin";
 import customAxios from "@/utils/api/axios";
 import { setCookie } from "@/utils/cookie";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { AiOutlineInfoCircle } from "react-icons/ai";
 
 type LoginFormType = {
   shelters: shelterType[];
@@ -91,7 +89,7 @@ const LoginForm = ({ shelters }: LoginFormType) => {
               labelName="비밀번호"
               type="password"
             />
-            <div className="flex gap-1">
+            {/* <div className="flex gap-1">
               <AiOutlineInfoCircle
                 width={16}
                 height={16}
@@ -104,7 +102,7 @@ const LoginForm = ({ shelters }: LoginFormType) => {
               >
                 비밀번호를 잊어버리셨나요?
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
 

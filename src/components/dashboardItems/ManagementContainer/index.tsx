@@ -24,7 +24,6 @@ const ManagementContainer = () => {
         "auth-token": getCookie("authToken"),
       },
     });
-    console.log(res);
     if (res.status === 200) {
       if (res.data.items) {
         const addStatus = res.data.items.map((item: sleepoverItemType) => {
