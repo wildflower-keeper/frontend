@@ -27,6 +27,10 @@ const RootLayout = ({
             httpEquiv="Content-Security-Policy"
             content="upgrade-insecure-requests"
           />
+          <script
+            type="text/javascript"
+            src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAPS_API_KEY}`}
+          />
         </head>
         <body className={pretendard.className}>
           <div className="flex flex-col min-h-screen h-auto mainBackGround">

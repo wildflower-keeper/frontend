@@ -2,9 +2,11 @@
 import { create } from "zustand";
 
 type userDashboardStoreType = {
-  dashboard: "dashboard" | "management";
+  dashboard: "dashboard" | "management" | "emergency";
   // eslint-disable-next-line no-unused-vars
-  setDashboard: (newDashboard: "dashboard" | "management") => void;
+  setDashboard: (
+    newDashboard: "dashboard" | "management" | "emergency",
+  ) => void;
 };
 
 const useDashboardStore = create<userDashboardStoreType>((set) => ({

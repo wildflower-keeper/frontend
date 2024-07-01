@@ -6,6 +6,7 @@ import Image from "next/image";
 import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
+import { TbRefreshAlert } from "react-icons/tb";
 
 const DashboardSideBar = () => {
   const { dashboard, setDashboard } = useDashboardStore();
@@ -36,6 +37,15 @@ const DashboardSideBar = () => {
             color={dashboard === "management" ? "#666666" : "#CCCCCC"}
             onClick={() => {
               setDashboard("management");
+            }}
+          />
+        </Button>
+        <Button>
+          <TbRefreshAlert
+            size={30}
+            color={dashboard === "emergency" ? "#666666" : "#CCCCCC"}
+            onClick={() => {
+              setDashboard("emergency");
             }}
           />
         </Button>
