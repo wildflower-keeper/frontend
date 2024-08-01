@@ -1,7 +1,10 @@
 import axios from "axios";
 
 const customAxios = axios.create({
-  baseURL: "http://api.wildflower-gardening.com",
+  baseURL:
+    process.env.NEXT_PUBLIC_DEV_TYPE === "dev"
+      ? "http://localhost:8080"
+      : "http://api.wildflower-gardening.com",
   headers: {
     accept: "*/*",
   },
