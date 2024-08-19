@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { useSearchParams } from "next/navigation";
+import useDashboardStore from "@/store/useDashboard";
+
 import UserCurrentSituation from "../UserCurrentSituation";
 import AdminInfoContainer from "../AdminInfoContainer";
 import UserBoardContainer from "../UserBoardContainer";
@@ -10,12 +11,12 @@ import ManagementContainer from "../ManagementContainer";
 import EmergencyContainer from "../EmergencyContainer";
 
 const DashboardBody = () => {
-  const dashboardType = useSearchParams().get("type");
+  const { dashboard } = useDashboardStore();
 
   return (
     <div className="grow h-full px-16 py-5 flex flex-col gap-8">
       <AdminInfoContainer />
-      {dashboardType === null && (
+      {dashboard === "dashboard" && (
         <div className="flex justify-between">
           <div className="flex flex-col gap-7">
             <UserCurrentSituation />
@@ -25,8 +26,8 @@ const DashboardBody = () => {
           <UserBoardContainer />
         </div>
       )}
-      {dashboardType === "management" && <ManagementContainer />}
-      {dashboardType === "emergency" && <EmergencyContainer />}
+      {dashboard === "management" && <ManagementContainer />}
+      {dashboard === "emergency" && <EmergencyContainer />}
     </div>
   );
 };
