@@ -11,21 +11,16 @@ import { setCookie } from "@/utils/cookie";
 import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-// type LoginFormType = {
-//   shelters: shelterType[];
-// };
+type LoginFormType = {
+  shelters: shelterType[];
+};
 
 type loginInfoType = {
   shelterId: string;
   password: string;
 };
 
-const LoginForm = () => {
-  const [shelters, setShelters] = useState<shelterType[]>([
-    { shelterId: 1, shelterName: "Shelter 1" },
-    { shelterId: 2, shelterName: "Shelter 2" },
-    { shelterId: 3, shelterName: "Shelter 3" },
-  ]);
+const LoginForm = ({ shelters }: LoginFormType) => {
   const { isLogin, setIsLogin } = useLoginStore();
   const [loginInfo, setLoginInfo] = useState<loginInfoType>({
     shelterId: "",
@@ -37,19 +32,6 @@ const LoginForm = () => {
   const handleShelterChange = (value: number) => {
     setLoginInfo({ ...loginInfo, shelterId: String(value) });
   };
-
-  useEffect(() => {
-    const getShelters = async () => {
-      const res = await customAxios({
-        method: "GET",
-        url: "/api/v1/shared/shelters",
-        headers: { accept: "*/*" },
-      });
-
-      setShelters(res.data);
-    };
-    getShelters();
-  });
   useEffect(() => {
     if (isLogin) {
       redirect("dashboard");
