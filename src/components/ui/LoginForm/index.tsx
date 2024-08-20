@@ -49,7 +49,7 @@ const LoginForm = () => {
       setShelters(res.data);
     };
     getShelters();
-  });
+  }, []);
   useEffect(() => {
     if (isLogin) {
       redirect("dashboard");
