@@ -27,11 +27,7 @@ const ManagerInfo = ({ chiefOfficer, dutyOfficer }: ManagerInfoType) => {
             </span>
           </>
         ) : (
-          <>
-            <span className="text-fontWeak">
-              책임자가 지정되어있지 않습니다.
-            </span>
-          </>
+          <span className="text-fontWeak">책임자가 지정되어있지 않습니다.</span>
         )}
       </div>
       <div className="flex gap-2 min-w-64 justify-start">
