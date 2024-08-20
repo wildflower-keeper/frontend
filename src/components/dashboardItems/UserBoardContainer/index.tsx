@@ -78,11 +78,13 @@ const UserBoardContainer = () => {
         </div>
       </div>
       <UserBoard userItemList={userItemList} />
-      <PagenationButtonContainer
-        pageNumberHandler={pageNumberHandler}
-        totalPages={totalPages}
-        pageNumber={pageNumber}
-      />
+      {userItemList.length ? (
+        <PagenationButtonContainer
+          pageNumberHandler={pageNumberHandler}
+          totalPages={totalPages}
+          pageNumber={pageNumber}
+        />
+      ) : null}
     </div>
   );
 };
