@@ -39,7 +39,9 @@ const RootLayout = ({
           <div className="flex flex-col min-h-screen h-auto mainBackGround">
             {children}
           </div>
-          <GoogleAnalytics />
+          {process.env.ANALYSIS || process.env.NODE_ENV === "production" ? (
+            <GoogleAnalytics />
+          ) : null}
         </body>
       </html>
     </ReactCookieProvider>
