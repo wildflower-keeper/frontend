@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "env-cmd -f product.env next build",
+    "start": "env-cmd -f product.env next start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "dev:analysis": "ANALYSIS=true next dev"
+    "dev:analysis": "env-cmd -f develop.env cross-env ANALYSIS=true next dev"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
