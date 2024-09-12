@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "env-cmd -f develop.env cross-env ANALYSIS=false next dev",
     "build": "env-cmd -f product.env next build",
     "start": "env-cmd -f product.env next start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
