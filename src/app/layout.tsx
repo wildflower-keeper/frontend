@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import localFont from "next/font/local";
 import ReactCookieProvider from "@/components/ReactCookieProvider";
 import Script from "next/script";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -38,6 +39,9 @@ const RootLayout = ({
           <div className="flex flex-col min-h-screen h-auto mainBackGround">
             {children}
           </div>
+          {process.env.ANALYSIS || process.env.NODE_ENV === "production" ? (
+            <GoogleAnalytics />
+          ) : null}
         </body>
       </html>
     </ReactCookieProvider>

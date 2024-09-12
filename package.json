@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "env-cmd -f develop.env cross-env ANALYSIS=false next dev",
+    "build": "env-cmd -f product.env next build",
+    "start": "env-cmd -f product.env next start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "dev:analysis": "env-cmd -f develop.env cross-env ANALYSIS=true next dev"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -17,12 +18,15 @@
     "@tanstack/react-query": "^5.36.2",
     "@types/uuid": "^10.0.0",
     "axios": "^1.6.8",
+    "cross-env": "^7.0.3",
+    "env-cmd": "^10.1.0",
     "file-saver": "^2.0.5",
     "next": "14.2.3",
     "react": "^18",
     "react-cookie": "^7.1.4",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
+    "sharp": "^0.33.5",
     "uuid": "^10.0.0",
     "xlsx": "^0.18.5",
     "zustand": "^4.5.2"
