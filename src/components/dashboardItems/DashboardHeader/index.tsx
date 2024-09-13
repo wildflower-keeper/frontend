@@ -3,8 +3,8 @@
 import Button from "@/components/base/Button";
 import useDashboardStore from "@/store/useDashboard";
 import useLoginStore from "@/store/useLogin";
-import customAxios from "@/utils/api/axios";
-import { getCookie, removeCookie } from "@/utils/cookie";
+import { logout } from "@/utils/api/v1/shelter-admin";
+import { removeCookie } from "@/utils/cookie";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { AiOutlineReload } from "react-icons/ai";
@@ -21,24 +21,14 @@ const DashboardHeader = () => {
   const { dashboard } = useDashboardStore();
   const { setIsLogin } = useLoginStore();
 
-  const handleLogout = async () => {
-    const logoutUrl = "/api/v1/shelter-admin/logout";
+  const handleLogout = () => {
     try {
-      const res = await customAxios({
-        method: "POST",
-        url: logoutUrl,
-        headers: {
-          "auth-token": getCookie("authToken"),
-          Accept: "*/*",
-        },
-      });
-      if (res.status === 200) {
-        removeCookie("authToken");
-        setIsLogin(false);
-        router.push("/");
-      }
+      logout();
+      removeCookie("authToken");
+      setIsLogin(false);
+      router.push("/");
     } catch (error) {
-      console.log(error);
+      return error;
     }
   };
 
