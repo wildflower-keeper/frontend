@@ -1,3 +1,29 @@
+# Project Major package version
+
+node : ^18.0.0, ^20.0.0(recommended)
+yarn : ^1.20
+next : ^14.0.0
+
+# script
+
+- $ dev : 개발모드로 실행
+- $ dev:analysis : 개발모드로 실행하면서 번들 분석 (분석 툴 수정 시)
+- $ build : 빌드
+- $ start : 빌드된 파일로 실행
+
+# Related Domain
+
+- [Docs](https://www.notion.so/5436cb4e78054e85a7ca5cd669082206)
+- [Repo](https://github.com/wildflower-keeper/frontend)
+- [Product-API](http://api.wildflower-gardening.com)
+
+
+# Maintainer
+
+- [이창수]
+- [이종호]
+- [엄성현]
+
 ## 사용방법
 ----
 
@@ -5,17 +31,3 @@
 yarn
 yarn run dev
 ```
-
-- 로그인
-  - 센터명을 선택하고, 비밀번호를 입력해서 로그인하는 절차.
-- 센터내의 인원들과 인원들 상태를 한눈에 볼 수 있는 대시보드
-  - 센터의 기본적인 인원과 간략한 내용을 볼수 있도록 설계 되어있습니다.
-- 외박중인 이용자 관리
-    - 이름 필터링
-      - 현재 이름으로만 검색할 수 있도록 설정되어있고, 요구사항이 있다면 프론트에서 이를 필터할 수 있도록 처리할 예정.
-    - 검색기능
-      - 위와 동일.
-    - 상태값(재실중, 외박중)
-      - 현재는 미확인 재실 외박 외출의 카테고리로 분류되어 있음.
-- 외박신청 목록조회
-  - 현재까지 외박을 신청한 사람들의 목록을 볼 수 있도록 되어있음.
