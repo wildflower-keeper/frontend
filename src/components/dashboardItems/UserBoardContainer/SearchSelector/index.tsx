@@ -3,10 +3,10 @@
 import React from "react";
 import { MdOutlineFilterList } from "react-icons/md";
 
-export type filterType = string;
+export type FilterType = "NONE" | "NAME";
 
 interface SearchSelectorProps {
-  onChange: (filter: filterType) => void;
+  onChange: (filter: FilterType) => void;
   value: string;
 }
 
@@ -17,7 +17,7 @@ const SearchSelector = ({ onChange, value }: SearchSelectorProps) => {
       <select
         className="py-1"
         onChange={(e) => {
-          onChange(e.target.value);
+          onChange(e.target.value as FilterType);
         }}
         value={value}
       >
