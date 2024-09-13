@@ -4,6 +4,8 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import UserBoardItem from "../UserBoardItem";
 import UserBoardHeader from "../../UserBoardHeader";
+//Types
+import type { UserItemType } from "@/utils/api/v1/shelter-admin/type";
 
 export type sleepoverItemType = {
   sleepoverId: number;
@@ -19,21 +21,9 @@ export type sleepoverItemType = {
   sleepoverSituation: "SCHEDULED" | "ONGOING" | "CLOSED";
 };
 
-export type userItemType = {
-  id: number;
-  name: string;
-  room: string;
-  birthDate: string;
-  targetDateSleepover: boolean;
-  lastLocationStatus: "OUTING" | "IN_SHELTER" | null;
-  lastLocationTrackedAt: string;
-  phoneNumber: string;
-  admissionDate: string;
-};
-
 type UserBoardType = {
   size?: "default" | "large";
-  userItemList?: userItemType[];
+  userItemList?: UserItemType[];
   sleepoverList?: sleepoverItemType[];
 };
 
