@@ -9,19 +9,15 @@ import { redirect } from "next/navigation";
 import useUpdateTimer from "@/store/useUpdateTimer";
 import { formatUpdateTime } from "@/utils/date/date";
 import PinNumberInfo from "./PinNumberInfo";
-import ManagerInfo, { chiefOfficerType, dutyOfficerType } from "./ManagerInfo";
+import ManagerInfo from "./ManagerInfo";
 import DateInfo from "./DateInfo";
-
-type adminInfoType = {
-  shelterName: string;
-  chiefOfficers: chiefOfficerType[];
-  dutyOfficers: dutyOfficerType[];
-};
+//Types
+import type { AdminInfoType } from "@/utils/api/v1/shelter-admin/type";
 
 const AdminInfoContainer = () => {
   const { isLogin, setIsLogin } = useLoginStore();
   const { setUpdateTimer } = useUpdateTimer();
-  const [adminInfo, setAdminInfo] = useState<adminInfoType>({
+  const [adminInfo, setAdminInfo] = useState<AdminInfoType>({
     shelterName: "",
     chiefOfficers: [
       {

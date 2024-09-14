@@ -45,3 +45,19 @@ export interface HomelessPeopleListResponseType {
   items: UserItemType[];
   pagination: PaginationType;
 }
+
+export interface ChiefOfficerType {
+  chiefOfficerId: number;
+  name: string;
+  phoneNumber: string;
+}
+
+export interface DutyOfficerType extends ChiefOfficerType {
+  targetDate: string;
+}
+
+export interface AdminInfoType {
+  shelterName: string;
+  chiefOfficers: ChiefOfficerType[];
+  dutyOfficers: DutyOfficerType[];
+}

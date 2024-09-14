@@ -1,17 +1,14 @@
 import formatPhoneNumber from "@/utils/common";
 import React from "react";
-
-export type chiefOfficerType = {
-  chiefOfficerId: number;
-  name: string;
-  phoneNumber: string;
-};
-
-export type dutyOfficerType = chiefOfficerType & { targetDate: string };
+//Types
+import type {
+  ChiefOfficerType,
+  DutyOfficerType,
+} from "@/utils/api/v1/shelter-admin/type";
 
 type ManagerInfoType = {
-  chiefOfficer: chiefOfficerType;
-  dutyOfficer: dutyOfficerType;
+  chiefOfficer: ChiefOfficerType;
+  dutyOfficer: DutyOfficerType;
 };
 
 const ManagerInfo = ({ chiefOfficer, dutyOfficer }: ManagerInfoType) => {

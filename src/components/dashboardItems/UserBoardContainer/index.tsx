@@ -4,31 +4,31 @@ import React, { useEffect, useState } from "react";
 import { formatDateTime } from "@/utils/date/date";
 import totalPagesMaker from "@/utils/pagenation";
 import SearchInput, { filterValueType } from "./SearchInput";
-import SearchSelector, { filterType } from "./SearchSelector";
+import SearchSelector, { FilterType } from "./SearchSelector";
 import UserBoard from "./UserBoard";
 import PagenationButtonContainer from "./PagenationButtonContainer";
 import { homelessPeopleList } from "@/utils/api/v1/shelter-admin";
-//Type
+//Types
 import type { UserItemType } from "@/utils/api/v1/shelter-admin/type";
 
-export type userItemListType = UserItemType[];
+export type UserItemListType = UserItemType[];
 
-type filterUserType = {
-  filter: filterType;
+type FilterUserType = {
+  filter: FilterType;
   filterValue: filterValueType;
 };
 
 const UserBoardContainer = () => {
-  const [filterUser, setFilterUser] = useState<filterUserType>({
+  const [filterUser, setFilterUser] = useState<FilterUserType>({
     filter: "NONE",
     filterValue: "",
   });
 
-  const [userItemList, setUserItemList] = useState<userItemListType>([]);
+  const [userItemList, setUserItemList] = useState<UserItemListType>([]);
 
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number[]>([]);
-  const fetchUser = async (pageNum: number) => {
+  const fetchUser = (pageNum: number) => {
     const queryParams = `?filterType=${filterUser.filter}&filterValue=${filterUser.filterValue}&sleepoverTargetDate=${formatDateTime(new Date())}&pageNumber=${pageNum}&pageSize=6`;
     homelessPeopleList(queryParams).then((res) => {
       setUserItemList(res.items);
@@ -41,9 +41,8 @@ const UserBoardContainer = () => {
 
   const pageNumberHandler = (pageNum: number) => {
     setPageNumber(pageNum);
-    fetchUser(pageNum);
   };
-  const filterHandler = (value: filterType) => {
+  const filterHandler = (value: FilterType) => {
     setFilterUser({ ...filterUser, filter: value });
   };
   const filterValueHandler = (value: string) => {
