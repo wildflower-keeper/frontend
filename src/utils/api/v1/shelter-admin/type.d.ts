@@ -56,7 +56,7 @@ export interface DutyOfficerType extends ChiefOfficerType {
   targetDate: string;
 }
 
-export interface AdminInfoType {
+export interface ShelterInfoType {
   shelterName: string;
   chiefOfficers: ChiefOfficerType[];
   dutyOfficers: DutyOfficerType[];

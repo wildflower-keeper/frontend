@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import customAxios from "@/utils/api/axios";
+import React, { useEffect, useMemo, useState } from "react";
 import { getCookie, removeCookie } from "@/utils/cookie";
-import axios from "axios";
 import useLoginStore from "@/store/useLogin";
 import { redirect } from "next/navigation";
 import useUpdateTimer from "@/store/useUpdateTimer";
@@ -11,55 +9,55 @@ import { formatUpdateTime } from "@/utils/date/date";
 import PinNumberInfo from "./PinNumberInfo";
 import ManagerInfo from "./ManagerInfo";
 import DateInfo from "./DateInfo";
+import { shelterInfo } from "@/utils/api/v1/shelter-admin";
+import { get } from "lodash";
 //Types
-import type { AdminInfoType } from "@/utils/api/v1/shelter-admin/type";
+import type { ShelterInfoType } from "@/utils/api/v1/shelter-admin/type";
+
+const initState = {
+  shelterName: "",
+  chiefOfficers: [
+    {
+      chiefOfficerId: 0,
+      name: "",
+      phoneNumber: "",
+    },
+  ],
+  dutyOfficers: [
+    {
+      chiefOfficerId: 0,
+      name: "",
+      phoneNumber: "",
+      targetDate: "",
+    },
+  ],
+};
 
 const AdminInfoContainer = () => {
   const { isLogin, setIsLogin } = useLoginStore();
   const { setUpdateTimer } = useUpdateTimer();
-  const [adminInfo, setAdminInfo] = useState<AdminInfoType>({
-    shelterName: "",
-    chiefOfficers: [
-      {
-        chiefOfficerId: 0,
-        name: "",
-        phoneNumber: "",
-      },
-    ],
-    dutyOfficers: [
-      {
-        chiefOfficerId: 0,
-        name: "",
-        phoneNumber: "",
-        targetDate: "",
-      },
-    ],
-  });
+  const [adminInfo, setAdminInfo] = useState<ShelterInfoType | null>(null);
   useEffect(() => {
-    const fetchAdminInfo = async () => {
-      try {
-        const res = await customAxios({
-          url: "/api/v1/shelter-admin/shelter",
-          method: "GET",
-          headers: {
-            "auth-token": getCookie("authToken"),
-          },
-        });
-        if (res.status === 200) {
-          setAdminInfo({ ...res.data });
-          setUpdateTimer(formatUpdateTime(new Date()));
-        }
-      } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          if (error.response.status === 403) {
-            removeCookie("authToken");
-            setIsLogin(false);
-          }
-        }
-      }
-    };
-    fetchAdminInfo();
+    //Call API
+    shelterInfo()
+      .then((res) => {
+        setAdminInfo(res);
+        setUpdateTimer(formatUpdateTime(new Date()));
+      })
+      .catch(() => {
+        removeCookie("authToken");
+        setIsLogin(false);
+        redirect("/auth");
+      });
   }, []);
+
+  const adminUsers = useMemo(() => {
+    return {
+      shelterName: get(adminInfo, "shelterName", initState.shelterName),
+      chiefOfficers: get(adminInfo, "chiefOfficers", initState.chiefOfficers),
+      dutyOfficers: get(adminInfo, "dutyOfficers", initState.dutyOfficers),
+    };
+  }, [adminInfo]);
 
   useEffect(() => {
     if (!isLogin && !getCookie("authToken")) {
@@ -71,10 +69,10 @@ const AdminInfoContainer = () => {
     <div className="w-full flex justify-between">
       <DateInfo />
       <div className="flex items-center rounded-lg border border-dashed border-[#CCCCCC] px-5 py-4 justify-between gap-6">
-        <PinNumberInfo shelterName={adminInfo.shelterName} />
+        <PinNumberInfo shelterName={adminUsers.shelterName} />
         <ManagerInfo
-          chiefOfficer={adminInfo.chiefOfficers[0]}
-          dutyOfficer={adminInfo.dutyOfficers[0]}
+          chiefOfficer={adminUsers.chiefOfficers[0]}
+          dutyOfficer={adminUsers.dutyOfficers[0]}
         />
       </div>
     </div>

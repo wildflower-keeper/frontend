@@ -1,7 +1,11 @@
 import * as ROUTES from "./Routes.const";
 import { GET, POST } from "../../axios";
 // Types
-import type { CurrentUserInfo, HomelessPeopleListResponseType } from "./type";
+import type {
+  CurrentUserInfo,
+  HomelessPeopleListResponseType,
+  ShelterInfoType,
+} from "./type";
 
 export function logout(): Promise<void> {
   return POST({ url: ROUTES.LOGOUT });
@@ -16,4 +20,8 @@ export function homelessPeopleList(
 ): Promise<HomelessPeopleListResponseType> {
   const URL = ROUTES.HOMELESS_PEOPLE + queryString;
   return GET({ url: URL });
+}
+
+export function shelterInfo(): Promise<ShelterInfoType> {
+  return GET({ url: ROUTES.SHELTER });
 }
