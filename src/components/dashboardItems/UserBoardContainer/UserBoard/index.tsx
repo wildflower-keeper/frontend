@@ -5,26 +5,15 @@ import { v4 as uuidv4 } from "uuid";
 import UserBoardItem from "../UserBoardItem";
 import UserBoardHeader from "../../UserBoardHeader";
 //Types
-import type { UserItemType } from "@/utils/api/v1/shelter-admin/type";
-
-export type sleepoverItemType = {
-  sleepoverId: number;
-  homelessId: number;
-  homelessName: string;
-  homelessPhoneNumber: string;
-  homelessRoom: string;
-  emergencyContact: string;
-  reason: string;
-  startDate: string;
-  endDate: string;
-  createdAt: string;
-  sleepoverSituation: "SCHEDULED" | "ONGOING" | "CLOSED";
-};
+import type {
+  AddSituationSleepoverType,
+  UserItemType,
+} from "@/utils/api/v1/shelter-admin/type";
 
 type UserBoardType = {
   size?: "default" | "large";
   userItemList?: UserItemType[];
-  sleepoverList?: sleepoverItemType[];
+  sleepoverList?: AddSituationSleepoverType[];
 };
 
 const UserBoard = ({
