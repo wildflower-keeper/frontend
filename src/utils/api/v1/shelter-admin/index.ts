@@ -4,6 +4,7 @@ import { GET, POST } from "../../axios";
 import type {
   CurrentUserInfo,
   HomelessPeopleListResponseType,
+  PinNumberResponseType,
   ShelterInfoType,
   SleepoversResponseType,
 } from "./type";
@@ -33,4 +34,8 @@ export function getSleepoverList(
 ): Promise<SleepoversResponseType> {
   const URL = join([ROUTES.SLEEPOVERS, queryString], "?");
   return GET({ url: URL });
+}
+
+export function getPinNumber(): Promise<PinNumberResponseType> {
+  return GET({ url: ROUTES.PIN });
 }

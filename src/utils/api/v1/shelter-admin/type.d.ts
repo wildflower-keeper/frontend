@@ -90,3 +90,8 @@ export type SleepoverSituation = "SCHEDULED" | "ONGOING" | "CLOSED";
 export interface AddSituationSleepoverType extends SleepoverItemType {
   sleepoverSituation: SleepoverSituation;
 }
+
+export interface PinNumberResponseType {
+  pin: string;
+  expiredAt: string;
+}
