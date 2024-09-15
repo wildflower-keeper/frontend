@@ -20,7 +20,7 @@ export function homelessPeopleCount(): Promise<CurrentUserInfo> {
 export function homelessPeopleList(
   queryString: string,
 ): Promise<HomelessPeopleListResponseType> {
-  const URL = ROUTES.HOMELESS_PEOPLE + queryString;
+  const URL = join([ROUTES.HOMELESS_PEOPLE, queryString], "?");
   return GET({ url: URL });
 }
 

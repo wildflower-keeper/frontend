@@ -29,7 +29,7 @@ const UserBoardContainer = () => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number[]>([]);
   const fetchUser = (pageNum: number) => {
-    const queryParams = `?filterType=${filterUser.filter}&filterValue=${filterUser.filterValue}&sleepoverTargetDate=${formatDateTime(new Date())}&pageNumber=${pageNum}&pageSize=6`;
+    const queryParams = `filterType=${filterUser.filter}&filterValue=${filterUser.filterValue}&sleepoverTargetDate=${formatDateTime(new Date())}&pageNumber=${pageNum}&pageSize=5`;
     homelessPeopleList(queryParams).then((res) => {
       setUserItemList(res.items);
       setTotalPages(totalPagesMaker(res.pagination.lastPageNumber));
