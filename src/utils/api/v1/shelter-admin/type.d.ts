@@ -100,3 +100,15 @@ export interface ShelterType {
   shelterId: number;
   shelterName: string;
 }
+
+export interface LoginBodyType {
+  id: number;
+  pw: string;
+}
+
+export interface LoginResponseType {
+  authToken?: string;
+  expiredAt?: string;
+  errorCode?: string;
+  description?: string;
+}
