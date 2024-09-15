@@ -1,53 +1,60 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import customAxios from "@/utils/api/axios";
-import { getCookie } from "@/utils/cookie";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import totalPagesMaker from "@/utils/pagenation";
 import { TbReportAnalytics } from "react-icons/tb";
 import Button from "@/components/base/Button";
-import { dateComparison } from "@/utils/date/date";
 import PagenationButtonContainer from "../UserBoardContainer/PagenationButtonContainer";
-import UserBoard, { sleepoverItemType } from "../UserBoardContainer/UserBoard";
+import UserBoard from "../UserBoardContainer/UserBoard";
+import { addStatus } from "@/utils/sleepoverUtils";
 
-export type sleepoverListType = sleepoverItemType[];
+//Types
+import { SleepoverItemType } from "@/utils/api/v1/shelter-admin/type";
+import { getSleepoverList } from "@/utils/api/v1/shelter-admin";
 
 const ManagementContainer = () => {
-  const [sleepoverList, setSleepoverList] = useState<sleepoverListType>([]);
+  //fetching data
+  const [sleepoverList, setSleepoverList] = useState<SleepoverItemType[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number[]>([]);
-  const fetchUser = async (pageNum: number) => {
-    const res = await customAxios({
-      url: `/api/v1/shelter-admin/sleepovers?pageNumber=${pageNum}&pageSize=6`,
-      method: "GET",
-      headers: {
-        "auth-token": getCookie("authToken"),
-      },
-    });
-    if (res.status === 200) {
-      if (res.data.items) {
-        const addStatus = res.data.items.map((item: sleepoverItemType) => {
-          const sleepoverSituation = dateComparison(
-            new Date(item.startDate),
-            new Date(item.endDate),
-          );
-          return { ...item, sleepoverSituation };
-        });
-        setSleepoverList([...addStatus]);
-      }
-      if (!res.data.items) {
-        setSleepoverList([]);
-      }
-      setTotalPages(totalPagesMaker(res.data.pagination.lastPageNumber));
-    }
-  };
+  const [totalPages, setTotalPages] = useState<number[] | null>(null);
+  const prevDataRef = useRef<SleepoverItemType[] | null>(null);
+
+  const fetchData = useCallback(
+    (pageNum: number) => {
+      const queryParams = `pageNumber=${pageNum}&pageSize=2`;
+      getSleepoverList(queryParams).then((res) => {
+        if (JSON.stringify(res.items) !== JSON.stringify(prevDataRef.current)) {
+          setSleepoverList(res.items);
+          prevDataRef.current = res.items; // 이전 데이터 업데이트
+        }
+
+        setTotalPages(totalPagesMaker(res.pagination.lastPageNumber));
+      });
+    },
+    [pageNumber],
+  );
+
+  const addStatusSleepoverList = useMemo(() => {
+    return addStatus(sleepoverList);
+  }, [sleepoverList]);
+
   useEffect(() => {
-    fetchUser(pageNumber);
-  }, []);
+    fetchData(pageNumber);
+    const interval = setInterval(() => {
+      fetchData(pageNumber);
+    }, 30 * 1000);
+    return () => clearInterval(interval);
+  }, [pageNumber]);
 
   const pageNumberHandler = (pageNum: number) => {
     setPageNumber(pageNum);
-    fetchUser(pageNum);
+    fetchData(pageNum);
   };
   return (
     <div className="flex flex-col gap-4">
@@ -59,13 +66,15 @@ const ManagementContainer = () => {
         </Button>
       </div>
       <div>
-        <UserBoard size="large" sleepoverList={sleepoverList} />
+        <UserBoard size="large" sleepoverList={addStatusSleepoverList} />
       </div>
-      <PagenationButtonContainer
-        pageNumberHandler={pageNumberHandler}
-        totalPages={totalPages}
-        pageNumber={pageNumber}
-      />
+      {totalPages && (
+        <PagenationButtonContainer
+          pageNumberHandler={pageNumberHandler}
+          totalPages={totalPages}
+          pageNumber={pageNumber}
+        />
+      )}
     </div>
   );
 };

@@ -61,3 +61,32 @@ export interface ShelterInfoType {
   chiefOfficers: ChiefOfficerType[];
   dutyOfficers: DutyOfficerType[];
 }
+
+export interface SleepoverItemType {
+  sleepoverId: number;
+  homelessId: number;
+  homelessName: string;
+  homelessPhoneNumber: string;
+  homelessRoom: string;
+  emergencyContact: string;
+  reason: string;
+  startDate: string;
+  endDate: string;
+  createdAt: string;
+}
+
+export interface SleepoversResponseType {
+  items: SleepoverItemType[];
+  pagination: {
+    currentPageNumber: number;
+    nextPageNumber: number;
+    pageSize: number;
+    lastPageNumber: number;
+  };
+}
+
+export type SleepoverSituation = "SCHEDULED" | "ONGOING" | "CLOSED";
+
+export interface AddSituationSleepoverType extends SleepoverItemType {
+  sleepoverSituation: SleepoverSituation;
+}

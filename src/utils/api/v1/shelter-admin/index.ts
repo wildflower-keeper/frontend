@@ -5,7 +5,9 @@ import type {
   CurrentUserInfo,
   HomelessPeopleListResponseType,
   ShelterInfoType,
+  SleepoversResponseType,
 } from "./type";
+import { join } from "lodash";
 
 export function logout(): Promise<void> {
   return POST({ url: ROUTES.LOGOUT });
@@ -24,4 +26,11 @@ export function homelessPeopleList(
 
 export function shelterInfo(): Promise<ShelterInfoType> {
   return GET({ url: ROUTES.SHELTER });
+}
+
+export function getSleepoverList(
+  queryString: string,
+): Promise<SleepoversResponseType> {
+  const URL = join([ROUTES.SLEEPOVERS, queryString], "?");
+  return GET({ url: URL });
 }
