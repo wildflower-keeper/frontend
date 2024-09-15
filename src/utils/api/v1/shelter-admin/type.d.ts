@@ -95,3 +95,8 @@ export interface PinNumberResponseType {
   pin: string;
   expiredAt: string;
 }
+
+export interface ShelterType {
+  shelterId: number;
+  shelterName: string;
+}

@@ -7,14 +7,11 @@ import {
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 import Button from "../Button";
-
-export type shelterType = {
-  shelterId: number;
-  shelterName: string;
-};
+//Types
+import type { ShelterType } from "@/utils/api/v1/shelter-admin/type";
 
 type CustomSelectBoxType = {
-  shelters: shelterType[];
+  shelters: ShelterType[];
   handleShelterChange: (value: number) => void;
 };
 
