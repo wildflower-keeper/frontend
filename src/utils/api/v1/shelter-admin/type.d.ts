@@ -106,9 +106,13 @@ export interface LoginBodyType {
   pw: string;
 }
 
-export interface LoginResponseType {
-  authToken?: string;
-  expiredAt?: string;
-  errorCode?: string;
-  description?: string;
+export interface LoginSuccessType {
+  authToken: string;
+  expiredAt: string;
 }
+
+export interface LoginErrorType {
+  errorCode: string;
+  description: string;
+}
+export type LoginResponseType = LoginSuccessType | LoginErrorType;
