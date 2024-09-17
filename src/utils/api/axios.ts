@@ -8,11 +8,6 @@ import { Interceptor } from "./__type__";
 import { V1_UNUSING_TOKEN_API } from "./v1/common.const";
 import { getCookie } from "../cookie";
 import { isArray } from "lodash";
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
-import { Interceptor } from './__type__';
-import { V1_UNUSING_TOKEN_API } from './v1/common.const';
-import { getCookie } from '../cookie';
-import { isArray } from 'lodash';
 
 const customAxios = axios.create({
   baseURL: "https://api.wildflower-gardening.com",
