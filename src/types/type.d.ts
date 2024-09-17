@@ -6,4 +6,3 @@ export interface FilterValuesType {
   filter: FilterType;
   filterValue: FilterValueType;
 }
-1;
