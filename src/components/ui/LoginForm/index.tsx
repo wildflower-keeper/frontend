@@ -52,14 +52,14 @@ const LoginForm = () => {
       pw: loginInfo.password,
     };
     login(loginData).then((res) => {
-      if (res.authToken && res.expiredAt) {
+      if ("authToken" in res && "expiredAt" in res) {
         setCookie("authToken", res.authToken, {
           path: "/",
           expires: new Date(res.expiredAt),
         });
         setIsLogin(true);
       }
-      if (res.errorCode && res.description) {
+      if ("errorCode" in res && "description" in res) {
         console.log(res.description);
       }
     });
