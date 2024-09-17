@@ -46,10 +46,6 @@ const ManagementContainer = () => {
 
   useEffect(() => {
     fetchData(pageNumber);
-    const interval = setInterval(() => {
-      fetchData(pageNumber);
-    }, 30 * 1000);
-    return () => clearInterval(interval);
   }, [pageNumber]);
 
   const pageNumberHandler = (pageNum: number) => {

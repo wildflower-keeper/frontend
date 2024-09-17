@@ -41,10 +41,6 @@ const UserBoardContainer = () => {
 
   useEffect(() => {
     fetchUserList(pageNumber);
-    const interval = setInterval(() => {
-      fetchUserList(pageNumber);
-    }, 60 * 1000);
-    return () => clearInterval(interval);
   }, [pageNumber, filterParams]);
 
   const pageNumberHandler = (pageNum: number) => {
