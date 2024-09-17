@@ -2,26 +2,36 @@ import Button from "@/components/base/Button";
 import Input from "@/components/base/Input";
 import React from "react";
 import { FiSearch } from "react-icons/fi";
-
-export type filterValueType = string;
+//Types
+import type { FilterValueType } from "@/types/type";
 
 type SearchInputType = {
-  value: filterValueType;
-  onChange: (value: filterValueType) => void;
-  onSubmit: (pageNum: number) => void;
+  value: FilterValueType;
+  filterValueHandler: (value: FilterValueType) => void;
+  submitHandler: (pageNum: number) => void;
 };
 
-const SearchInput = ({ value, onChange, onSubmit }: SearchInputType) => {
+//검색 결과로 첫페이지를 보여주어야하기 때문에 1로 작성하였습니다.
+const SEARCH_RESULT_PAGE = 1;
+
+const SearchInput = ({
+  value,
+  filterValueHandler,
+  submitHandler,
+}: SearchInputType) => {
   return (
     <div className="bg-white  px-3 py-2 w-auto rounded-lg">
       <form
         className="flex justify-center items-center gap-3"
         onSubmit={(e) => {
           e.preventDefault();
-          onSubmit(1);
         }}
       >
-        <Button className="m-auto">
+        <Button
+          className="m-auto"
+          type="submit"
+          onClick={() => submitHandler(SEARCH_RESULT_PAGE)}
+        >
           <FiSearch size={22} color="#828282" />
         </Button>
         <Input
@@ -29,7 +39,7 @@ const SearchInput = ({ value, onChange, onSubmit }: SearchInputType) => {
           className=" w-28 placeholder:text-fontWeak"
           value={value}
           onChange={(e) => {
-            onChange(e.target.value);
+            filterValueHandler(e.target.value);
           }}
         />
       </form>

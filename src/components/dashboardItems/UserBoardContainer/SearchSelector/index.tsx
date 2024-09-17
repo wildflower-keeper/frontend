@@ -2,22 +2,22 @@
 
 import React from "react";
 import { MdOutlineFilterList } from "react-icons/md";
-
-export type FilterType = "NONE" | "NAME";
+//Types
+import type { FilterType } from "@/types/type";
 
 interface SearchSelectorProps {
-  onChange: (filter: FilterType) => void;
+  filterHandler: (filter: FilterType) => void;
   value: string;
 }
 
-const SearchSelector = ({ onChange, value }: SearchSelectorProps) => {
+const SearchSelector = ({ filterHandler, value }: SearchSelectorProps) => {
   return (
     <div className="flex justify-center items-center py-2 px-3 bg-white rounded-lg gap-2">
       <MdOutlineFilterList size={22} color="#828282" />
       <select
         className="py-1"
         onChange={(e) => {
-          onChange(e.target.value as FilterType);
+          filterHandler(e.target.value as FilterType);
         }}
         value={value}
       >
