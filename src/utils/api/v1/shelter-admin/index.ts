@@ -1,5 +1,6 @@
 import * as ROUTES from "./Routes.const";
 import { GET, POST } from "../../axios";
+import { join } from "lodash";
 // Types
 import type {
   CurrentUserInfo,
@@ -11,7 +12,6 @@ import type {
   ShelterType,
   SleepoversResponseType,
 } from "./type";
-import { join } from "lodash";
 
 export function login(loginData: LoginBodyType): Promise<LoginResponseType> {
   return POST({ url: ROUTES.LOGIN, data: loginData });
