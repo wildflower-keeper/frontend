@@ -1,30 +1,28 @@
 "use client";
 
-import customAxios from "@/utils/api/axios";
-import { getCookie } from "@/utils/cookie";
-import React, { useEffect, useState } from "react";
+import { getPinNumber } from "@/utils/api/v1/shelter-admin";
+import { get } from "lodash";
+import React, { useEffect, useMemo, useState } from "react";
+//Types
+import type { PinNumberResponseType } from "@/utils/api/v1/shelter-admin/type";
 
 type PinNumberInfoType = {
   shelterName: string;
 };
 
 const PinNumberInfo = ({ shelterName }: PinNumberInfoType) => {
-  const [pinNumber, setPinNumber] = useState<number>(0);
+  const [pinNumberObject, setPinNumberObject] =
+    useState<PinNumberResponseType | null>(null);
+
   useEffect(() => {
-    const fetchPinNumber = async () => {
-      const res = await customAxios({
-        method: "GET",
-        url: "/api/v1/shelter-admin/pin",
-        headers: {
-          "auth-token": getCookie("authToken"),
-        },
-      });
-      if (res.status === 200) {
-        setPinNumber(res.data.pin);
-      }
-    };
-    fetchPinNumber();
+    getPinNumber()
+      .then(setPinNumberObject)
+      .catch(() => {});
   }, []);
+
+  const pinNumber = useMemo(() => {
+    return get(pinNumberObject, "pin", "0");
+  }, [pinNumberObject]);
 
   return (
     <div className="flex flex-col gap-2 min-w-60">

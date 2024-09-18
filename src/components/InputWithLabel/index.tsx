@@ -1,7 +1,7 @@
 import React, { HTMLInputTypeAttribute } from "react";
 import Input from "../base/Input";
 
-type InputWithLabelProps = {
+interface Props {
   id: string;
   placeholder: string;
   type: HTMLInputTypeAttribute;
@@ -10,8 +10,8 @@ type InputWithLabelProps = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isRequired?: boolean;
   labelName: string;
-};
-const InputWithLabel: React.FC<InputWithLabelProps> = ({
+}
+const InputWithLabel = ({
   id,
   placeholder,
   type,
@@ -19,7 +19,7 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({
   labelName,
   onChange,
   isRequired = false,
-}) => {
+}: Props) => {
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className={`smallFont ${isRequired && "relative"}`}>

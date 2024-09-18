@@ -44,12 +44,9 @@ const dateComparison = (startDay: Date, endDay: Date) => {
   if (startDay > today) {
     return "SCHEDULED";
   }
-  if (endDay < today) {
-    return "CLOSED";
-  }
   if (startDay <= today && endDay >= today) {
     return "ONGOING";
   }
-  return "";
+  return "CLOSED";
 };
 export { dateInfo, formatDateTime, formatUpdateTime, dateComparison };

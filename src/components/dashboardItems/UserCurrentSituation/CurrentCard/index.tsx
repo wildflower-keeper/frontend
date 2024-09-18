@@ -3,25 +3,20 @@ import { AiOutlineTeam } from "react-icons/ai";
 import { FiPhoneCall } from "react-icons/fi";
 import { RiLoginBoxLine } from "react-icons/ri";
 
-type CurrentCardType = {
-  bgColor: "blue" | "green" | "red";
-  count: number;
-  description: string;
-  type: "inShelterCount" | "outingCount" | "emergencyCount";
-};
-
 const cardColor = {
   blue: "bg-[#3384FF]",
   green: "bg-[#04C066]",
   red: "bg-[#FF6838]",
 } as const;
 
-const CurrentCard = ({
-  bgColor,
-  count,
-  description,
-  type,
-}: CurrentCardType) => {
+interface Props {
+  bgColor: "blue" | "green" | "red";
+  count: number;
+  description: string;
+  type: "inShelterCount" | "outingCount" | "emergencyCount";
+}
+
+const CurrentCard = ({ bgColor, count, description, type }: Props) => {
   return (
     <div className={`w-40 h-40 rounded-2xl p-5 ${cardColor[bgColor]}`}>
       <div className="bg-white/20 p-2 rounded-lg w-fit mb-5">

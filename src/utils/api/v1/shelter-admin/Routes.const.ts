@@ -1,4 +1,4 @@
-import { generatePathByBase, genreateBasePath } from '../../utils.const';
+import { generatePathByBase, genreateBasePath } from "../../utils.const";
 
 export const BASE_PATH = genreateBasePath("shelter-admin");
 
@@ -8,4 +8,7 @@ export const LOGIN = generatePathByBase(BASE_PATH, "login");
 export const LOGOUT = generatePathByBase(BASE_PATH, "logout");
 export const SLEEPOVERS = generatePathByBase(BASE_PATH, "sleepovers");
 export const HOMELESS_PEOPLE = generatePathByBase(BASE_PATH, "homeless-people");
-export const HOMELESS_PEOPLE_COUNT = generatePathByBase(HOMELESS_PEOPLE, "count");
+export const HOMELESS_PEOPLE_COUNT = generatePathByBase(
+  HOMELESS_PEOPLE,
+  "count",
+);

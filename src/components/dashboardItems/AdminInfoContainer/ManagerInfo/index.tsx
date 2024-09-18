@@ -1,20 +1,17 @@
 import formatPhoneNumber from "@/utils/common";
 import React from "react";
+//Types
+import type {
+  ChiefOfficerType,
+  DutyOfficerType,
+} from "@/utils/api/v1/shelter-admin/type";
 
-export type chiefOfficerType = {
-  chiefOfficerId: number;
-  name: string;
-  phoneNumber: string;
+type Props = {
+  chiefOfficer?: ChiefOfficerType;
+  dutyOfficer?: DutyOfficerType;
 };
 
-export type dutyOfficerType = chiefOfficerType & { targetDate: string };
-
-type ManagerInfoType = {
-  chiefOfficer: chiefOfficerType;
-  dutyOfficer: dutyOfficerType;
-};
-
-const ManagerInfo = ({ chiefOfficer, dutyOfficer }: ManagerInfoType) => {
+const ManagerInfo = ({ chiefOfficer, dutyOfficer }: Props) => {
   return (
     <div className="flex flex-col items-start gap-2">
       <div className="flex gap-2 min-w-64 justify-start">

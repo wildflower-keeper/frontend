@@ -7,21 +7,16 @@ import {
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 import Button from "../Button";
+//Types
+import type { ShelterType } from "@/utils/api/v1/shared/type";
 
-export type shelterType = {
-  shelterId: number;
-  shelterName: string;
-};
 
-type CustomSelectBoxType = {
-  shelters: shelterType[];
+interface Props {
+  shelters: ShelterType[];
   handleShelterChange: (value: number) => void;
-};
+}
 
-const CustomSelectBox = ({
-  shelters,
-  handleShelterChange,
-}: CustomSelectBoxType) => {
+const CustomSelectBox = ({ shelters, handleShelterChange }: Props) => {
   const [opened, setOpend] = useState<boolean>(false);
   const [selectValue, setSelectValue] =
     useState<string>("센터를 선택해주세요.");

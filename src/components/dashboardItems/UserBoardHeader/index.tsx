@@ -1,10 +1,10 @@
 import React from "react";
 
-type UserBoardHeaderType = {
+type Props = {
   size: "default" | "large";
 };
 
-const UserBoardHeader = ({ size }: UserBoardHeaderType) => {
+const UserBoardHeader = ({ size }: Props) => {
   return (
     <div
       className={` py-3 grid px-7 ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}

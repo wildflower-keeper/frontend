@@ -2,7 +2,7 @@ import React from "react";
 import formatPhoneNumber from "@/utils/common";
 import StatusBadge from "../StatusBadge";
 
-type UserBoardItemType = {
+type Props = {
   name: string;
   lastLocationStatus?: "OUTING" | "IN_SHELTER" | "UNKNOWN";
   sleepoverSituation?: "SCHEDULED" | "ONGOING" | "CLOSED";
@@ -26,7 +26,7 @@ const UserBoardItem = ({
   endDate,
   reason,
   emergencyContact,
-}: UserBoardItemType) => {
+}: Props) => {
   return (
     <div
       className={`rounded-2xl  py-3 bg-white grid px-7 ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}

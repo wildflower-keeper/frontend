@@ -2,18 +2,15 @@
 
 import InputWithLabel from "@/components/InputWithLabel";
 import Button from "@/components/base/Button";
-import CustomSelectBox, {
-  shelterType,
-} from "@/components/base/CustomSelectBox";
+import CustomSelectBox from "@/components/base/CustomSelectBox";
 import useLoginStore from "@/store/useLogin";
-import customAxios from "@/utils/api/axios";
+import { getShelters } from "@/utils/api/v1/shared";
+import { ShelterType } from "@/utils/api/v1/shared/type";
+import { login } from "@/utils/api/v1/shelter-admin";
 import { setCookie } from "@/utils/cookie";
 import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
-
-// type LoginFormType = {
-//   shelters: shelterType[];
-// };
+//Types
 
 type loginInfoType = {
   shelterId: string;
@@ -21,7 +18,7 @@ type loginInfoType = {
 };
 
 const LoginForm = () => {
-  const [shelters, setShelters] = useState<shelterType[]>([
+  const [shelters, setShelters] = useState<ShelterType[]>([
     { shelterId: 1, shelterName: "Shelter 1" },
     { shelterId: 2, shelterName: "Shelter 2" },
     { shelterId: 3, shelterName: "Shelter 3" },
@@ -39,43 +36,31 @@ const LoginForm = () => {
   };
 
   useEffect(() => {
-    const getShelters = async () => {
-      const res = await customAxios({
-        method: "GET",
-        url: "/api/v1/shared/shelters",
-        headers: { accept: "*/*" },
-      });
-
-      setShelters(res.data);
-    };
-    getShelters();
+    getShelters()
+      .then(setShelters)
+      .catch(() => {});
   }, []);
+
   useEffect(() => {
     if (isLogin) {
       redirect("dashboard");
     }
   }, [isLogin]);
-  const handleLoginSubmit = async () => {
-    const submitData = {
+
+  const handleLoginSubmit = () => {
+    const loginData = {
       id: parseInt(loginInfo.shelterId, 10),
       pw: loginInfo.password,
     };
-
-    const res = await customAxios({
-      method: "POST",
-      url: "/api/v1/shelter-admin/login",
-      data: JSON.stringify(submitData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (res.status === 200) {
-      setCookie("authToken", res.data.authToken, {
-        path: "/",
-        expires: new Date(res.data.expiredAt),
-      });
-      setIsLogin(true);
-    }
+    login(loginData)
+      .then((res) => {
+        setCookie("authToken", res.authToken, {
+          path: "/",
+          expires: new Date(res.expiredAt),
+        });
+        setIsLogin(true);
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <div className="w-80">

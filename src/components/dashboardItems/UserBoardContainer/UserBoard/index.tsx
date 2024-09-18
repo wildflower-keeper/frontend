@@ -4,44 +4,23 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import UserBoardItem from "../UserBoardItem";
 import UserBoardHeader from "../../UserBoardHeader";
+//Types
+import type {
+  AddSituationSleepoverType,
+  UserItemType,
+} from "@/utils/api/v1/shelter-admin/type";
 
-export type sleepoverItemType = {
-  sleepoverId: number;
-  homelessId: number;
-  homelessName: string;
-  homelessPhoneNumber: string;
-  homelessRoom: string;
-  emergencyContact: string;
-  reason: string;
-  startDate: string;
-  endDate: string;
-  createdAt: string;
-  sleepoverSituation: "SCHEDULED" | "ONGOING" | "CLOSED";
-};
-
-export type userItemType = {
-  id: number;
-  name: string;
-  room: string;
-  birthDate: string;
-  targetDateSleepover: boolean;
-  lastLocationStatus: "OUTING" | "IN_SHELTER" | null;
-  lastLocationTrackedAt: string;
-  phoneNumber: string;
-  admissionDate: string;
-};
-
-type UserBoardType = {
+type Props = {
   size?: "default" | "large";
-  userItemList?: userItemType[];
-  sleepoverList?: sleepoverItemType[];
+  userItemList?: UserItemType[];
+  sleepoverList?: AddSituationSleepoverType[];
 };
 
 const UserBoard = ({
   size = "default",
   userItemList,
   sleepoverList,
-}: UserBoardType) => {
+}: Props) => {
   return (
     <div
       className={` ${size === "default" && "w-[560px]"} ${size === "large" && "w-full"}`}
