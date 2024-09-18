@@ -10,11 +10,11 @@ import PinNumberInfo from "./PinNumberInfo";
 import ManagerInfo from "./ManagerInfo";
 import DateInfo from "./DateInfo";
 import { shelterInfo } from "@/utils/api/v1/shelter-admin";
-import { get } from "lodash";
+import { get, head } from "lodash";
 //Types
 import type { ShelterInfoType } from "@/utils/api/v1/shelter-admin/type";
 
-const initState = {
+const initState: ShelterInfoType = {
   shelterName: "",
   chiefOfficers: [
     {
@@ -37,6 +37,7 @@ const AdminInfoContainer = () => {
   const { isLogin, setIsLogin } = useLoginStore();
   const { setUpdateTimer } = useUpdateTimer();
   const [adminInfo, setAdminInfo] = useState<ShelterInfoType | null>(null);
+
   useEffect(() => {
     //Call API
     shelterInfo()
@@ -54,11 +55,18 @@ const AdminInfoContainer = () => {
   const adminUsers = useMemo(() => {
     return {
       shelterName: get(adminInfo, "shelterName", initState.shelterName),
-      chiefOfficers: get(adminInfo, "chiefOfficers", initState.chiefOfficers),
-      dutyOfficers: get(adminInfo, "dutyOfficers", initState.dutyOfficers),
+      chiefOfficer: get(
+        adminInfo,
+        "chiefOfficers.0",
+        head(initState.chiefOfficers),
+      ),
+      dutyOfficer: get(
+        adminInfo,
+        "dutyOfficers.0",
+        head(initState.dutyOfficers),
+      ),
     };
   }, [adminInfo]);
-
   useEffect(() => {
     if (!isLogin && !getCookie("authToken")) {
       redirect("/auth");
@@ -71,8 +79,8 @@ const AdminInfoContainer = () => {
       <div className="flex items-center rounded-lg border border-dashed border-[#CCCCCC] px-5 py-4 justify-between gap-6">
         <PinNumberInfo shelterName={adminUsers.shelterName} />
         <ManagerInfo
-          chiefOfficer={adminUsers.chiefOfficers[0]}
-          dutyOfficer={adminUsers.dutyOfficers[0]}
+          chiefOfficer={adminUsers.chiefOfficer}
+          dutyOfficer={adminUsers.dutyOfficer}
         />
       </div>
     </div>

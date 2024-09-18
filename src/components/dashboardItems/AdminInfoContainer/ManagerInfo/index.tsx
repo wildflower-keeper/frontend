@@ -7,8 +7,8 @@ import type {
 } from "@/utils/api/v1/shelter-admin/type";
 
 type Props = {
-  chiefOfficer: ChiefOfficerType;
-  dutyOfficer: DutyOfficerType;
+  chiefOfficer?: ChiefOfficerType;
+  dutyOfficer?: DutyOfficerType;
 };
 
 const ManagerInfo = ({ chiefOfficer, dutyOfficer }: Props) => {
