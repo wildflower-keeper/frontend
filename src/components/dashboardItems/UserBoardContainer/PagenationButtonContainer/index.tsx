@@ -8,17 +8,17 @@ import {
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 
-type PagenationButtonContainerType = {
+interface Props {
   pageNumberHandler: (pageNum: number) => void;
   totalPages: number[];
   pageNumber: number;
-};
+}
 
 const PagenationButtonContainer = ({
   totalPages,
   pageNumber,
   pageNumberHandler,
-}: PagenationButtonContainerType) => {
+}: Props) => {
   const prevHandler = () => {
     if (pageNumber > 1) {
       pageNumberHandler(pageNumber - 1);

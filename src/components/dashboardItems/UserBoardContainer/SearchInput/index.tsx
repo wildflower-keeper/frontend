@@ -5,19 +5,15 @@ import { FiSearch } from "react-icons/fi";
 //Types
 import type { FilterValueType } from "@/types/type";
 
-type SearchInputType = {
+interface Props {
   value: FilterValueType;
   filterValueHandler: (value: FilterValueType) => void;
   submitHandler: (pageNum: number) => void;
-};
+}
 
 const SEARCH_RESULT_PAGE = 1;
 
-const SearchInput = ({
-  value,
-  filterValueHandler,
-  submitHandler,
-}: SearchInputType) => {
+const SearchInput = ({ value, filterValueHandler, submitHandler }: Props) => {
   return (
     <div className="bg-white  px-3 py-2 w-auto rounded-lg">
       <form

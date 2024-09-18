@@ -6,11 +6,11 @@ import SearchInput from "../SearchInput";
 //Types
 import type { FilterType, FilterValuesType } from "@/types/type";
 
-interface SearchBarType {
+interface Props {
   filterParamHandler: (pageNum: number, filterValues: FilterValuesType) => void;
 }
 
-const SearchBar = ({ filterParamHandler }: SearchBarType) => {
+const SearchBar = ({ filterParamHandler }: Props) => {
   const [filterValues, setFilterValues] = useState<FilterValuesType>({
     filter: "NONE",
     filterValue: "",

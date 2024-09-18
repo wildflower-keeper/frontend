@@ -10,7 +10,7 @@ import type {
   UserItemType,
 } from "@/utils/api/v1/shelter-admin/type";
 
-type UserBoardType = {
+type Props = {
   size?: "default" | "large";
   userItemList?: UserItemType[];
   sleepoverList?: AddSituationSleepoverType[];
@@ -20,7 +20,7 @@ const UserBoard = ({
   size = "default",
   userItemList,
   sleepoverList,
-}: UserBoardType) => {
+}: Props) => {
   return (
     <div
       className={` ${size === "default" && "w-[560px]"} ${size === "large" && "w-full"}`}

@@ -10,15 +10,12 @@ import Button from "../Button";
 //Types
 import type { ShelterType } from "@/utils/api/v1/shelter-admin/type";
 
-type CustomSelectBoxType = {
+interface Props {
   shelters: ShelterType[];
   handleShelterChange: (value: number) => void;
-};
+}
 
-const CustomSelectBox = ({
-  shelters,
-  handleShelterChange,
-}: CustomSelectBoxType) => {
+const CustomSelectBox = ({ shelters, handleShelterChange }: Props) => {
   const [opened, setOpend] = useState<boolean>(false);
   const [selectValue, setSelectValue] =
     useState<string>("센터를 선택해주세요.");

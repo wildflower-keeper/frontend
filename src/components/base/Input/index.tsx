@@ -2,7 +2,7 @@
 
 import React, { InputHTMLAttributes } from "react";
 
-type InputProps = InputHTMLAttributes<HTMLInputElement>;
+interface Props extends InputHTMLAttributes<HTMLInputElement> {}
 
 const Input = ({
   className,
@@ -11,7 +11,7 @@ const Input = ({
   type = "text",
   value,
   ...props
-}: InputProps) => {
+}: Props) => {
   return (
     <input
       className={className}

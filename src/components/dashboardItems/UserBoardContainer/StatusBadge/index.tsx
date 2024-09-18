@@ -1,11 +1,6 @@
 import React from "react";
 import { GoDotFill } from "react-icons/go";
 
-type StatusBadgeType = {
-  lastLocationStatus?: "OUTING" | "IN_SHELTER" | "UNKNOWN";
-  sleepoverSituation?: "SCHEDULED" | "ONGOING" | "CLOSED";
-};
-
 const lastLocationStatusColor = {
   OUTING: "#FFC200",
   UNKNOWN: "#D9D9D9",
@@ -42,10 +37,12 @@ const sleepoverSituationClassName = {
   ONGOING: "bg-[#00B226]/10 text-[#00B226] border-[#00B226]",
 };
 
-const StatusBadge = ({
-  lastLocationStatus,
-  sleepoverSituation,
-}: StatusBadgeType) => {
+interface Props {
+  lastLocationStatus?: "OUTING" | "IN_SHELTER" | "UNKNOWN";
+  sleepoverSituation?: "SCHEDULED" | "ONGOING" | "CLOSED";
+}
+
+const StatusBadge = ({ lastLocationStatus, sleepoverSituation }: Props) => {
   return (
     <>
       {lastLocationStatus && (

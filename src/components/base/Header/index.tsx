@@ -1,8 +1,8 @@
 import React, { HtmlHTMLAttributes } from "react";
 
-type HeaderProps = HtmlHTMLAttributes<HTMLHeadElement>;
+interface Props extends HtmlHTMLAttributes<HTMLHeadElement> {}
 
-const Header: React.FC<HeaderProps> = ({ children, className }) => {
+const Header = ({ children, className }: Props) => {
   return <header className={className}>{children}</header>;
 };
 

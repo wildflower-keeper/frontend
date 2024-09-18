@@ -5,12 +5,12 @@ import { MdOutlineFilterList } from "react-icons/md";
 //Types
 import type { FilterType } from "@/types/type";
 
-interface SearchSelectorProps {
+interface Props {
   filterHandler: (filter: FilterType) => void;
   value: string;
 }
 
-const SearchSelector = ({ filterHandler, value }: SearchSelectorProps) => {
+const SearchSelector = ({ filterHandler, value }: Props) => {
   return (
     <div className="flex justify-center items-center py-2 px-3 bg-white rounded-lg gap-2">
       <MdOutlineFilterList size={22} color="#828282" />

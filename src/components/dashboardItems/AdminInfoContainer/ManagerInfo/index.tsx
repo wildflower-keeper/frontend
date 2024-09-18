@@ -6,12 +6,12 @@ import type {
   DutyOfficerType,
 } from "@/utils/api/v1/shelter-admin/type";
 
-type ManagerInfoType = {
+type Props = {
   chiefOfficer: ChiefOfficerType;
   dutyOfficer: DutyOfficerType;
 };
 
-const ManagerInfo = ({ chiefOfficer, dutyOfficer }: ManagerInfoType) => {
+const ManagerInfo = ({ chiefOfficer, dutyOfficer }: Props) => {
   return (
     <div className="flex flex-col items-start gap-2">
       <div className="flex gap-2 min-w-64 justify-start">

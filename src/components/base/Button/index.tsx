@@ -2,15 +2,15 @@
 
 import React, { ButtonHTMLAttributes } from "react";
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   className,
   onClick,
   type = "button",
   children,
   ...props
-}) => {
+}: Props) => {
   return (
     <button className={className} type={type} onClick={onClick} {...props}>
       {children}
