@@ -22,18 +22,13 @@ const UserBoardContainer = () => {
   // pagenation
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number[] | null>(null);
-  // prevDateValidation
-  const prevDataRef = useRef<UserItemType[] | null>(null);
 
   const fetchUserList = useCallback(
     (pageNum: number) => {
       const queryParams = `filterType=${filterParams.filter}&filterValue=${filterParams.filterValue}&sleepoverTargetDate=${formatDateTime(new Date())}&pageNumber=${pageNum}&pageSize=5`;
       homelessPeopleList(queryParams).then((res) => {
-        if (JSON.stringify(res.items) !== JSON.stringify(prevDataRef)) {
-          setUserItemList(res.items);
-          prevDataRef.current = res.items;
-          setTotalPages(totalPagesMaker(res.pagination.lastPageNumber));
-        }
+        setUserItemList(res.items);
+        setTotalPages(totalPagesMaker(res.pagination.lastPageNumber));
       });
     },
     [pageNumber, filterParams],

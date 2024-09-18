@@ -1,12 +1,6 @@
 "use client";
 
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import totalPagesMaker from "@/utils/pagenation";
 import { TbReportAnalytics } from "react-icons/tb";
 import Button from "@/components/base/Button";
@@ -23,16 +17,12 @@ const ManagementContainer = () => {
   const [sleepoverList, setSleepoverList] = useState<SleepoverItemType[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number[] | null>(null);
-  const prevDataRef = useRef<SleepoverItemType[] | null>(null);
 
   const fetchData = useCallback(
     (pageNum: number) => {
       const queryParams = `pageNumber=${pageNum}&pageSize=2`;
       getSleepoverList(queryParams).then((res) => {
-        if (JSON.stringify(res.items) !== JSON.stringify(prevDataRef.current)) {
-          setSleepoverList(res.items);
-          prevDataRef.current = res.items; // 이전 데이터 업데이트
-        }
+        setSleepoverList(res.items);
 
         setTotalPages(totalPagesMaker(res.pagination.lastPageNumber));
       });
