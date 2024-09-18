@@ -11,7 +11,6 @@ type SearchInputType = {
   submitHandler: (pageNum: number) => void;
 };
 
-//검색 결과로 첫페이지를 보여주어야하기 때문에 1로 작성하였습니다.
 const SEARCH_RESULT_PAGE = 1;
 
 const SearchInput = ({
