@@ -12,6 +12,3 @@ export const HOMELESS_PEOPLE_COUNT = generatePathByBase(
   HOMELESS_PEOPLE,
   "count",
 );
-
-export const SHEARED_PATH = genreateBasePath("shared");
-export const SHARED_SHELTERS = generatePathByBase(SHEARED_PATH, "shelters");

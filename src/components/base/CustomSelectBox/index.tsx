@@ -8,7 +8,8 @@ import {
 } from "react-icons/md";
 import Button from "../Button";
 //Types
-import type { ShelterType } from "@/utils/api/v1/shelter-admin/type";
+import type { ShelterType } from "@/utils/api/v1/shared/type";
+
 
 interface Props {
   shelters: ShelterType[];

@@ -4,12 +4,13 @@ import InputWithLabel from "@/components/InputWithLabel";
 import Button from "@/components/base/Button";
 import CustomSelectBox from "@/components/base/CustomSelectBox";
 import useLoginStore from "@/store/useLogin";
-import { getShelters, login } from "@/utils/api/v1/shelter-admin";
+import { getShelters } from "@/utils/api/v1/shared";
+import { ShelterType } from "@/utils/api/v1/shared/type";
+import { login } from "@/utils/api/v1/shelter-admin";
 import { setCookie } from "@/utils/cookie";
 import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
 //Types
-import type { ShelterType } from "@/utils/api/v1/shelter-admin/type";
 
 type loginInfoType = {
   shelterId: string;

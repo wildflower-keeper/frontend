@@ -9,7 +9,6 @@ import type {
   LoginResponseType,
   PinNumberResponseType,
   ShelterInfoType,
-  ShelterType,
   SleepoversResponseType,
 } from "./type";
 
@@ -45,8 +44,4 @@ export function getSleepoverList(
 
 export function getPinNumber(): Promise<PinNumberResponseType> {
   return GET({ url: ROUTES.PIN });
-}
-
-export function getShelters(): Promise<ShelterType[]> {
-  return GET({ url: ROUTES.SHARED_SHELTERS });
 }
