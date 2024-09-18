@@ -52,18 +52,15 @@ const LoginForm = () => {
       id: parseInt(loginInfo.shelterId, 10),
       pw: loginInfo.password,
     };
-    login(loginData).then((res) => {
-      if ("authToken" in res && "expiredAt" in res) {
+    login(loginData)
+      .then((res) => {
         setCookie("authToken", res.authToken, {
           path: "/",
           expires: new Date(res.expiredAt),
         });
         setIsLogin(true);
-      }
-      if ("errorCode" in res && "description" in res) {
-        console.log(res.description);
-      }
-    });
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <div className="w-80">

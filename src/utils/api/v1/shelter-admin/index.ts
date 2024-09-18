@@ -1,19 +1,24 @@
 import * as ROUTES from "./Routes.const";
-import { GET, POST } from "../../axios";
+import customAxios, { GET, POST } from "../../axios";
 import { join } from "lodash";
 // Types
 import type {
   CurrentUserInfo,
   HomelessPeopleListResponseType,
   LoginBodyType,
-  LoginResponseType,
+  LoginSuccessType,
   PinNumberResponseType,
   ShelterInfoType,
   SleepoversResponseType,
 } from "./type";
 
-export function login(loginData: LoginBodyType): Promise<LoginResponseType> {
-  return POST({ url: ROUTES.LOGIN, data: loginData });
+export function login(loginData: LoginBodyType): Promise<LoginSuccessType> {
+  return customAxios.post(ROUTES.LOGIN, loginData).then(({ data }) => {
+    if ("authToken" in data && "expiredAt" in data) return data;
+    else {
+      throw new Error(data.description);
+    }
+  });
 }
 
 export function logout(): Promise<void> {
