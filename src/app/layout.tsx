@@ -1,12 +1,11 @@
 // Compo
-
 import ReactCookieProvider from "@/components/ReactCookieProvider";
 import Script from "next/script";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 // Utils
-import React from "react";
 import "@/styles/globals.css";
+import React from "react";
 import localFont from "next/font/local";
 // Types
 import type { Metadata } from "next";
