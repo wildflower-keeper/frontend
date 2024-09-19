@@ -1,15 +1,22 @@
-import type { Metadata } from "next";
-import "@/styles/globals.css";
-import localFont from "next/font/local";
+// Compo
 import ReactCookieProvider from "@/components/ReactCookieProvider";
 import Script from "next/script";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+
+// Utils
+import "@/styles/globals.css";
+import localFont from "next/font/local";
+// Types
+import type { Metadata } from "next";
+import { cookies } from "next/headers";
+import { LayoutSelector } from "./layouts";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
   display: "swap",
   weight: "45 920",
 });
+
 export const metadata: Metadata = {
   title: "들꽃가드닝",
   description: "관리자 페이지",
@@ -21,6 +28,9 @@ const RootLayout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
+  const cookieStore = cookies();
+  const isLogined = Boolean(cookieStore.get("authToken"));
+
   return (
     <ReactCookieProvider>
       <html lang="kr">
@@ -37,7 +47,7 @@ const RootLayout = ({
         </head>
         <body className={pretendard.className}>
           <div className="flex flex-col min-h-screen h-auto mainBackGround">
-            {children}
+            <LayoutSelector initialLogin={isLogined}>{children}</LayoutSelector>
           </div>
           {process.env.ANALYSIS || process.env.NODE_ENV === "production" ? (
             <GoogleAnalytics />

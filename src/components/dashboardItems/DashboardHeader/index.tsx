@@ -1,14 +1,14 @@
 "use client";
 
-import Button from "@/components/base/Button";
-import useDashboardStore from "@/store/useDashboard";
-import useLoginStore from "@/store/useLogin";
-import { logout } from "@/utils/api/v1/shelter-admin";
-import { removeCookie } from "@/utils/cookie";
-import { useRouter } from "next/navigation";
 import React from "react";
+// Compo
+import Button from "@/components/base/Button";
 import { AiOutlineReload } from "react-icons/ai";
 import { MdOutlineLogout } from "react-icons/md";
+// Utils
+import useDashboardStore from "@/store/useDashboard";
+import { removeCookie } from "@/utils/cookie";
+import { logout } from "@/utils/api/v1/shelter-admin";
 
 const headerName = {
   dashboard: "대시보드",
@@ -17,18 +17,16 @@ const headerName = {
 };
 
 const DashboardHeader = () => {
-  const router = useRouter();
   const { dashboard } = useDashboardStore();
-  const { setIsLogin } = useLoginStore();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     try {
-      logout();
+      // Refresh Every thing
+      await logout();
       removeCookie("authToken");
-      setIsLogin(false);
-      router.push("/");
+      window.location.href = "/auth";
     } catch (error) {
-      return error;
+      return handleLogout();
     }
   };
 
