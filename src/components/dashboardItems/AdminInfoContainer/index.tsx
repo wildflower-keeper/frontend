@@ -1,15 +1,17 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+// Compo
+import PinNumberInfo from "./PinNumberInfo";
+import ManagerInfo from "./ManagerInfo";
+import DateInfo from "./DateInfo";
+// Utils
+import React, { useEffect, useMemo } from "react";
 import { getCookie, removeCookie } from "@/utils/cookie";
 import useLoginStore from "@/store/useLogin";
 import { redirect } from "next/navigation";
 import useUpdateTimer from "@/store/useUpdateTimer";
 import { formatUpdateTime } from "@/utils/date/date";
-import PinNumberInfo from "./PinNumberInfo";
-import ManagerInfo from "./ManagerInfo";
-import DateInfo from "./DateInfo";
-import { shelterInfo } from "@/utils/api/v1/shelter-admin";
+import { useShelterInfo } from "@/hooks/queries";
 import { get, head } from "lodash";
 //Types
 import type { ShelterInfoType } from "@/utils/api/v1/shelter-admin/type";
@@ -36,21 +38,18 @@ const initState: ShelterInfoType = {
 const AdminInfoContainer = () => {
   const { isLogin, setIsLogin } = useLoginStore();
   const { setUpdateTimer } = useUpdateTimer();
-  const [adminInfo, setAdminInfo] = useState<ShelterInfoType | null>(null);
+  const { data: adminInfo, isSuccess, isError } = useShelterInfo();
 
   useEffect(() => {
-    //Call API
-    shelterInfo()
-      .then((res) => {
-        setAdminInfo(res);
-        setUpdateTimer(formatUpdateTime(new Date()));
-      })
-      .catch(() => {
-        removeCookie("authToken");
-        setIsLogin(false);
-        redirect("/auth");
-      });
-  }, []);
+    if (isSuccess) {
+      setUpdateTimer(formatUpdateTime(new Date()));
+    }
+    if (isError) {
+      removeCookie("authToken");
+      setIsLogin(false);
+      redirect("/auth");
+    }
+  }, [isSuccess, isError]);
 
   const adminUsers = useMemo(() => {
     return {

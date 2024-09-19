@@ -1,9 +1,11 @@
 "use client";
 
+// Compo
 import Button from "@/components/base/Button";
+// Utils
+import { useLogout } from "@/hooks/queries";
 import useDashboardStore from "@/store/useDashboard";
 import useLoginStore from "@/store/useLogin";
-import { logout } from "@/utils/api/v1/shelter-admin";
 import { removeCookie } from "@/utils/cookie";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -17,19 +19,22 @@ const headerName = {
 };
 
 const DashboardHeader = () => {
+  const { mutate: logout } = useLogout();
   const router = useRouter();
   const { dashboard } = useDashboardStore();
   const { setIsLogin } = useLoginStore();
 
   const handleLogout = () => {
-    try {
-      logout();
-      removeCookie("authToken");
-      setIsLogin(false);
-      router.push("/");
-    } catch (error) {
-      return error;
-    }
+    logout(undefined, {
+      onSuccess: () => {
+        removeCookie("authToken");
+        setIsLogin(false);
+        router.push("/");
+      },
+      onError: (error) => {
+        return error;
+      },
+    });
   };
 
   return (

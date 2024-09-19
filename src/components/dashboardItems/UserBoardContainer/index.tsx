@@ -1,42 +1,53 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+// Compo
+import PagenationButtonContainer from "./PagenationButtonContainer";
+import SearchBar from "./SearchBar";
+import UserBoard from "./UserBoard";
+// Utils
+import React, { useEffect, useMemo, useState } from "react";
 import { formatDateTime } from "@/utils/date/date";
 import totalPagesMaker from "@/utils/pagenation";
-import UserBoard from "./UserBoard";
-import PagenationButtonContainer from "./PagenationButtonContainer";
-import { homelessPeopleList } from "@/utils/api/v1/shelter-admin";
-//Types
-import type { UserItemType } from "@/utils/api/v1/shelter-admin/type";
+import { useHomelessPeopleList } from "@/hooks/queries";
+import { get } from "lodash";
+// Types
 import type { FilterValuesType } from "@/types/type";
-import SearchBar from "./SearchBar";
+
+const PAGE_SIZE = 5;
+
+const TARGET_DATE = formatDateTime(new Date());
 
 const UserBoardContainer = () => {
-  //fetchDataFilter
+  // fetchDataFilter
   const [filterParams, setFilterParams] = useState<FilterValuesType>({
     filter: "NONE",
     filterValue: "",
   });
-  //userItems;
-  const [userItemList, setUserItemList] = useState<UserItemType[]>([]);
+
   // pagenation
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number[] | null>(null);
 
-  const fetchUserList = useCallback(
-    (pageNum: number) => {
-      const queryParams = `filterType=${filterParams.filter}&filterValue=${filterParams.filterValue}&sleepoverTargetDate=${formatDateTime(new Date())}&pageNumber=${pageNum}&pageSize=5`;
-      homelessPeopleList(queryParams).then((res) => {
-        setUserItemList(res.items);
-        setTotalPages(totalPagesMaker(res.pagination.lastPageNumber));
-      });
-    },
-    [pageNumber, filterParams],
-  );
+  const queryParams = useMemo(() => {
+    return `filterType=${filterParams.filter}&filterValue=${filterParams.filterValue}&sleepoverTargetDate=${TARGET_DATE}&pageNumber=${pageNumber}&pageSize=${PAGE_SIZE}`;
+  }, [pageNumber, filterParams]);
+
+  // userItems
+  const { data: homelessPeopleListData, isSuccess } =
+    useHomelessPeopleList(queryParams);
+
+  const userItemList = useMemo(() => {
+    return get(homelessPeopleListData, "items", []);
+  }, [homelessPeopleListData]);
 
   useEffect(() => {
-    fetchUserList(pageNumber);
-  }, [pageNumber, filterParams]);
+    if (isSuccess) {
+      const totalPageList = totalPagesMaker(
+        homelessPeopleListData.pagination.lastPageNumber,
+      );
+      setTotalPages(totalPageList);
+    }
+  }, [homelessPeopleListData]);
 
   const pageNumberHandler = (pageNum: number) => {
     setPageNumber(pageNum);

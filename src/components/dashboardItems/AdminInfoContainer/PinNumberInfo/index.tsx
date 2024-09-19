@@ -1,28 +1,21 @@
 "use client";
 
-import { getPinNumber } from "@/utils/api/v1/shelter-admin";
+// Utils
 import { get } from "lodash";
-import React, { useEffect, useMemo, useState } from "react";
-//Types
-import type { PinNumberResponseType } from "@/utils/api/v1/shelter-admin/type";
+import React, { useMemo } from "react";
+// Types
+import { useGetPinNumber } from "@/hooks/queries";
 
 type PinNumberInfoType = {
   shelterName: string;
 };
 
 const PinNumberInfo = ({ shelterName }: PinNumberInfoType) => {
-  const [pinNumberObject, setPinNumberObject] =
-    useState<PinNumberResponseType | null>(null);
-
-  useEffect(() => {
-    getPinNumber()
-      .then(setPinNumberObject)
-      .catch(() => {});
-  }, []);
+  const { data: pinNumberData } = useGetPinNumber();
 
   const pinNumber = useMemo(() => {
-    return get(pinNumberObject, "pin", "0");
-  }, [pinNumberObject]);
+    return get(pinNumberData, "pin", "0");
+  }, [pinNumberData]);
 
   return (
     <div className="flex flex-col gap-2 min-w-60">

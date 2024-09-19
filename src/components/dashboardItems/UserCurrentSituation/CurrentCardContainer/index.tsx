@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+// Compo
 import CurrentCard from "../CurrentCard";
-// Types
-import { CurrentUserInfo } from "@/utils/api/v1/shelter-admin/type";
-import { homelessPeopleCount } from "@/utils/api/v1/shelter-admin";
+// Utils
+import React, { useMemo } from "react";
 import { get } from "lodash";
+import { useHomelessPeopleCount } from "@/hooks/queries";
+// Types
 
 const CurrentCardContainer = () => {
-  const [currentUserInfo, setCurrentUserInfo] =
-    useState<CurrentUserInfo | null>(null);
+  const { data: currentUserInfo } = useHomelessPeopleCount();
 
   const counts = useMemo(() => {
     return {
@@ -22,12 +22,6 @@ const CurrentCardContainer = () => {
       outingCount: get(currentUserInfo, "sleepoverCount.count", 0),
     };
   }, [currentUserInfo]);
-  useEffect(() => {
-    // Call API
-    homelessPeopleCount()
-      .then(setCurrentUserInfo)
-      .catch(() => {});
-  }, []);
 
   return (
     <div className="flex gap-3">

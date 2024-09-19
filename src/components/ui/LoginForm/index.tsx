@@ -1,12 +1,12 @@
 "use client";
 
+// Compo
 import InputWithLabel from "@/components/InputWithLabel";
 import Button from "@/components/base/Button";
 import CustomSelectBox from "@/components/base/CustomSelectBox";
+// Utils
+import { useGetShelters, useLogin } from "@/hooks/queries";
 import useLoginStore from "@/store/useLogin";
-import { getShelters } from "@/utils/api/v1/shared";
-import { ShelterType } from "@/utils/api/v1/shared/type";
-import { login } from "@/utils/api/v1/shelter-admin";
 import { setCookie } from "@/utils/cookie";
 import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -18,28 +18,22 @@ type loginInfoType = {
 };
 
 const LoginForm = () => {
-  const [shelters, setShelters] = useState<ShelterType[]>([
-    { shelterId: 1, shelterName: "Shelter 1" },
-    { shelterId: 2, shelterName: "Shelter 2" },
-    { shelterId: 3, shelterName: "Shelter 3" },
-  ]);
+  // fetch Shelters
+  const { mutate: login } = useLogin();
+  const { data: shelters } = useGetShelters();
+
   const { isLogin, setIsLogin } = useLoginStore();
   const [loginInfo, setLoginInfo] = useState<loginInfoType>({
     shelterId: "",
     password: "",
   });
+
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginInfo({ ...loginInfo, password: e.target.value });
   };
   const handleShelterChange = (value: number) => {
     setLoginInfo({ ...loginInfo, shelterId: String(value) });
   };
-
-  useEffect(() => {
-    getShelters()
-      .then(setShelters)
-      .catch(() => {});
-  }, []);
 
   useEffect(() => {
     if (isLogin) {
@@ -52,15 +46,18 @@ const LoginForm = () => {
       id: parseInt(loginInfo.shelterId, 10),
       pw: loginInfo.password,
     };
-    login(loginData)
-      .then((res) => {
+    login(loginData, {
+      onSuccess: (res) => {
         setCookie("authToken", res.authToken, {
           path: "/",
           expires: new Date(res.expiredAt),
         });
         setIsLogin(true);
-      })
-      .catch((error) => console.log(error));
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    });
   };
   return (
     <div className="w-80">

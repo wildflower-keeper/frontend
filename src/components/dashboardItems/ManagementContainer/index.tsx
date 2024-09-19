@@ -1,46 +1,46 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import totalPagesMaker from "@/utils/pagenation";
-import { TbReportAnalytics } from "react-icons/tb";
+// Compo
 import Button from "@/components/base/Button";
 import PagenationButtonContainer from "../UserBoardContainer/PagenationButtonContainer";
 import UserBoard from "../UserBoardContainer/UserBoard";
+// Utils
+import React, { useEffect, useMemo, useState } from "react";
+import totalPagesMaker from "@/utils/pagenation";
+import { TbReportAnalytics } from "react-icons/tb";
 import { addStatus } from "@/utils/sleepoverUtils";
+// Types
+import { useGetSleepoverList } from "@/hooks/queries";
+import { get } from "lodash";
 
-//Types
-import { SleepoverItemType } from "@/utils/api/v1/shelter-admin/type";
-import { getSleepoverList } from "@/utils/api/v1/shelter-admin";
+const PAGE_SIZE = 5;
 
 const ManagementContainer = () => {
-  //fetching data
-  const [sleepoverList, setSleepoverList] = useState<SleepoverItemType[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number[] | null>(null);
 
-  const fetchData = useCallback(
-    (pageNum: number) => {
-      const queryParams = `pageNumber=${pageNum}&pageSize=2`;
-      getSleepoverList(queryParams).then((res) => {
-        setSleepoverList(res.items);
+  const queryParams = useMemo(() => {
+    return `pageNumber=${pageNumber}&pageSize=${PAGE_SIZE}`;
+  }, [pageNumber]);
 
-        setTotalPages(totalPagesMaker(res.pagination.lastPageNumber));
-      });
-    },
-    [pageNumber],
-  );
+  const { data: sleepoverListData, isSuccess } =
+    useGetSleepoverList(queryParams);
 
   const addStatusSleepoverList = useMemo(() => {
-    return addStatus(sleepoverList);
-  }, [sleepoverList]);
+    return addStatus(get(sleepoverListData, "items", []));
+  }, [sleepoverListData]);
 
   useEffect(() => {
-    fetchData(pageNumber);
-  }, [pageNumber]);
+    if (isSuccess) {
+      const totalPageList = totalPagesMaker(
+        sleepoverListData.pagination.lastPageNumber,
+      );
+      setTotalPages(totalPageList);
+    }
+  }, [isSuccess]);
 
   const pageNumberHandler = (pageNum: number) => {
     setPageNumber(pageNum);
-    fetchData(pageNum);
   };
   return (
     <div className="flex flex-col gap-4">
