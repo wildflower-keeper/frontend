@@ -45,6 +45,7 @@ export const useHomelessPeopleList = (queryString: string) => {
   return useQuery({
     queryKey: [QUERY_KEYS.HOMELESS_PEOPLE_LIST, queryString],
     queryFn: () => homelessPeopleList(queryString),
+    refetchInterval: 60 * 1000,
   });
 };
 export const useShelterInfo = () => {
