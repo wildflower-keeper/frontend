@@ -1,16 +1,19 @@
+// Compo
 import Image from "next/image";
+// Utils
 import React, { ReactNode } from "react";
 
-type pageLayoutProps = {
+interface Props {
   children: ReactNode;
-};
+}
 
-const Layout: React.FC<pageLayoutProps> = ({ children }) => {
+const NotLoginedLayout: React.FC<Props> = ({ children }) => {
   return (
     <div className="flex-grow flex flex-col gap-12">
       <div>
         <div className="w-40 h-10 m-3">
           <Image
+            key={1}
             src="/assets/logos/wildflower_logo_with_name.png"
             width={150}
             height={40}
@@ -23,4 +26,4 @@ const Layout: React.FC<pageLayoutProps> = ({ children }) => {
   );
 };
 
-export default Layout;
+export default NotLoginedLayout;

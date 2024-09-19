@@ -1,15 +1,16 @@
 "use client";
 
+// Compo
 import InputWithLabel from "@/components/InputWithLabel";
 import Button from "@/components/base/Button";
 import CustomSelectBox from "@/components/base/CustomSelectBox";
-import useLoginStore from "@/store/useLogin";
+// Utils
+import React, { useEffect, useState } from "react";
 import { getShelters } from "@/utils/api/v1/shared";
 import { ShelterType } from "@/utils/api/v1/shared/type";
 import { login } from "@/utils/api/v1/shelter-admin";
 import { setCookie } from "@/utils/cookie";
-import { redirect } from "next/navigation";
-import React, { useEffect, useState } from "react";
+
 //Types
 
 type loginInfoType = {
@@ -23,7 +24,7 @@ const LoginForm = () => {
     { shelterId: 2, shelterName: "Shelter 2" },
     { shelterId: 3, shelterName: "Shelter 3" },
   ]);
-  const { isLogin, setIsLogin } = useLoginStore();
+
   const [loginInfo, setLoginInfo] = useState<loginInfoType>({
     shelterId: "",
     password: "",
@@ -41,24 +42,20 @@ const LoginForm = () => {
       .catch(() => {});
   }, []);
 
-  useEffect(() => {
-    if (isLogin) {
-      redirect("dashboard");
-    }
-  }, [isLogin]);
-
   const handleLoginSubmit = () => {
     const loginData = {
       id: parseInt(loginInfo.shelterId, 10),
       pw: loginInfo.password,
     };
+
     login(loginData)
       .then((res) => {
         setCookie("authToken", res.authToken, {
           path: "/",
           expires: new Date(res.expiredAt),
         });
-        setIsLogin(true);
+
+        window.location.href = "/dashboard";
       })
       .catch((error) => console.log(error));
   };
@@ -92,20 +89,6 @@ const LoginForm = () => {
               labelName="비밀번호"
               type="password"
             />
-            {/* <div className="flex gap-1">
-              <AiOutlineInfoCircle
-                width={16}
-                height={16}
-                className="h-fit my-auto"
-              />
-
-              <Link
-                className="text-fontWeak underline underline-offset-2 smallFont"
-                href="/auth/findpwd"
-              >
-                비밀번호를 잊어버리셨나요?
-              </Link>
-            </div> */}
           </div>
         </div>
 

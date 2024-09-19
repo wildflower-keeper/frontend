@@ -1,17 +1,19 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
-import { getCookie, removeCookie } from "@/utils/cookie";
-import useLoginStore from "@/store/useLogin";
-import { redirect } from "next/navigation";
-import useUpdateTimer from "@/store/useUpdateTimer";
-import { formatUpdateTime } from "@/utils/date/date";
+// Compo
 import PinNumberInfo from "./PinNumberInfo";
 import ManagerInfo from "./ManagerInfo";
 import DateInfo from "./DateInfo";
+// Utils
+import React, { useEffect, useMemo, useState } from "react";
+import useLoginStore from "@/store/useLogin";
+import useUpdateTimer from "@/store/useUpdateTimer";
+import { getCookie, removeCookie } from "@/utils/cookie";
+import { redirect } from "next/navigation";
+import { formatUpdateTime } from "@/utils/date/date";
 import { shelterInfo } from "@/utils/api/v1/shelter-admin";
 import { get, head } from "lodash";
-//Types
+// Types
 import type { ShelterInfoType } from "@/utils/api/v1/shelter-admin/type";
 
 const initState: ShelterInfoType = {
@@ -34,9 +36,9 @@ const initState: ShelterInfoType = {
 };
 
 const AdminInfoContainer = () => {
+  const [adminInfo, setAdminInfo] = useState<ShelterInfoType | null>(null);
   const { isLogin, setIsLogin } = useLoginStore();
   const { setUpdateTimer } = useUpdateTimer();
-  const [adminInfo, setAdminInfo] = useState<ShelterInfoType | null>(null);
 
   useEffect(() => {
     //Call API
@@ -67,6 +69,7 @@ const AdminInfoContainer = () => {
       ),
     };
   }, [adminInfo]);
+
   useEffect(() => {
     if (!isLogin && !getCookie("authToken")) {
       redirect("/auth");

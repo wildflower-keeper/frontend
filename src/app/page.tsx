@@ -6,17 +6,12 @@ import { redirect } from "next/navigation";
 import { useEffect } from "react";
 
 const Home = () => {
-  const { isLogin, setIsLogin } = useLoginStore();
+  const { isLogin } = useLoginStore();
+
   useEffect(() => {
-    if (!isLogin) {
-      if (getCookie("authToken")) {
-        setIsLogin(true);
-        redirect("/dashboard");
-      }
-      if (!getCookie("authToken")) {
-        redirect("/auth");
-      }
-    }
+    if (!isLogin) return redirect("/auth");
+
+    return redirect("/dashboard");
   }, [isLogin, getCookie]);
 };
 
