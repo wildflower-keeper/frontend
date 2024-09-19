@@ -7,7 +7,7 @@ export function middleware(req: NextRequest) {
 
 
     // 쿠키 값에 따라 리다이렉트 처리
-    if (!isLogin && path !== '/auth') {
+    if (!isLogin && !path.includes('/auth')) {
         return NextResponse.redirect(`${req.nextUrl.origin}/auth`);
     }
 
