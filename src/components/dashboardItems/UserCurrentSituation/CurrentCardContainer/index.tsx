@@ -5,11 +5,15 @@ import CurrentCard from "../CurrentCard";
 // Utils
 import React, { useMemo } from "react";
 import { get } from "lodash";
-import { useHomelessPeopleCount } from "@/hooks/queries/v1/shelter-admin";
+import { useQuery } from "@tanstack/react-query";
+import { homelessPeopleCount } from "@/utils/api/v1/shelter-admin";
 // Types
 
 const CurrentCardContainer = () => {
-  const { data: currentUserInfo } = useHomelessPeopleCount();
+  const { data: currentUserInfo } = useQuery({
+    queryKey: homelessPeopleCount.queryKey(),
+    queryFn: homelessPeopleCount,
+  });
 
   const counts = useMemo(() => {
     return {

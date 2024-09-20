@@ -12,14 +12,14 @@ type PinNumberInfoType = {
 };
 
 const PinNumberInfo = ({ shelterName }: PinNumberInfoType) => {
-  const { data: pinNumberData } = useQuery({
+  const { data } = useQuery({
     queryKey: getPinNumber.queryKey(),
     queryFn: getPinNumber,
   });
 
   const pinNumber = useMemo(() => {
-    return get(pinNumberData, "pin", "0");
-  }, [pinNumberData]);
+    return get(data, "pin", "0");
+  }, [data]);
 
   return (
     <div className="flex flex-col gap-2 min-w-60">

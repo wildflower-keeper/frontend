@@ -6,13 +6,14 @@ import ManagerInfo from "./ManagerInfo";
 import DateInfo from "./DateInfo";
 // Utils
 import React, { useEffect, useMemo } from "react";
-import { getCookie, removeCookie } from "@/utils/cookie";
-import useLoginStore from "@/store/useLogin";
-import { redirect } from "next/navigation";
 import useUpdateTimer from "@/store/useUpdateTimer";
+import useLoginStore from "@/store/useLogin";
+import { getCookie, removeCookie } from "@/utils/cookie";
+import { redirect } from "next/navigation";
 import { formatUpdateTime } from "@/utils/date/date";
-import { useShelterInfo } from "@/hooks/queries/v1/shelter-admin";
 import { get, head } from "lodash";
+import { useQuery } from "@tanstack/react-query";
+import { shelterInfo } from "@/utils/api/v1/shelter-admin";
 // Types
 import type { ShelterInfoType } from "@/utils/api/v1/shelter-admin/type";
 
@@ -38,10 +39,13 @@ const initState: ShelterInfoType = {
 const AdminInfoContainer = () => {
   const { isLogin, setIsLogin } = useLoginStore();
   const { setUpdateTimer } = useUpdateTimer();
-  const { data: adminInfo, isSuccess, isError } = useShelterInfo();
+  const { data: adminInfo, isError } = useQuery({
+    queryKey: shelterInfo.queryKey(),
+    queryFn: shelterInfo,
+  });
 
   useEffect(() => {
-    if (isSuccess) {
+    if (adminInfo) {
       setUpdateTimer(formatUpdateTime(new Date()));
     }
     if (isError) {
@@ -49,7 +53,7 @@ const AdminInfoContainer = () => {
       setIsLogin(false);
       redirect("/auth");
     }
-  }, [isSuccess, isError]);
+  }, [adminInfo, isError, setUpdateTimer, setIsLogin]);
 
   const adminUsers = useMemo(() => {
     return {
@@ -66,12 +70,6 @@ const AdminInfoContainer = () => {
       ),
     };
   }, [adminInfo]);
-
-  useEffect(() => {
-    if (!isLogin && !getCookie("authToken")) {
-      redirect("/auth");
-    }
-  }, [isLogin]);
 
   return (
     <div className="w-full flex justify-between">

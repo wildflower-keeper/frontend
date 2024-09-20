@@ -5,10 +5,12 @@ import InputWithLabel from "@/components/InputWithLabel";
 import Button from "@/components/base/Button";
 import CustomSelectBox from "@/components/base/CustomSelectBox";
 // Utils
-import { useLogin } from "@/hooks/queries/v1/shelter-admin";
 import React, { useState } from "react";
 import { setCookie } from "@/utils/cookie";
-import { useGetShelters } from "@/hooks/queries/v1/shared";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { LoginBodyType } from "@/utils/api/v1/shelter-admin/type";
+import { login } from "@/utils/api/v1/shelter-admin";
+import { getShelters } from "@/utils/api/v1/shared";
 //Types
 
 type loginInfoType = {
@@ -17,9 +19,14 @@ type loginInfoType = {
 };
 
 const LoginForm = () => {
-  // fetch Shelters
-  const { mutate: login } = useLogin();
-  const { data: shelters } = useGetShelters();
+  const { mutate } = useMutation({
+    mutationFn: (loginData: LoginBodyType) => login(loginData),
+  });
+  const { data: shelters } = useQuery({
+    queryKey: getShelters.queryKey(),
+    queryFn: getShelters,
+    initialData: [],
+  });
 
   const [loginInfo, setLoginInfo] = useState<loginInfoType>({
     shelterId: "",
@@ -38,7 +45,7 @@ const LoginForm = () => {
       id: parseInt(loginInfo.shelterId, 10),
       pw: loginInfo.password,
     };
-    login(loginData, {
+    mutate(loginData, {
       onSuccess: (res) => {
         setCookie("authToken", res.authToken, {
           path: "/",

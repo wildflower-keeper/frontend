@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
-import { v4 as uuidv4 } from "uuid";
+// Compo
 import UserBoardItem from "../UserBoardItem";
 import UserBoardHeader from "../../UserBoardHeader";
-//Types
+// Utils
+import React from "react";
+import { v4 as uuidv4 } from "uuid";
+// Types
 import type {
   AddSituationSleepoverType,
   UserItemType,

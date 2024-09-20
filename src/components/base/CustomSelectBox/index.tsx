@@ -10,7 +10,6 @@ import Button from "../Button";
 //Types
 import type { ShelterType } from "@/utils/api/v1/shared/type";
 
-
 interface Props {
   shelters: ShelterType[];
   handleShelterChange: (value: number) => void;

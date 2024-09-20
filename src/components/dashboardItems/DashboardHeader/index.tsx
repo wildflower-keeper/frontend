@@ -6,9 +6,10 @@ import Button from "@/components/base/Button";
 import { AiOutlineReload } from "react-icons/ai";
 import { MdOutlineLogout } from "react-icons/md";
 // Utils
-import { useLogout } from "@/hooks/queries/v1/shelter-admin";
 import useDashboardStore from "@/store/useDashboard";
 import { removeCookie } from "@/utils/cookie";
+import { useMutation } from "@tanstack/react-query";
+import { logout } from "@/utils/api/v1/shelter-admin";
 
 const headerName = {
   dashboard: "대시보드",
@@ -17,11 +18,14 @@ const headerName = {
 };
 
 const DashboardHeader = () => {
-  const { mutate: logout } = useLogout();
+  const { mutate } = useMutation({
+    mutationKey: logout.mutationKey(),
+    mutationFn: logout,
+  });
   const { dashboard } = useDashboardStore();
 
   const handleLogout = () => {
-    logout(undefined, {
+    mutate(undefined, {
       onSuccess: () => {
         removeCookie("authToken");
         window.location.href = "/auth";
