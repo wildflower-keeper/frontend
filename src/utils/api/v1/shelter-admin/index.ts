@@ -1,6 +1,7 @@
 import * as ROUTES from "./Routes.const";
 import customAxios, { GET, POST } from "../../axios";
 import { join } from "lodash";
+import { generateSplitUrl } from "../../utils.const";
 // Types
 import type {
   CurrentUserInfo,
@@ -50,3 +51,13 @@ export function getSleepoverList(
 export function getPinNumber(): Promise<PinNumberResponseType> {
   return GET({ url: ROUTES.PIN });
 }
+
+login.mutationKey = () => generateSplitUrl(ROUTES.LOGIN);
+logout.mutationKey = () => generateSplitUrl(ROUTES.LOGOUT);
+
+homelessPeopleCount.queryKey = () =>
+  generateSplitUrl(ROUTES.HOMELESS_PEOPLE_COUNT);
+homelessPeopleList.queryKey = () => generateSplitUrl(ROUTES.HOMELESS_PEOPLE);
+shelterInfo.queryKey = () => generateSplitUrl(ROUTES.SHELTER);
+getSleepoverList.queryKey = () => generateSplitUrl(ROUTES.SLEEPOVERS);
+getPinNumber.queryKey = () => generateSplitUrl(ROUTES.PIN);
