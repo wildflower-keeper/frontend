@@ -78,7 +78,7 @@ module.exports = {
       2,
       { namedComponents: "arrow-function" },
     ],
-    "arrow-body-style": ["error", "always"],
+    "arrow-body-style": ["error", "as-needs"],
     "react/require-default-props": [0],
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
