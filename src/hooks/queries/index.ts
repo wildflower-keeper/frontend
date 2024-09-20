@@ -24,26 +24,32 @@ export const useGetShelters = () => {
 
 export const useLogin = () => {
   return useMutation({
+    mutationKey: [QUERY_KEYS.LOGIN],
     mutationFn: (loginData: LoginBodyType) => login(loginData),
   });
 };
 
 export const useLogout = () => {
   return useMutation({
+    mutationKey: [QUERY_KEYS.LOGOUT],
     mutationFn: logout,
   });
 };
 
 export const useHomelessPeopleCount = () => {
   return useQuery({
-    queryKey: [QUERY_KEYS.HOMELESS_PEOPLE_COUNT],
+    queryKey: [QUERY_KEYS.HOMELESS_PEOPLE, QUERY_KEYS.HOMELESS_PEOPLE_COUNT],
     queryFn: homelessPeopleCount,
   });
 };
 
 export const useHomelessPeopleList = (queryString: string) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.HOMELESS_PEOPLE_LIST, queryString],
+    queryKey: [
+      QUERY_KEYS.HOMELESS_PEOPLE,
+      QUERY_KEYS.HOMELESS_PEOPLE_LIST,
+      queryString,
+    ],
     queryFn: () => homelessPeopleList(queryString),
     refetchInterval: 60 * 1000,
   });
