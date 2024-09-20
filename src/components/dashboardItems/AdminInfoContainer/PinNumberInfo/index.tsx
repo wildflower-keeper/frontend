@@ -3,8 +3,8 @@
 // Utils
 import { get } from "lodash";
 import React, { useMemo } from "react";
-// Types
 import { useGetPinNumber } from "@/hooks/queries";
+// Types
 
 type PinNumberInfoType = {
   shelterName: string;
