@@ -1,48 +1,64 @@
 "use client";
 
-import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+// Compo
+import Button from "../Button";
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
-import Button from "../Button";
+// Utils
+import React, { useState } from "react";
+import { getShelters } from "@/utils/api/v1/shared";
+import { useQuery } from "@tanstack/react-query";
+import { v4 as uuidv4 } from "uuid";
 //Types
-import type { ShelterType } from "@/utils/api/v1/shared/type";
+import type { Dispatch, SetStateAction } from "react";
+import type { LoginBodyType } from "@/utils/api/v1/shelter-admin/type";
 
 interface Props {
-  shelters: ShelterType[];
-  handleShelterChange: (value: number) => void;
+  shelterChange: Dispatch<SetStateAction<LoginBodyType>>;
 }
 
-const CustomSelectBox = ({ shelters, handleShelterChange }: Props) => {
-  const [opened, setOpend] = useState<boolean>(false);
-  const [selectValue, setSelectValue] =
-    useState<string>("센터를 선택해주세요.");
-  const [isDefault, setIsDefault] = useState<boolean>(true);
-  const openedHandler = () => {
-    setOpend(!opened);
-  };
+interface BoxParams {
+  opened: boolean;
+  selectName: string;
+  isDefault: boolean;
+}
 
-  const selectShelterHandler = (Id: number, name: string) => {
-    handleShelterChange(Id);
-    setSelectValue(name);
-    setIsDefault(false);
-    setOpend(false);
+const ShleterSelect = ({ shelterChange }: Props) => {
+  const { data: shelters } = useQuery({
+    queryKey: getShelters.queryKey(),
+    queryFn: getShelters,
+    initialData: [],
+  });
+  const [boxParams, setBoxParams] = useState<BoxParams>({
+    opened: false,
+    selectName: "센터를 선택해주세요",
+    isDefault: true,
+  });
+  const selectShelterHandler = (id: number, name: string) => {
+    shelterChange((prev) => ({ ...prev, id }));
+    setBoxParams((prev) => ({ ...prev, selectName: name, opened: false }));
   };
   return (
-    <div className={`flex flex-col gap-2 ${opened && "relative"}`}>
+    <div className={`flex flex-col gap-2 ${boxParams.opened && "relative"}`}>
       <div className="p-2 bg-white w-full rounded-lg shadow-sm shadow-primary/30">
         <Button
-          onClick={openedHandler}
+          onClick={() =>
+            setBoxParams((prev) => ({
+              ...prev,
+              opened: !boxParams.opened,
+              isDefault: false,
+            }))
+          }
           className="flex justify-between items-center w-full"
         >
           <p
-            className={`${isDefault ? "text-fontWeak" : "text-black"} text-base`}
+            className={`${boxParams.isDefault ? "text-fontWeak" : "text-black"} text-base`}
           >
-            {selectValue}
+            {boxParams.selectName}
           </p>
-          {opened ? (
+          {boxParams.opened ? (
             <MdOutlineKeyboardArrowUp size={24} color="#00B226" />
           ) : (
             <MdOutlineKeyboardArrowDown size={24} color="#00B226" />
@@ -51,7 +67,7 @@ const CustomSelectBox = ({ shelters, handleShelterChange }: Props) => {
       </div>
 
       <ul
-        className={`bg-white rounded-lg p-2 shadow-sm w-full shadow-primary/30 ${!opened ? "hidden" : "absolute top-12"}`}
+        className={`bg-white rounded-lg p-2 shadow-sm w-full shadow-primary/30 ${!boxParams.opened ? "hidden" : "absolute top-12"}`}
       >
         {shelters?.map(({ shelterId, shelterName }) => {
           return (
@@ -72,4 +88,4 @@ const CustomSelectBox = ({ shelters, handleShelterChange }: Props) => {
   );
 };
 
-export default CustomSelectBox;
+export default ShleterSelect;
