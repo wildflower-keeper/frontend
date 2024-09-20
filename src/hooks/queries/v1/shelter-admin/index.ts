@@ -1,16 +1,13 @@
 // Utils
 import {
-  getPinNumber,
-  getSleepoverList,
   homelessPeopleCount,
-  homelessPeopleList,
   login,
   logout,
   shelterInfo,
 } from "@/utils/api/v1/shelter-admin";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { UndefinedInitialDataOptions, useMutation, useQuery } from "@tanstack/react-query";
 // Types
-import type { LoginBodyType } from "@/utils/api/v1/shelter-admin/type";
+import type { CurrentUserInfo, LoginBodyType } from "@/utils/api/v1/shelter-admin/type";
 import { useMemo } from "react";
 
 export const useLogin = () => {
@@ -29,22 +26,16 @@ export const useLogout = () => {
   });
 };
 
-export const useHomelessPeopleCount = () => {
+export const useHomelessPeopleCount = (options: UndefinedInitialDataOptions<CurrentUserInfo, Error, CurrentUserInfo, string[]>,) => {
   const queryKey = useMemo(homelessPeopleCount.queryKey, []);
+
   return useQuery({
+    ...options,
     queryKey,
     queryFn: homelessPeopleCount,
   });
 };
 
-export const useHomelessPeopleList = (queryString: string) => {
-  const queryKey = useMemo(homelessPeopleList.queryKey, []);
-  return useQuery({
-    queryKey: [...queryKey, queryString],
-    queryFn: () => homelessPeopleList(queryString),
-    refetchInterval: 60 * 1000,
-  });
-};
 export const useShelterInfo = () => {
   const queryKey = useMemo(shelterInfo.queryKey, []);
 
@@ -53,17 +44,5 @@ export const useShelterInfo = () => {
     queryFn: shelterInfo,
   });
 };
-export const useGetSleepoverList = (queryString: string) => {
-  const queryKey = useMemo(getSleepoverList.queryKey, []);
-  return useQuery({
-    queryKey: [...queryKey, queryString],
-    queryFn: () => getSleepoverList(queryString),
-  });
-};
-export const useGetPinNumber = () => {
-  const queryKey = useMemo(getPinNumber.queryKey, []);
-  return useQuery({
-    queryKey,
-    queryFn: getPinNumber,
-  });
-};
+
+

@@ -9,39 +9,36 @@ import React, { useEffect, useMemo, useState } from "react";
 import totalPagesMaker from "@/utils/pagenation";
 import { TbReportAnalytics } from "react-icons/tb";
 import { addStatus } from "@/utils/sleepoverUtils";
-import { useGetSleepoverList } from "@/hooks/queries/v1/shelter-admin";
 import { get } from "lodash";
+import { getSleepoverList } from "@/utils/api/v1/shelter-admin";
+import { useQuery } from "@tanstack/react-query";
 // Types
-
-const PAGE_SIZE = 5;
 
 const ManagementContainer = () => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number[] | null>(null);
 
   const queryParams = useMemo(() => {
-    return `pageNumber=${pageNumber}&pageSize=${PAGE_SIZE}`;
+    return { pageNumber, pageSize: 5 };
   }, [pageNumber]);
 
-  const { data: sleepoverListData, isSuccess } =
-    useGetSleepoverList(queryParams);
+  const { data: sleepoverListData } = useQuery({
+    queryFn: () => getSleepoverList(queryParams),
+    queryKey: getSleepoverList.queryKey(),
+  });
 
   const addStatusSleepoverList = useMemo(() => {
     return addStatus(get(sleepoverListData, "items", []));
   }, [sleepoverListData]);
 
   useEffect(() => {
-    if (isSuccess) {
-      const totalPageList = totalPagesMaker(
-        sleepoverListData.pagination.lastPageNumber,
-      );
-      setTotalPages(totalPageList);
-    }
-  }, [isSuccess]);
+    const lastPage = get(sleepoverListData, "pagination.lastPageNumber", null);
 
-  const pageNumberHandler = (pageNum: number) => {
-    setPageNumber(pageNum);
-  };
+    if (lastPage === null) return;
+
+    setTotalPages(totalPagesMaker(lastPage));
+  }, [sleepoverListData]);
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center">
@@ -56,7 +53,7 @@ const ManagementContainer = () => {
       </div>
       {totalPages && (
         <PagenationButtonContainer
-          pageNumberHandler={pageNumberHandler}
+          pageNumberHandler={setPageNumber}
           totalPages={totalPages}
           pageNumber={pageNumber}
         />

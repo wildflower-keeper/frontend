@@ -31,10 +31,16 @@ export function homelessPeopleCount(): Promise<CurrentUserInfo> {
 }
 
 export function homelessPeopleList(
-  queryString: string,
+  opt: {
+    filterType: string,
+    filterValue: string,
+    pageNumber: number,
+    sleepoverTargetDate: string,
+    pageSize: number,
+  },
 ): Promise<HomelessPeopleListResponseType> {
-  const URL = join([ROUTES.HOMELESS_PEOPLE, queryString], "?");
-  return GET({ url: URL });
+
+  return GET({ url: ROUTES.HOMELESS_PEOPLE, params: opt });
 }
 
 export function shelterInfo(): Promise<ShelterInfoType> {
@@ -42,10 +48,13 @@ export function shelterInfo(): Promise<ShelterInfoType> {
 }
 
 export function getSleepoverList(
-  queryString: string,
+  opt: { pageNumber: number, pageSize: number },
 ): Promise<SleepoversResponseType> {
-  const URL = join([ROUTES.SLEEPOVERS, queryString], "?");
-  return GET({ url: URL });
+
+  return GET({
+    url: ROUTES.SLEEPOVERS,
+    params: opt
+  });
 }
 
 export function getPinNumber(): Promise<PinNumberResponseType> {

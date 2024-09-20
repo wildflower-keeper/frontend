@@ -5,61 +5,56 @@ import PagenationButtonContainer from "./PagenationButtonContainer";
 import SearchBar from "./SearchBar";
 import UserBoard from "./UserBoard";
 // Utils
-import React, { useEffect, useMemo, useState } from "react";
-import { formatDateTime } from "@/utils/date/date";
+import React, { useMemo, useState } from "react";
 import totalPagesMaker from "@/utils/pagenation";
-import { useHomelessPeopleList } from "@/hooks/queries/v1/shelter-admin";
+import { formatDateTime } from "@/utils/date/date";
 import { get } from "lodash";
+import { useQuery } from "@tanstack/react-query";
+import { homelessPeopleList } from "@/utils/api/v1/shelter-admin";
 // Types
 import type { FilterValuesType } from "@/types/type";
 
-const PAGE_SIZE = 5;
-
-const TARGET_DATE = formatDateTime(new Date());
-
 const UserBoardContainer = () => {
-  // fetchDataFilter
-  const [filterParams, setFilterParams] = useState<FilterValuesType>({
-    filter: "NONE",
+  const [param, setParam] = useState({
+    filterType: "NONE",
     filterValue: "",
+    sleepoverTargetDate: formatDateTime(new Date()),
+    pageNumber: 1,
+    pageSize: 5,
   });
 
-  // pagenation
-  const [pageNumber, setPageNumber] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number[] | null>(null);
+  const { data: homelessPeopleListData } = useQuery({
+    queryFn: () => homelessPeopleList(param),
+    queryKey: homelessPeopleList.queryKey(),
+  });
 
-  const queryParams = useMemo(() => {
-    return `filterType=${filterParams.filter}&filterValue=${filterParams.filterValue}&sleepoverTargetDate=${TARGET_DATE}&pageNumber=${pageNumber}&pageSize=${PAGE_SIZE}`;
-  }, [pageNumber, filterParams]);
+  const userItemList = useMemo(
+    () => get(homelessPeopleListData, "items", []),
+    [homelessPeopleListData],
+  );
 
-  // userItems
-  const { data: homelessPeopleListData, isSuccess } =
-    useHomelessPeopleList(queryParams);
+  const totalPages = useMemo(() => {
+    const lastPage = get(
+      homelessPeopleListData,
+      "pagination.lastPageNumber",
+      null,
+    );
 
-  const userItemList = useMemo(() => {
-    return get(homelessPeopleListData, "items", []);
+    if (lastPage === null) return [];
+
+    return totalPagesMaker(lastPage);
   }, [homelessPeopleListData]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      const totalPageList = totalPagesMaker(
-        homelessPeopleListData.pagination.lastPageNumber,
-      );
-      setTotalPages(totalPageList);
-    }
-  }, [homelessPeopleListData]);
-
-  const pageNumberHandler = (pageNum: number) => {
-    setPageNumber(pageNum);
-  };
 
   const filterParamHandler = (
     pageNum: number,
-    filterValues: FilterValuesType,
-  ) => {
-    setFilterParams((prev) => ({ ...prev, ...filterValues }));
-    setPageNumber(pageNum);
-  };
+    { filter, filterValue }: FilterValuesType,
+  ) =>
+    setParam((prev) => ({
+      ...prev,
+      filterType: filter,
+      filterValue,
+      pageNumber: pageNum,
+    }));
 
   return (
     <div>
@@ -70,13 +65,13 @@ const UserBoardContainer = () => {
         </div>
       </div>
       <UserBoard userItemList={userItemList} />
-      {totalPages && (
-        <PagenationButtonContainer
-          pageNumberHandler={pageNumberHandler}
-          totalPages={totalPages}
-          pageNumber={pageNumber}
-        />
-      )}
+      <PagenationButtonContainer
+        pageNumberHandler={(v) =>
+          setParam((prev) => ({ ...prev, pageNumber: v }))
+        }
+        totalPages={totalPages}
+        pageNumber={param.pageNumber}
+      />
     </div>
   );
 };

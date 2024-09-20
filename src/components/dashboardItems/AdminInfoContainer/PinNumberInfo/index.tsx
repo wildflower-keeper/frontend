@@ -1,9 +1,10 @@
 "use client";
 
 // Utils
-import { get } from "lodash";
 import React, { useMemo } from "react";
-import { useGetPinNumber } from "@/hooks/queries/v1/shelter-admin";
+import { get } from "lodash";
+import { useQuery } from "@tanstack/react-query";
+import { getPinNumber } from "@/utils/api/v1/shelter-admin";
 // Types
 
 type PinNumberInfoType = {
@@ -11,7 +12,10 @@ type PinNumberInfoType = {
 };
 
 const PinNumberInfo = ({ shelterName }: PinNumberInfoType) => {
-  const { data: pinNumberData } = useGetPinNumber();
+  const { data: pinNumberData } = useQuery({
+    queryKey: getPinNumber.queryKey(),
+    queryFn: getPinNumber,
+  });
 
   const pinNumber = useMemo(() => {
     return get(pinNumberData, "pin", "0");

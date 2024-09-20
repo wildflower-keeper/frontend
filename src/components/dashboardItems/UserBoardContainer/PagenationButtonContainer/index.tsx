@@ -31,6 +31,8 @@ const PagenationButtonContainer = ({
     }
   };
 
+  if (totalPages.length === 0) return <></>;
+
   return (
     <div className="w-full flex justify-between px-12">
       <Button onClick={prevHandler}>

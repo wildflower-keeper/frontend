@@ -3,7 +3,7 @@
 import Script from "next/script";
 import React from "react";
 
-const GoogleAnalytics = () => {
+export const GoogleAnalytics = () => {
   return (
     <>
       <Script id="GoogleTagManager">
@@ -25,5 +25,3 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </>
   );
 };
-
-export default GoogleAnalytics;
