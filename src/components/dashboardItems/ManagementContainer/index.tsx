@@ -9,9 +9,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import totalPagesMaker from "@/utils/pagenation";
 import { TbReportAnalytics } from "react-icons/tb";
 import { addStatus } from "@/utils/sleepoverUtils";
-// Types
-import { useGetSleepoverList } from "@/hooks/queries";
+import { useGetSleepoverList } from "@/hooks/queries/v1/shelter-admin";
 import { get } from "lodash";
+// Types
 
 const PAGE_SIZE = 5;
 

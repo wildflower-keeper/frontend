@@ -6,7 +6,7 @@ import Button from "@/components/base/Button";
 import { AiOutlineReload } from "react-icons/ai";
 import { MdOutlineLogout } from "react-icons/md";
 // Utils
-import { useLogout } from "@/hooks/queries";
+import { useLogout } from "@/hooks/queries/v1/shelter-admin";
 import useDashboardStore from "@/store/useDashboard";
 import { removeCookie } from "@/utils/cookie";
 

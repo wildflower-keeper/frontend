@@ -11,7 +11,7 @@ import useLoginStore from "@/store/useLogin";
 import { redirect } from "next/navigation";
 import useUpdateTimer from "@/store/useUpdateTimer";
 import { formatUpdateTime } from "@/utils/date/date";
-import { useShelterInfo } from "@/hooks/queries";
+import { useShelterInfo } from "@/hooks/queries/v1/shelter-admin";
 import { get, head } from "lodash";
 // Types
 import type { ShelterInfoType } from "@/utils/api/v1/shelter-admin/type";

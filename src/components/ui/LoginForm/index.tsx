@@ -5,9 +5,10 @@ import InputWithLabel from "@/components/InputWithLabel";
 import Button from "@/components/base/Button";
 import CustomSelectBox from "@/components/base/CustomSelectBox";
 // Utils
-import { useGetShelters, useLogin } from "@/hooks/queries";
+import { useLogin } from "@/hooks/queries/v1/shelter-admin";
 import React, { useState } from "react";
 import { setCookie } from "@/utils/cookie";
+import { useGetShelters } from "@/hooks/queries/v1/shared";
 //Types
 
 type loginInfoType = {

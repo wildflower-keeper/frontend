@@ -3,7 +3,7 @@
 // Utils
 import { get } from "lodash";
 import React, { useMemo } from "react";
-import { useGetPinNumber } from "@/hooks/queries";
+import { useGetPinNumber } from "@/hooks/queries/v1/shelter-admin";
 // Types
 
 type PinNumberInfoType = {

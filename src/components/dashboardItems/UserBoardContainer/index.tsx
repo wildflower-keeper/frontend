@@ -8,7 +8,7 @@ import UserBoard from "./UserBoard";
 import React, { useEffect, useMemo, useState } from "react";
 import { formatDateTime } from "@/utils/date/date";
 import totalPagesMaker from "@/utils/pagenation";
-import { useHomelessPeopleList } from "@/hooks/queries";
+import { useHomelessPeopleList } from "@/hooks/queries/v1/shelter-admin";
 import { get } from "lodash";
 // Types
 import type { FilterValuesType } from "@/types/type";

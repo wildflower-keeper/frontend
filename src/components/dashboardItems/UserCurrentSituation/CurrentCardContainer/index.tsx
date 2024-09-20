@@ -5,7 +5,7 @@ import CurrentCard from "../CurrentCard";
 // Utils
 import React, { useMemo } from "react";
 import { get } from "lodash";
-import { useHomelessPeopleCount } from "@/hooks/queries";
+import { useHomelessPeopleCount } from "@/hooks/queries/v1/shelter-admin";
 // Types
 
 const CurrentCardContainer = () => {
