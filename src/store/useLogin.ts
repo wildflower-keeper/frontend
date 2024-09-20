@@ -1,13 +1,14 @@
+import { getCookie } from '@/utils/cookie';
 import { create } from "zustand";
 
-type useLoginStoreType = {
+interface UseLoginStoreType {
   isLogin: boolean;
   setIsLogin: (newLoginInfo: boolean) => void;
 };
 
-const useLoginStore = create<useLoginStoreType>((set) => {
+const useLoginStore = create<UseLoginStoreType>((set) => {
   return {
-    isLogin: false,
+    isLogin: Boolean(getCookie("authToken")),
     setIsLogin: (newLoginInfo) => {
       set({ isLogin: newLoginInfo });
     },

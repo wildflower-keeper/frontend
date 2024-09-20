@@ -1,16 +1,22 @@
-import type { Metadata } from "next";
-import "@/styles/globals.css";
-import localFont from "next/font/local";
+// Compo
 import ReactCookieProvider from "@/components/ReactCookieProvider";
 import Script from "next/script";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import ReactQueryProvider from "@/components/ReactQueryProvider";
+
+// Utils
+import "@/styles/globals.css";
+import React from "react";
+import localFont from "next/font/local";
+// Types
+import type { Metadata } from "next";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
   display: "swap",
   weight: "45 920",
 });
+
 export const metadata: Metadata = {
   title: "들꽃가드닝",
   description: "관리자 페이지",

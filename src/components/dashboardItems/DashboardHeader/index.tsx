@@ -1,16 +1,14 @@
 "use client";
 
+import React from "react";
 // Compo
 import Button from "@/components/base/Button";
+import { AiOutlineReload } from "react-icons/ai";
+import { MdOutlineLogout } from "react-icons/md";
 // Utils
 import { useLogout } from "@/hooks/queries";
 import useDashboardStore from "@/store/useDashboard";
-import useLoginStore from "@/store/useLogin";
 import { removeCookie } from "@/utils/cookie";
-import { useRouter } from "next/navigation";
-import React from "react";
-import { AiOutlineReload } from "react-icons/ai";
-import { MdOutlineLogout } from "react-icons/md";
 
 const headerName = {
   dashboard: "대시보드",
@@ -20,16 +18,13 @@ const headerName = {
 
 const DashboardHeader = () => {
   const { mutate: logout } = useLogout();
-  const router = useRouter();
   const { dashboard } = useDashboardStore();
-  const { setIsLogin } = useLoginStore();
 
   const handleLogout = () => {
     logout(undefined, {
       onSuccess: () => {
         removeCookie("authToken");
-        setIsLogin(false);
-        router.push("/");
+        window.location.href = "/auth";
       },
       onError: (error) => {
         return error;

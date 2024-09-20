@@ -6,10 +6,8 @@ import Button from "@/components/base/Button";
 import CustomSelectBox from "@/components/base/CustomSelectBox";
 // Utils
 import { useGetShelters, useLogin } from "@/hooks/queries";
-import useLoginStore from "@/store/useLogin";
+import React, { useState } from "react";
 import { setCookie } from "@/utils/cookie";
-import { redirect } from "next/navigation";
-import React, { useEffect, useState } from "react";
 //Types
 
 type loginInfoType = {
@@ -22,7 +20,6 @@ const LoginForm = () => {
   const { mutate: login } = useLogin();
   const { data: shelters } = useGetShelters();
 
-  const { isLogin, setIsLogin } = useLoginStore();
   const [loginInfo, setLoginInfo] = useState<loginInfoType>({
     shelterId: "",
     password: "",
@@ -35,12 +32,6 @@ const LoginForm = () => {
     setLoginInfo({ ...loginInfo, shelterId: String(value) });
   };
 
-  useEffect(() => {
-    if (isLogin) {
-      redirect("dashboard");
-    }
-  }, [isLogin]);
-
   const handleLoginSubmit = () => {
     const loginData = {
       id: parseInt(loginInfo.shelterId, 10),
@@ -52,7 +43,7 @@ const LoginForm = () => {
           path: "/",
           expires: new Date(res.expiredAt),
         });
-        setIsLogin(true);
+        window.location.href = "/dashboard";
       },
       onError: (error) => {
         console.log(error);
@@ -89,20 +80,6 @@ const LoginForm = () => {
               labelName="비밀번호"
               type="password"
             />
-            {/* <div className="flex gap-1">
-              <AiOutlineInfoCircle
-                width={16}
-                height={16}
-                className="h-fit my-auto"
-              />
-
-              <Link
-                className="text-fontWeak underline underline-offset-2 smallFont"
-                href="/auth/findpwd"
-              >
-                비밀번호를 잊어버리셨나요?
-              </Link>
-            </div> */}
           </div>
         </div>
 

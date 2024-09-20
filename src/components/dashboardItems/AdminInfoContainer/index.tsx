@@ -13,7 +13,7 @@ import useUpdateTimer from "@/store/useUpdateTimer";
 import { formatUpdateTime } from "@/utils/date/date";
 import { useShelterInfo } from "@/hooks/queries";
 import { get, head } from "lodash";
-//Types
+// Types
 import type { ShelterInfoType } from "@/utils/api/v1/shelter-admin/type";
 
 const initState: ShelterInfoType = {
@@ -66,6 +66,7 @@ const AdminInfoContainer = () => {
       ),
     };
   }, [adminInfo]);
+
   useEffect(() => {
     if (!isLogin && !getCookie("authToken")) {
       redirect("/auth");

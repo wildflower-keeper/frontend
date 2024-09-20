@@ -1,15 +1,15 @@
 "use client";
 
-import Button from "@/components/base/Button";
-import useDashboardStore from "@/store/useDashboard";
+// Compo
 import Image from "next/image";
+import Link from "next/link";
+// Utils
 import React from "react";
-import { AiFillHome } from "react-icons/ai";
-import { FaUser } from "react-icons/fa";
-import { TbRefreshAlert } from "react-icons/tb";
+import { PAGE_ROUTE } from "./index.const";
+import { usePathname } from "next/navigation";
 
 const DashboardSideBar = () => {
-  const { dashboard, setDashboard } = useDashboardStore();
+  const pathname = usePathname();
 
   return (
     <div className="flex flex-col h-min-full bg-white pt-5 w-24">
@@ -22,33 +22,18 @@ const DashboardSideBar = () => {
         />
       </div>
       <div className="grow flex flex-col justify-center items-center gap-8">
-        <Button>
-          <AiFillHome
-            size={26}
-            color={dashboard === "dashboard" ? "#666666" : "#CCCCCC"}
-            onClick={() => {
-              setDashboard("dashboard");
-            }}
-          />
-        </Button>
-        <Button>
-          <FaUser
-            size={26}
-            color={dashboard === "management" ? "#666666" : "#CCCCCC"}
-            onClick={() => {
-              setDashboard("management");
-            }}
-          />
-        </Button>
-        <Button>
-          <TbRefreshAlert
-            size={30}
-            color={dashboard === "emergency" ? "#666666" : "#CCCCCC"}
-            onClick={() => {
-              setDashboard("emergency");
-            }}
-          />
-        </Button>
+        {PAGE_ROUTE.map(({ path, Icon }) => {
+          return (
+            <Link href={path} key={path}>
+              {Icon && (
+                <Icon
+                  size={26}
+                  color={pathname === path ? "#666666" : "#CCCCCC"}
+                />
+              )}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
