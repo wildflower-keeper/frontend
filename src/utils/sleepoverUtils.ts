@@ -4,7 +4,7 @@ import type {
   AddSituationSleepoverType,
   SleepoverItemType,
   SleepoverSituation,
-} from "./api/v1/shelter-admin/type";
+} from "@/api/v1/shelter-admin/type";
 
 // startDate, endDate로 외박 상태를 만드는 함수.
 export function addStatus(

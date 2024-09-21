@@ -1,5 +1,5 @@
 // Compo
-import FindPwdForm from "@/components/ui/FindPwdForm";
+import FindPwdForm from "@/components/Layout/FindPwdForm";
 // Utils
 import React from "react";
 

@@ -3,7 +3,7 @@
 // Compo
 import Button from "@/components/base/Button";
 import InputWithLabel from "@/components/Composition/InputWithLabel";
-import ShleterSelect from "@/components/base/CustomSelectBox";
+import ShleterSelect from "@/components/Composition/CustomSelectBox";
 // Utils
 import React, { useState } from "react";
 import { setCookie } from "@/utils/cookie";

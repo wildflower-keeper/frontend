@@ -1,6 +1,6 @@
 // Compo
-import Header from "@/components/AfterLoginLoyouts/Header";
-import Sidebar from "@/components/AfterLoginLoyouts/SideBar";
+import Header from "@/components/Layout/AfterLoginLoyouts/Header";
+import Sidebar from "@/components/Layout/AfterLoginLoyouts/SideBar";
 import { AdminInfomation } from "./layout.compo";
 // Utils
 import React, { ReactNode } from "react";

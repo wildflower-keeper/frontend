@@ -1,5 +1,5 @@
 // Compo
-import AuthPhoneForm from "@/components/ui/AuthPhoneForm";
+import AuthPhoneForm from "@/components/Layout/AuthPhoneForm";
 // Utils
 import React from "react";
 

@@ -4,8 +4,8 @@ import Button from "@/components/base/Button";
 import React from "react";
 import { TbReportAnalytics } from "react-icons/tb";
 import excelDownloader from "@/utils/excel";
-import ProgressContainer from "./items/ProgressContainer";
-import PieChartContainer from "./items/PieChartContainer";
+import ProgressContainer from "@/components/Chart/ProgressContainer";
+import PieChartContainer from "@/components/Chart/PieChartContainer";
 
 const MonthlyReport = () => {
   return (

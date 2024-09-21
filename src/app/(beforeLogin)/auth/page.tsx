@@ -1,5 +1,5 @@
 // Compo
-import LoginForm from "@/components/ui/LoginForm";
+import LoginForm from "@/components/Layout/LoginForm";
 // Utils
 import React from "react";
 

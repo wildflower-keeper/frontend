@@ -1,5 +1,5 @@
+import CurrentCardContainer from "@/components/Composition/CurrentCardContainer";
 import React from "react";
-import CurrentCardContainer from "./items/CurrenCardContainer";
 
 const UserCurrentSituation = () => {
   return (
