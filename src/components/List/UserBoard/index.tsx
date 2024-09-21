@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 import type {
   AddSituationSleepoverType,
   UserItemType,
-} from "@/utils/api/v1/shelter-admin/type";
+} from "@/api/v1/shelter-admin/type";
 
 type Props = {
   size?: "default" | "large";
