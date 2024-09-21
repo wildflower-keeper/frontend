@@ -1,19 +1,19 @@
 "use client";
 
 // Compo
-import Button from "../Button";
+import Button from "../../base/Button";
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 // Utils
 import React, { useState } from "react";
-import { getShelters } from "@/utils/api/v1/shared";
+import { getShelters } from "@/api/v1/shared";
 import { useQuery } from "@tanstack/react-query";
 import { v4 as uuidv4 } from "uuid";
 //Types
 import type { Dispatch, SetStateAction } from "react";
-import type { LoginBodyType } from "@/utils/api/v1/shelter-admin/type";
+import type { LoginBodyType } from "@/api/v1/shelter-admin/type";
 
 interface Props {
   shelterChange: Dispatch<SetStateAction<LoginBodyType>>;

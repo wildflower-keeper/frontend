@@ -10,9 +10,9 @@ import useUpdateTimer from "@/store/useUpdateTimer";
 import { formatUpdateTime } from "@/utils/date/date";
 import { get, head } from "lodash";
 import { useQuery } from "@tanstack/react-query";
-import { shelterInfo } from "@/utils/api/v1/shelter-admin";
+import { shelterInfo } from "@/api/v1/shelter-admin";
 // Types
-import type { ShelterInfoType } from "@/utils/api/v1/shelter-admin/type";
+import type { ShelterInfoType } from "@/api/v1/shelter-admin/type";
 
 const initState: ShelterInfoType = {
   shelterName: "",
@@ -45,7 +45,6 @@ const AdminInfoContainer = () => {
       setUpdateTimer(formatUpdateTime(new Date()));
     }
   }, [adminInfo, setUpdateTimer]);
-
   const adminUsers = useMemo(() => {
     return {
       shelterName: get(adminInfo, "shelterName", initState.shelterName),

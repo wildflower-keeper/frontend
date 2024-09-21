@@ -2,7 +2,7 @@
 
 // Utils
 import React, { useMemo } from "react";
-import { CARD_STYLE } from "../index.const";
+import { CARD_STYLE } from "./index.const";
 
 interface Props {
   count: number;

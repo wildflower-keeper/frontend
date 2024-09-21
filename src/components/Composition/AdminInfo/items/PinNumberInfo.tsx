@@ -4,7 +4,7 @@
 import React, { useMemo } from "react";
 import { get } from "lodash";
 import { useQuery } from "@tanstack/react-query";
-import { getPinNumber } from "@/utils/api/v1/shelter-admin";
+import { getPinNumber } from "@/api/v1/shelter-admin";
 // Types
 
 type PinNumberInfoType = {

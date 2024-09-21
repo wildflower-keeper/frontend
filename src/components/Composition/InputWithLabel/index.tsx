@@ -1,5 +1,5 @@
 import React, { HTMLInputTypeAttribute } from "react";
-import Input from "../base/Input";
+import Input from "../../base/Input";
 
 interface Props {
   id: string;

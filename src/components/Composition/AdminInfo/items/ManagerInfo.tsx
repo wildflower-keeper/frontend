@@ -4,7 +4,7 @@ import React from "react";
 import type {
   ChiefOfficerType,
   DutyOfficerType,
-} from "@/utils/api/v1/shelter-admin/type";
+} from "@/api/v1/shelter-admin/type";
 
 type Props = {
   chiefOfficer?: ChiefOfficerType;

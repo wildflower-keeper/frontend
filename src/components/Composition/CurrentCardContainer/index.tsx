@@ -6,7 +6,7 @@ import CurrentCard from "./CurrentCard";
 import React, { useMemo } from "react";
 import { get } from "lodash";
 import { useQuery } from "@tanstack/react-query";
-import { homelessPeopleCount } from "@/utils/api/v1/shelter-admin";
+import { homelessPeopleCount } from "@/api/v1/shelter-admin";
 // Types
 
 const CurrentCardContainer = () => {
