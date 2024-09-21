@@ -17,7 +17,7 @@ const headerName = {
   emergency: "긴급 상황 내역",
 };
 
-const DashboardHeader = () => {
+const AfterLoginHeader = () => {
   const { mutate } = useMutation({
     mutationKey: logout.mutationKey(),
     mutationFn: logout,
@@ -54,4 +54,4 @@ const DashboardHeader = () => {
   );
 };
 
-export default DashboardHeader;
+export default AfterLoginHeader;

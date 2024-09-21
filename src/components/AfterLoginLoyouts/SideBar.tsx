@@ -8,7 +8,7 @@ import React from "react";
 import { PAGE_ROUTE } from "./index.const";
 import { usePathname } from "next/navigation";
 
-const DashboardSideBar = () => {
+const AfterLoginSideBar = () => {
   const pathname = usePathname();
 
   return (
@@ -39,4 +39,4 @@ const DashboardSideBar = () => {
   );
 };
 
-export default DashboardSideBar;
+export default AfterLoginSideBar;
