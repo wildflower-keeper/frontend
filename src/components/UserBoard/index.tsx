@@ -1,8 +1,8 @@
 "use client";
 
 // Compo
-import UserBoardItem from "../UserBoardItem";
-import UserBoardHeader from "../../UserBoardHeader";
+import UserBoardItem from "./items/UserBoardItem";
+import UserBoardHeader from "./items/UserBoardHeader";
 // Utils
 import React from "react";
 import { v4 as uuidv4 } from "uuid";

@@ -1,6 +1,6 @@
 import React from "react";
 import formatPhoneNumber from "@/utils/common";
-import StatusBadge from "../StatusBadge";
+import StatusBadge from "./StatusBadge";
 
 type Props = {
   name: string;

@@ -1,9 +1,9 @@
 "use client";
 
 // Compo
-import PagenationButtonContainer from "./PagenationButtonContainer";
-import SearchBar from "./SearchBar";
-import UserBoard from "./UserBoard";
+import PagenationButtonContainer from "../../PagenationButtonContainer";
+import SearchBar from "../../SearchBar";
+import UserBoard from "../../UserBoard";
 // Utils
 import React, { useMemo, useState } from "react";
 import totalPagesMaker from "@/utils/pagenation";
