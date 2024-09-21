@@ -1,6 +1,6 @@
 // Compo
-import Header from "@/components/dashboardItems/DashboardHeader";
-import Sidebar from "@/components/dashboardItems/DashboardSideBar";
+import Header from "@/components/Layout/AfterLoginLoyouts/Header";
+import Sidebar from "@/components/Layout/AfterLoginLoyouts/SideBar";
 import { AdminInfomation } from "./layout.compo";
 // Utils
 import React, { ReactNode } from "react";

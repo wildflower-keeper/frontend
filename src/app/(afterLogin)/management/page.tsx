@@ -1,4 +1,4 @@
-import ManagementContainer from "@/components/dashboardItems/ManagementContainer";
+import ManagementContainer from "@/components/Layout/ManagementContainer";
 
 const Page = () => {
   return <ManagementContainer />;
