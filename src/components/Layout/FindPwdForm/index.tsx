@@ -1,6 +1,6 @@
 "use client";
 
-import InputWithLabel from "@/components/InputWithLabel";
+import InputWithLabel from "@/components/Composition/InputWithLabel";
 import Button from "@/components/base/Button";
 import { useRouter } from "next/navigation";
 import React from "react";

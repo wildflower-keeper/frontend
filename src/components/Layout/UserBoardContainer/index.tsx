@@ -1,16 +1,16 @@
 "use client";
 
 // Compo
-import PagenationButtonContainer from "../../PagenationButtonContainer";
-import SearchBar from "../../SearchBar";
-import UserBoard from "../../UserBoard";
+import PagenationButtonContainer from "../../Composition/PagenationButtonContainer";
+import SearchBar from "../../Composition/SearchBar";
+import UserBoard from "../../List/UserBoard";
 // Utils
 import React, { useMemo, useState } from "react";
 import totalPagesMaker from "@/utils/pagenation";
 import { formatDateTime } from "@/utils/date/date";
 import { get } from "lodash";
 import { useQuery } from "@tanstack/react-query";
-import { homelessPeopleList } from "@/utils/api/v1/shelter-admin";
+import { homelessPeopleList } from "@/api/v1/shelter-admin";
 // Types
 import type { FilterValuesType } from "@/types/type";
 

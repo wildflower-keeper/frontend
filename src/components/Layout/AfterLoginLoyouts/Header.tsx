@@ -8,7 +8,7 @@ import { MdOutlineLogout } from "react-icons/md";
 import React, { useMemo } from "react";
 import { removeCookie } from "@/utils/cookie";
 import { useMutation } from "@tanstack/react-query";
-import { logout } from "@/utils/api/v1/shelter-admin";
+import { logout } from "@/api/v1/shelter-admin";
 import { HEADER_NAME } from "./index.const";
 import { usePathname } from "next/navigation";
 

@@ -1,4 +1,4 @@
-import Maps from "@/components/Map";
+import Maps from "@/components/Composition/Map";
 import React from "react";
 
 const EmergencyContainer = () => {

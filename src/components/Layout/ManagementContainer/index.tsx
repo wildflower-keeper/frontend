@@ -2,15 +2,15 @@
 
 // Compo
 import Button from "@/components/base/Button";
-import PagenationButtonContainer from "../../PagenationButtonContainer";
-import UserBoard from "../../UserBoard";
+import PagenationButtonContainer from "../../Composition/PagenationButtonContainer";
+import UserBoard from "../../List/UserBoard";
 // Utils
 import React, { useEffect, useMemo, useState } from "react";
 import totalPagesMaker from "@/utils/pagenation";
 import { TbReportAnalytics } from "react-icons/tb";
 import { addStatus } from "@/utils/sleepoverUtils";
 import { get } from "lodash";
-import { getSleepoverList } from "@/utils/api/v1/shelter-admin";
+import { getSleepoverList } from "@/api/v1/shelter-admin";
 import { useQuery } from "@tanstack/react-query";
 // Types
 
