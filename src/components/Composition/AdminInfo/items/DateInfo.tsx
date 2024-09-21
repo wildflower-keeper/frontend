@@ -1,7 +1,7 @@
 "use client";
 
 import useUpdateTimer from "@/store/useUpdateTimer";
-import { dateInfo } from "@/utils/date/date";
+import { dateInfo } from "@/utils/string/date";
 import React, { useEffect, useState } from "react";
 
 const DateInfo = () => {

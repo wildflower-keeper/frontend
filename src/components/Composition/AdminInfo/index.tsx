@@ -7,7 +7,7 @@ import DateInfo from "./items/DateInfo";
 // Utils
 import React, { useEffect, useMemo } from "react";
 import useUpdateTimer from "@/store/useUpdateTimer";
-import { formatUpdateTime } from "@/utils/date/date";
+import { formatUpdateTime } from "@/utils/string/date";
 import { get, head } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 import { shelterInfo } from "@/api/v1/shelter-admin";

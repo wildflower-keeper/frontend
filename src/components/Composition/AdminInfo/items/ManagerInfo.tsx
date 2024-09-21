@@ -1,4 +1,4 @@
-import formatPhoneNumber from "@/utils/common";
+import formatPhoneNumber from "@/utils/string/phone";
 import React from "react";
 //Types
 import type {

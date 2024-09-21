@@ -1,5 +1,5 @@
 import React from "react";
-import formatPhoneNumber from "@/utils/common";
+import formatPhoneNumber from "@/utils/string/phone";
 import StatusBadge from "./StatusBadge";
 
 type Props = {
