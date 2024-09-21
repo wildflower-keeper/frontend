@@ -7,7 +7,7 @@ import UserBoard from "../../List/UserBoard";
 // Utils
 import React, { useMemo, useState } from "react";
 import totalPagesMaker from "@/utils/pagenation";
-import { formatDateTime } from "@/utils/date/date";
+import { formatDateTime } from "@/utils/string/date";
 import { get } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 import { homelessPeopleList } from "@/api/v1/shelter-admin";
