@@ -1,7 +1,7 @@
 "use client";
 
 // Compo
-import CurrentCard from "../CurrentCard";
+import CurrentCard from "./CurrentCard";
 // Utils
 import React, { useMemo } from "react";
 import { get } from "lodash";
@@ -31,19 +31,16 @@ const CurrentCardContainer = () => {
     <div className="flex gap-3">
       <CurrentCard
         type="inShelterCount"
-        bgColor="green"
         count={counts.shelterCount}
         description="센터 내 총 인원수"
       />
       <CurrentCard
         type="outingCount"
-        bgColor="blue"
         count={counts.outingCount}
         description="금일 외박 인원수"
       />
       <CurrentCard
         type="emergencyCount"
-        bgColor="red"
         count={counts.emergencyCount}
         description="긴급상황 발생건수"
       />

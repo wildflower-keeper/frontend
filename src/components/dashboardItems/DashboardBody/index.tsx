@@ -3,7 +3,7 @@
 import React from "react";
 import useDashboardStore from "@/store/useDashboard";
 
-import UserCurrentSituation from "../UserCurrentSituation";
+import UserCurrentSituation from "../../UserCurrentSituation";
 import AdminInfoContainer from "../../AdminInfo";
 import UserBoardContainer from "../UserBoardContainer";
 import MonthlyReport from "../MonthlyReport";

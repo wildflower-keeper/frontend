@@ -1,5 +1,5 @@
 // Compo
-import UserCurrentSituation from "@/components/dashboardItems/UserCurrentSituation";
+import UserCurrentSituation from "@/components/UserCurrentSituation";
 import UserBoardContainer from "@/components/dashboardItems/UserBoardContainer";
 import MonthlyReport from "@/components/dashboardItems/MonthlyReport";
 // Utils
