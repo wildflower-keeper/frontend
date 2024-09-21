@@ -1,4 +1,4 @@
-import EmergencyContainer from "@/components/dashboardItems/EmergencyContainer";
+import EmergencyContainer from "@/components/ui/EmergencyContainer";
 
 const Page = () => {
   return <EmergencyContainer />;

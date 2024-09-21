@@ -1,7 +1,7 @@
 // Compo
 import UserCurrentSituation from "@/components/UserCurrentSituation";
-import UserBoardContainer from "@/components/dashboardItems/UserBoardContainer";
-import MonthlyReport from "@/components/dashboardItems/MonthlyReport";
+import UserBoardContainer from "@/components/ui/UserBoardContainer";
+import MonthlyReport from "@/components/MonthlyReport";
 // Utils
 import React from "react";
 
