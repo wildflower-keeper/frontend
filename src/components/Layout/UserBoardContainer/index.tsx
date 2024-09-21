@@ -26,6 +26,7 @@ const UserBoardContainer = () => {
   const { data: homelessPeopleListData } = useQuery({
     queryFn: () => homelessPeopleList(param),
     queryKey: homelessPeopleList.queryKey(),
+    refetchInterval: 60 * 1000,
   });
 
   const userItemList = useMemo(
