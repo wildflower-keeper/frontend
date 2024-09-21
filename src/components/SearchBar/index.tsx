@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import SearchSelector from "../SearchSelector";
-import SearchInput from "../SearchInput";
+import SearchSelector from "./items/SearchSelector";
+import SearchInput from "./items/SearchInput";
 //Types
 import type { FilterType, FilterValuesType } from "@/types/type";
 
