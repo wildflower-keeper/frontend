@@ -2,8 +2,8 @@
 
 // Compo
 import Button from "@/components/base/Button";
-import PagenationButtonContainer from "../UserBoardContainer/PagenationButtonContainer";
-import UserBoard from "../UserBoardContainer/UserBoard";
+import PagenationButtonContainer from "../../PagenationButtonContainer";
+import UserBoard from "../../UserBoard";
 // Utils
 import React, { useEffect, useMemo, useState } from "react";
 import totalPagesMaker from "@/utils/pagenation";
