@@ -1,7 +1,7 @@
 "use client";
 
 // Compo
-import AdminInfoContainer from "@/components/dashboardItems/AdminInfoContainer";
+import AdminInfoContainer from "@/components/AdminInfo";
 //
 import React, { useMemo } from "react";
 import { usePathname } from "next/navigation";

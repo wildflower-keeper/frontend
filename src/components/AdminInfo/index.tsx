@@ -1,15 +1,12 @@
 "use client";
 
 // Compo
-import PinNumberInfo from "./PinNumberInfo";
-import ManagerInfo from "./ManagerInfo";
-import DateInfo from "./DateInfo";
+import PinNumberInfo from "./items/PinNumberInfo";
+import ManagerInfo from "./items/ManagerInfo";
+import DateInfo from "./items/DateInfo";
 // Utils
 import React, { useEffect, useMemo } from "react";
 import useUpdateTimer from "@/store/useUpdateTimer";
-import useLoginStore from "@/store/useLogin";
-import { getCookie, removeCookie } from "@/utils/cookie";
-import { redirect } from "next/navigation";
 import { formatUpdateTime } from "@/utils/date/date";
 import { get, head } from "lodash";
 import { useQuery } from "@tanstack/react-query";
@@ -37,9 +34,8 @@ const initState: ShelterInfoType = {
 };
 
 const AdminInfoContainer = () => {
-  const { isLogin, setIsLogin } = useLoginStore();
   const { setUpdateTimer } = useUpdateTimer();
-  const { data: adminInfo, isError } = useQuery({
+  const { data: adminInfo } = useQuery({
     queryKey: shelterInfo.queryKey(),
     queryFn: shelterInfo,
   });
@@ -48,12 +44,7 @@ const AdminInfoContainer = () => {
     if (adminInfo) {
       setUpdateTimer(formatUpdateTime(new Date()));
     }
-    if (isError) {
-      removeCookie("authToken");
-      setIsLogin(false);
-      redirect("/auth");
-    }
-  }, [adminInfo, isError, setUpdateTimer, setIsLogin]);
+  }, [adminInfo, setUpdateTimer]);
 
   const adminUsers = useMemo(() => {
     return {
