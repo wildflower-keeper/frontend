@@ -1,4 +1,4 @@
-import _ from "lodash";
+import { range } from "lodash";
 
 const totalPagesMaker = ({
   currentPageNumber,
@@ -11,11 +11,13 @@ const totalPagesMaker = ({
 }) => {
   if (!lastPageNumber || !currentPageNumber) return null;
 
+  if (lastPageNumber === 1) return [1];
+
   const groupIndex = Math.floor((currentPageNumber - 1) / pageListSize);
   const startPoint = groupIndex * pageListSize + 1;
   const endPoint = Math.min((groupIndex + 1) * pageListSize, lastPageNumber);
 
-  return _.range(startPoint, endPoint);
+  return range(startPoint, endPoint);
 };
 
 export default totalPagesMaker;
