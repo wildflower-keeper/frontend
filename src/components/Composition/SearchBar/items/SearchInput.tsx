@@ -1,17 +1,17 @@
+// Compo
 import Button from "@/components/base/Button";
 import Input from "@/components/base/Input";
-import React from "react";
 import { FiSearch } from "react-icons/fi";
-//Types
-import type { FilterValueType } from "@/types/type";
+// Utils
+import React from "react";
+// Types
+import type { FilterValueType } from "@/api/v1/shelter-admin/type";
 
 interface Props {
   value: FilterValueType;
   filterValueHandler: (value: FilterValueType) => void;
-  submitHandler: (pageNum: number) => void;
+  submitHandler: () => void;
 }
-
-const SEARCH_RESULT_PAGE = 1;
 
 const SearchInput = ({ value, filterValueHandler, submitHandler }: Props) => {
   return (
@@ -25,7 +25,7 @@ const SearchInput = ({ value, filterValueHandler, submitHandler }: Props) => {
         <Button
           className="m-auto"
           type="submit"
-          onClick={() => submitHandler(SEARCH_RESULT_PAGE)}
+          onClick={() => submitHandler()}
         >
           <FiSearch size={22} color="#828282" />
         </Button>

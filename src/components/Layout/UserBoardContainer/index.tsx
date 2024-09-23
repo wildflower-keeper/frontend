@@ -40,23 +40,21 @@ const UserBoardContainer = () => {
     [homelessPeopleListData],
   );
 
-  const filterParamHandler = (
-    pageNum: number,
-    { filterType, filterValue }: FilterValuesType,
-  ) =>
-    setParam((prev) => ({
-      ...prev,
-      filterType,
-      filterValue,
-      pageNumber: pageNum,
-    }));
-
   return (
     <div>
       <div className="flex items-center justify-between">
         <p className="font-bold text-xl">이용자 관리</p>
         <div className="flex gap-4">
-          <SearchBar filterParamHandler={filterParamHandler} />
+          <SearchBar
+            filterParamHandler={(pageNumber, { filterType, filterValue }) =>
+              setParam((prev) => ({
+                ...prev,
+                filterType,
+                filterValue,
+                pageNumber,
+              }))
+            }
+          />
         </div>
       </div>
       <UserBoard userItemList={userItemList} />
