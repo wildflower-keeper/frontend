@@ -5,6 +5,8 @@ import { generateSplitUrl } from "../../utils.const";
 // Types
 import type {
   CurrentUserInfo,
+  GetSleepoverListParam,
+  HomelessPeopleListParam,
   HomelessPeopleListResponseType,
   LoginBodyType,
   LoginSuccessType,
@@ -31,15 +33,8 @@ export function homelessPeopleCount(): Promise<CurrentUserInfo> {
 }
 
 export function homelessPeopleList(
-  opt: {
-    filterType: string,
-    filterValue: string,
-    pageNumber: number,
-    sleepoverTargetDate: string,
-    pageSize: number,
-  },
+  opt: HomelessPeopleListParam,
 ): Promise<HomelessPeopleListResponseType> {
-
   return GET({ url: ROUTES.HOMELESS_PEOPLE, params: opt });
 }
 
@@ -48,13 +43,9 @@ export function shelterInfo(): Promise<ShelterInfoType> {
 }
 
 export function getSleepoverList(
-  opt: { pageNumber: number, pageSize: number },
+  opt: GetSleepoverListParam,
 ): Promise<SleepoversResponseType> {
-
-  return GET({
-    url: ROUTES.SLEEPOVERS,
-    params: opt
-  });
+  return GET({ url: ROUTES.SLEEPOVERS, params: opt });
 }
 
 export function getPinNumber(): Promise<PinNumberResponseType> {

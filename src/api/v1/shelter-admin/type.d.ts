@@ -111,3 +111,22 @@ export interface LoginErrorType {
   description: string;
 }
 export type LoginResponseType = LoginSuccessType | LoginErrorType;
+
+export type FilterValueType = string;
+
+export type FilterType = "NONE" | "NAME";
+
+export interface FilterValuesType {
+  filterType: FilterType;
+  filterValue: FilterValueType;
+}
+
+export interface GetSleepoverListParam {
+  pageNumber: number;
+  pageSize: number;
+}
+export interface HomelessPeopleListParam
+  extends FilterValuesType,
+    GetSleepoverListParam {
+  sleepoverTargetDate: string;
+}
