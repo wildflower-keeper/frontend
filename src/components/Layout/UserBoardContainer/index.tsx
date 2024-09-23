@@ -1,21 +1,21 @@
 "use client";
 
 // Compo
-import PagenationButtonContainer from "../../Composition/PagenationButtonContainer";
-import SearchBar from "../../Composition/SearchBar";
-import UserBoard from "../../List/UserBoard";
+import PagenationButtonContainer from "@/components/Composition/PagenationButtonContainer";
+import SearchBar from "@/components/Composition/SearchBar";
+import UserBoard from "@/components/List/UserBoard";
 // Utils
 import React, { useMemo, useState } from "react";
-import totalPagesMaker from "@/utils/pagenation";
 import { formatDateTime } from "@/utils/string/date";
 import { get } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 import { homelessPeopleList } from "@/api/v1/shelter-admin";
+import { simpleGenerateSecond } from "@/utils/number/time";
 // Types
-import type { FilterValuesType } from "@/types/type";
+import type { HomelessPeopleListParam } from "@/api/v1/shelter-admin/type";
 
 const UserBoardContainer = () => {
-  const [param, setParam] = useState({
+  const [param, setParam] = useState<HomelessPeopleListParam>({
     filterType: "NONE",
     filterValue: "",
     sleepoverTargetDate: formatDateTime(new Date()),
@@ -23,9 +23,14 @@ const UserBoardContainer = () => {
     pageSize: 5,
   });
 
+  const queryKey = useMemo(() => {
+    return [...homelessPeopleList.queryKey(), Object.values(param)];
+  }, [homelessPeopleList, param]);
+
   const { data: homelessPeopleListData } = useQuery({
     queryFn: () => homelessPeopleList(param),
-    queryKey: homelessPeopleList.queryKey(),
+    queryKey,
+    refetchInterval: simpleGenerateSecond([[3, "m"]]),
   });
 
   const userItemList = useMemo(
@@ -33,35 +38,21 @@ const UserBoardContainer = () => {
     [homelessPeopleListData],
   );
 
-  const totalPages = useMemo(() => {
-    const lastPage = get(
-      homelessPeopleListData,
-      "pagination.lastPageNumber",
-      null,
-    );
-
-    if (lastPage === null) return [];
-
-    return totalPagesMaker(lastPage);
-  }, [homelessPeopleListData]);
-
-  const filterParamHandler = (
-    pageNum: number,
-    { filter, filterValue }: FilterValuesType,
-  ) =>
-    setParam((prev) => ({
-      ...prev,
-      filterType: filter,
-      filterValue,
-      pageNumber: pageNum,
-    }));
-
   return (
     <div>
       <div className="flex items-center justify-between">
         <p className="font-bold text-xl">이용자 관리</p>
         <div className="flex gap-4">
-          <SearchBar filterParamHandler={filterParamHandler} />
+          <SearchBar
+            filterParamHandler={(pageNumber, { filterType, filterValue }) =>
+              setParam((prev) => ({
+                ...prev,
+                filterType,
+                filterValue,
+                pageNumber,
+              }))
+            }
+          />
         </div>
       </div>
       <UserBoard userItemList={userItemList} />
@@ -69,7 +60,7 @@ const UserBoardContainer = () => {
         pageNumberHandler={(v) =>
           setParam((prev) => ({ ...prev, pageNumber: v }))
         }
-        totalPages={totalPages}
+        lastPageNumber={homelessPeopleListData?.pagination.lastPageNumber}
         pageNumber={param.pageNumber}
       />
     </div>

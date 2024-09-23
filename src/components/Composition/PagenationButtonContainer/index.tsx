@@ -1,41 +1,44 @@
 "use client";
 
+// Compo
 import Button from "@/components/base/Button";
-import React from "react";
-import { v4 as uuidv4 } from "uuid";
 import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
+// Utils
+import React, { useMemo } from "react";
+import totalPagesMaker from "@/utils/pagenation";
+import { v4 as uuidv4 } from "uuid";
+// Types
 
 interface Props {
-  pageNumberHandler: (pageNum: number) => void;
-  totalPages: number[];
+  pageNumberHandler: (v: number) => void;
+  lastPageNumber?: number | null;
   pageNumber: number;
 }
 
 const PagenationButtonContainer = ({
-  totalPages,
+  lastPageNumber,
   pageNumber,
   pageNumberHandler,
 }: Props) => {
-  const prevHandler = () => {
-    if (pageNumber > 1) {
-      pageNumberHandler(pageNumber - 1);
-    }
-  };
+  const pageButtonList = useMemo(() => {
+    return totalPagesMaker({
+      currentPageNumber: pageNumber,
+      lastPageNumber,
+      pageListSize: 10,
+    });
+  }, [pageNumber, lastPageNumber]);
 
-  const nextHandler = () => {
-    if (pageNumber < totalPages.length) {
-      pageNumberHandler(pageNumber + 1);
-    }
-  };
-
-  if (totalPages.length === 0) return <></>;
+  if (!pageButtonList) return <></>;
 
   return (
     <div className="w-full flex justify-between px-12">
-      <Button onClick={prevHandler}>
+      <Button
+        onClick={() => pageNumberHandler(pageNumber - 1)}
+        disabled={pageNumber === 1}
+      >
         <MdOutlineKeyboardArrowLeft
           size={24}
           color="#828282"
@@ -43,7 +46,7 @@ const PagenationButtonContainer = ({
         />
       </Button>
       <div className="flex gap-1">
-        {totalPages.map((value) => {
+        {pageButtonList.map((value) => {
           return (
             <Button
               className="w-5 h-7"
@@ -51,6 +54,7 @@ const PagenationButtonContainer = ({
               onClick={() => {
                 pageNumberHandler(value);
               }}
+              disabled={pageNumber === value}
             >
               <p
                 className={`text-[#828282] ${pageNumber === value && "font-bold text-black"}`}
@@ -61,7 +65,10 @@ const PagenationButtonContainer = ({
           );
         })}
       </div>
-      <Button onClick={nextHandler}>
+      <Button
+        onClick={() => pageNumberHandler(pageNumber + 1)}
+        disabled={pageNumber === lastPageNumber}
+      >
         <MdOutlineKeyboardArrowRight
           size={24}
           color="#828282"

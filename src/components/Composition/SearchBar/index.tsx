@@ -1,42 +1,46 @@
 "use client";
 
-import React, { useState } from "react";
+// Compo
 import SearchSelector from "./items/SearchSelector";
 import SearchInput from "./items/SearchInput";
-//Types
-import type { FilterType, FilterValuesType } from "@/types/type";
+// Utils
+import React, { useState } from "react";
+// Types
+import type { FilterValuesType } from "@/api/v1/shelter-admin/type";
+
+const SEARCH_RESULT_PAGE = 1;
 
 interface Props {
-  filterParamHandler: (pageNum: number, filterValues: FilterValuesType) => void;
+  filterParamHandler: (
+    pageNumber: number,
+    filterValues: FilterValuesType,
+  ) => void;
 }
 
 const SearchBar = ({ filterParamHandler }: Props) => {
   const [filterValues, setFilterValues] = useState<FilterValuesType>({
-    filter: "NONE",
+    filterType: "NONE",
     filterValue: "",
   });
-  const filterHandler = (value: FilterType) => {
-    setFilterValues((prev) => ({ ...prev, filter: value }));
-  };
 
-  const filterValueHandler = (value: string) => {
-    setFilterValues((prev) => ({ ...prev, filterValue: value }));
-  };
-
-  const submitHandler = (pageNum: number) => {
-    filterParamHandler(pageNum, filterValues);
-    setFilterValues({ filter: "NONE", filterValue: "" });
+  const submitHandler = () => {
+    filterParamHandler(SEARCH_RESULT_PAGE, filterValues);
+    setFilterValues({ filterType: "NONE", filterValue: "" });
   };
 
   return (
     <>
       <SearchSelector
-        filterHandler={filterHandler}
-        value={filterValues.filter}
+        filterHandler={(v) =>
+          setFilterValues((prev) => ({ ...prev, filterType: v }))
+        }
+        value={filterValues.filterType}
       />
       <SearchInput
         value={filterValues.filterValue}
-        filterValueHandler={filterValueHandler}
+        filterValueHandler={(v) =>
+          setFilterValues((prev) => ({ ...prev, filterValue: v }))
+        }
         submitHandler={submitHandler}
       />
     </>
