@@ -28,6 +28,7 @@ const ManagementContainer = () => {
     queryFn: () => getSleepoverList(param),
     queryKey,
   });
+
   const addStatusSleepoverList = useMemo(() => {
     return addStatus(get(sleepoverListData, "items", []));
   }, [sleepoverListData]);
