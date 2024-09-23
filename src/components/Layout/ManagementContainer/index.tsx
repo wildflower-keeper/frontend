@@ -2,41 +2,34 @@
 
 // Compo
 import Button from "@/components/base/Button";
-import PagenationButtonContainer from "../../Composition/PagenationButtonContainer";
-import UserBoard from "../../List/UserBoard";
+import PagenationButtonContainer from "@/components/Composition/PagenationButtonContainer";
+import UserBoard from "@/components/List/UserBoard";
 // Utils
-import React, { useEffect, useMemo, useState } from "react";
-import totalPagesMaker from "@/utils/pagenation";
+import React, { useMemo, useState } from "react";
 import { TbReportAnalytics } from "react-icons/tb";
 import { addStatus } from "@/utils/sleepoverUtils";
 import { get } from "lodash";
 import { getSleepoverList } from "@/api/v1/shelter-admin";
 import { useQuery } from "@tanstack/react-query";
 // Types
+import type { GetSleepoverListParam } from "@/api/v1/shelter-admin/type";
 
 const ManagementContainer = () => {
-  const [pageNumber, setPageNumber] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number[] | null>(null);
-
-  const queryParams = useMemo(() => {
-    return { pageNumber, pageSize: 5 };
-  }, [pageNumber]);
-
-  const { data: sleepoverListData } = useQuery({
-    queryFn: () => getSleepoverList(queryParams),
-    queryKey: getSleepoverList.queryKey(),
+  const [param, setParam] = useState<GetSleepoverListParam>({
+    pageNumber: 1,
+    pageSize: 5,
   });
 
+  const queryKey = useMemo(() => {
+    return [...getSleepoverList.queryKey(), Object.values(param)];
+  }, [getSleepoverList, param]);
+
+  const { data: sleepoverListData } = useQuery({
+    queryFn: () => getSleepoverList(param),
+    queryKey,
+  });
   const addStatusSleepoverList = useMemo(() => {
     return addStatus(get(sleepoverListData, "items", []));
-  }, [sleepoverListData]);
-
-  useEffect(() => {
-    const lastPage = get(sleepoverListData, "pagination.lastPageNumber", null);
-
-    if (lastPage === null) return;
-
-    setTotalPages(totalPagesMaker(lastPage));
   }, [sleepoverListData]);
 
   return (
@@ -51,13 +44,13 @@ const ManagementContainer = () => {
       <div>
         <UserBoard size="large" sleepoverList={addStatusSleepoverList} />
       </div>
-      {totalPages && (
-        <PagenationButtonContainer
-          pageNumberHandler={setPageNumber}
-          totalPages={totalPages}
-          pageNumber={pageNumber}
-        />
-      )}
+      <PagenationButtonContainer
+        pageNumberHandler={(v: number) =>
+          setParam((prev) => ({ ...prev, pageNumber: v }))
+        }
+        lastPageNumber={sleepoverListData?.pagination.lastPageNumber}
+        pageNumber={param.pageNumber}
+      />
     </div>
   );
 };
