@@ -10,11 +10,9 @@ import { formatDateTime } from "@/utils/string/date";
 import { get } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 import { homelessPeopleList } from "@/api/v1/shelter-admin";
+import { simpleGenerateSecond } from "@/utils/number/time";
 // Types
-import type {
-  FilterValuesType,
-  HomelessPeopleListParam,
-} from "@/api/v1/shelter-admin/type";
+import type { HomelessPeopleListParam } from "@/api/v1/shelter-admin/type";
 
 const UserBoardContainer = () => {
   const [param, setParam] = useState<HomelessPeopleListParam>({
@@ -32,7 +30,7 @@ const UserBoardContainer = () => {
   const { data: homelessPeopleListData } = useQuery({
     queryFn: () => homelessPeopleList(param),
     queryKey,
-    refetchInterval: 60 * 1000,
+    refetchInterval: simpleGenerateSecond([[3, "m"]]),
   });
 
   const userItemList = useMemo(
