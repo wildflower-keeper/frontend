@@ -1,16 +1,25 @@
 "use client";
 
-import useUpdateTimer from "@/store/useUpdateTimer";
-import { dateInfo } from "@/utils/string/date";
+// Utils
 import React, { useEffect, useState } from "react";
+import useUpdateTimer from "@/store/useUpdateTimer";
+import { format } from "date-fns";
+import { ko } from "date-fns/locale";
 
 const DateInfo = () => {
-  const [timeStamp, setTimeStamp] = useState<string>(dateInfo());
+  const [timeStamp, setTimeStamp] = useState<string>(
+    format(new Date(), "M월 d일 (EEE) HH:mm", { locale: ko }),
+  );
   const { updateTimer } = useUpdateTimer();
+
   useEffect(() => {
-    setInterval(() => {
-      setTimeStamp(dateInfo());
-    }, 1000);
+    const tick = setTimeout(
+      () =>
+        setTimeStamp(format(new Date(), "M월 d일 (EEE) HH:mm", { locale: ko })),
+      1000,
+    );
+
+    return () => clearTimeout(tick);
   }, []);
 
   return (
