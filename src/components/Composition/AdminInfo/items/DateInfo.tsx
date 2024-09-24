@@ -25,7 +25,11 @@ const DateInfo = () => {
   return (
     <div className="flex flex-col h-fit my-auto gap-1">
       <p className="text-xl font-bold">{timeStamp}</p>
-      <p className="text-fontWeak">{updateTimer}</p>
+      <p className="text-fontWeak">
+        {updateTimer
+          ? `${updateTimer}에 업데이트 되었습니다.`
+          : "업데이트 시간을 나타냅니다."}
+      </p>
     </div>
   );
 };
