@@ -1,5 +1,7 @@
 "use client";
 
+// Compo
+import PinNumberInfo from "./PinNumberInfo";
 // Utils
 import React, { useEffect, useState } from "react";
 import useUpdateTimer from "@/store/useUpdateTimer";
@@ -23,8 +25,10 @@ const DateInfo = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-fit my-auto gap-1">
-      <p className="text-xl font-bold">{timeStamp}</p>
+    <div className="flex flex-col h-fit my-auto gap-3">
+      <div className="flex gap-4">
+        <p className="text-xl font-bold">{timeStamp}</p> <PinNumberInfo />
+      </div>
       <p className="text-fontWeak">
         {updateTimer
           ? `${updateTimer}에 업데이트 되었습니다.`

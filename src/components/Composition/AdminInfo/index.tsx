@@ -1,7 +1,6 @@
 "use client";
 
 // Compo
-import PinNumberInfo from "./items/PinNumberInfo";
 import ManagerInfo from "./items/ManagerInfo";
 import DateInfo from "./items/DateInfo";
 // Utils
@@ -62,14 +61,11 @@ const AdminInfoContainer = () => {
   }, [adminInfo]);
 
   return (
-    <div className="w-full flex justify-between">
+    <div className="flex w-full justify-between">
       <DateInfo />
-      <div className="flex items-center rounded-lg border border-dashed border-[#CCCCCC] px-5 py-4 justify-between gap-6">
-        <PinNumberInfo shelterName={adminUsers.shelterName} />
-        <ManagerInfo
-          chiefOfficer={adminUsers.chiefOfficer}
-          dutyOfficer={adminUsers.dutyOfficer}
-        />
+      <div className="flex flex-col my-auto justify-between gap-3">
+        <p className="font-semibold text-xl">{adminUsers.shelterName}</p>
+        <ManagerInfo chiefOfficer={adminUsers.chiefOfficer} />
       </div>
     </div>
   );
