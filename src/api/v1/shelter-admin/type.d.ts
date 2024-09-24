@@ -130,3 +130,21 @@ export interface HomelessPeopleListParam
     GetSleepoverListParam {
   sleepoverTargetDate: string;
 }
+
+export interface LocationType {
+  lat: number | null;
+  lng: number | null;
+}
+
+export interface EmergencyLogItemType {
+  id: number;
+  name: string;
+  phNumber: string;
+  date: string;
+  location: LocationType;
+}
+
+export interface GetEmergencyResponseType {
+  result: string;
+  logs: EmergencyLogItemType[];
+}
