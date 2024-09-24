@@ -4,7 +4,7 @@ import StatusBadge from "./StatusBadge";
 
 type Props = {
   name: string;
-  lastLocationStatus?: "OUTING" | "IN_SHELTER" | "UNKNOWN";
+  lastLocationStatus?: "OUT_SHELTER" | "IN_SHELTER" | "UNKNOWN";
   sleepoverSituation?: "SCHEDULED" | "ONGOING" | "CLOSED";
   room: string;
   phoneNumber: string;

@@ -28,7 +28,7 @@ export interface UserItemType {
   room: string;
   birthDate: string;
   targetDateSleepover: boolean;
-  lastLocationStatus: "OUTING" | "IN_SHELTER" | null;
+  lastLocationStatus: "OUT_SHELTER" | "IN_SHELTER" | null;
   lastLocationTrackedAt: string;
   phoneNumber: string;
   admissionDate: string;
