@@ -1,16 +1,15 @@
 "use client";
 
 // Compo
-import PinNumberInfo from "./items/PinNumberInfo";
 import ManagerInfo from "./items/ManagerInfo";
 import DateInfo from "./items/DateInfo";
 // Utils
 import React, { useEffect, useMemo } from "react";
 import useUpdateTimer from "@/store/useUpdateTimer";
-import { formatUpdateTime } from "@/utils/string/date";
 import { get, head } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 import { shelterInfo } from "@/api/v1/shelter-admin";
+import { formatDateString } from "@/utils/string/date";
 // Types
 import type { ShelterInfoType } from "@/api/v1/shelter-admin/type";
 
@@ -42,7 +41,7 @@ const AdminInfoContainer = () => {
 
   useEffect(() => {
     if (adminInfo) {
-      setUpdateTimer(formatUpdateTime(new Date()));
+      setUpdateTimer(formatDateString(new Date(), "M월 dd일 HH시 mm분"));
     }
   }, [adminInfo, setUpdateTimer]);
   const adminUsers = useMemo(() => {
@@ -62,14 +61,11 @@ const AdminInfoContainer = () => {
   }, [adminInfo]);
 
   return (
-    <div className="w-full flex justify-between">
+    <div className="flex w-full justify-between">
       <DateInfo />
-      <div className="flex items-center rounded-lg border border-dashed border-[#CCCCCC] px-5 py-4 justify-between gap-6">
-        <PinNumberInfo shelterName={adminUsers.shelterName} />
-        <ManagerInfo
-          chiefOfficer={adminUsers.chiefOfficer}
-          dutyOfficer={adminUsers.dutyOfficer}
-        />
+      <div className="flex flex-col my-auto justify-between gap-3">
+        <p className="font-semibold text-xl">{adminUsers.shelterName}</p>
+        <ManagerInfo chiefOfficer={adminUsers.chiefOfficer} />
       </div>
     </div>
   );

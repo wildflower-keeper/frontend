@@ -6,7 +6,6 @@ import SearchBar from "@/components/Composition/SearchBar";
 import UserBoard from "@/components/List/UserBoard";
 // Utils
 import React, { useMemo, useState } from "react";
-import { formatDateTime } from "@/utils/string/date";
 import { get } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 import { homelessPeopleList } from "@/api/v1/shelter-admin";
@@ -18,7 +17,7 @@ const UserBoardContainer = () => {
   const [param, setParam] = useState<HomelessPeopleListParam>({
     filterType: "NONE",
     filterValue: "",
-    sleepoverTargetDate: formatDateTime(new Date()),
+    sleepoverTargetDate: new Date().toISOString(),
     pageNumber: 1,
     pageSize: 5,
   });

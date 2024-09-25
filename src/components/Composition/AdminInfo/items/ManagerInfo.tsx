@@ -1,17 +1,14 @@
-import formatPhoneNumber from "@/utils/string/phone";
+// Utils
 import React from "react";
-//Types
-import type {
-  ChiefOfficerType,
-  DutyOfficerType,
-} from "@/api/v1/shelter-admin/type";
+import formatPhoneNumber from "@/utils/string/phone";
+// Types
+import type { ChiefOfficerType } from "@/api/v1/shelter-admin/type";
 
 type Props = {
   chiefOfficer?: ChiefOfficerType;
-  dutyOfficer?: DutyOfficerType;
 };
 
-const ManagerInfo = ({ chiefOfficer, dutyOfficer }: Props) => {
+const ManagerInfo = ({ chiefOfficer }: Props) => {
   return (
     <div className="flex flex-col items-start gap-2">
       <div className="flex gap-2 min-w-64 justify-start">
@@ -25,19 +22,6 @@ const ManagerInfo = ({ chiefOfficer, dutyOfficer }: Props) => {
           </>
         ) : (
           <span className="text-fontWeak">책임자가 지정되어있지 않습니다.</span>
-        )}
-      </div>
-      <div className="flex gap-2 min-w-64 justify-start">
-        <span className="font-semibold">당직자</span>
-        {dutyOfficer ? (
-          <>
-            <span>{dutyOfficer.name}</span>
-            <span className="text-fontWeak">
-              {formatPhoneNumber(dutyOfficer.phoneNumber)}
-            </span>
-          </>
-        ) : (
-          <span className="text-fontWeak">오늘은 당직자가 없습니다.</span>
         )}
       </div>
     </div>

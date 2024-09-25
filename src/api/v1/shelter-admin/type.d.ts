@@ -22,13 +22,15 @@ export interface CurrentUserInfo {
   emergencyCount: emergencyCountType;
 }
 
+export type LocationStatusType = "OUT_SHELTER" | "IN_SHELTER" | null;
+
 export interface UserItemType {
   id: number;
   name: string;
   room: string;
   birthDate: string;
   targetDateSleepover: boolean;
-  lastLocationStatus: "OUTING" | "IN_SHELTER" | null;
+  lastLocationStatus: LocationStatusType;
   lastLocationTrackedAt: string;
   phoneNumber: string;
   admissionDate: string;
@@ -129,4 +131,22 @@ export interface HomelessPeopleListParam
   extends FilterValuesType,
     GetSleepoverListParam {
   sleepoverTargetDate: string;
+}
+
+export interface LocationType {
+  lat: number | null;
+  lng: number | null;
+}
+
+export interface EmergencyLogItemType {
+  id: number;
+  name: string;
+  phNumber: string;
+  date: string;
+  location: LocationType;
+}
+
+export interface GetEmergencyResponseType {
+  result: string;
+  logs: EmergencyLogItemType[];
 }

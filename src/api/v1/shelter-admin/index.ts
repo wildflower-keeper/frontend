@@ -5,6 +5,7 @@ import { generateSplitUrl } from "../../utils.const";
 // Types
 import type {
   CurrentUserInfo,
+  GetEmergencyResponseType,
   GetSleepoverListParam,
   HomelessPeopleListParam,
   HomelessPeopleListResponseType,
@@ -52,6 +53,10 @@ export function getPinNumber(): Promise<PinNumberResponseType> {
   return GET({ url: ROUTES.PIN });
 }
 
+export function getEmergency(): Promise<GetEmergencyResponseType> {
+  return GET({ url: ROUTES.EMERGENCY });
+}
+
 login.mutationKey = () => generateSplitUrl(ROUTES.LOGIN);
 logout.mutationKey = () => generateSplitUrl(ROUTES.LOGOUT);
 
@@ -61,3 +66,4 @@ homelessPeopleList.queryKey = () => generateSplitUrl(ROUTES.HOMELESS_PEOPLE);
 shelterInfo.queryKey = () => generateSplitUrl(ROUTES.SHELTER);
 getSleepoverList.queryKey = () => generateSplitUrl(ROUTES.SLEEPOVERS);
 getPinNumber.queryKey = () => generateSplitUrl(ROUTES.PIN);
+getEmergency.queryKey = () => generateSplitUrl(ROUTES.EMERGENCY);

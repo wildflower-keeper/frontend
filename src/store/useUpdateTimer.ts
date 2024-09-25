@@ -1,3 +1,4 @@
+// Utils
 import { create } from "zustand";
 
 interface useUpdateTimerStoreType {
@@ -7,7 +8,7 @@ interface useUpdateTimerStoreType {
 
 const useUpdateTimer = create<useUpdateTimerStoreType>((set) => {
   return {
-    updateTimer: "업데이트 시간을 나타냅니다.",
+    updateTimer: "",
     setUpdateTimer: (newTimer: string) => {
       return set({ updateTimer: newTimer });
     },

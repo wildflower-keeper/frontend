@@ -1,11 +1,18 @@
+// Compo
+import StatusBadge from "./StatusBadge";
+// Utils
 import React from "react";
 import formatPhoneNumber from "@/utils/string/phone";
-import StatusBadge from "./StatusBadge";
+// Types
+import type {
+  LocationStatusType,
+  SleepoverSituation,
+} from "@/api/v1/shelter-admin/type";
 
 type Props = {
   name: string;
-  lastLocationStatus?: "OUTING" | "IN_SHELTER" | "UNKNOWN";
-  sleepoverSituation?: "SCHEDULED" | "ONGOING" | "CLOSED";
+  lastLocationStatus?: LocationStatusType;
+  sleepoverSituation?: SleepoverSituation;
   room: string;
   phoneNumber: string;
   size: "default" | "large";
