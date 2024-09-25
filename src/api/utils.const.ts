@@ -5,4 +5,4 @@ export const genreateBasePath = (path: string, version = "v1") =>
 export const generatePathByBase = (base: string, ...paths: string[]) =>
   join([base, ...paths], "/");
 
-export const generateSplitUrl = (url: string) => url.split("/");
+export const generateSplitUrl = (url: string) => split(url, "/");
