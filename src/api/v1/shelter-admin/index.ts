@@ -1,6 +1,5 @@
 import * as ROUTES from "./Routes.const";
 import customAxios, { GET, POST } from "../../axios";
-import { join } from "lodash";
 import { generateSplitUrl } from "../../utils.const";
 // Types
 import type {
