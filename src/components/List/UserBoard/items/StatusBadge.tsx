@@ -3,10 +3,15 @@ import { GoDotFill } from "react-icons/go";
 // Utils
 import React from "react";
 import { LAST_LOCATION_STATUS, SLEEPOVER_SITUATION } from "./index.const";
+// Types
+import type {
+  LocationStatusType,
+  SleepoverSituation,
+} from "@/api/v1/shelter-admin/type";
 
 interface Props {
-  lastLocationStatus?: "OUT_SHELTER" | "IN_SHELTER" | "UNKNOWN";
-  sleepoverSituation?: "SCHEDULED" | "ONGOING" | "CLOSED";
+  lastLocationStatus?: LocationStatusType;
+  sleepoverSituation?: SleepoverSituation;
 }
 
 const StatusBadge = ({ lastLocationStatus, sleepoverSituation }: Props) => {

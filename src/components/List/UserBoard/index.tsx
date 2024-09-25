@@ -37,7 +37,7 @@ const UserBoard = ({
                   <li key={uuidv4()}>
                     <UserBoardItem
                       name={name}
-                      lastLocationStatus={lastLocationStatus ?? "UNKNOWN"}
+                      lastLocationStatus={lastLocationStatus}
                       size={size}
                       room={room}
                       phoneNumber={phoneNumber}

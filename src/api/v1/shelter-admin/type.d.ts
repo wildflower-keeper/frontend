@@ -22,13 +22,15 @@ export interface CurrentUserInfo {
   emergencyCount: emergencyCountType;
 }
 
+export type LocationStatusType = "OUT_SHELTER" | "IN_SHELTER" | null;
+
 export interface UserItemType {
   id: number;
   name: string;
   room: string;
   birthDate: string;
   targetDateSleepover: boolean;
-  lastLocationStatus: "OUT_SHELTER" | "IN_SHELTER" | null;
+  lastLocationStatus: LocationStatusType;
   lastLocationTrackedAt: string;
   phoneNumber: string;
   admissionDate: string;
