@@ -1,12 +1,10 @@
 "use client";
 
 // Compo
-import Button from "@/components/base/Button";
 import PagenationButtonContainer from "@/components/Composition/PagenationButtonContainer";
 import UserBoard from "@/components/List/UserBoard";
 // Utils
 import React, { useMemo, useState } from "react";
-import { TbReportAnalytics } from "react-icons/tb";
 import { addStatus } from "@/utils/sleepoverUtils";
 import { get } from "lodash";
 import { getSleepoverList } from "@/api/v1/shelter-admin";
@@ -37,10 +35,10 @@ const ManagementContainer = () => {
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <p className="font-semibold text-xl">외박자 관리</p>
-        <Button className="flex gap-2 border rounded-lg border-solid border-fontWeak px-10 py-2 items-center w-fit mr-3">
+        {/* <Button className="flex gap-2 border rounded-lg border-solid border-fontWeak px-10 py-2 items-center w-fit mr-3">
           <TbReportAnalytics size={24} color="#828282" />
           <span className="text-fontWeak">보고서 생성</span>
-        </Button>
+        </Button> */}
       </div>
       <div>
         <UserBoard size="large" sleepoverList={addStatusSleepoverList} />

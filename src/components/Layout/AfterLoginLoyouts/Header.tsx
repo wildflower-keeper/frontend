@@ -2,7 +2,6 @@
 
 // Compo
 import Button from "@/components/base/Button";
-import { AiOutlineReload } from "react-icons/ai";
 import { MdOutlineLogout } from "react-icons/md";
 // Utils
 import React, { useMemo } from "react";
@@ -35,9 +34,9 @@ const AfterLoginHeader = () => {
     <div className="px-10 flex justify-between h-20 items-center rounded-br-xl border bg-white">
       <p className="text-2xl font-bold">{headerName}</p>
       <div className="flex gap-7">
-        <Button className="w-12 h-12 bg border rounded-lg">
+        {/* <Button className="w-12 h-12 bg border rounded-lg">
           <AiOutlineReload size={24} color="#828282" className="m-auto" />
-        </Button>
+        </Button> */}
         <Button
           className="w-12 h-12 bg border rounded-lg"
           onClick={handleLogout}
