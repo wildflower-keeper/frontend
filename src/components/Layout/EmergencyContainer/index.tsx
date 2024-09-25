@@ -9,7 +9,7 @@ import { getEmergency } from "@/api/v1/shelter-admin";
 import { simpleGenerateSecond } from "@/utils/number/time";
 import { useQuery } from "@tanstack/react-query";
 import { get, map } from "lodash";
-import { format } from "date-fns";
+import { formatDateString } from "@/utils/string/date";
 // Types
 import { GetSleepoverListParam } from "@/api/v1/shelter-admin/type";
 
@@ -80,7 +80,7 @@ const EmergencyContainer = () => {
     if (data) {
       return map(get(data, "logs", []), (log) => ({
         ...log,
-        date: format(new Date(log.date), "yyyy-MM-dd HH:mm"),
+        date: formatDateString(log.date, "yyyy-MM-dd HH:mm"),
         phNumber: formatPhoneNumber(log.phNumber),
       }));
     }

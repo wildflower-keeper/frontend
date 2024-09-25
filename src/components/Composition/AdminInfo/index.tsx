@@ -9,7 +9,7 @@ import useUpdateTimer from "@/store/useUpdateTimer";
 import { get, head } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 import { shelterInfo } from "@/api/v1/shelter-admin";
-import { format } from "date-fns";
+import { formatDateString } from "@/utils/string/date";
 // Types
 import type { ShelterInfoType } from "@/api/v1/shelter-admin/type";
 
@@ -41,7 +41,7 @@ const AdminInfoContainer = () => {
 
   useEffect(() => {
     if (adminInfo) {
-      setUpdateTimer(format(new Date(), "M월 dd일 HH시 mm분"));
+      setUpdateTimer(formatDateString(new Date(), "M월 dd일 HH시 mm분"));
     }
   }, [adminInfo, setUpdateTimer]);
   const adminUsers = useMemo(() => {
