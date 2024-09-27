@@ -5,10 +5,10 @@ import { MdOutlineFilterList } from "react-icons/md";
 // Utils
 import React from "react";
 // Types
-import type { FilterType } from "@/api/v1/shelter-admin/type";
+import type { FilterType, FilterValuesType } from "@/api/v1/shelter-admin/type";
 
 interface Props {
-  filterHandler: (filter: FilterType) => void;
+  filterHandler: (key: keyof FilterValuesType, filter: FilterType) => void;
   value: string;
 }
 
@@ -19,7 +19,7 @@ const SearchSelector = ({ filterHandler, value }: Props) => {
       <select
         className="py-1"
         onChange={(e) => {
-          filterHandler(e.target.value as FilterType);
+          filterHandler("filterType", e.target.value as FilterType);
         }}
         value={value}
       >
