@@ -7,6 +7,7 @@ import UserBoard from "@/components/List/UserBoard";
 // Utils
 import React, { useMemo, useState } from "react";
 import { get } from "lodash";
+import { useSearch } from "@/hooks/useSearch";
 import { useQuery } from "@tanstack/react-query";
 import { homelessPeopleList } from "@/api/v1/shelter-admin";
 import { simpleGenerateSecond } from "@/utils/number/time";
@@ -21,6 +22,8 @@ const UserBoardContainer = () => {
     pageNumber: 1,
     pageSize: 5,
   });
+
+  const { filterValues, filterHandler, isSubmitDisabled } = useSearch();
 
   const queryKey = useMemo(() => {
     return [...homelessPeopleList.queryKey(), ...Object.values(param)];
@@ -43,13 +46,12 @@ const UserBoardContainer = () => {
         <p className="font-bold text-xl">이용자 관리</p>
         <div className="flex gap-4">
           <SearchBar
-            paramHandler={(filters, page) =>
-              setParam((prev) => ({
-                ...prev,
-                ...filters,
-                pageNumber: page,
-              }))
-            }
+            filterValues={filterValues}
+            filterHandler={filterHandler}
+            isSubmitDisabled={isSubmitDisabled}
+            submitHandler={() => {
+              setParam((prev) => ({ ...prev, ...filterValues }));
+            }}
           />
         </div>
       </div>
