@@ -6,8 +6,9 @@ import SearchInput from "./items/SearchInput";
 // Utils
 import React from "react";
 import { useSearch } from "@/hooks/useSearch";
-import { FilterValuesType } from "@/api/v1/shelter-admin/type";
 // Types
+import type { FilterValuesType } from "@/api/v1/shelter-admin/type";
+
 interface Props {
   submitHandler: (filters: FilterValuesType, page: number) => void;
 }
