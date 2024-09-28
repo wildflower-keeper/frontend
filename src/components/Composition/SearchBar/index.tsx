@@ -1,25 +1,19 @@
+"use client";
+
 // Compo
 import SearchSelector from "./items/SearchSelector";
 import SearchInput from "./items/SearchInput";
 // Utils
 import React from "react";
+import { useSearch } from "@/hooks/useSearch";
+import { FilterValuesType } from "@/api/v1/shelter-admin/type";
 // Types
-import type { FilterValuesType } from "@/api/v1/shelter-admin/type";
-import type { FilterHandlerType } from "@/hooks/useSearch";
-
 interface Props {
-  filterValues: FilterValuesType;
-  isSubmitDisabled: boolean;
-  filterHandler: FilterHandlerType;
-  submitHandler: () => void;
+  submitHandler: (filters: FilterValuesType, page: number) => void;
 }
 
-const SearchBar = ({
-  filterValues,
-  isSubmitDisabled,
-  filterHandler,
-  submitHandler,
-}: Props) => {
+const SearchBar = ({ submitHandler }: Props) => {
+  const { filterValues, filterHandler, isSubmitDisabled } = useSearch();
   return (
     <>
       <SearchSelector
@@ -30,7 +24,7 @@ const SearchBar = ({
         value={filterValues.filterValue}
         disabled={isSubmitDisabled}
         filterHandler={filterHandler}
-        submitHandler={submitHandler}
+        submitHandler={() => submitHandler(filterValues, 1)}
       />
     </>
   );
