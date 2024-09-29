@@ -23,7 +23,7 @@ const UserBoardContainer = () => {
   });
 
   const queryKey = useMemo(() => {
-    return [...homelessPeopleList.queryKey(), Object.values(param)];
+    return [...homelessPeopleList.queryKey(), ...Object.values(param)];
   }, [homelessPeopleList, param]);
 
   const { data: homelessPeopleListData } = useQuery({
@@ -43,14 +43,9 @@ const UserBoardContainer = () => {
         <p className="font-bold text-xl">이용자 관리</p>
         <div className="flex gap-4">
           <SearchBar
-            filterParamHandler={(pageNumber, { filterType, filterValue }) =>
-              setParam((prev) => ({
-                ...prev,
-                filterType,
-                filterValue,
-                pageNumber,
-              }))
-            }
+            submitHandler={(filters, page) => {
+              setParam((prev) => ({ ...prev, ...filters, pageNumber: page }));
+            }}
           />
         </div>
       </div>

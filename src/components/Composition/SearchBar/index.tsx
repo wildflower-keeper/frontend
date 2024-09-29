@@ -4,44 +4,28 @@
 import SearchSelector from "./items/SearchSelector";
 import SearchInput from "./items/SearchInput";
 // Utils
-import React, { useState } from "react";
+import React from "react";
+import { useSearch } from "@/hooks/useSearch";
 // Types
 import type { FilterValuesType } from "@/api/v1/shelter-admin/type";
 
-const SEARCH_RESULT_PAGE = 1;
-
 interface Props {
-  filterParamHandler: (
-    pageNumber: number,
-    filterValues: FilterValuesType,
-  ) => void;
+  submitHandler: (filters: FilterValuesType, page: number) => void;
 }
 
-const SearchBar = ({ filterParamHandler }: Props) => {
-  const [filterValues, setFilterValues] = useState<FilterValuesType>({
-    filterType: "NONE",
-    filterValue: "",
-  });
-
-  const submitHandler = () => {
-    filterParamHandler(SEARCH_RESULT_PAGE, filterValues);
-    setFilterValues({ filterType: "NONE", filterValue: "" });
-  };
-
+const SearchBar = ({ submitHandler }: Props) => {
+  const { filterValues, filterHandler, isSubmitDisabled } = useSearch();
   return (
     <>
       <SearchSelector
-        filterHandler={(v) =>
-          setFilterValues((prev) => ({ ...prev, filterType: v }))
-        }
+        filterHandler={filterHandler}
         value={filterValues.filterType}
       />
       <SearchInput
         value={filterValues.filterValue}
-        filterValueHandler={(v) =>
-          setFilterValues((prev) => ({ ...prev, filterValue: v }))
-        }
-        submitHandler={submitHandler}
+        disabled={isSubmitDisabled}
+        filterHandler={filterHandler}
+        submitHandler={() => submitHandler(filterValues, 1)}
       />
     </>
   );
