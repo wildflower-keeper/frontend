@@ -19,7 +19,7 @@ export function login(loginData: LoginBodyType): Promise<LoginSuccessType> {
   return customAxios.post(ROUTES.LOGIN, loginData).then(({ data }) => {
     if ("authToken" in data && "expiredAt" in data) return data;
     else {
-      throw new Error(data.description);
+      throw new Error(data.errorCode);
     }
   });
 }

@@ -4,6 +4,7 @@
 import Button from "@/components/base/Button";
 import InputWithLabel from "@/components/Composition/InputWithLabel";
 import ShleterSelect from "@/components/Composition/CustomSelectBox";
+import { IoIosInformationCircleOutline } from "react-icons/io";
 // Utils
 import React, { useState } from "react";
 import { setCookie } from "@/utils/cookie";
@@ -23,6 +24,8 @@ const LoginForm = () => {
     pw: "",
   });
 
+  const [isWrongPassword, setIsWrongPassword] = useState(false);
+
   const handleLoginSubmit = () => {
     mutate(loginInfo, {
       onSuccess: (res) => {
@@ -33,7 +36,9 @@ const LoginForm = () => {
         window.location.href = "/dashboard";
       },
       onError: (error) => {
-        console.log(error);
+        if (error.message === "SHELTER_ADMIN_LOGIN_ID_PASSWORD_INVALID") {
+          setIsWrongPassword(true);
+        }
       },
     });
   };
@@ -50,7 +55,7 @@ const LoginForm = () => {
             </label>
             <ShleterSelect shelterChange={setLoginInfo} />
           </div>
-          <div className="flex flex-col gap-5 w-full">
+          <div className="flex flex-col w-full">
             <InputWithLabel
               value={loginInfo.pw}
               onChange={(e) =>
@@ -61,15 +66,31 @@ const LoginForm = () => {
               labelName="비밀번호"
               type="password"
             />
+            {
+              isWrongPassword ? (
+                <div className="flex justify-end items-center gap-1">
+                  <IoIosInformationCircleOutline className="size-3" />
+                  <div className="text-gray-500 underline text-[10.5px]">비밀번호를 잊어버리셨나요?</div>
+                </div>
+              )
+                : null
+            }
           </div>
         </div>
-        <Button
-          type="submit"
-          className="primaryButtonDefault"
-          onClick={handleLoginSubmit}
-        >
-          로그인
-        </Button>
+        <div className="flex flex-col justify-center items-center">
+          <Button
+            type="submit"
+            className="primaryButtonDefault"
+            onClick={handleLoginSubmit}
+          >
+            로그인
+          </Button>
+          {
+            isWrongPassword ?
+              <div className="text-red-500 underline text-[10.5px]">* 비밀번호가 틀렸습니다. 올바른 비밀번호로 다시 입력해주세요.</div>
+              : null
+          }
+        </div>
       </form>
     </div>
   );
