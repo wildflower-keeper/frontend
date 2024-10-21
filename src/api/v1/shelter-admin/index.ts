@@ -17,11 +17,16 @@ import type {
 
 export function login(loginData: LoginBodyType): Promise<LoginSuccessType> {
   return customAxios.post(ROUTES.LOGIN, loginData).then(({ data }) => {
-    if ("authToken" in data && "expiredAt" in data) return data;
-    else {
-      throw new Error(data.errorCode);
+    if(!data) { // 입력 데이터가 부족할 경우
+      throw new Error("* 인증을 위한 정보가 부족합니다. 모든 정보를 입력해주세요");
     }
-  });
+    else if ("authToken" in data && "expiredAt" in data) return data;
+    else {
+      if (data.errorCode === "SHELTER_ADMIN_LOGIN_ID_PASSWORD_INVALID") {
+        throw new Error("* 비밀번호가 틀렸습니다. 올바른 비밀번호로 다시 입력해주세요.");
+      }
+    }
+  })
 }
 
 export function logout(): Promise<void> {

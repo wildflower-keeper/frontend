@@ -24,7 +24,7 @@ const LoginForm = () => {
     pw: "",
   });
 
-  const [isWrongPassword, setIsWrongPassword] = useState(false);
+  const [error, setError] = useState("");
 
   const handleLoginSubmit = () => {
     mutate(loginInfo, {
@@ -36,9 +36,7 @@ const LoginForm = () => {
         window.location.href = "/dashboard";
       },
       onError: (error) => {
-        if (error.message === "SHELTER_ADMIN_LOGIN_ID_PASSWORD_INVALID") {
-          setIsWrongPassword(true);
-        }
+        setError(error.message);
       },
     });
   };
@@ -66,15 +64,10 @@ const LoginForm = () => {
               labelName="비밀번호"
               type="password"
             />
-            {
-              isWrongPassword ? (
-                <div className="flex justify-end items-center gap-1">
-                  <IoIosInformationCircleOutline className="size-3" />
-                  <div className="text-gray-500 underline text-[10.5px]">비밀번호를 잊어버리셨나요?</div>
-                </div>
-              )
-                : null
-            }
+            {error != "" ? <div className="flex justify-end items-center gap-1">
+              <IoIosInformationCircleOutline className="size-3" />
+              <div className="text-gray-500 underline text-[10.5px]">비밀번호를 잊어버리셨나요?</div>
+            </div> : null}
           </div>
         </div>
         <div className="flex flex-col justify-center items-center">
@@ -85,11 +78,7 @@ const LoginForm = () => {
           >
             로그인
           </Button>
-          {
-            isWrongPassword ?
-              <div className="text-red-500 underline text-[10.5px]">* 비밀번호가 틀렸습니다. 올바른 비밀번호로 다시 입력해주세요.</div>
-              : null
-          }
+          <div className="text-red-500 underline text-[10.5px]">{error}</div>
         </div>
       </form>
     </div>
