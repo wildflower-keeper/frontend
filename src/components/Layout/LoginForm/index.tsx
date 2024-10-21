@@ -66,7 +66,7 @@ const LoginForm = () => {
             />
             {error != "" ? <div className="flex justify-end items-center gap-1">
               <IoIosInformationCircleOutline className="size-3" />
-              <div className="text-gray-500 underline text-[10.5px]">비밀번호를 잊어버리셨나요?</div>
+              <div className="text-gray-500 underline text-[10.5px] cursor-pointer">비밀번호를 잊어버리셨나요?</div>
             </div> : null}
           </div>
         </div>
