@@ -12,6 +12,8 @@ import { homelessPeopleList } from "@/api/v1/shelter-admin";
 import { simpleGenerateSecond } from "@/utils/number/time";
 // Types
 import type { HomelessPeopleListParam } from "@/api/v1/shelter-admin/type";
+import UserManagementButtonContainer from "@/components/Composition/UserManagementButtonContainer";
+import AddUserModal from "@/components/Composition/AddUserModal";
 
 const UserBoardContainer = () => {
   const [param, setParam] = useState<HomelessPeopleListParam>({
@@ -50,13 +52,17 @@ const UserBoardContainer = () => {
         </div>
       </div>
       <UserBoard userItemList={userItemList} />
-      <PagenationButtonContainer
-        pageNumberHandler={(v) =>
-          setParam((prev) => ({ ...prev, pageNumber: v }))
-        }
-        lastPageNumber={homelessPeopleListData?.pagination.lastPageNumber}
-        pageNumber={param.pageNumber}
-      />
+      <AddUserModal />
+      <div className="flex flex-row items-center">
+        <UserManagementButtonContainer />
+        <PagenationButtonContainer
+          pageNumberHandler={(v) =>
+            setParam((prev) => ({ ...prev, pageNumber: v }))
+          }
+          lastPageNumber={homelessPeopleListData?.pagination.lastPageNumber}
+          pageNumber={param.pageNumber}
+        />
+      </div>
     </div>
   );
 };
