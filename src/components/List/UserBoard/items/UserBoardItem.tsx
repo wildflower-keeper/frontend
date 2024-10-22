@@ -43,8 +43,8 @@ const UserBoardItem = ({
         sleepoverSituation={sleepoverSituation}
       />
 
-      <div className="h-fit my-auto text-center">{name}</div>
-      <div className="h-fit my-auto text-center">{room}</div>
+      <div className="h-fit my-auto text-center truncate">{name}</div>
+      <div className="h-fit my-auto text-center truncate">{room}</div>
       <div
         className={`h-fit my-auto text-center ${size === "default" && "col-span-2"}`}
       >

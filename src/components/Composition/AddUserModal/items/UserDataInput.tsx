@@ -1,21 +1,31 @@
+import { InputHTMLAttributes, forwardRef } from "react";
+
 interface userDataProps {
     id: string,
     title: string,
     placeholder: string,
+    type: string,
+    maxLength: number,
+    error: boolean,
 }
 
-const UserDataInput = ({ id, title, placeholder }: userDataProps) => {
+const UserDataInput = forwardRef<HTMLInputElement, userDataProps>(({ id, title, placeholder, maxLength, type, error, ...rest }, ref) => {
     return (
         <div className="flex justify-end items-center gap-5">
-            <label htmlFor={id} className="text-center text-lg font-bold">{title}</label>
+            <label htmlFor={id} className={`text-center text-lg font-bold ${error ? 'text-red-500' : null}`}>{title}</label>
             <input
                 id={id}
-                type="text"
+                type={type}
                 placeholder={placeholder}
-                className="text-[#3f3f3f] text-base font-normal w-[380px] outline-none rounded-xl border border-solid border-[#e7e7e7] p-3"
+                maxLength={maxLength}
+                className="appearance-none text-[#3f3f3f] text-base font-normal w-[380px] outline-none rounded-xl border border-solid border-[#e7e7e7] p-3"
+                ref={ref}
+                {...rest}
             />
         </div>
     );
-}
+});
+
+UserDataInput.displayName = 'UserDataInput';
 
 export default UserDataInput;

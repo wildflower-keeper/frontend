@@ -8,7 +8,6 @@ interface userManagementButtonProps {
 }
 
 const UserManagementButton = ({children, type, selected, onClick}: userManagementButtonProps) => {
-    console.log(selected);
     return (
         <button onClick={onClick} className={`h-10 w-24 px-1.5 pl-3 py-2 rounded-[10px] hover:bg-[#efefef]
         border border-solid border-[#dfdfdf] items-center gap-3 inline-flex text-[#999999]
