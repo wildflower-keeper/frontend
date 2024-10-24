@@ -1,20 +1,31 @@
+import { addUser } from "@/api/v1/shelter-admin";
 import UserDataInput from "@/components/Composition/AddUserModal/items/UserDataInput";
-import userManagementStore from "@/store/useUserManagement";
+import userManagementStore from "@/store/useUserAddManagement";
+import { getCookie } from "@/utils/cookie";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 import { useForm } from "react-hook-form"
 
-interface userDataFormType {
+export interface userDataFormType {
     name: string
-    location: number
+    location: string
     phone: string
-    secondPhone: number | null
+    secondPhone: string | null
 }
 
 const AddUserForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<userDataFormType>()
     const { closeAddUser } = userManagementStore();
-    console.log(errors.name)
-    const onSubmit = (data: userDataFormType) => {
-        // console.log(data);
+    const { mutate } = useMutation({
+        mutationKey: addUser.mutationKey(),
+        mutationFn: (userData: userDataFormType) => addUser(userData)
+    });
+    const onSubmit = (userData: userDataFormType) => {
+        mutate(userData, {
+            onSuccess: (res) => {
+                console.log(res);
+            }
+        })
     };
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">

@@ -1,12 +1,12 @@
 import { create } from "zustand";
 
-interface userManagementStoreType {
+interface userAddManagementStoreType {
     isOpenAddUser: boolean,
     openAddUser: () => void,
     closeAddUser: () => void,
 }
 
-const userManagementStore = create<userManagementStoreType>(set => ({
+const userManagementStore = create<userAddManagementStoreType>(set => ({
     isOpenAddUser: false,
     openAddUser: () => set((state) => {
         if (!state.isOpenAddUser) return {

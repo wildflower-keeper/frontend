@@ -1,6 +1,6 @@
 import AddUserForm from "@/components/Layout/AddUserForm";
 import UserDataInput from "./items/UserDataInput";
-import userManagementStore from "@/store/useUserManagement";
+import userManagementStore from "@/store/useUserAddManagement";
 
 const AddUserModal = () => {
     const {isOpenAddUser} = userManagementStore();
