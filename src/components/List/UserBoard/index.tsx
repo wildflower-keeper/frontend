@@ -32,10 +32,11 @@ const UserBoard = ({
         <ul className="flex flex-col gap-4 h-[420px]">
           {size === "default" &&
             userItemList?.map(
-              ({ name, lastLocationStatus, room, phoneNumber }) => {
+              ({ id, name, lastLocationStatus, room, phoneNumber }) => {
                 return (
                   <li key={uuidv4()}>
                     <UserBoardItem
+                      id={id}
                       name={name}
                       lastLocationStatus={lastLocationStatus}
                       size={size}
@@ -49,6 +50,7 @@ const UserBoard = ({
           {size === "large" &&
             sleepoverList?.map(
               ({
+                homelessId,
                 homelessName,
                 homelessPhoneNumber,
                 homelessRoom,
@@ -61,6 +63,7 @@ const UserBoard = ({
                 return (
                   <li key={uuidv4()}>
                     <UserBoardItem
+                      id={homelessId}
                       sleepoverSituation={sleepoverSituation}
                       name={homelessName}
                       size={size}

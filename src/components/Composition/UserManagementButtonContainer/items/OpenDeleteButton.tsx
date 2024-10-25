@@ -1,14 +1,15 @@
 import { HiOutlineTrash } from "react-icons/hi2";
-import UserManagementButton from "./UserManagementButton";
+import OpenUserManagement from "./OpenUserManagement";
 import userDeleteManagementStore from "@/store/useUserDeleteManagement";
 
-const DeleteUserButton = () => {
+//삭제 버튼
+const OpenDeleteButton = () => {
     const {openDeleteUser, isOpenDeleteUser} = userDeleteManagementStore();
     return (
-        <UserManagementButton type={"삭제"} selected={isOpenDeleteUser} onClick={openDeleteUser}>
+        <OpenUserManagement type={"삭제"} selected={isOpenDeleteUser} onClick={openDeleteUser}>
             <HiOutlineTrash className="size-6" />
-        </UserManagementButton>
+        </OpenUserManagement>
     )
 };
 
-export default DeleteUserButton;
+export default OpenDeleteButton;

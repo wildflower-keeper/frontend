@@ -33,6 +33,10 @@ export function addUser(userData: userDataFormType) {
   return POST({data: userData, url: ROUTES.ADD_USER});
 }
 
+export function deleteUser(id: number) {
+  return POST({url: ROUTES.DELETE_USER + '/' + id});
+}
+
 export function logout(): Promise<void> {
   return POST({ url: ROUTES.LOGOUT });
 }
@@ -77,3 +81,4 @@ getSleepoverList.queryKey = () => generateSplitUrl(ROUTES.SLEEPOVERS);
 getPinNumber.queryKey = () => generateSplitUrl(ROUTES.PIN);
 getEmergency.queryKey = () => generateSplitUrl(ROUTES.EMERGENCY);
 addUser.mutationKey = () => generateSplitUrl(ROUTES.ADD_USER);
+deleteUser.mutationKey = () => generateSplitUrl(ROUTES.DELETE_USER);
