@@ -6,7 +6,7 @@ export const LAST_LOCATION_STATUS = {
   },
   STATUS: {
     OUT_SHELTER: "외출",
-    UNKNOWN: "미확인",
+    UNKNOWN: "불명",
     IN_SHELTER: "재실",
   },
   CLASSNAME: {

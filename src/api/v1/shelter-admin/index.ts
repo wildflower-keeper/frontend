@@ -1,5 +1,5 @@
 import * as ROUTES from "./Routes.const";
-import customAxios, { GET, POST } from "../../axios";
+import customAxios, { GET, POST, PUT } from "../../axios";
 import { generateSplitUrl } from "../../utils.const";
 // Types
 import type {
@@ -8,6 +8,7 @@ import type {
   GetSleepoverListParam,
   HomelessPeopleListParam,
   HomelessPeopleListResponseType,
+  LocationStatusType,
   LoginBodyType,
   LoginSuccessType,
   PinNumberResponseType,
@@ -38,6 +39,10 @@ export function homelessPeopleList(
   return GET({ url: ROUTES.HOMELESS_PEOPLE, params: opt });
 }
 
+export function changeUserStatus(id: number, status: LocationStatusType) {
+  return PUT({url: ROUTES.CHANGE_USER_STATUS + '/' + id});
+}
+
 export function shelterInfo(): Promise<ShelterInfoType> {
   return GET({ url: ROUTES.SHELTER });
 }
@@ -58,6 +63,7 @@ export function getEmergency(): Promise<GetEmergencyResponseType> {
 
 login.mutationKey = () => generateSplitUrl(ROUTES.LOGIN);
 logout.mutationKey = () => generateSplitUrl(ROUTES.LOGOUT);
+changeUserStatus.mutationKey = () => generateSplitUrl(ROUTES.CHANGE_USER_STATUS);
 
 homelessPeopleCount.queryKey = () =>
   generateSplitUrl(ROUTES.HOMELESS_PEOPLE_COUNT);

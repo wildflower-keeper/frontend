@@ -8,8 +8,10 @@ import type {
   LocationStatusType,
   SleepoverSituation,
 } from "@/api/v1/shelter-admin/type";
+import StatusToggle from "./StatusToggle";
 
 type Props = {
+  id: number,
   name: string;
   lastLocationStatus?: LocationStatusType;
   sleepoverSituation?: SleepoverSituation;
@@ -23,6 +25,7 @@ type Props = {
 };
 
 const UserBoardItem = ({
+  id,
   name,
   size,
   lastLocationStatus,
@@ -38,11 +41,12 @@ const UserBoardItem = ({
     <div
       className={`rounded-2xl  py-3 bg-white grid px-7 ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}
     >
-      <StatusBadge
-        lastLocationStatus={lastLocationStatus}
-        sleepoverSituation={sleepoverSituation}
-      />
-
+      <StatusToggle id={id}>
+        <StatusBadge
+          lastLocationStatus={lastLocationStatus}
+          sleepoverSituation={sleepoverSituation}
+        />
+      </StatusToggle>
       <div className="h-fit my-auto text-center">{name}</div>
       <div className="h-fit my-auto text-center">{room}</div>
       <div

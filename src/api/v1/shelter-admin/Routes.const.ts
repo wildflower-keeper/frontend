@@ -14,3 +14,4 @@ export const HOMELESS_PEOPLE_COUNT = generatePathByBase(
   HOMELESS_PEOPLE,
   "count",
 );
+export const CHANGE_USER_STATUS = generatePathByBase(BASE_PATH, "homeless");
