@@ -39,9 +39,6 @@ const UserBoardItem = ({
   emergencyContact,
 }: Props) => {
   const { isOpenDeleteUser, checkedUserList, checkUser } = userDeleteManagementStore();
-  const handleCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    checkUser(id);
-  }
   return (
     <div
       className={`rounded-2xl  py-3 bg-white grid px-7 ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}
@@ -49,7 +46,7 @@ const UserBoardItem = ({
       {isOpenDeleteUser ?
         <Checkbox
         checked={checkedUserList.includes(id)}
-        onChange={handleCheckBox}
+        onChange={() => checkUser(id)}
           sx={{
             color: '#34c01f', // 기본 색상 (연두색)
             '&.Mui-checked': {

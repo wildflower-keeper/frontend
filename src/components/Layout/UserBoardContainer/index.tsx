@@ -38,6 +38,7 @@ const UserBoardContainer = () => {
     () => get(homelessPeopleListData, "items", []),
     [homelessPeopleListData],
   );
+  console.log(userItemList);
   return (
     <div>
       <div className="flex items-center justify-between">

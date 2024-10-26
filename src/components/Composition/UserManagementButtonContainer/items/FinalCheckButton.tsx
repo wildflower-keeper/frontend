@@ -16,7 +16,7 @@ const FinalCheckButton = ({ onCancelDeleteClick }: FinalCheckButtonProps) => {
     });
     const onSubmit = () => {
         checkedUserList.forEach((id) => {
-            mutate(id, {
+            mutate(108, {
                 onSuccess: (res) => {
                     console.log(res);
                 }

@@ -18,10 +18,18 @@ const AddUserForm = () => {
     const { closeAddUser } = userManagementStore();
     const { mutate } = useMutation({
         mutationKey: addUser.mutationKey(),
-        mutationFn: (userData: userDataFormType) => addUser(userData)
+        mutationFn: (userData: any) => addUser(userData)
     });
     const onSubmit = (userData: userDataFormType) => {
-        mutate(userData, {
+        mutate({
+            "name": "임동현",
+            "shelterId": 1,
+            "shelterPin": "1234",
+            "room": "방번호41 (선택사항)",
+            "birthDate": "1970-05-15",
+            "phoneNumber": "01012341234",
+            "admissionDate": "2024-08-01"
+          }, {
             onSuccess: (res) => {
                 console.log(res);
             }
