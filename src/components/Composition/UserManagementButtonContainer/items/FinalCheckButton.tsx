@@ -8,20 +8,22 @@ interface FinalCheckButtonProps {
 }
 
 const FinalCheckButton = ({ onCancelDeleteClick }: FinalCheckButtonProps) => {
-    const { checkedUserList } = userDeleteManagementStore();
-    // console.log(checkedUserList);
+    const { checkedUserList, openDeleteSuccessMessage, closeDeleteUser } = userDeleteManagementStore();
     const { mutate } = useMutation({
         mutationKey: deleteUser.mutationKey(),
         mutationFn: (id: number) => deleteUser(id)
     });
     const onSubmit = () => {
-        checkedUserList.forEach((id) => {
-            mutate(108, {
-                onSuccess: (res) => {
-                    console.log(res);
-                }
-            })
-        });
+        // checkedUserList.forEach((id) => {
+        //     mutate(108, {
+        //         onSuccess: (res) => {
+        //             console.log(res);
+        //         }
+        //     })
+        // });
+        
+        closeDeleteUser();
+        openDeleteSuccessMessage();
     };
 
     return (

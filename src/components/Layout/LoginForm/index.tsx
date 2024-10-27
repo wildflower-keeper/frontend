@@ -33,7 +33,7 @@ const LoginForm = () => {
           path: "/",
           expires: new Date(res.expiredAt),
         });
-        // window.location.href = "/dashboard";
+        window.location.href = "/dashboard";
       },
       onError: (error) => {
         setError(error.message);

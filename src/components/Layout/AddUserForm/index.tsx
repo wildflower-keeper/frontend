@@ -1,6 +1,6 @@
 import { addUser } from "@/api/v1/shelter-admin";
 import UserDataInput from "@/components/Composition/AddUserModal/items/UserDataInput";
-import userManagementStore from "@/store/useUserAddManagement";
+import userAddManagementStore from "@/store/useUserAddManagement";
 import { getCookie } from "@/utils/cookie";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
@@ -15,25 +15,27 @@ export interface userDataFormType {
 
 const AddUserForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<userDataFormType>()
-    const { closeAddUser } = userManagementStore();
+    const { closeAddUser, openAddSuccessMessage } = userAddManagementStore();
     const { mutate } = useMutation({
         mutationKey: addUser.mutationKey(),
         mutationFn: (userData: any) => addUser(userData)
     });
     const onSubmit = (userData: userDataFormType) => {
-        mutate({
-            "name": "임동현",
-            "shelterId": 1,
-            "shelterPin": "1234",
-            "room": "방번호41 (선택사항)",
-            "birthDate": "1970-05-15",
-            "phoneNumber": "01012341234",
-            "admissionDate": "2024-08-01"
-          }, {
-            onSuccess: (res) => {
-                console.log(res);
-            }
-        })
+        // mutate({
+        //     "name": "임동현",
+        //     "shelterId": 1,
+        //     "shelterPin": "1234",
+        //     "room": "방번호41 (선택사항)",
+        //     "birthDate": "1970-05-15",
+        //     "phoneNumber": "01012341234",
+        //     "admissionDate": "2024-08-01"
+        //   }, {
+        //     onSuccess: (res) => {
+        //         console.log(res);
+        //     }
+        // });
+        closeAddUser();
+        openAddSuccessMessage();
     };
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">

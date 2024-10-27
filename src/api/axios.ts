@@ -73,7 +73,7 @@ export const GET = (option: AxiosRequestConfig<unknown>) =>
   customAxios.request({ ...option, method: "GET" }).then((res) => res.data);
 export const POST = (option: AxiosRequestConfig<unknown>) =>
   customAxios.request({ ...option, method: "POST" }).then((res) => res.data);
-export const DELETE = (option: AxiosRequestConfig<unknown>[]) =>
+export const DELETE = (option: AxiosRequestConfig<unknown>) =>
   customAxios.request({ ...option, method: "DELETE" }).then((res) => res.data);
 export const PUT = (option: AxiosRequestConfig<unknown>) =>
   customAxios.request({ ...option, method: "PUT" }).then((res) => res.data);

@@ -2,14 +2,18 @@ import { create } from "zustand";
 
 interface userDeleteManagementStoreType {
     isOpenDeleteUser: boolean,
+    isDeleteSuccess: boolean,
     checkedUserList: number[],
     checkUser: (id: number) => void,
     openDeleteUser: () => void,
     closeDeleteUser: () => void,
+    openDeleteSuccessMessage: () => void,
+    closeDeleteSuccessMessage: () => void,
 }
 
 const userDeleteManagementStore = create<userDeleteManagementStoreType>(set => ({
     isOpenDeleteUser: false,
+    isDeleteSuccess: false,
     checkedUserList: [],
     checkUser: (id: number) => set((state) => {
         const newUserList = [...state.checkedUserList];
@@ -35,6 +39,13 @@ const userDeleteManagementStore = create<userDeleteManagementStoreType>(set => (
         isOpenDeleteUser: false,
         checkedUserList: []
     })),
+    openDeleteSuccessMessage: () => set(() => ({
+        isDeleteSuccess: true
+    })),
+    closeDeleteSuccessMessage: () => set(() => {
+        return ({
+        isDeleteSuccess: false
+    })}),
 }));
 
 export default userDeleteManagementStore;
