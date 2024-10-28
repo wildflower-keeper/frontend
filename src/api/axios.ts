@@ -32,7 +32,7 @@ const requestInterceptor: Interceptor<InternalAxiosRequestConfig> = {
     return config;
   },
   onRejected: (error) => {
-    return error;
+    throw error;
   },
 };
 
@@ -56,7 +56,7 @@ const responseInterceptor: Interceptor<AxiosResponse> = {
     return config;
   },
   onRejected: (error) => {
-    return error;
+    throw error;
   },
 };
 

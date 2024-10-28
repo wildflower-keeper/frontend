@@ -1,5 +1,5 @@
 import * as ROUTES from "./Routes.const";
-import customAxios, { GET, POST } from "../../axios";
+import customAxios, { DELETE, GET, POST } from "../../axios";
 import { generateSplitUrl } from "../../utils.const";
 // Types
 import type {
@@ -34,7 +34,7 @@ export function addUser(userData: userDataFormType) {
 }
 
 export function deleteUser(id: number) {
-  return POST({url: ROUTES.DELETE_USER + '/' + id});
+  return DELETE({url: ROUTES.DELETE_USER + '/' + id});
 }
 
 export function logout(): Promise<void> {

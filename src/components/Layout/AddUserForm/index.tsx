@@ -1,8 +1,9 @@
-import { addUser } from "@/api/v1/shelter-admin";
+import { addUser, homelessPeopleList } from "@/api/v1/shelter-admin";
 import UserDataInput from "@/components/Composition/AddUserModal/items/UserDataInput";
+import useHomelessListQueryKey from "@/store/useHomelessListQueryKey";
 import userAddManagementStore from "@/store/useUserAddManagement";
 import { getCookie } from "@/utils/cookie";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form"
 
@@ -16,26 +17,32 @@ export interface userDataFormType {
 const AddUserForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<userDataFormType>()
     const { closeAddUser, openAddSuccessMessage } = userAddManagementStore();
+    const queryClient = useQueryClient();
+    const {homelessListQueryKey} = useHomelessListQueryKey();
     const { mutate } = useMutation({
         mutationKey: addUser.mutationKey(),
         mutationFn: (userData: any) => addUser(userData)
     });
     const onSubmit = (userData: userDataFormType) => {
-        // mutate({
-        //     "name": "임동현",
-        //     "shelterId": 1,
-        //     "shelterPin": "1234",
-        //     "room": "방번호41 (선택사항)",
-        //     "birthDate": "1970-05-15",
-        //     "phoneNumber": "01012341234",
-        //     "admissionDate": "2024-08-01"
-        //   }, {
-        //     onSuccess: (res) => {
-        //         console.log(res);
-        //     }
-        // });
-        closeAddUser();
-        openAddSuccessMessage();
+        mutate(/*userData,*/{
+            "name": "testName5",
+            "shelterId": 1,
+            "shelterPin": "1234",
+            "room": "test방번호5",
+            "birthDate": "1970-05-15",
+            "phoneNumber": "01012341234",
+            "lastLocationStatus": "IN_SHELTER",
+            "admissionDate": "2024-08-01"
+        }, {
+            onSuccess: (res) => {
+                queryClient.invalidateQueries({queryKey: homelessListQueryKey});
+                closeAddUser();
+                openAddSuccessMessage();
+            },
+            onError: (error) => {
+                console.log(error);
+            }
+        });
     };
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
