@@ -2,12 +2,16 @@ import { create } from "zustand";
 
 interface userAddManagementStoreType {
     isOpenAddUser: boolean,
+    isAddSuccess: boolean,
     openAddUser: () => void,
     closeAddUser: () => void,
+    openAddSuccessMessage: () => void,
+    closeAddSuccessMessage: () => void,
 }
 
-const userManagementStore = create<userAddManagementStoreType>(set => ({
+const userAddManagementStore = create<userAddManagementStoreType>(set => ({
     isOpenAddUser: false,
+    isAddSuccess: false,
     openAddUser: () => set((state) => {
         if (!state.isOpenAddUser) return {
             isOpenAddUser: true
@@ -21,6 +25,13 @@ const userManagementStore = create<userAddManagementStoreType>(set => ({
     closeAddUser: () => set(() => ({
         isOpenAddUser: false
     })),
+    openAddSuccessMessage: () => set(() => ({
+        isAddSuccess: true
+    })),
+    closeAddSuccessMessage: () => set(() => {
+        return ({
+        isAddSuccess: false
+    })}),
 }));
 
-export default userManagementStore;
+export default userAddManagementStore;
