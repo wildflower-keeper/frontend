@@ -12,7 +12,7 @@ const StatusToggle = ({ children, id }: { children: ReactNode, id: number }) => 
 
     const { mutate } = useMutation({
         mutationKey: changeUserStatus.mutationKey(),
-        mutationFn: ({ lastLocationStatus }: { lastLocationStatus: LocationStatusType }) => changeUserStatus(id, lastLocationStatus)
+        mutationFn: (status: { lastLocationStatus: LocationStatusType }) => changeUserStatus(id, status)
     })
     const changeStatus = (status: LocationStatusType) => {
         mutate({

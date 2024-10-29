@@ -39,8 +39,11 @@ export function homelessPeopleList(
   return GET({ url: ROUTES.HOMELESS_PEOPLE, params: opt });
 }
 
-export function changeUserStatus(id: number, status: LocationStatusType) {
-  return PUT({url: ROUTES.CHANGE_USER_STATUS + '/' + id});
+export function changeUserStatus(id: number, status: {lastLocationStatus: LocationStatusType}) {
+  return PUT({
+    data: status,
+    url: ROUTES.CHANGE_USER_STATUS + '/' + id,
+  });
 }
 
 export function shelterInfo(): Promise<ShelterInfoType> {
