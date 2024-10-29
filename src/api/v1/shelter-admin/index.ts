@@ -39,10 +39,10 @@ export function homelessPeopleList(
   return GET({ url: ROUTES.HOMELESS_PEOPLE, params: opt });
 }
 
-export function changeUserStatus(id: number, status: {lastLocationStatus: LocationStatusType}) {
+export function changeUserStatus(id: number, status: {locationStatus: LocationStatusType}) {
   return PUT({
     data: status,
-    url: ROUTES.CHANGE_USER_STATUS + '/' + id,
+    url: ROUTES.BASE_PATH + '/' + id + '/' + 'in-out',
   });
 }
 

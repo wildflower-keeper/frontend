@@ -1,25 +1,28 @@
 import { ReactNode, useState } from "react";
 import StatusBadge from "./StatusBadge";
 import { MdKeyboardArrowUp } from "react-icons/md";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { changeUserStatus } from "@/api/v1/shelter-admin";
 import { LocationStatusType } from "@/api/v1/shelter-admin/type";
+import useHomelessListQueryKey from "@/store/useHomelessListQueryKey";
 
 const StatusToggle = ({ children, id }: { children: ReactNode, id: number }) => {
     const onStatusClick = () => {
         setIsOpenStatus((prev) => !prev);
     }
-
+    const queryClient = useQueryClient();
+    const {homelessListQueryKey} = useHomelessListQueryKey();
     const { mutate } = useMutation({
         mutationKey: changeUserStatus.mutationKey(),
-        mutationFn: (status: { lastLocationStatus: LocationStatusType }) => changeUserStatus(id, status)
+        mutationFn: (status: { locationStatus: LocationStatusType }) => changeUserStatus(id, status)
     })
     const changeStatus = (status: LocationStatusType) => {
         mutate({
-            lastLocationStatus: status
+            locationStatus: status
         }, {
-            onSuccess: (res) => {
-                console.log(res);
+            onSuccess: async (res) => {
+                await queryClient.invalidateQueries({queryKey: homelessListQueryKey});
+                setIsOpenStatus(true);
             }
         })
     }
