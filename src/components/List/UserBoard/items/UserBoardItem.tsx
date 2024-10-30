@@ -8,7 +8,6 @@ import type {
   LocationStatusType,
   SleepoverSituation,
 } from "@/api/v1/shelter-admin/type";
-import userDeleteManagementStore from "@/store/useUserDeleteManagement";
 import Checkbox from '@mui/material/Checkbox';
 import { userManagementContext } from "@/components/Layout/UserManagementProvider";
 

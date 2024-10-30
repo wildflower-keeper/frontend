@@ -1,4 +1,4 @@
-import userDeleteManagementStore from "@/store/useUserDeleteManagement";
+import { useUserContext } from "@/components/Layout/UserManagementProvider";
 import React from "react";
 
 type Props = {
@@ -6,7 +6,8 @@ type Props = {
 };
 
 const UserBoardHeader = ({ size }: Props) => {
-  const {isOpenDeleteUser} = userDeleteManagementStore();
+  const userContext = useUserContext();
+  const {isOpenDeleteUser} = userContext;
   return (
     <div
       className={` py-3 grid px-7 ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}
