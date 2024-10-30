@@ -11,6 +11,15 @@ import type {
 import userDeleteManagementStore from "@/store/useUserDeleteManagement";
 import Checkbox from '@mui/material/Checkbox';
 
+const checkBoxStyle = {
+  color: '#34c01f', // 기본 색상 (연두색)
+  '&.Mui-checked': {
+    color: '#34c01f', // 체크된 색상 (연두색)
+  },
+  margin: 0, // 마진을 0으로 설정
+  padding: 0, // 패딩을 0으로 설정
+}
+
 type Props = {
   id: number
   name: string;
@@ -47,14 +56,7 @@ const UserBoardItem = ({
         <Checkbox
         checked={checkedUserList.includes(id)}
         onChange={() => checkUser(id)}
-          sx={{
-            color: '#34c01f', // 기본 색상 (연두색)
-            '&.Mui-checked': {
-              color: '#34c01f', // 체크된 색상 (연두색)
-            },
-            margin: 0, // 마진을 0으로 설정
-            padding: 0, // 패딩을 0으로 설정
-          }}
+          sx={checkBoxStyle}
         />
         : <StatusBadge
           lastLocationStatus={lastLocationStatus}

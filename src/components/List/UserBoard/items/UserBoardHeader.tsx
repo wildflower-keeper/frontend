@@ -11,7 +11,7 @@ const UserBoardHeader = ({ size }: Props) => {
     <div
       className={` py-3 grid px-7 ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}
     >
-      {isOpenDeleteUser ? <div className="h-fit my-auto text-center">체크</div> : <div className="h-fit my-auto text-center">상태</div>}
+      {<div className="h-fit my-auto text-center">{isOpenDeleteUser ? "체크" : "상태"}</div>}
 
       <div className="h-fit my-auto text-center">이름</div>
       <div className="h-fit my-auto text-center">호실</div>
