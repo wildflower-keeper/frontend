@@ -1,3 +1,4 @@
+import userDeleteManagementStore from "@/store/useUserDeleteManagement";
 import React from "react";
 
 type Props = {
@@ -5,6 +6,7 @@ type Props = {
 };
 
 const UserBoardHeader = ({ size }: Props) => {
+  const {isOpenDeleteUser} = userDeleteManagementStore()
   return (
     <div
       className={` py-3 grid px-7 ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}

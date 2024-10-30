@@ -14,6 +14,7 @@ import type {
   ShelterInfoType,
   SleepoversResponseType,
 } from "./type";
+import { userDataFormType } from "@/components/Layout/AddUserForm";
 
 export function login(loginData: LoginBodyType): Promise<LoginSuccessType> {
   return customAxios.post(ROUTES.LOGIN, loginData).then(({ data }) => {
@@ -27,6 +28,9 @@ export function login(loginData: LoginBodyType): Promise<LoginSuccessType> {
       }
     }
   })
+}
+export function addUser(userData: userDataFormType) {
+  return POST({data: userData, url: ROUTES.ADD_USER});
 }
 
 export function logout(): Promise<void> {
@@ -42,6 +46,7 @@ export function homelessPeopleList(
 ): Promise<HomelessPeopleListResponseType> {
   return GET({ url: ROUTES.HOMELESS_PEOPLE, params: opt });
 }
+
 
 export function shelterInfo(): Promise<ShelterInfoType> {
   return GET({ url: ROUTES.SHELTER });
@@ -71,3 +76,4 @@ shelterInfo.queryKey = () => generateSplitUrl(ROUTES.SHELTER);
 getSleepoverList.queryKey = () => generateSplitUrl(ROUTES.SLEEPOVERS);
 getPinNumber.queryKey = () => generateSplitUrl(ROUTES.PIN);
 getEmergency.queryKey = () => generateSplitUrl(ROUTES.EMERGENCY);
+addUser.mutationKey = () => generateSplitUrl(ROUTES.ADD_USER);

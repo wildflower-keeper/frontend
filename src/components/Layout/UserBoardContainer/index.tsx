@@ -5,13 +5,16 @@ import PagenationButtonContainer from "@/components/Composition/PagenationButton
 import SearchBar from "@/components/Composition/SearchBar";
 import UserBoard from "@/components/List/UserBoard";
 // Utils
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { get } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 import { homelessPeopleList } from "@/api/v1/shelter-admin";
 import { simpleGenerateSecond } from "@/utils/number/time";
 // Types
 import type { HomelessPeopleListParam } from "@/api/v1/shelter-admin/type";
+import UserManagementButtonContainer from "@/components/Composition/UserManagementButtonContainer";
+import AddUserModal from "@/components/Composition/AddUserModal";
+import useHomelessListQueryKey from "@/store/useHomelessListQueryKey";
 
 const UserBoardContainer = () => {
   const [param, setParam] = useState<HomelessPeopleListParam>({
@@ -21,10 +24,16 @@ const UserBoardContainer = () => {
     pageNumber: 1,
     pageSize: 5,
   });
+  const { setHomelessListQueryKey } = useHomelessListQueryKey();
 
   const queryKey = useMemo(() => {
-    return [...homelessPeopleList.queryKey(), ...Object.values(param)];
+    const queryKey = [...homelessPeopleList.queryKey(), ...Object.values(param)];
+    return queryKey;
   }, [homelessPeopleList, param]);
+
+  useEffect(() => {
+    setHomelessListQueryKey(queryKey);
+  }, queryKey);
 
   const { data: homelessPeopleListData } = useQuery({
     queryFn: () => homelessPeopleList(param),
@@ -36,7 +45,6 @@ const UserBoardContainer = () => {
     () => get(homelessPeopleListData, "items", []),
     [homelessPeopleListData],
   );
-
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -50,13 +58,17 @@ const UserBoardContainer = () => {
         </div>
       </div>
       <UserBoard userItemList={userItemList} />
-      <PagenationButtonContainer
-        pageNumberHandler={(v) =>
-          setParam((prev) => ({ ...prev, pageNumber: v }))
-        }
-        lastPageNumber={homelessPeopleListData?.pagination.lastPageNumber}
-        pageNumber={param.pageNumber}
-      />
+      <AddUserModal />
+      <div className="flex flex-row items-center">
+        <UserManagementButtonContainer />
+        <PagenationButtonContainer
+          pageNumberHandler={(v) =>
+            setParam((prev) => ({ ...prev, pageNumber: v }))
+          }
+          lastPageNumber={homelessPeopleListData?.pagination.lastPageNumber}
+          pageNumber={param.pageNumber}
+        />
+      </div>
     </div>
   );
 };
