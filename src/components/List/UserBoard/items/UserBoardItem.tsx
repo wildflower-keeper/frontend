@@ -1,7 +1,7 @@
 // Compo
 import StatusBadge from "./StatusBadge";
 // Utils
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import formatPhoneNumber from "@/utils/string/phone";
 // Types
 import type {
@@ -10,6 +10,7 @@ import type {
 } from "@/api/v1/shelter-admin/type";
 import userDeleteManagementStore from "@/store/useUserDeleteManagement";
 import Checkbox from '@mui/material/Checkbox';
+import { userManagementContext } from "@/components/Layout/UserManagementProvider";
 
 const checkBoxStyle = {
   color: '#34c01f', // 기본 색상 (연두색)
@@ -47,7 +48,24 @@ const UserBoardItem = ({
   reason,
   emergencyContact,
 }: Props) => {
-  const { isOpenDeleteUser, checkedUserList, checkUser } = userDeleteManagementStore();
+  const userContext = useContext(userManagementContext);
+  const {
+    isOpenDeleteUser,
+    checkedUserList,
+    setCheckedUser
+  } = userContext;
+
+  const checkUser = (id: number) => {
+    setCheckedUser(prev => {
+      const newUserList = [...prev];
+        if (newUserList.includes(id)) {
+            const index = newUserList.indexOf(id);
+            newUserList.splice(index, 1);
+            return newUserList;
+        }
+        else return [...newUserList, id];
+    });
+  }
   return (
     <div
       className={`rounded-2xl  py-3 bg-white grid px-7 ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}

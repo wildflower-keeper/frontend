@@ -1,9 +1,9 @@
 import AddUserForm from "@/components/Layout/AddUserForm";
-import UserDataInput from "./items/UserDataInput";
-import userManagementStore from "@/store/useUserAddManagement";
+import { useUserContext } from "@/components/Layout/UserManagementProvider";
 
 const AddUserModal = () => {
-    const {isOpenAddUser} = userManagementStore();
+    const userContext = useUserContext();
+    const {isOpenAddUser} = userContext;
     if(isOpenAddUser) return (
         <div className="absolute text-[#353535] left-[330px] top-[340px] p-5 bg-white rounded-[20px] 
         flex-col justify-start gap-8 inline-flex font-['Pretendard']

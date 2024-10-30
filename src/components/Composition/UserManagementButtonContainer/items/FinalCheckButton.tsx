@@ -1,27 +1,35 @@
 import { deleteUser, homelessPeopleList } from "@/api/v1/shelter-admin";
 import { buttonStyle } from "./OpenUserManagement"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import userDeleteManagementStore from "@/store/useUserDeleteManagement";
-import useHomelessListQueryKey from "@/store/useHomelessListQueryKey";
+import { useUserContext } from "@/components/Layout/UserManagementProvider";
 
 interface FinalCheckButtonProps {
     onCancelDeleteClick: () => void;
 }
 
 const FinalCheckButton = ({ onCancelDeleteClick }: FinalCheckButtonProps) => {
-    const { checkedUserList, openDeleteSuccessMessage, closeDeleteUser } = userDeleteManagementStore();
     const queryClient = useQueryClient();
-    const {homelessListQueryKey} = useHomelessListQueryKey();
+    const userContext = useUserContext();
+    const {checkedUserList, setIsDeleteSuccess, setIsOpenDeleteUser} = userContext;
     const { mutate } = useMutation({
         mutationKey: deleteUser.mutationKey(),
         mutationFn: (id: number) => deleteUser(id)
     });
+
+    const closeDeleteUser = () => {
+        setIsOpenDeleteUser(false);
+    }
+
+    const openDeleteSuccessMessage = () => {
+        setIsDeleteSuccess(true);
+    }
+    
     const onSubmit = () => {
         checkedUserList.forEach((id) => {
             mutate(id, {
                 onSuccess: (res) => {
-                    queryClient.invalidateQueries({queryKey: homelessListQueryKey});
-                    closeDeleteUser();
+                    queryClient.invalidateQueries({queryKey: [...homelessPeopleList.queryKey()]});
+                    onCancelDeleteClick();
                     openDeleteSuccessMessage();
                 }
             })
