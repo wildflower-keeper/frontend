@@ -34,7 +34,7 @@ const UserBoard = ({
             userItemList?.map(
               ({ id, name, lastLocationStatus, room, phoneNumber }) => {
                 return (
-                  <li key={uuidv4()}>
+                  <li key={id}>
                     <UserBoardItem
                       id={id}
                       name={name}
