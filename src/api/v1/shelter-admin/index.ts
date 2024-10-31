@@ -1,5 +1,5 @@
 import * as ROUTES from "./Routes.const";
-import customAxios, { GET, POST } from "../../axios";
+import customAxios, { DELETE, GET, POST } from "../../axios";
 import { generateSplitUrl } from "../../utils.const";
 // Types
 import type {
@@ -30,7 +30,11 @@ export function login(loginData: LoginBodyType): Promise<LoginSuccessType> {
   })
 }
 export function addUser(userData: userDataFormType) {
-  return POST({data: userData, url: ROUTES.ADD_USER});
+  return POST({data: userData, url: ROUTES.USER});
+}
+
+export function deleteUser(id: number) {
+  return DELETE({url: ROUTES.USER + '/' + id});
 }
 
 export function logout(): Promise<void> {
@@ -76,4 +80,5 @@ shelterInfo.queryKey = () => generateSplitUrl(ROUTES.SHELTER);
 getSleepoverList.queryKey = () => generateSplitUrl(ROUTES.SLEEPOVERS);
 getPinNumber.queryKey = () => generateSplitUrl(ROUTES.PIN);
 getEmergency.queryKey = () => generateSplitUrl(ROUTES.EMERGENCY);
-addUser.mutationKey = () => generateSplitUrl(ROUTES.ADD_USER);
+addUser.mutationKey = () => generateSplitUrl(ROUTES.USER);
+deleteUser.mutationKey = () => generateSplitUrl(ROUTES.USER); 

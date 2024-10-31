@@ -14,4 +14,4 @@ export const HOMELESS_PEOPLE_COUNT = generatePathByBase(
   HOMELESS_PEOPLE,
   "count",
 );
-export const ADD_USER = generatePathByBase(BASE_PATH, "homeless");
+export const USER = generatePathByBase(BASE_PATH, "homeless");

@@ -1,5 +1,4 @@
 "use client";
-
 // Compo
 import PagenationButtonContainer from "@/components/Composition/PagenationButtonContainer";
 import SearchBar from "@/components/Composition/SearchBar";
@@ -14,8 +13,7 @@ import { simpleGenerateSecond } from "@/utils/number/time";
 import type { HomelessPeopleListParam } from "@/api/v1/shelter-admin/type";
 import UserManagementButtonContainer from "@/components/Composition/UserManagementButtonContainer";
 import AddUserModal from "@/components/Composition/AddUserModal";
-import useHomelessListQueryKey from "@/store/useHomelessListQueryKey";
-
+import UserManagementProvider from "../UserManagementProvider";
 const UserBoardContainer = () => {
   const [param, setParam] = useState<HomelessPeopleListParam>({
     filterType: "NONE",
@@ -24,53 +22,46 @@ const UserBoardContainer = () => {
     pageNumber: 1,
     pageSize: 5,
   });
-  const { setHomelessListQueryKey } = useHomelessListQueryKey();
-
   const queryKey = useMemo(() => {
     const queryKey = [...homelessPeopleList.queryKey(), ...Object.values(param)];
     return queryKey;
   }, [homelessPeopleList, param]);
-
-  useEffect(() => {
-    setHomelessListQueryKey(queryKey);
-  }, queryKey);
-
   const { data: homelessPeopleListData } = useQuery({
     queryFn: () => homelessPeopleList(param),
     queryKey,
     refetchInterval: simpleGenerateSecond([[3, "m"]]),
   });
-
   const userItemList = useMemo(
     () => get(homelessPeopleListData, "items", []),
     [homelessPeopleListData],
   );
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <p className="font-bold text-xl">이용자 관리</p>
-        <div className="flex gap-4">
-          <SearchBar
-            submitHandler={(filters, page) => {
-              setParam((prev) => ({ ...prev, ...filters, pageNumber: page }));
-            }}
+      <UserManagementProvider>
+        <div className="flex items-center justify-between">
+          <p className="font-bold text-xl">이용자 관리</p>
+          <div className="flex gap-4">
+            <SearchBar
+              submitHandler={(filters, page) => {
+                setParam((prev) => ({ ...prev, ...filters, pageNumber: page }));
+              }}
+            />
+          </div>
+        </div>
+        <UserBoard userItemList={userItemList} />
+        <AddUserModal />
+        <div className="flex flex-row items-center">
+          <UserManagementButtonContainer />
+          <PagenationButtonContainer
+            pageNumberHandler={(v) =>
+              setParam((prev) => ({ ...prev, pageNumber: v }))
+            }
+            lastPageNumber={homelessPeopleListData?.pagination.lastPageNumber}
+            pageNumber={param.pageNumber}
           />
         </div>
-      </div>
-      <UserBoard userItemList={userItemList} />
-      <AddUserModal />
-      <div className="flex flex-row items-center">
-        <UserManagementButtonContainer />
-        <PagenationButtonContainer
-          pageNumberHandler={(v) =>
-            setParam((prev) => ({ ...prev, pageNumber: v }))
-          }
-          lastPageNumber={homelessPeopleListData?.pagination.lastPageNumber}
-          pageNumber={param.pageNumber}
-        />
-      </div>
+      </UserManagementProvider>
     </div>
   );
 };
-
 export default UserBoardContainer;

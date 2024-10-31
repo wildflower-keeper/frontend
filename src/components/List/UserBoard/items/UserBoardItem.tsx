@@ -1,15 +1,27 @@
 // Compo
 import StatusBadge from "./StatusBadge";
 // Utils
-import React from "react";
+import React, { useContext, useState } from "react";
 import formatPhoneNumber from "@/utils/string/phone";
 // Types
 import type {
   LocationStatusType,
   SleepoverSituation,
 } from "@/api/v1/shelter-admin/type";
+import Checkbox from '@mui/material/Checkbox';
+import { userManagementContext } from "@/components/Layout/UserManagementProvider";
+
+const checkBoxStyle = {
+  color: '#34c01f', // 기본 색상 (연두색)
+  '&.Mui-checked': {
+    color: '#34c01f', // 체크된 색상 (연두색)
+  },
+  margin: 0, // 마진을 0으로 설정
+  padding: 0, // 패딩을 0으로 설정
+}
 
 type Props = {
+  id: number
   name: string;
   lastLocationStatus?: LocationStatusType;
   sleepoverSituation?: SleepoverSituation;
@@ -23,6 +35,7 @@ type Props = {
 };
 
 const UserBoardItem = ({
+  id,
   name,
   size,
   lastLocationStatus,
@@ -34,14 +47,38 @@ const UserBoardItem = ({
   reason,
   emergencyContact,
 }: Props) => {
+  const userContext = useContext(userManagementContext);
+  const {
+    isOpenDeleteUser,
+    checkedUserList,
+    setCheckedUser
+  } = userContext;
+
+  const checkUser = (id: number) => {
+    setCheckedUser(prev => {
+      const newUserList = [...prev];
+        if (newUserList.includes(id)) {
+            const index = newUserList.indexOf(id);
+            newUserList.splice(index, 1);
+            return newUserList;
+        }
+        else return [...newUserList, id];
+    });
+  }
   return (
     <div
       className={`rounded-2xl  py-3 bg-white grid px-7 ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}
     >
-      <StatusBadge
-        lastLocationStatus={lastLocationStatus}
-        sleepoverSituation={sleepoverSituation}
-      />
+      {isOpenDeleteUser ?
+        <Checkbox
+        checked={checkedUserList.includes(id)}
+        onChange={() => checkUser(id)}
+          sx={checkBoxStyle}
+        />
+        : <StatusBadge
+          lastLocationStatus={lastLocationStatus}
+          sleepoverSituation={sleepoverSituation}
+        />}
 
       <div className="h-fit my-auto text-center truncate">{name}</div>
       <div className="h-fit my-auto text-center truncate">{room}</div>

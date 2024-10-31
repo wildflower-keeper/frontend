@@ -1,11 +1,8 @@
 import { addUser, homelessPeopleList } from "@/api/v1/shelter-admin";
 import UserDataInput from "@/components/Composition/AddUserModal/items/UserDataInput";
-import useHomelessListQueryKey from "@/store/useHomelessListQueryKey";
-import userAddManagementStore from "@/store/useUserAddManagement";
-import { getCookie } from "@/utils/cookie";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
 import { useForm } from "react-hook-form"
+import { useUserContext } from "../UserManagementProvider";
 
 export interface userDataFormType {
     name: string
@@ -16,26 +13,32 @@ export interface userDataFormType {
 
 const AddUserForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<userDataFormType>()
-    const { closeAddUser, openAddSuccessMessage } = userAddManagementStore();
     const queryClient = useQueryClient();
-    const {homelessListQueryKey} = useHomelessListQueryKey();
     const { mutate } = useMutation({
         mutationKey: addUser.mutationKey(),
         mutationFn: (userData: any) => addUser(userData)
     });
+    const userContext = useUserContext();
+    const {setIsOpenAddUser, setIsAddSuccess} = userContext;
+    const closeAddUser = () => {
+        setIsOpenAddUser(false);
+    }
+    const openAddSuccessMessage = () => {
+        setIsAddSuccess(true);
+    }
     const onSubmit = (userData: userDataFormType) => {
         mutate(/*userData,*/{
-            "name": "testName",
+            "name": "testName5",
             "shelterId": 1,
             "shelterPin": "1234",
-            "room": "test방번호",
+            "room": "test방번호5",
             "birthDate": "1970-05-15",
             "phoneNumber": "01012341234",
             "lastLocationStatus": "IN_SHELTER",
             "admissionDate": "2024-08-01"
         }, {
             onSuccess: (res) => {
-                queryClient.invalidateQueries({queryKey: homelessListQueryKey});
+                queryClient.invalidateQueries({ queryKey: [...homelessPeopleList.queryKey()] });
                 closeAddUser();
                 openAddSuccessMessage();
             },
