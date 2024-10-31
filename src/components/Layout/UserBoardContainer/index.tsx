@@ -4,7 +4,7 @@ import PagenationButtonContainer from "@/components/Composition/PagenationButton
 import SearchBar from "@/components/Composition/SearchBar";
 import UserBoard from "@/components/List/UserBoard";
 // Utils
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { get } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 import { homelessPeopleList } from "@/api/v1/shelter-admin";
@@ -23,7 +23,8 @@ const UserBoardContainer = () => {
     pageSize: 5,
   });
   const queryKey = useMemo(() => {
-    return [...homelessPeopleList.queryKey(), ...Object.values(param)];
+    const queryKey = [...homelessPeopleList.queryKey(), ...Object.values(param)];
+    return queryKey;
   }, [homelessPeopleList, param]);
   const { data: homelessPeopleListData } = useQuery({
     queryFn: () => homelessPeopleList(param),
