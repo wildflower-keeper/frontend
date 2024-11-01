@@ -11,6 +11,7 @@ import type {
   LoginBodyType,
   LoginSuccessType,
   PinNumberResponseType,
+  SecondAuthType,
   ShelterInfoType,
   SleepoversResponseType,
 } from "./type";
@@ -44,8 +45,12 @@ export function first_auth(loginData: LoginBodyType): Promise<LoginSuccessType> 
   })
 }
 
+export function second_auth(secondAuthData: SecondAuthType) {
+  return POST({url: ROUTES.SECOND_AUTH, data: secondAuthData});
+}
+
 export function addUser(userData: userDataFormType) {
-  return POST({data: userData, url: ROUTES.USER});
+  return POST({url: ROUTES.USER, data: userData});
 }
 
 export function deleteUser(id: number) {
@@ -86,6 +91,8 @@ export function getEmergency(): Promise<GetEmergencyResponseType> {
 }
 
 login.mutationKey = () => generateSplitUrl(ROUTES.LOGIN);
+first_auth.mutationKey = () => generateSplitUrl(ROUTES.FIRST_AUTH);
+second_auth.mutationKey = () => generateSplitUrl(ROUTES.SECOND_AUTH);
 logout.mutationKey = () => generateSplitUrl(ROUTES.LOGOUT);
 
 homelessPeopleCount.queryKey = () =>

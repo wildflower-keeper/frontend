@@ -7,16 +7,17 @@ import ShleterSelect from "@/components/Composition/CustomSelectBox";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 // Utils
 import React, { useState } from "react";
-import { setCookie } from "@/utils/cookie";
 import { useMutation } from "@tanstack/react-query";
 import { first_auth, login } from "@/api/v1/shelter-admin";
 //Types
 import type { LoginBodyType } from "@/api/v1/shelter-admin/type";
+import Loading from "@/components/Composition/Loading";
+import { useAuthContext } from "../AuthProvider";
 
 const FirstAuth = () => {
   const [authLoading, setAuthLoading] = useState(false);
   const { mutate } = useMutation({
-    mutationKey: login.mutationKey(),
+    mutationKey: first_auth.mutationKey(),
     mutationFn: (loginData: LoginBodyType) => first_auth(loginData),
   });
 
@@ -25,13 +26,17 @@ const FirstAuth = () => {
     pw: "",
   });
 
+  const authContext = useAuthContext();
+  const {setIsSuccessFirstAuth, setCurAdminId} = authContext;
+
   const [error, setError] = useState("");
 
   const handleLoginSubmit = () => {
     setAuthLoading(true);
     mutate(loginInfo, {
       onSuccess: (res) => {
-        console.log(res);
+        setCurAdminId(loginInfo.id);
+        setIsSuccessFirstAuth(true);
       },
       onError: (error) => {
         setError(error.message);
@@ -72,13 +77,18 @@ const FirstAuth = () => {
           </div>
         </div>
         <div className="flex flex-col justify-center items-center">
-          <Button
-            type="submit"
-            className="primaryButtonDefault"
-            onClick={handleLoginSubmit}
-          >
-            다음
-          </Button>
+          {
+            authLoading ?
+              <Loading loadingStyle="size-8 bg-green-500" />
+              :
+              <Button
+                type="submit"
+                className="primaryButtonDefault"
+                onClick={handleLoginSubmit}
+              >
+                다음
+              </Button>
+          }
           <div className="text-red-500 underline text-[10.5px]">{error}</div>
         </div>
       </form>
