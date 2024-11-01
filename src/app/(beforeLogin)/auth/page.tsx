@@ -1,5 +1,6 @@
 // Compo
-import LoginForm from "@/components/Layout/LoginForm";
+import FirstAuth from "@/components/Layout/FirstAuth";
+import SecondAuth from "@/components/Layout/SecondAuth";
 // Utils
 import React from "react";
 
@@ -15,7 +16,8 @@ const Page = () => {
         </h1>
       </header>
       <div className="flex-grow flex justify-center">
-        <LoginForm />
+        {true ? <FirstAuth />
+        : <SecondAuth />}
       </div>
     </>
   );

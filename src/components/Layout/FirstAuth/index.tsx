@@ -9,14 +9,15 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import React, { useState } from "react";
 import { setCookie } from "@/utils/cookie";
 import { useMutation } from "@tanstack/react-query";
-import { login } from "@/api/v1/shelter-admin";
+import { first_auth, login } from "@/api/v1/shelter-admin";
 //Types
 import type { LoginBodyType } from "@/api/v1/shelter-admin/type";
 
-const LoginForm = () => {
+const FirstAuth = () => {
+  const [authLoading, setAuthLoading] = useState(false);
   const { mutate } = useMutation({
     mutationKey: login.mutationKey(),
-    mutationFn: (loginData: LoginBodyType) => login(loginData),
+    mutationFn: (loginData: LoginBodyType) => first_auth(loginData),
   });
 
   const [loginInfo, setLoginInfo] = useState<LoginBodyType>({
@@ -27,17 +28,17 @@ const LoginForm = () => {
   const [error, setError] = useState("");
 
   const handleLoginSubmit = () => {
+    setAuthLoading(true);
     mutate(loginInfo, {
       onSuccess: (res) => {
-        setCookie("authToken", res.authToken, {
-          path: "/",
-          expires: new Date(res.expiredAt),
-        });
-        window.location.href = "/dashboard";
+        console.log(res);
       },
       onError: (error) => {
         setError(error.message);
       },
+      onSettled: () => {
+        setAuthLoading(false);
+      }
     });
   };
   return (
@@ -76,7 +77,7 @@ const LoginForm = () => {
             className="primaryButtonDefault"
             onClick={handleLoginSubmit}
           >
-            로그인
+            다음
           </Button>
           <div className="text-red-500 underline text-[10.5px]">{error}</div>
         </div>
@@ -85,4 +86,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default FirstAuth;
