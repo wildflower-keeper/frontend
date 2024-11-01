@@ -1,4 +1,3 @@
-
 const Loading = ({loadingStyle}: {loadingStyle: string}) => {
 const defaultStyle = `${loadingStyle} bg-blue-500 rounded-full`;
     return (

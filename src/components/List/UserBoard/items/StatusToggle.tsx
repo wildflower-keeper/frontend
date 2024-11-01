@@ -4,7 +4,7 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { changeUserStatus, homelessPeopleList } from "@/api/v1/shelter-admin";
 import { LocationStatusType } from "@/api/v1/shelter-admin/type";
-import Loading from "@/components/Composition/loading.tsx";
+import Loading from "@/components/Composition/Loading";
 
 const StatusToggle = ({ children, id }: { children: ReactNode, id: number }) => {
     const onStatusClick = () => {
@@ -25,6 +25,12 @@ const StatusToggle = ({ children, id }: { children: ReactNode, id: number }) => 
             onSuccess: async (res) => {
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 queryClient.invalidateQueries({queryKey: [...homelessPeopleList.queryKey()]});
+                
+            },
+            onError: (error) => {
+                console.error(error);
+            },
+            onSettled: () => {
                 setLoadingStatus(-1);
             }
         })
