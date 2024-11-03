@@ -8,7 +8,7 @@ import type {
   LocationStatusType,
   SleepoverSituation,
 } from "@/api/v1/shelter-admin/type";
-import StatusToggle from "./StatusToggle";
+import StatusControllerOpenToggle from "./StatusControllerOpenToggle";
 
 type Props = {
   id: number,
@@ -41,12 +41,12 @@ const UserBoardItem = ({
     <div
       className={`rounded-2xl  py-3 bg-white grid px-7 ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}
     >
-      <StatusToggle id={id}>
+      <StatusControllerOpenToggle id={id}>
         <StatusBadge
           lastLocationStatus={lastLocationStatus}
           sleepoverSituation={sleepoverSituation}
         />
-      </StatusToggle>
+      </StatusControllerOpenToggle>
       <div className="h-fit my-auto text-center">{name}</div>
       <div className="h-fit my-auto text-center">{room}</div>
       <div

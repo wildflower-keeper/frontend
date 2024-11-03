@@ -1,5 +1,5 @@
 const Loading = ({loadingStyle}: {loadingStyle: string}) => {
-const defaultStyle = `${loadingStyle} bg-blue-500 rounded-full`;
+const defaultStyle = `${loadingStyle} rounded-full`;
     return (
     <div className="flex justify-center items-center">
         <div className="relative inline-flex">

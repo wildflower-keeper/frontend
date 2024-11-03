@@ -39,7 +39,8 @@ export function homelessPeopleList(
   return GET({ url: ROUTES.HOMELESS_PEOPLE, params: opt });
 }
 
-export function changeUserStatus(id: number, status: {locationStatus: LocationStatusType}) {
+export async function changeUserStatus(id: number, status: {locationStatus: LocationStatusType}) {
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return PUT({
     data: status,
     url: ROUTES.BASE_PATH + '/' + id + '/' + 'in-out',
