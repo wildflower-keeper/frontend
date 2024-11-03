@@ -8,17 +8,16 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 // Utils
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { first_auth, login } from "@/api/v1/shelter-admin";
+import { firstAuth, login } from "@/api/v1/shelter-admin";
 //Types
 import type { LoginBodyType } from "@/api/v1/shelter-admin/type";
 import Loading from "@/components/Composition/Loading";
 import { useAuthContext } from "../AuthProvider";
 
 const FirstAuth = () => {
-  const [authLoading, setAuthLoading] = useState(false);
-  const { mutate } = useMutation({
-    mutationKey: first_auth.mutationKey(),
-    mutationFn: (loginData: LoginBodyType) => first_auth(loginData),
+  const { mutate, isPending } = useMutation({
+    mutationKey: firstAuth.mutationKey(),
+    mutationFn: (loginData: LoginBodyType) => firstAuth(loginData),
   });
 
   const [loginInfo, setLoginInfo] = useState<LoginBodyType>({
@@ -32,7 +31,7 @@ const FirstAuth = () => {
   const [error, setError] = useState("");
 
   const handleLoginSubmit = () => {
-    setAuthLoading(true);
+    setError("");
     mutate(loginInfo, {
       onSuccess: (res) => {
         setCurAdminId(loginInfo.id);
@@ -41,9 +40,6 @@ const FirstAuth = () => {
       onError: (error) => {
         setError(error.message);
       },
-      onSettled: () => {
-        setAuthLoading(false);
-      }
     });
   };
   return (
@@ -78,7 +74,7 @@ const FirstAuth = () => {
         </div>
         <div className="flex flex-col justify-center items-center">
           {
-            authLoading ?
+            isPending ?
               <Loading loadingStyle="size-8 bg-green-500" />
               :
               <Button

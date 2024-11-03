@@ -5,14 +5,14 @@ import InputWithLabel from "@/components/Composition/InputWithLabel"
 import { useAuthContext } from "../AuthProvider";
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { second_auth } from "@/api/v1/shelter-admin";
+import { secondAuth } from "@/api/v1/shelter-admin";
 import { SecondAuthType } from "@/api/v1/shelter-admin/type";
 import { setCookie } from "@/utils/cookie";
 
 const SecondAuth = () => {
     const { mutate } = useMutation({
-        mutationKey: second_auth.mutationKey(),
-        mutationFn: (authData: SecondAuthType) => second_auth(authData),
+        mutationKey: secondAuth.mutationKey(),
+        mutationFn: (authData: SecondAuthType) => secondAuth(authData),
       });
 
     const authContext = useAuthContext();
