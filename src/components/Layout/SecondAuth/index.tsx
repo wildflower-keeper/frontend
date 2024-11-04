@@ -8,6 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { secondAuth } from "@/api/v1/shelter-admin";
 import { SecondAuthType } from "@/api/v1/shelter-admin/type";
 import { setCookie } from "@/utils/cookie";
+import { useRouter } from "next/router";
 
 const SecondAuth = () => {
     const { mutate } = useMutation({
@@ -24,6 +25,7 @@ const SecondAuth = () => {
     });
 
     const [errorCount, setErrorCount] = useState(0);
+    const router = useRouter();
     
     const handleLoginSubmit = () => {
         mutate(authData, {
@@ -32,14 +34,12 @@ const SecondAuth = () => {
                     path: "/",
                     expires: new Date(res.expiredAt),
                 });
-                window.location.href = "/dashboard";
+                router.push("/dashboard");
             },
             onError: (error) => {
                 if(errorCount === 2) setIsSuccessFirstAuth(false);
                 console.error(error);
                 setErrorCount(prev => prev + 1);
-          },
-          onSettled: () => {
           }
         });
       };
