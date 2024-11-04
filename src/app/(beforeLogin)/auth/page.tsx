@@ -1,9 +1,14 @@
+"use client"
+
 // Compo
-import LoginForm from "@/components/Layout/LoginForm";
+import { useAuthContext } from "@/components/Layout/AuthProvider";
+import FirstAuth from "@/components/Layout/FirstAuth";
+import SecondAuth from "@/components/Layout/SecondAuth";
 // Utils
 import React from "react";
 
 const Page = () => {
+  const { isSuccessFirstAuth } = useAuthContext();
   return (
     <>
       <header className="authHeader">
@@ -15,7 +20,12 @@ const Page = () => {
         </h1>
       </header>
       <div className="flex-grow flex justify-center">
-        <LoginForm />
+        {
+          !isSuccessFirstAuth ?
+            <FirstAuth />
+            :
+            <SecondAuth />
+        }
       </div>
     </>
   );

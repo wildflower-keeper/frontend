@@ -11,30 +11,46 @@ import type {
   LoginBodyType,
   LoginSuccessType,
   PinNumberResponseType,
+  SecondAuthType,
   ShelterInfoType,
   SleepoversResponseType,
 } from "./type";
 import { userDataFormType } from "@/components/Layout/AddUserForm";
 
 export function login(loginData: LoginBodyType): Promise<LoginSuccessType> {
-  return customAxios.post(ROUTES.LOGIN, loginData).then(({ data }) => {
-    if(!data) { // 입력 데이터가 부족할 경우
+  return customAxios.post(ROUTES.FIRST_AUTH, loginData).then(({ data }) => {
+    if (!data) { // 입력 데이터가 부족할 경우
       throw new Error("* 인증을 위한 정보가 부족합니다. 모든 정보를 입력해주세요");
     }
-    else if ("authToken" in data && "expiredAt" in data) return data;
-    else {
-      if (data.errorCode === "SHELTER_ADMIN_LOGIN_ID_PASSWORD_INVALID") {
-        throw new Error("* 비밀번호가 틀렸습니다. 올바른 비밀번호로 다시 입력해주세요.");
-      }
+    if (data.errorCode === "SHELTER_ADMIN_LOGIN_ID_PASSWORD_INVALID") {
+      throw new Error("* 비밀번호가 틀렸습니다. 올바른 비밀번호로 다시 입력해주세요.");
     }
-  })
+    if ("authToken" in data && "expiredAt" in data) return data;
+  });
 }
+
+export function firstAuth(loginData: LoginBodyType): Promise<LoginSuccessType> {
+  return customAxios.post(ROUTES.FIRST_AUTH, loginData).then(({ data }) => {
+    if (!data) { // 입력 데이터가 부족할 경우
+      throw new Error("* 인증을 위한 정보가 부족합니다. 모든 정보를 입력해주세요");
+    }
+    if (data.errorCode === "SHELTER_ADMIN_LOGIN_ID_PASSWORD_INVALID") {
+      throw new Error("* 비밀번호가 틀렸습니다. 올바른 비밀번호로 다시 입력해주세요.");
+    }
+    if ("authToken" in data && "expiredAt" in data) return data;
+  });
+}
+
+export function secondAuth(secondAuthData: SecondAuthType) {
+  return POST({ url: ROUTES.SECOND_AUTH, data: secondAuthData });
+}
+
 export function addUser(userData: userDataFormType) {
-  return POST({data: userData, url: ROUTES.USER});
+  return POST({ url: ROUTES.USER, data: userData });
 }
 
 export function deleteUser(id: number) {
-  return DELETE({url: ROUTES.USER + '/' + id});
+  return DELETE({ url: ROUTES.USER + '/' + id });
 }
 
 export function logout(): Promise<void> {
@@ -71,6 +87,8 @@ export function getEmergency(): Promise<GetEmergencyResponseType> {
 }
 
 login.mutationKey = () => generateSplitUrl(ROUTES.LOGIN);
+firstAuth.mutationKey = () => generateSplitUrl(ROUTES.FIRST_AUTH);
+secondAuth.mutationKey = () => generateSplitUrl(ROUTES.SECOND_AUTH);
 logout.mutationKey = () => generateSplitUrl(ROUTES.LOGOUT);
 
 homelessPeopleCount.queryKey = () =>

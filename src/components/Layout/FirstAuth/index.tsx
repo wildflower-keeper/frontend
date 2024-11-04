@@ -7,16 +7,17 @@ import ShleterSelect from "@/components/Composition/CustomSelectBox";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 // Utils
 import React, { useState } from "react";
-import { setCookie } from "@/utils/cookie";
 import { useMutation } from "@tanstack/react-query";
-import { login } from "@/api/v1/shelter-admin";
+import { firstAuth, login } from "@/api/v1/shelter-admin";
 //Types
 import type { LoginBodyType } from "@/api/v1/shelter-admin/type";
+import Loading from "@/components/Composition/Loading";
+import { useAuthContext } from "../AuthProvider";
 
-const LoginForm = () => {
-  const { mutate } = useMutation({
-    mutationKey: login.mutationKey(),
-    mutationFn: (loginData: LoginBodyType) => login(loginData),
+const FirstAuth = () => {
+  const { mutate, isPending } = useMutation({
+    mutationKey: firstAuth.mutationKey(),
+    mutationFn: (loginData: LoginBodyType) => firstAuth(loginData),
   });
 
   const [loginInfo, setLoginInfo] = useState<LoginBodyType>({
@@ -24,16 +25,17 @@ const LoginForm = () => {
     pw: "",
   });
 
+  const authContext = useAuthContext();
+  const {setIsSuccessFirstAuth, setCurAdminId} = authContext;
+
   const [error, setError] = useState("");
 
   const handleLoginSubmit = () => {
+    setError("");
     mutate(loginInfo, {
       onSuccess: (res) => {
-        setCookie("authToken", res.authToken, {
-          path: "/",
-          expires: new Date(res.expiredAt),
-        });
-        window.location.href = "/dashboard";
+        setCurAdminId(loginInfo.id);
+        setIsSuccessFirstAuth(true);
       },
       onError: (error) => {
         setError(error.message);
@@ -71,13 +73,18 @@ const LoginForm = () => {
           </div>
         </div>
         <div className="flex flex-col justify-center items-center">
-          <Button
-            type="submit"
-            className="primaryButtonDefault"
-            onClick={handleLoginSubmit}
-          >
-            로그인
-          </Button>
+          {
+            isPending ?
+              <Loading loadingStyle="size-8 bg-green-500" />
+              :
+              <Button
+                type="submit"
+                className="primaryButtonDefault"
+                onClick={handleLoginSubmit}
+              >
+                다음
+              </Button>
+          }
           <div className="text-red-500 underline text-[10.5px]">{error}</div>
         </div>
       </form>
@@ -85,4 +92,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default FirstAuth;
