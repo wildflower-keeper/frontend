@@ -27,7 +27,6 @@ const AddUserForm = () => {
         setIsAddSuccess(true);
     }
     const onSubmit = (userData: userDataFormType) => {
-        console.log(userData)
         mutate(/*userData,*/{
             "name": userData.name,
             "shelterId": 1,
