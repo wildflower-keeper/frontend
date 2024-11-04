@@ -103,6 +103,11 @@ export interface LoginBodyType {
   pw: string;
 }
 
+export interface SecondAuthType {
+  id: number;
+  code: string;
+}
+
 export interface LoginSuccessType {
   authToken: string;
   expiredAt: string;

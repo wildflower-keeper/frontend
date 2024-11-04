@@ -1,4 +1,5 @@
 // Compo
+import AuthProvider from "@/components/Layout/AuthProvider";
 import Image from "next/image";
 // Utils
 import React, { ReactNode } from "react";
@@ -21,7 +22,9 @@ const NotLoginedLayout: React.FC<Props> = ({ children }) => {
           />
         </div>
       </div>
-      {children}
+      <AuthProvider>
+        {children}
+      </AuthProvider>
     </div>
   );
 };

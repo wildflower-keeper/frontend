@@ -21,7 +21,7 @@ const AfterLoginSideBar = () => {
           height={40}
         />
       </div>
-      <div className="grow flex flex-col justify-center items-center gap-8">
+      <div className="grow flex flex-col items-center gap-8 mt-48">
         {PAGE_ROUTE.map(({ path, Icon }) => {
           return (
             <Link href={path} key={path}>
