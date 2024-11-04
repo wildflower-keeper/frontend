@@ -12,6 +12,7 @@ import type {
   LoginBodyType,
   LoginSuccessType,
   PinNumberResponseType,
+  SecondAuthType,
   ShelterInfoType,
   SleepoversResponseType,
   SecondAuthType
@@ -47,11 +48,11 @@ export function secondAuth(secondAuthData: SecondAuthType) {
 }
 
 export function addUser(userData: userDataFormType) {
-  return POST({data: userData, url: ROUTES.USER});
+  return POST({ url: ROUTES.USER, data: userData });
 }
 
 export function deleteUser(id: number) {
-  return DELETE({url: ROUTES.USER + '/' + id});
+  return DELETE({ url: ROUTES.USER + '/' + id });
 }
 
 export function logout(): Promise<void> {
