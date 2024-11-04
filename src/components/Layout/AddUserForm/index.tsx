@@ -27,16 +27,17 @@ const AddUserForm = () => {
         setIsAddSuccess(true);
     }
     const onSubmit = (userData: userDataFormType) => {
+        console.log(userData)
         mutate(/*userData,*/{
-            "name": "testName5",
+            "name": userData.name,
             "shelterId": 1,
             "shelterPin": "1234",
-            "room": "test방번호5",
+            "room": userData.location,
             "birthDate": "1970-05-15",
-            "phoneNumber": "01012341234",
-            "lastLocationStatus": "IN_SHELTER",
-            "admissionDate": "2024-08-01"
-        }, {
+            "phoneNumber": userData.phone,
+            "admissionDate": "2024-08-01",
+            "memo": "알러지 존재"
+          }, {
             onSuccess: (res) => {
                 queryClient.invalidateQueries({ queryKey: [...homelessPeopleList.queryKey()] });
                 closeAddUser();
