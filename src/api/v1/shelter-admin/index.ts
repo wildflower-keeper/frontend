@@ -1,5 +1,5 @@
 import * as ROUTES from "./Routes.const";
-import customAxios, { DELETE, GET, POST } from "../../axios";
+import customAxios, { GET, POST, PUT, DELETE } from "../../axios";
 import { generateSplitUrl } from "../../utils.const";
 // Types
 import type {
@@ -8,12 +8,14 @@ import type {
   GetSleepoverListParam,
   HomelessPeopleListParam,
   HomelessPeopleListResponseType,
+  LocationStatusType,
   LoginBodyType,
   LoginSuccessType,
   PinNumberResponseType,
   SecondAuthType,
   ShelterInfoType,
   SleepoversResponseType,
+  SecondAuthType
 } from "./type";
 import { userDataFormType } from "@/components/Layout/AddUserForm";
 
@@ -67,6 +69,13 @@ export function homelessPeopleList(
   return GET({ url: ROUTES.HOMELESS_PEOPLE, params: opt });
 }
 
+export async function changeUserStatus(id: number, status: {locationStatus: LocationStatusType}) {
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  return PUT({
+    data: status,
+    url: ROUTES.BASE_PATH + '/' + id + '/' + 'in-out'
+  });
+}
 
 export function shelterInfo(): Promise<ShelterInfoType> {
   return GET({ url: ROUTES.SHELTER });
@@ -90,6 +99,7 @@ login.mutationKey = () => generateSplitUrl(ROUTES.LOGIN);
 firstAuth.mutationKey = () => generateSplitUrl(ROUTES.FIRST_AUTH);
 secondAuth.mutationKey = () => generateSplitUrl(ROUTES.SECOND_AUTH);
 logout.mutationKey = () => generateSplitUrl(ROUTES.LOGOUT);
+changeUserStatus.mutationKey = () => generateSplitUrl(ROUTES.CHANGE_USER_STATUS);
 
 homelessPeopleCount.queryKey = () =>
   generateSplitUrl(ROUTES.HOMELESS_PEOPLE_COUNT);

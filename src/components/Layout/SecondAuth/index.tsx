@@ -8,7 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { secondAuth } from "@/api/v1/shelter-admin";
 import { SecondAuthType } from "@/api/v1/shelter-admin/type";
 import { setCookie } from "@/utils/cookie";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const SecondAuth = () => {
     const { mutate } = useMutation({

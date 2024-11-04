@@ -40,7 +40,7 @@ const SearchInput = ({
           <FiSearch size={22} color="#828282" />
         </Button>
         <Input
-          placeholder="검색"
+          placeholder="이용자 검색"
           className=" w-28 placeholder:text-fontWeak"
           value={value}
           onChange={(e) => {
