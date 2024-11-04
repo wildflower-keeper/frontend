@@ -1,7 +1,7 @@
 import { ReactNode, useState } from "react";
 import StatusToggleList from "./StatusToggleList";
 
-const StatusToggle = ({ children, id }: { children: ReactNode, id: number }) => {
+const StatusControllerOpenToggle = ({ children, id }: { children: ReactNode, id: number }) => {
     const [isOpenStatus, setIsOpenStatus] = useState(false);
     const onStatusClick = () => {
         setIsOpenStatus((prev) => !prev);
@@ -19,4 +19,4 @@ const StatusToggle = ({ children, id }: { children: ReactNode, id: number }) => 
     )
 };
 
-export default StatusToggle;
+export default StatusControllerOpenToggle;

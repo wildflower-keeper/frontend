@@ -1,5 +1,5 @@
 import * as ROUTES from "./Routes.const";
-import customAxios, { GET, POST, PUT } from "../../axios";
+import customAxios, { GET, POST, PUT, DELETE } from "../../axios";
 import { generateSplitUrl } from "../../utils.const";
 // Types
 import type {
@@ -14,15 +14,44 @@ import type {
   PinNumberResponseType,
   ShelterInfoType,
   SleepoversResponseType,
+  SecondAuthType
 } from "./type";
+import { userDataFormType } from "@/components/Layout/AddUserForm";
 
 export function login(loginData: LoginBodyType): Promise<LoginSuccessType> {
-  return customAxios.post(ROUTES.LOGIN, loginData).then(({ data }) => {
-    if ("authToken" in data && "expiredAt" in data) return data;
-    else {
-      throw new Error(data.description);
+  return customAxios.post(ROUTES.FIRST_AUTH, loginData).then(({ data }) => {
+    if (!data) { // 입력 데이터가 부족할 경우
+      throw new Error("* 인증을 위한 정보가 부족합니다. 모든 정보를 입력해주세요");
     }
+    if (data.errorCode === "SHELTER_ADMIN_LOGIN_ID_PASSWORD_INVALID") {
+      throw new Error("* 비밀번호가 틀렸습니다. 올바른 비밀번호로 다시 입력해주세요.");
+    }
+    if ("authToken" in data && "expiredAt" in data) return data;
   });
+}
+
+export function firstAuth(loginData: LoginBodyType): Promise<LoginSuccessType> {
+  return customAxios.post(ROUTES.FIRST_AUTH, loginData).then(({ data }) => {
+    if (!data) { // 입력 데이터가 부족할 경우
+      throw new Error("* 인증을 위한 정보가 부족합니다. 모든 정보를 입력해주세요");
+    }
+    if (data.errorCode === "SHELTER_ADMIN_LOGIN_ID_PASSWORD_INVALID") {
+      throw new Error("* 비밀번호가 틀렸습니다. 올바른 비밀번호로 다시 입력해주세요.");
+    }
+    if ("authToken" in data && "expiredAt" in data) return data;
+  });
+}
+
+export function secondAuth(secondAuthData: SecondAuthType) {
+  return POST({ url: ROUTES.SECOND_AUTH, data: secondAuthData });
+}
+
+export function addUser(userData: userDataFormType) {
+  return POST({data: userData, url: ROUTES.USER});
+}
+
+export function deleteUser(id: number) {
+  return DELETE({url: ROUTES.USER + '/' + id});
 }
 
 export function logout(): Promise<void> {
@@ -43,7 +72,7 @@ export async function changeUserStatus(id: number, status: {locationStatus: Loca
   await new Promise(resolve => setTimeout(resolve, 1000));
   return PUT({
     data: status,
-    url: ROUTES.BASE_PATH + '/' + id + '/' + 'in-out',
+    url: ROUTES.BASE_PATH + '/' + id + '/' + 'in-out'
   });
 }
 
@@ -66,6 +95,8 @@ export function getEmergency(): Promise<GetEmergencyResponseType> {
 }
 
 login.mutationKey = () => generateSplitUrl(ROUTES.LOGIN);
+firstAuth.mutationKey = () => generateSplitUrl(ROUTES.FIRST_AUTH);
+secondAuth.mutationKey = () => generateSplitUrl(ROUTES.SECOND_AUTH);
 logout.mutationKey = () => generateSplitUrl(ROUTES.LOGOUT);
 changeUserStatus.mutationKey = () => generateSplitUrl(ROUTES.CHANGE_USER_STATUS);
 
@@ -76,3 +107,5 @@ shelterInfo.queryKey = () => generateSplitUrl(ROUTES.SHELTER);
 getSleepoverList.queryKey = () => generateSplitUrl(ROUTES.SLEEPOVERS);
 getPinNumber.queryKey = () => generateSplitUrl(ROUTES.PIN);
 getEmergency.queryKey = () => generateSplitUrl(ROUTES.EMERGENCY);
+addUser.mutationKey = () => generateSplitUrl(ROUTES.USER);
+deleteUser.mutationKey = () => generateSplitUrl(ROUTES.USER); 
