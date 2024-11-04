@@ -12,7 +12,6 @@ import type {
   LoginBodyType,
   LoginSuccessType,
   PinNumberResponseType,
-  SecondAuthType,
   ShelterInfoType,
   SleepoversResponseType,
   SecondAuthType
