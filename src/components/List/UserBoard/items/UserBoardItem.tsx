@@ -11,7 +11,7 @@ import type {
 import Checkbox from '@mui/material/Checkbox';
 import { userManagementContext } from "@/components/Layout/UserManagementProvider";
 import StatusControllerOpenToggle from "./StatusControllerOpenToggle";
-import StatusBadgeOrCheckbox from "./StatusBadgeOrCheckBox";
+import StatusBadgeOrCheckbox from "./StatusBadgeOrCheckbox";
 
 type Props = {
   id: number
