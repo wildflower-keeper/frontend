@@ -18,7 +18,7 @@ const CurrentCard = ({ count, description, type }: Props) => {
   if (!cardStyle) return <></>;
 
   return (
-    <div className={`w-40 h-40 rounded-2xl p-5 ${cardStyle.color}`}>
+    <div className="w-[262px] h-[120px] bg-white rounded-lg shadow">
       <div className="bg-white/20 p-2 rounded-lg w-fit mb-5">
         <cardStyle.Icon size={32} color="white" />
       </div>

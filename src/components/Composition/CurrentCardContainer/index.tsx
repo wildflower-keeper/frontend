@@ -28,7 +28,7 @@ const CurrentCardContainer = () => {
   }, [currentUserInfo]);
 
   return (
-    <div className="flex gap-3">
+    <div className="flex flex-row justify-around gap-5">
       <CurrentCard
         type="inShelterCount"
         count={counts.shelterCount}
@@ -38,6 +38,11 @@ const CurrentCardContainer = () => {
         type="outingCount"
         count={counts.outingCount}
         description="금일 외박 인원수"
+      />
+      <CurrentCard
+        type="emergencyCount"
+        count={counts.emergencyCount}
+        description="긴급상황 발생건수"
       />
       <CurrentCard
         type="emergencyCount"

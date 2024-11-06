@@ -3,6 +3,7 @@
 // Compo
 import ManagerInfo from "./items/ManagerInfo";
 import DateInfo from "./items/DateInfo";
+import { PiLineVerticalThin } from "react-icons/pi";
 // Utils
 import React, { useEffect, useMemo } from "react";
 import useUpdateTimer from "@/store/useUpdateTimer";
@@ -12,6 +13,7 @@ import { shelterInfo } from "@/api/v1/shelter-admin";
 import { formatDateString } from "@/utils/string/date";
 // Types
 import type { ShelterInfoType } from "@/api/v1/shelter-admin/type";
+
 
 const initState: ShelterInfoType = {
   shelterName: "",
@@ -61,10 +63,11 @@ const AdminInfoContainer = () => {
   }, [adminInfo]);
 
   return (
-    <div className="flex w-full justify-between">
+    <div className="flex flex-row w-full justify-between items-start bg-neutral-100 p-5 rounded-md">
       <DateInfo />
-      <div className="flex flex-col my-auto justify-between gap-3">
-        <p className="font-semibold text-xl">{adminUsers.shelterName}</p>
+      <div className="flex flex-row gap-2 items-center">
+        <div className="font-semibold text-xl">{adminUsers.shelterName}</div>
+        <PiLineVerticalThin />
         <ManagerInfo chiefOfficer={adminUsers.chiefOfficer} />
       </div>
     </div>

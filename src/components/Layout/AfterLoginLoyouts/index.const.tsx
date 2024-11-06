@@ -1,30 +1,45 @@
 // Compo
-import { AiFillHome } from "react-icons/ai";
-import { FaUser } from "react-icons/fa";
-import { TbRefreshAlert } from "react-icons/tb";
+import { GoHome } from "react-icons/go";
+import { PiFolderUserFill } from "react-icons/pi";
+import { PiSiren } from "react-icons/pi";
+import { PiChartLineUpLight } from "react-icons/pi";
 // Types
 import { IconType } from "react-icons/lib";
 
 interface Route {
+  name: string;
   path: string;
   Icon?: IconType;
 }
 
 export const generate_Route = (arg: Route) => ({ ...arg });
 
+const PAGE_NAME = ["홈 화면", "이용자 관리", "긴급상황 발생내역"];
+export const dashboardPageName = "홈 화면";
+export const managementPageName = "이용자 관리";
+export const emergencyPageName = "긴급상황 발생내역";
+
 export const PAGE_ROUTE: Route[] = [
   generate_Route({
+    name: dashboardPageName,
     path: "/dashboard",
-    Icon: AiFillHome,
+    Icon: GoHome,
   }),
   generate_Route({
+    name: managementPageName,
     path: "/management",
-    Icon: FaUser,
+    Icon: PiFolderUserFill,
   }),
   generate_Route({
+    name: emergencyPageName,
     path: "/emergency",
-    Icon: TbRefreshAlert,
+    Icon: PiSiren,
   }),
+  // generate_Route({
+  //   name: "징후파악 대시보드",
+  //   path: "/check",
+  //   Icon: PiChartLineUpLight,
+  // }),
 ];
 
 interface HeaderName {
@@ -32,7 +47,7 @@ interface HeaderName {
 }
 
 export const HEADER_NAME: HeaderName = {
-  "/dashboard": "대시보드",
-  "/management": "외박 신청 내역",
-  "/emergency": "긴급 상황 내역",
+  "/dashboard": "홈 화면",
+  "/management": "이용자 관리",
+  "/emergency": "긴급상황 발생내역",
 };

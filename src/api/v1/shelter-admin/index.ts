@@ -15,12 +15,11 @@ import type {
   SecondAuthType,
   ShelterInfoType,
   SleepoversResponseType,
-  SecondAuthType
 } from "./type";
 import { userDataFormType } from "@/components/Layout/AddUserForm";
 
 export function login(loginData: LoginBodyType): Promise<LoginSuccessType> {
-  return customAxios.post(ROUTES.FIRST_AUTH, loginData).then(({ data }) => {
+  return customAxios.post(ROUTES.LOGIN, loginData).then(({ data }) => {
     if (!data) { // 입력 데이터가 부족할 경우
       throw new Error("* 인증을 위한 정보가 부족합니다. 모든 정보를 입력해주세요");
     }
