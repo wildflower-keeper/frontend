@@ -99,7 +99,7 @@ export interface PinNumberResponseType {
 }
 
 export interface LoginBodyType {
-  id: number;
+  email: string;
   pw: string;
 }
 

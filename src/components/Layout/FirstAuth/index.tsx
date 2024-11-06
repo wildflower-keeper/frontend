@@ -21,7 +21,7 @@ const FirstAuth = () => {
   });
 
   const [loginInfo, setLoginInfo] = useState<LoginBodyType>({
-    id: 0,
+    email: "",
     pw: "",
   });
 
@@ -31,16 +31,17 @@ const FirstAuth = () => {
   const [error, setError] = useState("");
 
   const handleLoginSubmit = () => {
-    setError("");
-    mutate(loginInfo, {
-      onSuccess: (res) => {
-        setCurAdminId(loginInfo.id);
-        setIsSuccessFirstAuth(true);
-      },
-      onError: (error) => {
-        setError(error.message);
-      },
-    });
+    console.log(loginInfo)
+    // setError("");
+    // mutate(loginInfo, {
+    //   onSuccess: (res) => {
+    //     // setCurAdminId(loginInfo.email);
+    //     setIsSuccessFirstAuth(true);
+    //   },
+    //   onError: (error) => {
+    //     setError(error.message);
+    //   },
+    // });
   };
   return (
     <div className="w-80">
@@ -50,10 +51,16 @@ const FirstAuth = () => {
       >
         <div className="flex flex-col gap-10 items-center">
           <div className="flex flex-col gap-2 w-full">
-            <label htmlFor="centerSelector" className="smallFont">
-              센터명
-            </label>
-            <ShleterSelect shelterChange={setLoginInfo} />
+            <InputWithLabel
+              value={loginInfo.email}
+              onChange={(e) =>
+                setLoginInfo((prev) => ({ ...prev, email: e.target.value }))
+              }
+              id="adminEmail"
+              placeholder="이메일"
+              labelName="이메일"
+              type="email"
+            />
           </div>
           <div className="flex flex-col w-full">
             <InputWithLabel
