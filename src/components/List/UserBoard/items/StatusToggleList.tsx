@@ -13,7 +13,7 @@ interface StatusToggleListProps {
 
 const StatusToggleList = ({id, closeList}: StatusToggleListProps) => {
     const [selectedStauts, setSelectedStatus] = useState(-1);
-    const statusList: LocationStatusType[] = ["IN_SHELTER", "OUT_SHELTER"];
+    const statusList: LocationStatusType[] = ["IN_SHELTER", "OUT_SHELTER", "UNKNOWN", "SLEEPOVER"];
 
     const queryClient = useQueryClient();
     const { mutate, isPending } = useMutation({

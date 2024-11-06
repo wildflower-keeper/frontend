@@ -63,7 +63,7 @@ const AdminInfoContainer = () => {
   }, [adminInfo]);
 
   return (
-    <div className="flex flex-row w-full justify-between items-start bg-neutral-100 p-5 rounded-md">
+    <div className="flex flex-row w-full justify-between items-start bg-neutral-100 px-5 py-3 rounded-md">
       <DateInfo />
       <div className="flex flex-row gap-2 items-center">
         <div className="font-semibold text-xl">{adminUsers.shelterName}</div>

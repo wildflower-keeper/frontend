@@ -24,7 +24,7 @@ const SearchInput = ({
   disabled,
 }: Props) => {
   return (
-    <div className="bg-white  px-3 py-2 w-auto rounded-lg border border-solid border-neutral-300">
+    <div className="bg-white px-3 py-1 w-auto rounded-lg border border-solid border-neutral-300">
       <form
         className="flex justify-center items-center gap-3"
         onSubmit={(e) => {
@@ -41,7 +41,7 @@ const SearchInput = ({
         </Button>
         <Input
           placeholder="이용자 검색"
-          className=" w-28 placeholder:text-fontWeak"
+          className=" w-40 placeholder:text-fontWeak focus:outline-none"
           value={value}
           onChange={(e) => {
             filterHandler("filterValue", e.target.value);

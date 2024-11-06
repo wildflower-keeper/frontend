@@ -3,17 +3,20 @@
 import PagenationButtonContainer from "@/components/Composition/PagenationButtonContainer";
 import SearchBar from "@/components/Composition/SearchBar";
 import UserBoard from "@/components/List/UserBoard";
+import UserListFilter from "@/components/Composition/UserListFilter";
 // Utils
 import React, { useMemo, useState } from "react";
 import { get } from "lodash";
 import { useQuery } from "@tanstack/react-query";
 import { homelessPeopleList } from "@/api/v1/shelter-admin";
 import { simpleGenerateSecond } from "@/utils/number/time";
+import UserManagementProvider from "../UserManagementProvider";
+
 // Types
-import type { HomelessPeopleListParam } from "@/api/v1/shelter-admin/type";
+import type { HomelessPeopleListParam, UserItemType } from "@/api/v1/shelter-admin/type";
 import UserManagementButtonContainer from "@/components/Composition/UserManagementButtonContainer";
 import AddUserModal from "@/components/Composition/AddUserModal";
-import UserManagementProvider from "../UserManagementProvider";
+
 const UserBoardContainer = () => {
   const [param, setParam] = useState<HomelessPeopleListParam>({
     filterType: "NONE",
@@ -35,18 +38,75 @@ const UserBoardContainer = () => {
     () => get(homelessPeopleListData, "items", []),
     [homelessPeopleListData],
   );
+
+  const testList: UserItemType[] = [
+    {
+      id: 1,
+      lastLocationStatus: "SLEEPOVER",
+      name: "임동현",
+      room: "303호",
+      phoneNumber: "01012345678",
+      targetDateSleepover: "24.05.06~24.05.07",
+      sleepoverReason: "친구",
+      secondPhoneNumber: "없음",
+    },
+    {
+      id: 2,
+      lastLocationStatus: "IN_SHELTER",
+      name: "임동현",
+      room: "303호",
+      phoneNumber: "01012345678",
+      targetDateSleepover: "24.05.06~24.05.07",
+      sleepoverReason: "친구",
+      secondPhoneNumber: "없음",
+    },
+    {
+      id: 3,
+      lastLocationStatus: "OUT_SHELTER",
+      name: "임동현",
+      room: "303호",
+      phoneNumber: "01012345678",
+      targetDateSleepover: "24.05.06~24.05.07",
+      sleepoverReason: "친구",
+      secondPhoneNumber: "없음",
+    },
+    {
+      id: 4,
+      lastLocationStatus: "UNKNOWN",
+      name: "임동현",
+      room: "303호",
+      phoneNumber: "01012345678",
+      targetDateSleepover: "24.05.06~24.05.07",
+      sleepoverReason: "친구",
+      secondPhoneNumber: "없음",
+    },
+    {
+      id: 5,
+      lastLocationStatus: "OUT_SHELTER",
+      name: "임동현",
+      room: "303호",
+      phoneNumber: "01012345678",
+      targetDateSleepover: "24.05.06~24.05.07",
+      sleepoverReason: "친구",
+      secondPhoneNumber: "없음",
+    }
+  ]
+
+  const [selecedStatusIndex, setSelectedStatusIndex] = useState(0);
+
   return (
-    <div>
+    <div className="w-full h-full">
       <UserManagementProvider>
-      <p className="custom-page-name">이용자 관리</p>
-          <div className="flex gap-4">
-            <SearchBar
-              submitHandler={(filters, page) => {
-                setParam((prev) => ({ ...prev, ...filters, pageNumber: page }));
-              }}
-            />
+        <p className="custom-page-name mb-4">이용자 관리</p>
+        <div className="flex gap-4 justify-between items-center mb-2">
+          <UserListFilter selecedStatusIndex={selecedStatusIndex} setSelectedStatusIndex={setSelectedStatusIndex} />
+          <SearchBar
+            submitHandler={(filters, page) => {
+              setParam((prev) => ({ ...prev, ...filters, pageNumber: page }));
+            }}
+          />
         </div>
-        <UserBoard userItemList={userItemList} />
+        <UserBoard userItemList={testList} />
         <AddUserModal />
         <div className="flex flex-row items-center">
           <UserManagementButtonContainer />

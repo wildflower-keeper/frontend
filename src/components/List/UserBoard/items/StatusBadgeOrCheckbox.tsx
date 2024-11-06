@@ -17,10 +17,9 @@ const checkBoxStyle = {
 interface StatusBadgeOrCheckboxProps {
     id: number,
     lastLocationStatus?: LocationStatusType,
-    sleepoverSituation?: SleepoverSituation,
 }
 
-const StatusBadgeOrCheckbox = ({ id, lastLocationStatus, sleepoverSituation }: StatusBadgeOrCheckboxProps) => {
+const StatusBadgeOrCheckbox = ({ id, lastLocationStatus }: StatusBadgeOrCheckboxProps) => {
     const userContext = useContext(userManagementContext);
     const {
         isOpenDeleteUser,
@@ -51,7 +50,6 @@ const StatusBadgeOrCheckbox = ({ id, lastLocationStatus, sleepoverSituation }: S
         <StatusControllerOpenToggle id={id}>
             <StatusBadge
                 lastLocationStatus={lastLocationStatus}
-                sleepoverSituation={sleepoverSituation}
             />
         </StatusControllerOpenToggle>
     )

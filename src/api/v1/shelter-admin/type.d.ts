@@ -22,18 +22,21 @@ export interface CurrentUserInfo {
   emergencyCount: emergencyCountType;
 }
 
-export type LocationStatusType = "OUT_SHELTER" | "IN_SHELTER" | null;
+export type LocationStatusType = "OUT_SHELTER" | "IN_SHELTER" | "UNKNOWN" | "SLEEPOVER" | null;
 
 export interface UserItemType {
   id: number;
+  lastLocationStatus: LocationStatusType;
   name: string;
   room: string;
-  birthDate: string;
-  targetDateSleepover: boolean;
-  lastLocationStatus: LocationStatusType;
-  lastLocationTrackedAt: string;
   phoneNumber: string;
-  admissionDate: string;
+  targetDateSleepover: string;
+  sleepoverReason: string;
+  secondPhoneNumber: string;
+}
+
+export interface UserBoardItemType extends UserItemType {
+  index: number
 }
 
 export interface PaginationType {

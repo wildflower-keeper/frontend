@@ -8,7 +8,6 @@ const Page = () => {
       <UserBoardContainer />
     </div>
   )
-  // return <ManagementContainer />;
 };
 
 export default Page;
