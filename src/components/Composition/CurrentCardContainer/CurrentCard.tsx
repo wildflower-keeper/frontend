@@ -7,7 +7,7 @@ import { CARD_STYLE } from "./index.const";
 interface Props {
   count: number;
   description: string;
-  type: "inShelterCount" | "outingCount" | "emergencyCount";
+  type: "inShelterCount" | "activeUserCount" | "sleepoverCount" | "emergencyCount";
 }
 
 const CurrentCard = ({ count, description, type }: Props) => {
@@ -18,14 +18,12 @@ const CurrentCard = ({ count, description, type }: Props) => {
   if (!cardStyle) return <></>;
 
   return (
-    <div className="w-[262px] h-[120px] bg-white rounded-lg shadow">
-      <div className="bg-white/20 p-2 rounded-lg w-fit mb-5">
-        <cardStyle.Icon size={32} color="white" />
-      </div>
-      <div className="flex-col gap-1 text-white">
-        <p className="text-3xl font-bold">{count}</p>
+    <div className="flex justify-between w-[262px] h-[120px] bg-white rounded-lg p-4 shadow">
+      <div className="flex flex-col gap-3 text-black">
         <p className="text-base">{description}</p>
+        <p className="text-3xl font-bold">{count}</p>
       </div>
+        <cardStyle.Icon size={50} className={`${cardStyle.color} ${cardStyle.bgColor} p-2 rounded-2xl`} />
     </div>
   );
 };

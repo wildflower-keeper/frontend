@@ -32,22 +32,22 @@ const CurrentCardContainer = () => {
       <CurrentCard
         type="inShelterCount"
         count={counts.shelterCount}
-        description="센터 내 총 인원수"
+        description="센터 총 인원수"
       />
       <CurrentCard
-        type="outingCount"
+        type="activeUserCount"
         count={counts.outingCount}
-        description="금일 외박 인원수"
+        description="30분 동안 활성 이용자"
+      />
+      <CurrentCard
+        type="sleepoverCount"
+        count={counts.emergencyCount}
+        description="외박중인 인원수"
       />
       <CurrentCard
         type="emergencyCount"
         count={counts.emergencyCount}
-        description="긴급상황 발생건수"
-      />
-      <CurrentCard
-        type="emergencyCount"
-        count={counts.emergencyCount}
-        description="긴급상황 발생건수"
+        description="오늘 긴급상황"
       />
     </div>
   );
