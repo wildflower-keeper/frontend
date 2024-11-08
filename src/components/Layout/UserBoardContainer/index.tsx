@@ -100,16 +100,18 @@ const UserBoardContainer = () => {
         <p className="custom-page-name mb-4">이용자 관리</p>
         <div className="flex gap-4 justify-between items-center mb-2">
           <UserListFilter selecedStatusIndex={selecedStatusIndex} setSelectedStatusIndex={setSelectedStatusIndex} />
-          <SearchBar
-            submitHandler={(filters, page) => {
-              setParam((prev) => ({ ...prev, ...filters, pageNumber: page }));
-            }}
-          />
+          <div className="flex items-center relative">
+            <UserManagementButtonContainer />
+            <SearchBar
+              submitHandler={(filters, page) => {
+                setParam((prev) => ({ ...prev, ...filters, pageNumber: page }));
+              }}
+            />
+            <AddUserModal />
+          </div>
         </div>
         <UserBoard userItemList={testList} />
-        <AddUserModal />
-        <div className="flex flex-row items-center">
-          <UserManagementButtonContainer />
+        <div className="flex flex-row justify-center">
           <PagenationButtonContainer
             pageNumberHandler={(v) =>
               setParam((prev) => ({ ...prev, pageNumber: v }))

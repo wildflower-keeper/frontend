@@ -1,13 +1,9 @@
-import { useUserContext } from "@/components/Layout/UserManagementProvider";
 import React from "react";
 
 const UserBoardHeader = () => {
-  const userContext = useUserContext();
-  const { isOpenDeleteUser } = userContext;
-
   const userDataTypeList = [
     "NO.",
-    isOpenDeleteUser ? "체크" : "상태",
+    "상태",
     "이름",
     "호실",
     "전화번호",

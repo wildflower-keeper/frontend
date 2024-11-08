@@ -1,12 +1,9 @@
 import { userManagementContext } from "@/components/Layout/UserManagementProvider";
 import { Checkbox } from "@mui/material";
 import { useContext } from "react";
-import StatusControllerOpenToggle from "./StatusControllerOpenToggle";
-import StatusBadge from "./StatusBadge";
-import { LocationStatusType, SleepoverSituation } from "@/api/v1/shelter-admin/type";
 
 const checkBoxStyle = {
-    color: '#34c01f', // 기본 색상 (연두색)
+    color: '#c8ccd5', // 기본 색상 (연두색)
     '&.Mui-checked': {
         color: '#34c01f', // 체크된 색상 (연두색)
     },
@@ -14,12 +11,12 @@ const checkBoxStyle = {
     padding: 0, // 패딩을 0으로 설정
 }
 
-interface StatusBadgeOrCheckboxProps {
+interface NumberOrCheckboxProps {
     id: number,
-    lastLocationStatus?: LocationStatusType,
+    index: number
 }
 
-const StatusBadgeOrCheckbox = ({ id, lastLocationStatus }: StatusBadgeOrCheckboxProps) => {
+const NumberOrCheckbox = ({ id, index }: NumberOrCheckboxProps) => {
     const userContext = useContext(userManagementContext);
     const {
         isOpenDeleteUser,
@@ -47,12 +44,8 @@ const StatusBadgeOrCheckbox = ({ id, lastLocationStatus }: StatusBadgeOrCheckbox
         />
     )
     return (
-        <StatusControllerOpenToggle id={id}>
-            <StatusBadge
-                lastLocationStatus={lastLocationStatus}
-            />
-        </StatusControllerOpenToggle>
+        <div className="h-fit my-auto text-center">{index}</div>
     )
 }
 
-export default StatusBadgeOrCheckbox;
+export default NumberOrCheckbox;

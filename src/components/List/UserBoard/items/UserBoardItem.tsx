@@ -1,12 +1,16 @@
-// Compo
-import StatusBadgeOrCheckbox from "./StatusBadgeOrCheckbox";
+// Compo\
+import NumberOrCheckbox from "./NumberOrCheckbox";
+import StatusBadge from "./StatusBadge";
+
 // Utils
-import React, { useContext, useState } from "react";
 import formatPhoneNumber from "@/utils/string/phone";
 // Types
 import type {
   UserBoardItemType,
 } from "@/api/v1/shelter-admin/type";
+import StatusControllerOpenToggle from "./StatusControllerOpenToggle";
+import StatusToggleList from "./StatusToggleList";
+import { useState } from "react";
 const UserBoardItem = ({
   index,
   id,
@@ -19,11 +23,24 @@ const UserBoardItem = ({
   targetDateSleepover
 }: UserBoardItemType) => {
   const baseStyle = "h-fit my-auto text-center"
+  const [isOpenStatus, setIsOpenStatus] = useState(false);
+  const onStatusClick = () => {
+    setIsOpenStatus((prev) => !prev);
+  }
   return (
-    <div className="  py-3 bg-white grid grid-cols-8 place-items-cente text-sm border-b border-solid border-neutral-200">
-      <div className={baseStyle}>{index}</div>
-      <div className={baseStyle}>
-        <StatusBadgeOrCheckbox id={id} lastLocationStatus={lastLocationStatus} />
+    <div className="py-3 bg-white grid grid-cols-8 place-items-cente text-sm border-b border-solid border-neutral-200">
+      <NumberOrCheckbox id={id} index={index} />
+      <div className={`${baseStyle} relative`}>
+        {
+          isOpenStatus ?
+            <StatusToggleList id={id} />
+            :
+            <StatusControllerOpenToggle onStatusClick={onStatusClick} lastLocationStatus={lastLocationStatus} >
+              <StatusBadge
+                lastLocationStatus={lastLocationStatus}
+              />
+            </StatusControllerOpenToggle>
+        }
       </div>
       <div className={`${baseStyle} truncate`}>{name}</div>
       <div className={`${baseStyle} truncate`}>{room}</div>

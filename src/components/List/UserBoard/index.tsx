@@ -13,7 +13,7 @@ import type {
 
 const UserBoard = ({ userItemList }: { userItemList: UserItemType[] }) => {
   return (
-    <div className="mb-6">
+    <div className="mb-4">
       <UserBoardHeader />
       <div>
         <ul className="flex flex-col gap-4">
@@ -23,7 +23,7 @@ const UserBoard = ({ userItemList }: { userItemList: UserItemType[] }) => {
                 return (
                   <li key={id}>
                     <UserBoardItem
-                      index={index}
+                      index={index + 1}
                       id={id}
                       lastLocationStatus={lastLocationStatus}
                       name={name}

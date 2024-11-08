@@ -67,7 +67,7 @@ const AddUserForm = () => {
                     })}
                 id="location"
                 title="거주동,호실"
-                placeholder="이용자가 거주하는 곳을 입력해주세요. (필수)"
+                placeholder="이용자의 거주하는 곳을 입력해주세요. (필수)"
                 type="text"
                 maxLength={10}
                 error={errors.location ? true : false}
@@ -93,10 +93,10 @@ const AddUserForm = () => {
                 maxLength={11}
                 error={errors.secondPhone ? true : false}
             />
-            <div className="flex flex-row gap-2 items-center justify-end">
+            <div className="flex flex-row gap-2 items-center justify-end text-md">
                 {Object.keys(errors).length != 0 ? <div className="justify-start text-[#ff3d00] text-base mr-24">필수적인 정보를 모두 입력해주세요.</div> : null}
-                <button type="submit" className="px-3 py-1 bg-black text-white rounded-[10px] border border-[#dfdfdf]">저장</button>
-                <button onClick={closeAddUser} className="px-3 py-1 bg-white rounded-[10px] border border-[#dfdfdf]">취소</button>
+                <button type="submit" className="px-3 py-1 bg-black text-white rounded-3xl border border-[#dfdfdf]">저장</button>
+                <button onClick={closeAddUser} className="px-3 py-1 text-[#949494] bg-white rounded-3xl border border-[#dfdfdf]">취소</button>
             </div>
         </form>
     )

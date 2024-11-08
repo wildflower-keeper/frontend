@@ -8,12 +8,11 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 
 interface StatusToggleListProps {
     id: number, 
-    closeList: () => void
 }
 
-const StatusToggleList = ({id, closeList}: StatusToggleListProps) => {
+const StatusToggleList = ({id}: StatusToggleListProps) => {
     const [selectedStauts, setSelectedStatus] = useState(-1);
-    const statusList: LocationStatusType[] = ["IN_SHELTER", "OUT_SHELTER", "UNKNOWN", "SLEEPOVER"];
+    const statusList: LocationStatusType[] = ["IN_SHELTER", "OUT_SHELTER"];
 
     const queryClient = useQueryClient();
     const { mutate, isPending } = useMutation({
@@ -37,7 +36,7 @@ const StatusToggleList = ({id, closeList}: StatusToggleListProps) => {
         })
     }
     return (
-        <div className="absolute flex items-center gap-2 z-10 top-10 p-3 bg-white rounded-[20px] border border-solid border-[#e7e7e7]">
+        <div className="absolute right-[-20px] top-[-30px] flex items-center gap-2 z-10 p-2 bg-white rounded-[20px] border border-solid border-[#e7e7e7]">
             {
                 statusList.map((status, index) => (
                     isPending && selectedStauts === index ?
@@ -47,7 +46,6 @@ const StatusToggleList = ({id, closeList}: StatusToggleListProps) => {
                             <StatusBadge lastLocationStatus={status} />
                         </button>
                 ))}
-            <MdKeyboardArrowUp onClick={closeList} className="text-gray-400 cursor-pointer" size={24} />
         </div>
     )
 };
