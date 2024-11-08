@@ -4,6 +4,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import LogoutButton from "@/components/Composition/LogoutButton";
+import { IoSettingsOutline } from "react-icons/io5";
 // Utils
 import React from "react";
 import { PAGE_ROUTE } from "./index.const";
@@ -14,7 +15,7 @@ const AfterLoginSideBar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col h-min-full bg-white py-5 w-64 border border-r border-solid border-gray-200 items-center">
+    <div className="flex flex-col h-min-full bg-neutral-100 py-5 w-64 border-r border-solid border-gray-200 items-center">
       <div className=" w-40 h-10 mx-auto">
         <Image
           src="/assets/logos/wildflower_logo_with_name.png"
@@ -40,7 +41,10 @@ const AfterLoginSideBar = () => {
           );
         })}
       </div>
-      <LogoutButton />
+      <div className="flex flex-col items-start gap-4 w-full border-t border-solid border-gray-200 pb-5 pt-10 pl-10 text-sm">
+        <button className="flex gap-2 items-center"><IoSettingsOutline size={22} />설정</button>
+        <LogoutButton />
+      </div>
     </div>
   );
 };

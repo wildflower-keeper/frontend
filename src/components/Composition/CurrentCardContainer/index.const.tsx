@@ -9,15 +9,23 @@ import type { IconType } from "react-icons/lib";
 interface Card {
   type: string;
   Icon: IconType;
-  color: string;
+  textColor: string;
   bgColor: string;
+  oulineColor: string;
 }
 
-export enum CARD_COLORS {
-  blue = "text-[#4D73FF]",
-  green = "text-[#19C23D]",
-  red = "text-[#FF3D00]",
-  yellow = "text-[#FEC53D]"
+export enum CARD_TEXT_COLORS {
+  blue = `text-[#4D73FF]`,
+  green = `text-[#19C23D]`,
+  red = `text-[#FF3D00]`,
+  yellow = `text-[#FEC53D]`,
+}
+
+export enum CARD_OUTLINE_COLORS {
+  blue = `outline-[#4D73FF]`,
+  green = `outline-[#19C23D]`,
+  red = `outline-[#FF3D00]`,
+  yellow = `outline-[#FEC53D]`,
 }
 
 export enum CARD_BG_COLORS {
@@ -33,25 +41,29 @@ export const CARD_STYLE: Card[] = [
   generate_Card({
     type: "inShelterCount",
     Icon: MdPeople,
-    color: CARD_COLORS.green,
-    bgColor: CARD_BG_COLORS.green
+    textColor: CARD_TEXT_COLORS.green,
+    bgColor: CARD_BG_COLORS.green,
+    oulineColor: CARD_OUTLINE_COLORS.green
   }),
   generate_Card({
-    type: "activeUserCount",
+    type: "outShelterCount",
     Icon: PiClockCounterClockwise,
-    color: CARD_COLORS.blue,
-    bgColor: CARD_BG_COLORS.blue
+    textColor: CARD_TEXT_COLORS.blue,
+    bgColor: CARD_BG_COLORS.blue,
+    oulineColor: CARD_OUTLINE_COLORS.blue
   }),
   generate_Card({
     type: "sleepoverCount",
     Icon: RiBox3Fill,
-    color: CARD_COLORS.yellow,
-    bgColor: CARD_BG_COLORS.yellow
+    textColor: CARD_TEXT_COLORS.yellow,
+    bgColor: CARD_BG_COLORS.yellow,
+    oulineColor: CARD_OUTLINE_COLORS.yellow
   }),
   generate_Card({
     type: "emergencyCount",
     Icon: AiOutlineLineChart,
-    color: CARD_COLORS.red,
-    bgColor: CARD_BG_COLORS.red
+    textColor: CARD_TEXT_COLORS.red,
+    bgColor: CARD_BG_COLORS.red,
+    oulineColor: CARD_OUTLINE_COLORS.red
   }),
 ];
