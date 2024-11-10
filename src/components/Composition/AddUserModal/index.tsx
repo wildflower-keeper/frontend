@@ -7,7 +7,7 @@ const AddUserModal = () => {
     if(isOpenAddUser) return (
         <div className="absolute top-10 right-80 text-[#353535] p-5 bg-white rounded-[20px] 
         flex-col justify-start gap-8 inline-flex font-['Pretendard']
-        shadow-lg w-[540px]">
+        shadow-lg w-[540px] z-20">
             <div className="text-[28px] font-semibold">이용자 추가</div>
             <AddUserForm />
         </div>

@@ -38,9 +38,6 @@ const UserManagementButtonContainer = () => {
         setIsDeleteSuccess(false);
     }, []);
     const isChecked = checkedUserList.length > 0;
-    if (isChecked) { // 삭제할 사용자가 선택된 상태
-        if (isOpenFinalCheck) return <FinalCheckButton onCancelDeleteClick={onCancelDeleteClick} /> // 최종 삭제 확인 버튼
-    }
     if (isAddSuccess) {
         return <SuccessPopup closeMessage={closeAddSuccessMessage} Message="정상적으로 이용자가 생성되었습니다." />
     }

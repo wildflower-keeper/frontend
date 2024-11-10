@@ -35,12 +35,13 @@ const UserBoardItem = ({
           isOpenStatus ?
             <StatusToggleList id={id} />
             :
-            <StatusControllerOpenToggle onStatusClick={onStatusClick} lastLocationStatus={lastLocationStatus} >
-              <StatusBadge
-                lastLocationStatus={lastLocationStatus}
-              />
-            </StatusControllerOpenToggle>
+            null
         }
+        <StatusControllerOpenToggle onStatusClick={onStatusClick} lastLocationStatus={lastLocationStatus} >
+          <StatusBadge
+            lastLocationStatus={lastLocationStatus}
+          />
+        </StatusControllerOpenToggle>
       </div>
       <div className={`${baseStyle} truncate`}>{name}</div>
       <div className={`${baseStyle} truncate`}>{room}</div>

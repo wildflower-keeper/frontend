@@ -18,7 +18,7 @@ const UserDataInput = forwardRef<HTMLInputElement, userDataProps>(({ id, title, 
                 type={type}
                 placeholder={placeholder}
                 maxLength={maxLength}
-                className="appearance-none text-[#3f3f3f] text-base font-normal w-[380px] outline-none rounded-xl border border-solid border-[#e7e7e7] p-3"
+                className={`appearance-none text-[#3f3f3f] text-base font-normal w-[380px] outline-none rounded-xl border border-solid border-[#e7e7e7] ${error ? "border-red-500 border-[2px]" : null} p-3`}
                 ref={ref}
                 {...rest}
             />

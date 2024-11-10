@@ -36,7 +36,7 @@ const StatusToggleList = ({id}: StatusToggleListProps) => {
         })
     }
     return (
-        <div className="absolute right-[-20px] top-[-30px] flex items-center gap-2 z-10 p-2 bg-white rounded-[20px] border border-solid border-[#e7e7e7]">
+        <div className="absolute right-[-20px] top-[-15px] flex items-center gap-2 z-10 p-2 bg-white rounded-[20px] border border-solid border-[#e7e7e7]">
             {
                 statusList.map((status, index) => (
                     isPending && selectedStauts === index ?
