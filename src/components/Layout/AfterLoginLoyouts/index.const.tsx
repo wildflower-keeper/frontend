@@ -1,5 +1,6 @@
 // Compo
 import { GoHome } from "react-icons/go";
+import { TiMessages } from "react-icons/ti";
 import { PiFolderUserFill } from "react-icons/pi";
 import { PiSiren } from "react-icons/pi";
 import { PiChartLineUpLight } from "react-icons/pi";
@@ -26,6 +27,11 @@ export const PAGE_ROUTE: Route[] = [
     Icon: GoHome,
   }),
   generate_Route({
+    name: "공지사항",
+    path: "/notice",
+    Icon: TiMessages,
+  }),
+  generate_Route({
     name: managementPageName,
     path: "/management",
     Icon: PiFolderUserFill,
@@ -35,11 +41,11 @@ export const PAGE_ROUTE: Route[] = [
     path: "/emergency",
     Icon: PiSiren,
   }),
-  // generate_Route({
-  //   name: "징후파악 대시보드",
-  //   path: "/check",
-  //   Icon: PiChartLineUpLight,
-  // }),
+  generate_Route({
+    name: "징후파악 대시보드",
+    path: "/situation",
+    Icon: PiChartLineUpLight,
+  }),
 ];
 
 interface HeaderName {

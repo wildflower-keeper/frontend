@@ -46,5 +46,5 @@ body {
 }
 
 .custom-page-name {
-  @apply font-bold text-3xl;
+  @apply font-bold text-3xl mb-4;
 }

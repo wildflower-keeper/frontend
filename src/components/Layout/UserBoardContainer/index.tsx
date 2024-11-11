@@ -97,7 +97,7 @@ const UserBoardContainer = () => {
   return (
     <div className="w-full h-full">
       <UserManagementProvider>
-        <p className="custom-page-name mb-4">이용자 관리</p>
+        <div className="custom-page-name">이용자 관리</div>
         <div className="flex gap-4 justify-between items-center mb-2">
           <UserListFilter selecedStatusIndex={selecedStatusIndex} setSelectedStatusIndex={setSelectedStatusIndex} />
           <div className="flex items-center relative">

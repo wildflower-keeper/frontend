@@ -56,11 +56,8 @@ const PagenationButtonContainer = ({
               }}
               disabled={pageNumber === value}
             >
-              <p
-                className={`text-[#828282] ${pageNumber === value && "font-bold text-[#19C23D]"}`}
-              >
-                {value}
-              </p>
+              <p className={`${pageNumber === value ? "font-bold text-[#19C23D]" : ""}`}>{value}</p>
+
             </Button>
           );
         })}
