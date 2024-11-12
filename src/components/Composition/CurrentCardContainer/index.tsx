@@ -12,7 +12,7 @@ import UserStatusChart from "@/components/Chart/UserStatusChart";
 
 export type statusCountType = "inShelterCount" | "outingCount" | "sleepoverCount" | "emergencyCount"
 
-export interface StatusCountType {
+export interface slectedStatusType {
   inShelterCount: boolean
   outingCount: boolean
   sleepoverCount: boolean
@@ -87,7 +87,7 @@ const CurrentCardContainer = () => {
     emergencyCount: emergencyCountResult.data
   }
 
-  const [selectedStatusCount, setSelectedStatusCount] = useState<StatusCountType>(
+  const [selectedStatusCount, setSelectedStatusCount] = useState<slectedStatusType>(
     {
       inShelterCount: false,
       outingCount: false,

@@ -1,4 +1,4 @@
-import { statusCountDataType, StatusCountType } from '@/components/Composition/CurrentCardContainer';
+import { statusCountDataType, slectedStatusType } from '@/components/Composition/CurrentCardContainer';
 import { ResponsiveLine } from '@nivo/line'
 
 interface chartDataValueType {
@@ -6,7 +6,7 @@ interface chartDataValueType {
     y: number
 }
 
-const UserStatusChart = ({ selectedStatusCount, statusCountData }: { selectedStatusCount: StatusCountType, statusCountData: statusCountDataType }) => {
+const UserStatusChart = ({ selectedStatusCount, statusCountData }: { selectedStatusCount: slectedStatusType, statusCountData: statusCountDataType }) => {
     const generateData = (countArray: number[]) => {
         const dataValueArray: chartDataValueType[] = [];
         countArray.forEach((v, index) => {
