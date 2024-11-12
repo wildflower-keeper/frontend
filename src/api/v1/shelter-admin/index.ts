@@ -68,6 +68,22 @@ export function homelessPeopleList(
   return GET({ url: ROUTES.HOMELESS_PEOPLE, params: opt });
 }
 
+export function inShelterMonthlyCount() {
+  return GET({url: ROUTES.INSHELTER_MONTHLY_COUNT});
+}
+
+export function outingMonthlyCount() {
+  return GET({url: ROUTES.OUTING_MONTHLY_COUNT});
+}
+
+export function sleepoverCount() {
+  return GET({url: ROUTES.SLEEPOVER_MONTHLY_COUNT});
+}
+
+export function emergencyCount() {
+  return GET({url: ROUTES.EMERGENCY_MONTHLY_COUNT});
+}
+
 export async function changeUserStatus(id: number, status: {locationStatus: LocationStatusType}) {
   await new Promise(resolve => setTimeout(resolve, 1000));
   return PUT({
@@ -103,6 +119,12 @@ changeUserStatus.mutationKey = () => generateSplitUrl(ROUTES.CHANGE_USER_STATUS)
 homelessPeopleCount.queryKey = () =>
   generateSplitUrl(ROUTES.HOMELESS_PEOPLE_COUNT);
 homelessPeopleList.queryKey = () => generateSplitUrl(ROUTES.HOMELESS_PEOPLE);
+
+inShelterMonthlyCount.queryKey = () => generateSplitUrl(ROUTES.INSHELTER_MONTHLY_COUNT);
+outingMonthlyCount.queryKey = () => generateSplitUrl(ROUTES.OUTING_MONTHLY_COUNT);
+sleepoverCount.queryKey = () => generateSplitUrl(ROUTES.SLEEPOVER_MONTHLY_COUNT);
+emergencyCount.queryKey = () => generateSplitUrl(ROUTES.EMERGENCY_MONTHLY_COUNT);
+
 shelterInfo.queryKey = () => generateSplitUrl(ROUTES.SHELTER);
 getSleepoverList.queryKey = () => generateSplitUrl(ROUTES.SLEEPOVERS);
 getPinNumber.queryKey = () => generateSplitUrl(ROUTES.PIN);

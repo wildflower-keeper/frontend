@@ -46,7 +46,7 @@ export const CARD_STYLE: Card[] = [
     oulineColor: CARD_OUTLINE_COLORS.green
   }),
   generate_Card({
-    type: "outShelterCount",
+    type: "outingCount",
     Icon: PiClockCounterClockwise,
     textColor: CARD_TEXT_COLORS.blue,
     bgColor: CARD_BG_COLORS.blue,

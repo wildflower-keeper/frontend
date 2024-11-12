@@ -15,10 +15,11 @@ interface Route {
 
 export const generate_Route = (arg: Route) => ({ ...arg });
 
-const PAGE_NAME = ["홈 화면", "이용자 관리", "긴급상황 발생내역"];
 export const dashboardPageName = "홈 화면";
+export const noticePageName = "공지사항";
 export const managementPageName = "이용자 관리";
 export const emergencyPageName = "긴급상황 발생내역";
+export const situationPageName = "징후파악 대시보드";
 
 export const PAGE_ROUTE: Route[] = [
   generate_Route({
@@ -27,7 +28,7 @@ export const PAGE_ROUTE: Route[] = [
     Icon: GoHome,
   }),
   generate_Route({
-    name: "공지사항",
+    name: noticePageName,
     path: "/notice",
     Icon: TiMessages,
   }),
@@ -42,7 +43,7 @@ export const PAGE_ROUTE: Route[] = [
     Icon: PiSiren,
   }),
   generate_Route({
-    name: "징후파악 대시보드",
+    name: situationPageName,
     path: "/check",
     Icon: PiChartLineUpLight,
   }),
