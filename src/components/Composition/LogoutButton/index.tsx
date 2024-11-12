@@ -1,10 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { logout } from "@/api/v1/shelter-admin";
 import { removeCookie } from "@/utils/cookie";
-import Button from "@/components/base/Button";
 import { LiaPowerOffSolid } from "react-icons/lia";
+import { useRouter } from "next/navigation";
 
 const LogoutButton = () => {
+    const router = useRouter();
     const { mutate } = useMutation({
         mutationKey: logout.mutationKey(),
         mutationFn: logout,
@@ -14,7 +15,7 @@ const LogoutButton = () => {
         mutate(undefined, {
             onSuccess: () => {
                 removeCookie("authToken");
-                window.location.href = "/auth";
+                router.push('/auth');
             },
             onError: (error) => {
                 return error;

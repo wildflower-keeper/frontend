@@ -20,12 +20,13 @@ const UserStatusChart = ({ selectedStatusCount, statusCountData }: { selectedSta
     }
 
     const isSelected = Object.values(selectedStatusCount).find(v => v === true);
-
+    const axisY = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200];
+    const defaultData = [{ x: "1일", y: "0명" }];
     const chartData = [
-        selectedStatusCount.inShelterCount ? { id: 'inShelterCount', color: "#19C23D", data: generateData(statusCountData.inShelterCount) } : { id: 'a', data: [{ x: "1일", y: "0명" }] },
-        selectedStatusCount.outingCount ? { id: 'outingCount', color: "#4D73FF", data: generateData(statusCountData.outingCount) } : { id: 'b', data: [{ x: "1일", y: "0명" }] },
-        selectedStatusCount.sleepoverCount ? { id: 'sleepoverCount', color: "#FEC53D", data: generateData(statusCountData.sleepoverCount) } : { id: 'c', data: [{ x: "1일", y: "0명" }] },
-        selectedStatusCount.emergencyCount ? { id: 'emergencyCount', color: "#FF3D00", data: generateData(statusCountData.emergencyCount) } : { id: 'd', data: [{ x: "1일", y: "0명" }] }
+        selectedStatusCount.inShelterCount ? { id: 'inShelterCount', color: "#19C23D", data: generateData(statusCountData.inShelterCount) } : { id: 'a', data: defaultData },
+        selectedStatusCount.outingCount ? { id: 'outingCount', color: "#4D73FF", data: generateData(statusCountData.outingCount) } : { id: 'b', data: defaultData },
+        selectedStatusCount.sleepoverCount ? { id: 'sleepoverCount', color: "#FEC53D", data: generateData(statusCountData.sleepoverCount) } : { id: 'c', data: defaultData },
+        selectedStatusCount.emergencyCount ? { id: 'emergencyCount', color: "#FF3D00", data: generateData(statusCountData.emergencyCount) } : { id: 'd', data: defaultData }
     ]
     return (
         <div className='w-full h-full bg-white mt-4 rounded-md'>
@@ -42,8 +43,8 @@ const UserStatusChart = ({ selectedStatusCount, statusCountData }: { selectedSta
                         xScale={{ type: 'point' }}
                         yScale={{
                             type: 'linear',
-                            min: 0,  // y축 최소값을 0으로 설정
-                            max: 100,  // 최대값은 자동으로 계산되도록 설정
+                            min: 0,
+                            max: 100,
                             stacked: false,
                             reverse: false,
                         }}
@@ -52,7 +53,7 @@ const UserStatusChart = ({ selectedStatusCount, statusCountData }: { selectedSta
                             tickSize: 5,
                             tickPadding: 5,
                             tickRotation: 0,
-                            tickValues: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200]
+                            tickValues: axisY
                         }}
                         axisBottom={{
                             tickSize: 5,
@@ -65,9 +66,9 @@ const UserStatusChart = ({ selectedStatusCount, statusCountData }: { selectedSta
                         axisRight={null}
                         useMesh
                         gridXValues={[]}  // 세로 선 없애기
-                        gridYValues={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200]}  // 10명 단위로 그리드 선을 설정
+                        gridYValues={axisY}  // 10명 단위로 그리드 선을 설정
                         tooltip={({ point }: { point: any }) => (
-                            <div className=''>  
+                            <div className=''>
                                 {point.data.yFormatted}명
                             </div>
                         )}
