@@ -15,6 +15,7 @@ import type {
   SecondAuthType,
   ShelterInfoType,
   SleepoversResponseType,
+  StatusCountType,
 } from "./type";
 import { userDataFormType } from "@/components/Layout/AddUserForm";
 
@@ -68,19 +69,19 @@ export function homelessPeopleList(
   return GET({ url: ROUTES.HOMELESS_PEOPLE, params: opt });
 }
 
-export function inShelterMonthlyCount() {
+export function inShelterMonthlyCount(): Promise<StatusCountType> {
   return GET({url: ROUTES.INSHELTER_MONTHLY_COUNT});
 }
 
-export function outingMonthlyCount() {
+export function outingMonthlyCount(): Promise<StatusCountType> {
   return GET({url: ROUTES.OUTING_MONTHLY_COUNT});
 }
 
-export function sleepoverCount() {
+export function sleepoverCount(): Promise<StatusCountType> {
   return GET({url: ROUTES.SLEEPOVER_MONTHLY_COUNT});
 }
 
-export function emergencyCount() {
+export function emergencyCount(): Promise<StatusCountType> {
   return GET({url: ROUTES.EMERGENCY_MONTHLY_COUNT});
 }
 

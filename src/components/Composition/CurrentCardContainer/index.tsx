@@ -3,27 +3,35 @@
 // Compo
 import CurrentCard from "./CurrentCard";
 // Utils
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { get } from "lodash";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { emergencyCount, homelessPeopleCount, inShelterMonthlyCount, outingMonthlyCount, sleepoverCount } from "@/api/v1/shelter-admin";
 import UserStatusChart from "@/components/Chart/UserStatusChart";
+import { StatusCountType } from "@/api/v1/shelter-admin/type";
 // Types
 
 export type statusCountType = "inShelterCount" | "outingCount" | "sleepoverCount" | "emergencyCount"
 
-export interface slectedStatusType {
+export interface SelectedStatusType {
   inShelterCount: boolean
   outingCount: boolean
   sleepoverCount: boolean
   emergencyCount: boolean
 }
 
-export interface statusCountDataType {
-  inShelterCount: number[]
-  outingCount: number[]
-  sleepoverCount: number[]
-  emergencyCount: number[]
+export interface StatusCountDataType {
+  inShelterCount: StatusCountType | undefined
+  outingCount: StatusCountType | undefined
+  sleepoverCount: StatusCountType | undefined
+  emergencyCount: StatusCountType | undefined
+}
+
+export interface CardProps {
+  count: number;
+  description: string;
+  type: statusCountType;
+  isSelected: boolean;
 }
 
 const CurrentCardContainer = () => {
@@ -87,7 +95,7 @@ const CurrentCardContainer = () => {
     emergencyCount: emergencyCountResult.data
   }
 
-  const [selectedStatusCount, setSelectedStatusCount] = useState<slectedStatusType>(
+  const [selectedStatusCount, setSelectedStatusCount] = useState<SelectedStatusType>(
     {
       inShelterCount: false,
       outingCount: false,
@@ -100,39 +108,57 @@ const CurrentCardContainer = () => {
     const newObj = { ...selectedStatusCount };
     newObj[seletedStatus] = !newObj[seletedStatus];
     setSelectedStatusCount(newObj);
-  }
+  };
+
+  const handleClick = useCallback((type: statusCountType) => () => {
+    onStatusCountClick(type);
+  }, [onStatusCountClick]);
+
+  const cardData: CardProps[] = useMemo(() => [
+    {
+      type: "inShelterCount",
+      count: counts.inShelterCount,
+      description: "센터 총 인원수",
+      isSelected: selectedStatusCount.inShelterCount,
+    },
+    {
+      type: "outingCount",
+      count: counts.outingCount,
+      description: "외출 횟수",
+      isSelected: selectedStatusCount.outingCount,
+    },
+    {
+      type: "sleepoverCount",
+      count: counts.sleepoverCount,
+      description: "외박 신청 횟수",
+      isSelected: selectedStatusCount.sleepoverCount,
+    },
+    {
+      type: "emergencyCount",
+      count: counts.emergencyCount,
+      description: "오늘 긴급상황",
+      isSelected: selectedStatusCount.emergencyCount,
+    },
+  ], [counts, selectedStatusCount]);
+
 
   return (
     <div className="flex flex-col">
       <div className="flex flex-row justify-around gap-5">
-        <CurrentCard
-          type="inShelterCount"
-          count={counts.inShelterCount}
-          description="센터 총 인원수"
-          selected={selectedStatusCount.inShelterCount}
-          onClick={() => onStatusCountClick("inShelterCount")}
-        />
-        <CurrentCard
-          type="outingCount"
-          count={counts.outingCount}
-          description="외출 횟수"
-          selected={selectedStatusCount.outingCount}
-          onClick={() => onStatusCountClick("outingCount")}
-        />
-        <CurrentCard
-          type="sleepoverCount"
-          count={counts.emergencyCount}
-          description="외박 신청 횟수"
-          selected={selectedStatusCount.sleepoverCount}
-          onClick={() => onStatusCountClick("sleepoverCount")}
-        />
-        <CurrentCard
-          type="emergencyCount"
-          count={counts.emergencyCount}
-          description="오늘 긴급상황"
-          selected={selectedStatusCount.emergencyCount}
-          onClick={() => onStatusCountClick("emergencyCount")}
-        />
+        {
+          cardData.map((card, index) => {
+            return (
+              <CurrentCard
+                key={index}
+                type={card.type}
+                count={card.count}
+                description={card.description}
+                isSelected={card.isSelected}
+                onClick={handleClick(card.type)}
+              />
+            )
+          })
+        }
       </div>
       <UserStatusChart selectedStatusCount={selectedStatusCount} statusCountData={statusCountData} />
     </div>
