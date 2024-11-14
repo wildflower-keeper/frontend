@@ -22,7 +22,7 @@ export interface CurrentUserInfo {
   emergencyCount: emergencyCountType;
 }
 
-export type LocationStatusType = "OUT_SHELTER" | "IN_SHELTER" | "UNKNOWN" | "SLEEPOVER" | null;
+export type LocationStatusType = "OUT_SHELTER" | "IN_SHELTER" | "UNCONFIRMED" | "OVERNIGHT_STAY" | null;
 
 export interface UserItemType {
   id: number;
@@ -128,9 +128,17 @@ export interface LoginErrorType {
 }
 export type LoginResponseType = LoginSuccessType | LoginErrorType;
 
+export type StatusType = "ALL" | "IN_SHELTER" | "OUT_SHELTER" | "OVERNIGHT_STAY" | "UNCONFIRMED" | null ;
+
+export interface StatusFilterType {
+    name: "전체" | "외출" | "외박" | "재실" | "미확인",
+    type: StatusType,
+    isSelected: boolean
+}
+
 export type FilterValueType = string;
 
-export type FilterType = "NONE" | "NAME";
+export type FilterType = "NONE" | "NAME" | 'InOutStatus';
 
 export interface FilterValuesType {
   filterType: FilterType;

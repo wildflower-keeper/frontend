@@ -3,7 +3,7 @@
 import PagenationButtonContainer from "@/components/Composition/PagenationButtonContainer";
 import SearchBar from "@/components/Composition/SearchBar";
 import UserBoard from "@/components/List/UserBoard";
-import UserListFilter from "@/components/Composition/UserListFilter";
+import StatusFilter from "@/components/Composition/UserListFilter";
 // Utils
 import React, { useMemo, useState } from "react";
 import { get } from "lodash";
@@ -46,9 +46,9 @@ const UserBoardContainer = () => {
       <UserManagementProvider>
         <div className="custom-page-name">이용자 관리</div>
         <div className="flex gap-4 justify-between items-center mb-2">
-          <UserListFilter 
-          filterHandler={(filters, page) => setParam((prev) => ({
-            ...prev, 
+          <StatusFilter 
+          filterHandler={(status, filterType) => setParam((prev) => ({
+            ...prev, status, filterType
           }))} 
           />
           <div className="flex items-center relative">
