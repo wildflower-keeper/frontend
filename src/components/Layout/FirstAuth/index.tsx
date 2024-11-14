@@ -13,14 +13,12 @@ import { firstAuth, login } from "@/api/v1/shelter-admin";
 import type { LoginBodyType } from "@/api/v1/shelter-admin/type";
 import Loading from "@/components/Composition/Loading";
 import { useAuthContext } from "../AuthProvider";
-import { useRouter } from "next/navigation";
 import { setCookie } from "@/utils/cookie";
 
 const FirstAuth = () => {
-  const router = useRouter();
   const { mutate, isPending } = useMutation({
-    mutationKey: login.mutationKey(),
-    mutationFn: (loginData: LoginBodyType) => login(loginData),
+    mutationKey: firstAuth.mutationKey(),
+    mutationFn: (loginData: LoginBodyType) => firstAuth(loginData),
   });
 
   const [loginInfo, setLoginInfo] = useState<LoginBodyType>({
@@ -34,17 +32,15 @@ const FirstAuth = () => {
   const [error, setError] = useState("");
 
   const handleLoginSubmit = () => {
-    console.log(loginInfo)
     setError("");
     mutate(loginInfo, {
       onSuccess: (res) => {
-        // setCurAdminId(loginInfo.id);
-        // setIsSuccessFirstAuth(true);
+        setCurAdminId(loginInfo.id);
+        setIsSuccessFirstAuth(true);
         setCookie("authToken", res.authToken, {
           path: "/",
           expires: new Date(res.expiredAt),
       });
-        router.push('/dashboard');
       },
       onError: (error) => {
         setError(error.message);
