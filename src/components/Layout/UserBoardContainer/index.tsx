@@ -19,7 +19,7 @@ import AddUserModal from "@/components/Composition/AddUserModal";
 
 const UserBoardContainer = () => {
   const [param, setParam] = useState<HomelessPeopleListParam>({
-    filterType: "NONE",
+    filterType: "NAME",
     filterValue: "",
     sleepoverTargetDate: new Date().toISOString(),
     pageNumber: 1,
@@ -39,67 +39,18 @@ const UserBoardContainer = () => {
     [homelessPeopleListData],
   );
 
-  const testList: UserItemType[] = [
-    {
-      id: 1,
-      lastLocationStatus: "SLEEPOVER",
-      name: "임동현",
-      room: "303호",
-      phoneNumber: "01012345678",
-      targetDateSleepover: "24.05.06~24.05.07",
-      sleepoverReason: "친구",
-      secondPhoneNumber: "없음",
-    },
-    {
-      id: 2,
-      lastLocationStatus: "IN_SHELTER",
-      name: "임동현",
-      room: "303호",
-      phoneNumber: "01012345678",
-      targetDateSleepover: "24.05.06~24.05.07",
-      sleepoverReason: "친구",
-      secondPhoneNumber: "없음",
-    },
-    {
-      id: 3,
-      lastLocationStatus: "OUT_SHELTER",
-      name: "임동현",
-      room: "303호",
-      phoneNumber: "01012345678",
-      targetDateSleepover: "24.05.06~24.05.07",
-      sleepoverReason: "친구",
-      secondPhoneNumber: "없음",
-    },
-    {
-      id: 4,
-      lastLocationStatus: "UNKNOWN",
-      name: "임동현",
-      room: "303호",
-      phoneNumber: "01012345678",
-      targetDateSleepover: "24.05.06~24.05.07",
-      sleepoverReason: "친구",
-      secondPhoneNumber: "없음",
-    },
-    {
-      id: 5,
-      lastLocationStatus: "OUT_SHELTER",
-      name: "임동현",
-      room: "303호",
-      phoneNumber: "01012345678",
-      targetDateSleepover: "24.05.06~24.05.07",
-      sleepoverReason: "친구",
-      secondPhoneNumber: "없음",
-    }
-  ]
-
-  const [selecedStatusIndex, setSelectedStatusIndex] = useState(0);
+  console.log(userItemList)
 
   return (
     <div className="w-full h-full">
       <UserManagementProvider>
         <div className="custom-page-name">이용자 관리</div>
         <div className="flex gap-4 justify-between items-center mb-2">
-          <UserListFilter selecedStatusIndex={selecedStatusIndex} setSelectedStatusIndex={setSelectedStatusIndex} />
+          <UserListFilter 
+          filterHandler={(filters, page) => setParam((prev) => ({
+            ...prev, 
+          }))} 
+          />
           <div className="flex items-center relative">
             <UserManagementButtonContainer />
             <SearchBar
@@ -110,7 +61,7 @@ const UserBoardContainer = () => {
             <AddUserModal />
           </div>
         </div>
-        <UserBoard userItemList={testList} />
+        <UserBoard userItemList={userItemList} />
         <div className="flex flex-row justify-center">
           <PagenationButtonContainer
             pageNumberHandler={(v) =>

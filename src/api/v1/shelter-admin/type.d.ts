@@ -29,10 +29,14 @@ export interface UserItemType {
   lastLocationStatus: LocationStatusType;
   name: string;
   room: string;
+  birthDate?: string;
   phoneNumber: string;
-  targetDateSleepover: string;
-  sleepoverReason: string;
-  secondPhoneNumber: string;
+  admissionDate?: string;
+  targetDateSleepover?: boolean;
+  sleepoverStartDate?: string;
+  sleepoverEndDate?: string;
+  reason?: string;
+  emergencyContact?: string;
 }
 
 export interface UserBoardItemType extends UserItemType {
@@ -95,6 +99,8 @@ export type SleepoverSituation = "SCHEDULED" | "ONGOING" | "CLOSED";
 export interface AddSituationSleepoverType extends SleepoverItemType {
   sleepoverSituation: SleepoverSituation;
 }
+
+export type StatusCountType = number[]
 
 export interface PinNumberResponseType {
   pin: string;

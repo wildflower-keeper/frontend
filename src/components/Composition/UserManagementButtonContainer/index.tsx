@@ -19,14 +19,8 @@ const UserManagementButtonContainer = () => {
         setIsDeleteSuccess
     } = userContext;
 
-    const [isOpenFinalCheck, setIsOpenFinalCheck] = useState(false);
-    const onDeleteClick = useCallback(() => {
-        setIsOpenFinalCheck(true);
-    }, []);
-
     const onCancelDeleteClick = useCallback(() => {
         setIsOpenDeleteUser(false);
-        setIsOpenFinalCheck(false);
         setCheckedUser([]);
     }, []);
 
@@ -48,7 +42,7 @@ const UserManagementButtonContainer = () => {
         <div className="flex flex-row gap-2 px-3 py-1 relative">
             <OpenAddButton />
             <OpenDeleteButton />
-            {isChecked && <DeleteButton onCancelDeleteClick={onCancelDeleteClick} onDeleteClick={onDeleteClick} />}
+            {isChecked && <DeleteButton onCancelDeleteClick={onCancelDeleteClick} />}
         </div>
     )
 }

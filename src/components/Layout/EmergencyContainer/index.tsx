@@ -64,7 +64,7 @@ export const EmergencyListItem = ({
   );
 };
 
-interface getEmergencyListParam extends GetSleepoverListParam {}
+interface getEmergencyListParam extends GetSleepoverListParam { }
 
 const EmergencyContainer = () => {
   const [param, setParam] = useState<getEmergencyListParam>({
@@ -95,9 +95,7 @@ const EmergencyContainer = () => {
 
   return (
     <div className="flex flex-col gap-9">
-      <div>
-        <p className="custom-pageName-style">{emergencyPageName}</p>
-      </div>
+      <p className="custom-pageName-style">{emergencyPageName}</p>
       <div className="flex w-full justify-between">
         <div>
           <EmergencyListHeader />

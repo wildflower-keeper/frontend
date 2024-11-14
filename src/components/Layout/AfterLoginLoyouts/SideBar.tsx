@@ -15,7 +15,7 @@ const AfterLoginSideBar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col h-min-full bg-neutral-100 py-5 w-64 border-r border-solid border-gray-200 items-center">
+    <div className="flex flex-col h-min-full bg-white py-5 w-64 border-r border-solid border-gray-200 items-center">
       <div className=" w-40 h-10 mx-auto">
         <Image
           src="/assets/logos/wildflower_logo_with_name.png"

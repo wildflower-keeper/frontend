@@ -13,13 +13,13 @@ import { firstAuth, login } from "@/api/v1/shelter-admin";
 import type { LoginBodyType } from "@/api/v1/shelter-admin/type";
 import Loading from "@/components/Composition/Loading";
 import { useAuthContext } from "../AuthProvider";
-import { setCookie } from "@/utils/cookie";
 import { useRouter } from "next/navigation";
+import { setCookie } from "@/utils/cookie";
 
 const FirstAuth = () => {
   const router = useRouter();
   const { mutate, isPending } = useMutation({
-    mutationKey: firstAuth.mutationKey(),
+    mutationKey: login.mutationKey(),
     mutationFn: (loginData: LoginBodyType) => login(loginData),
   });
 
@@ -43,7 +43,7 @@ const FirstAuth = () => {
           path: "/",
           expires: new Date(res.expiredAt),
       });
-      router.push("dashboard"); 
+        router.push('/dashboard');
       },
       onError: (error) => {
         setError(error.message);

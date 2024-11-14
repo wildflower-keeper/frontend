@@ -8,9 +8,10 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 
 interface StatusToggleListProps {
     id: number, 
+    onStatusClick: () => void
 }
 
-const StatusToggleList = ({id}: StatusToggleListProps) => {
+const StatusToggleList = ({id, onStatusClick}: StatusToggleListProps) => {
     const [selectedStauts, setSelectedStatus] = useState(-1);
     const statusList: LocationStatusType[] = ["IN_SHELTER", "OUT_SHELTER"];
 
@@ -27,6 +28,7 @@ const StatusToggleList = ({id}: StatusToggleListProps) => {
         }, {
             onSuccess: async (res) => {
                 queryClient.invalidateQueries({ queryKey: [...homelessPeopleList.queryKey()] });
+                onStatusClick();
             },
             onError: (error) => {
                 console.error(error);
@@ -36,7 +38,7 @@ const StatusToggleList = ({id}: StatusToggleListProps) => {
         })
     }
     return (
-        <div className="absolute right-[-20px] top-[-15px] flex items-center gap-2 z-10 p-2 bg-white rounded-[20px] border border-solid border-[#e7e7e7]">
+        <div className="absolute right-[-20px] top-[-9px] flex items-center gap-2 z-10 p-2 bg-white rounded-[20px] border border-solid border-[#e7e7e7]">
             {
                 statusList.map((status, index) => (
                     isPending && selectedStauts === index ?

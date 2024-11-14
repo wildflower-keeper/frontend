@@ -10,7 +10,7 @@ interface Props {
 
 const LoginedLayout: React.FC<Props> = ({ children }: Props) => {
   return (
-    <div className="flex w-full min-h-screen m-auto bg-[#fcfcfc]">
+    <div className="flex w-full min-h-screen m-auto bg-white">
       <Sidebar />
       <div className="grow flex-col h-full">
         <div className="grow h-full px-16 py-5 flex flex-col gap-8">
