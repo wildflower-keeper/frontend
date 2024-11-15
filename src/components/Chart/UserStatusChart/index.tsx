@@ -1,7 +1,7 @@
 import { StatusCountDataType, SelectedStatusType, statusCountType } from '@/components/Composition/CurrentCardContainer';
 import { ResponsiveLine } from '@nivo/line'
 import { useMemo } from 'react';
-import { chartDataType, generateChartData, generateStaticChartOption } from './generateData';
+import { generateChartData, generateStaticChartOption } from './generateData';
 
 interface Props {
   selectedStatusCount: SelectedStatusType,
@@ -15,6 +15,8 @@ const COLOR_MAP = new Map([
   ["emergencyCount", "#FF3D00"],
 ]);
 
+const staticChartOption = generateStaticChartOption();
+
 const UserStatusChart = ({ selectedStatusCount, statusCountData }: Props) => {
   const visibleChartTypes = useMemo<statusCountType[]>(() => {
     const newTypesArray: statusCountType[] = [];
@@ -25,27 +27,18 @@ const UserStatusChart = ({ selectedStatusCount, statusCountData }: Props) => {
   }, [selectedStatusCount]);
 
   const chartData = useMemo(() => {
-    const data: chartDataType[] = [];
-
-    visibleChartTypes.forEach((type) => {
-      data.push(generateChartData(type, COLOR_MAP.get(type), statusCountData[type]))
-    })
-
-    return data;
-  }, [selectedStatusCount, statusCountData]);
+    if(!visibleChartTypes.length) return null;
+    
+    return visibleChartTypes.map((type) => generateChartData({id: type, color: COLOR_MAP.get(type), countArray: statusCountData[type]}))
+  }, [visibleChartTypes]);
 
   const chartOptions = useMemo(() => {
-    const staticChartOption = generateStaticChartOption();
+    if(!chartData) return null;
     return {
       ...staticChartOption,
       data: chartData,
     };
   }, [chartData]);
-
-  const isSelected = useMemo(() => {
-    return Object.values(selectedStatusCount).find(v => Boolean(v)
-    )
-  }, [selectedStatusCount]);
 
   return (
     <div className='w-full h-full bg-white mt-4 rounded-md'>
@@ -55,7 +48,7 @@ const UserStatusChart = ({ selectedStatusCount, statusCountData }: Props) => {
       </div>
       <div className='h-[250px]'>
         {
-          isSelected &&
+          chartOptions &&
           <ResponsiveLine
             {...chartOptions}
           />}
