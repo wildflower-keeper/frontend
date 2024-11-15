@@ -8,7 +8,7 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 // Utils
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { firstAuth, login } from "@/api/v1/shelter-admin";
+import { firstAuth } from "@/api/v1/shelter-admin";
 //Types
 import type { LoginBodyType } from "@/api/v1/shelter-admin/type";
 import Loading from "@/components/Composition/Loading";
