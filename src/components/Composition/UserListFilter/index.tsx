@@ -49,9 +49,9 @@ const StatusFilter = ({ filterHandler }: Props) => {
     }
 
     useEffect(() => {
-        statusFilters.forEach((filter, index) => {
+        statusFilters.map((filter, index) => {
             if(filter.isSelected) {
-                if(index === 0) filterHandler(filter.type, 'NONE');
+                if(index === 0) filterHandler(filter.type, 'NONE'); //전체 필터일 때는 필터 적용 X
                 else filterHandler(filter.type, 'InOutStatus');
             }
         })
