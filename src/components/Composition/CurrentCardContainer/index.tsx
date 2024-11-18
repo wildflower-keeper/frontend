@@ -20,11 +20,8 @@ export interface SelectedStatusType {
   emergencyCount: boolean
 }
 
-export interface StatusCountDataType {
-  inShelterCount: StatusCountType | undefined
-  outingCount: StatusCountType | undefined
-  sleepoverCount: StatusCountType | undefined
-  emergencyCount: StatusCountType | undefined
+export type StatusCountDataType = {
+  [key in statusCountType]: StatusCountType | undefined;
 }
 
 export interface CardProps {

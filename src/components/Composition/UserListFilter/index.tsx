@@ -39,8 +39,8 @@ const StatusFilter = ({ filterHandler }: Props) => {
     const onStatusFilterClick = (index: number) => {
         setStatusFilters((prev) => {
             const newArray = prev.map((filter) => ({ ...filter }));
-            if(newArray[index].isSelected) return newArray;
-            newArray.forEach((filter) => {
+            if(newArray[index].isSelected) return newArray; // 이미 선택된 status일 때
+            newArray.map((filter) => {
                 if(filter.isSelected) filter.isSelected = false;
             });
             newArray[index].isSelected = true;

@@ -39,8 +39,6 @@ const UserBoardContainer = () => {
     [homelessPeopleListData],
   );
 
-  console.log(userItemList)
-
   return (
     <div className="w-full h-full">
       <UserManagementProvider>
