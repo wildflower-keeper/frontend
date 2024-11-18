@@ -1,7 +1,11 @@
-import ManagementContainer from "@/components/Layout/ManagementContainer";
+import UserBoardContainer from "@/components/Layout/UserBoardContainer";
 
 const Page = () => {
-  return <ManagementContainer />;
+  return (
+    <div className="flex justify-between">
+      <UserBoardContainer />
+    </div>
+  )
 };
 
 export default Page;
