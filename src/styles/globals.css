@@ -44,3 +44,7 @@ body {
 .mainBackGround {
   @apply bg-gradient-to-b from-white to-[#ECF9EF];
 }
+
+.custom-page-name {
+  @apply font-bold text-3xl mb-2;
+}

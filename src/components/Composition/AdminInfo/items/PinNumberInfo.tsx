@@ -18,10 +18,7 @@ const PinNumberInfo = () => {
   }, [data]);
 
   return (
-    <div className="flex gap-1">
-      <span className="text-fontWeak">오늘의 핀번호</span>
-      <span className="font-semibold">{pinNumber}</span>
-    </div>
+      <div className="text-xl font-bold">오늘의 핀번호 {pinNumber}</div>
   );
 };
 

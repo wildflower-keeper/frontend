@@ -93,6 +93,8 @@ export interface AddSituationSleepoverType extends SleepoverItemType {
   sleepoverSituation: SleepoverSituation;
 }
 
+export type StatusCountType = number[]
+
 export interface PinNumberResponseType {
   pin: string;
   expiredAt: string;
