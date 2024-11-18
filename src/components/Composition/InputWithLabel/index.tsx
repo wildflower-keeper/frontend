@@ -1,47 +1,31 @@
-import React, { HTMLInputTypeAttribute } from "react";
-import Input from "../../base/Input";
+// Compo
+
+// Utils
+import React, { forwardRef } from "react";
+
+//Types
 
 interface Props {
-  id: string;
-  placeholder: string;
-  type: HTMLInputTypeAttribute;
-  value?: string;
-  // eslint-disable-next-line no-unused-vars
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  isRequired?: boolean;
-  labelName: string;
+  id: string,
+  title: string,
+  placeholder?: string,
+  type: string,
 }
-const InputWithLabel = ({
-  id,
-  placeholder,
-  type,
-  value,
-  labelName,
-  onChange,
-  isRequired = false,
-}: Props) => {
+
+const InputWithLabel = forwardRef<HTMLInputElement, Props>(({ id, title, placeholder, type, ...rest }, ref) => {
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor={id} className={`smallFont ${isRequired && "relative"}`}>
-        {isRequired && (
-          <p className="absolute -top-3 -left-3 text-2xl text-red-400 h-fit">
-            •
-          </p>
-        )}
-        <p>{labelName}</p>
-      </label>
-      <div className="bg-white px-1 rounded-lg shadow-sm shadow-primary/30">
-        <Input
-          id={id}
-          className="py-[6px] px-1 placeholder:text-fontWeak w-full placeholder:text-base"
-          placeholder={placeholder}
-          type={type}
-          value={value}
-          onChange={onChange}
-        />
-      </div>
-    </div>
+    <div className="flex flex-col justify-end items-start">
+            <label htmlFor={id} className="text-center text-base">{title}</label>
+            <input
+                id={id}
+                type={type}
+                placeholder={placeholder}
+                className="appearance-none text-[#3f3f3f] text-base font-normal w-[360px] outline-none rounded-md border border-solid border-[#19c23d] px-3 py-2"
+                ref={ref}
+                {...rest}
+            />
+        </div>
   );
-};
+});
 
 export default InputWithLabel;

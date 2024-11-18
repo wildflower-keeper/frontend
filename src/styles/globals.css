@@ -38,7 +38,7 @@ body {
 }
 
 .authHeader {
-  @apply h-32 flex justify-center items-center headerFont text-center;
+  @apply h-16 flex justify-center items-center headerFont text-center;
 }
 
 .mainBackGround {

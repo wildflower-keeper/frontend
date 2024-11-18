@@ -101,12 +101,12 @@ export interface PinNumberResponseType {
 }
 
 export interface LoginBodyType {
-  id: number;
+  email: string;
   pw: string;
 }
 
 export interface SecondAuthType {
-  id: number;
+  email: string;
   code: string;
 }
 

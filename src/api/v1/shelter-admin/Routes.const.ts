@@ -1,9 +1,11 @@
-import { generatePathByBase, genreateBasePath } from "../../utils.const";
+import { generatePathByBase, genreateBasePath, genreateBasePath_v2 } from "../../utils.const";
 
 export const BASE_PATH = genreateBasePath("shelter-admin");
+export const V2_BASE_PATH = genreateBasePath_v2("shelter-admin");
 
 export const SHELTER = generatePathByBase(BASE_PATH, "shelter");
 export const PIN = generatePathByBase(BASE_PATH, "pin");
+export const CREATE_ADMIN_ACCOUNT = generatePathByBase(V2_BASE_PATH, "shelter-account");
 export const LOGIN = generatePathByBase(BASE_PATH, "login");
 export const FIRST_AUTH = generatePathByBase(BASE_PATH, "verification-code");
 export const SECOND_AUTH = generatePathByBase(BASE_PATH, "auth-token");

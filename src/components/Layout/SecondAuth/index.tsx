@@ -9,26 +9,25 @@ import { secondAuth } from "@/api/v1/shelter-admin";
 import { SecondAuthType } from "@/api/v1/shelter-admin/type";
 import { setCookie } from "@/utils/cookie";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import Loading from "@/components/Composition/Loading";
 
 const SecondAuth = () => {
-    const { mutate } = useMutation({
+    const {register, handleSubmit} = useForm<{code: string}>();
+    const { mutate, isPending } = useMutation({
         mutationKey: secondAuth.mutationKey(),
         mutationFn: (authData: SecondAuthType) => secondAuth(authData),
       });
 
     const authContext = useAuthContext();
-    const {setIsSuccessFirstAuth, curAdminId } = authContext;
-
-    const [authData, setAuthData] = useState<SecondAuthType>({
-        id: 0,
-        code: ""
-    });
+    const { setIsSuccessFirstAuth, curAdminEmail } = authContext;
 
     const [errorCount, setErrorCount] = useState(0);
+    const [error, setError] = useState("");
     const router = useRouter();
-    
-    const handleLoginSubmit = () => {
-        mutate(authData, {
+
+    const onSubmit = ({code}: {code: string}) => {
+        mutate({code, email: curAdminEmail}, {
             onSuccess: (res) => {
                 setCookie("authToken", res.authToken, {
                     path: "/",
@@ -37,12 +36,12 @@ const SecondAuth = () => {
                 router.push("/dashboard");
             },
             onError: (error) => {
-                if(errorCount === 2) setIsSuccessFirstAuth(false);
-                console.error(error);
+                if (errorCount === 2) setIsSuccessFirstAuth(false);
                 setErrorCount(prev => prev + 1);
-          }
+                setError(error.message);
+            }
         });
-      };
+    };
 
     const [time, setTime] = useState(180);
     useEffect(() => {
@@ -61,33 +60,36 @@ const SecondAuth = () => {
         <div className="w-80">
             <form
                 className="flex flex-col gap-14"
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={handleSubmit(onSubmit)}
             >
                 <div className="flex flex-col gap-10 items-center">
                     <div className="flex flex-col w-full">
                         <InputWithLabel
-                            onChange={(e) =>
-                                setAuthData({ id: curAdminId, code: e.target.value })
-                            }
-                            value={authData.code}
-                            id="authCode"
+                        {...register("code", {
+                            required: true
+                        })}
+                            title="2차 인증코드"
+                            id="code"
                             placeholder="이메일로 전송된 인증코드를 입력해주세요."
-                            labelName="2차 인증코드"
                             type="password"
                         />
-                        <div className="flex justify-end py-3">
-                            <div className="text-red-500 text-sm">시간제한: {minutes}분 {seconds}초</div>
+                        <div className={`flex ${error ? "justify-between" : "justify-end"} py-3 text-sm`}>
+                            <span className="text-orange-500">{error}</span>
+                            <span className="text-red-500">시간제한: {minutes}분 {seconds}초</span>
                         </div>
                     </div>
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    <Button
+                    {
+                        isPending ?
+                        <Loading loadingStyle="size-8 bg-green-500" />
+                        :
+                        <Button
                         type="submit"
                         className="primaryButtonDefault"
-                        onClick={handleLoginSubmit}
                     >
                         로그인
-                    </Button>
+                    </Button>}
                 </div>
             </form>
         </div>

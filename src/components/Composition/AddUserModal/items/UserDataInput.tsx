@@ -1,6 +1,6 @@
-import { InputHTMLAttributes, forwardRef } from "react";
+import { forwardRef } from "react";
 
-interface userDataProps {
+interface Props {
     id: string,
     title: string,
     placeholder: string,
@@ -9,7 +9,7 @@ interface userDataProps {
     error: boolean,
 }
 
-const UserDataInput = forwardRef<HTMLInputElement, userDataProps>(({ id, title, placeholder, maxLength, type, error, ...rest }, ref) => {
+const UserDataInput = forwardRef<HTMLInputElement, Props>(({ id, title, placeholder, maxLength, type, error, ...rest }, ref) => {
     return (
         <div className="flex justify-end items-center gap-5">
             <label htmlFor={id} className={`text-center text-lg font-bold ${error ? 'text-red-500' : null}`}>{title}</label>
