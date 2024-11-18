@@ -5,29 +5,29 @@ import { createContext, ReactNode, useContext, useState } from "react";
 interface authManagementType {
     isSuccessFirstAuth: boolean,
     setIsSuccessFirstAuth: React.Dispatch<React.SetStateAction<boolean>>;
-    curAdminId: number
-    setCurAdminId: React.Dispatch<React.SetStateAction<number>>;
+    curAdminEmail: string
+    setCurAdminEmail: React.Dispatch<React.SetStateAction<string>>;
 };
 
     const authContext = createContext<authManagementType>({
         isSuccessFirstAuth: false,
         setIsSuccessFirstAuth: () => {},
-        curAdminId: 0,
-        setCurAdminId: () => {}
+        curAdminEmail: "",
+        setCurAdminEmail: () => {}
     });
 
 export const useAuthContext = () => useContext(authContext);
 
 const AuthProvider = ({children}: {children: ReactNode}) => {
     const [isSuccessFirstAuth, setIsSuccessFirstAuth]= useState(false);
-    const [curAdminId, setCurAdminId] = useState(0);
+    const [curAdminEmail, setCurAdminEmail] = useState("");
     return (
         <authContext.Provider
             value={{
                 isSuccessFirstAuth,
                 setIsSuccessFirstAuth,
-                curAdminId,
-                setCurAdminId
+                curAdminEmail,
+                setCurAdminEmail
             }}
         >
             {children}

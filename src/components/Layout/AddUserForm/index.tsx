@@ -12,7 +12,7 @@ export interface userDataFormType {
 }
 
 const AddUserForm = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<userDataFormType>()
+    const { register, handleSubmit, formState: { errors } } = useForm<userDataFormType>();
     const queryClient = useQueryClient();
     const { mutate } = useMutation({
         mutationKey: addUser.mutationKey(),

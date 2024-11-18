@@ -1,11 +1,13 @@
 import CurrentCardContainer from "@/components/Composition/CurrentCardContainer";
 import React from "react";
+import { dashboardPageName } from "../AfterLoginLoyouts/index.const";
 
 const UserCurrentSituation = () => {
   return (
-    <div>
-      <div className=" mb-2">
-        <p className="font-bold text-xl">이용자 현황</p>
+    <div className="w-full">
+      <p className="custom-page-name">{dashboardPageName}</p>
+      <div className="relative w-full">
+        <p className="absolute right-0 bottom-4 text-neutral-400 text-md">(이전 30일)</p>
       </div>
       <CurrentCardContainer />
     </div>

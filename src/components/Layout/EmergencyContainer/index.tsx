@@ -12,6 +12,7 @@ import { get, map } from "lodash";
 import { formatDateString } from "@/utils/string/date";
 // Types
 import { GetSleepoverListParam } from "@/api/v1/shelter-admin/type";
+import { emergencyPageName } from "../AfterLoginLoyouts/index.const";
 
 interface EmergencyListItemType {
   name: string;
@@ -63,7 +64,7 @@ export const EmergencyListItem = ({
   );
 };
 
-interface getEmergencyListParam extends GetSleepoverListParam {}
+interface getEmergencyListParam extends GetSleepoverListParam { }
 
 const EmergencyContainer = () => {
   const [param, setParam] = useState<getEmergencyListParam>({
@@ -94,9 +95,7 @@ const EmergencyContainer = () => {
 
   return (
     <div className="flex flex-col gap-9">
-      <div>
-        <p className=" font-semibold text-xl">긴급상황 발생내역</p>
-      </div>
+      <p className="custom-pageName-style">{emergencyPageName}</p>
       <div className="flex w-full justify-between">
         <div>
           <EmergencyListHeader />

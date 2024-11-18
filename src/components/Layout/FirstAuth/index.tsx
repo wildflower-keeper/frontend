@@ -3,74 +3,72 @@
 // Compo
 import Button from "@/components/base/Button";
 import InputWithLabel from "@/components/Composition/InputWithLabel";
-import ShleterSelect from "@/components/Composition/CustomSelectBox";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 // Utils
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { firstAuth, login } from "@/api/v1/shelter-admin";
+import { firstAuth } from "@/api/v1/shelter-admin";
+import Link from "next/link";
 //Types
 import type { LoginBodyType } from "@/api/v1/shelter-admin/type";
 import Loading from "@/components/Composition/Loading";
 import { useAuthContext } from "../AuthProvider";
+import { setCookie } from "@/utils/cookie";
+import { useForm } from "react-hook-form";
+import LoginHelp from "./items/LoginHelp";
 
 const FirstAuth = () => {
+  const { register, handleSubmit, getValues } = useForm<LoginBodyType>();
   const { mutate, isPending } = useMutation({
     mutationKey: firstAuth.mutationKey(),
     mutationFn: (loginData: LoginBodyType) => firstAuth(loginData),
   });
 
-  const [loginInfo, setLoginInfo] = useState<LoginBodyType>({
-    email: "",
-    pw: "",
-  });
-
   const authContext = useAuthContext();
-  const {setIsSuccessFirstAuth, setCurAdminId} = authContext;
+  const { setIsSuccessFirstAuth, setCurAdminEmail } = authContext;
 
   const [error, setError] = useState("");
 
-  const handleLoginSubmit = () => {
-    console.log(loginInfo)
-    // setError("");
-    // mutate(loginInfo, {
-    //   onSuccess: (res) => {
-    //     // setCurAdminId(loginInfo.email);
-    //     setIsSuccessFirstAuth(true);
-    //   },
-    //   onError: (error) => {
-    //     setError(error.message);
-    //   },
-    // });
+  const onSubmit = (loginData: LoginBodyType) => {
+    setError("");
+    mutate(loginData, {
+      onSuccess: (res) => {
+        setCurAdminEmail(getValues().email);
+        setIsSuccessFirstAuth(true);
+        setCookie("authToken", res.authToken, {
+          path: "/",
+          expires: new Date(res.expiredAt),
+        });
+      },
+      onError: (error) => {
+        setError(error.message);
+      },
+    });
   };
   return (
-    <div className="w-80">
+    <div className="w-80 flex items-center">
       <form
         className="flex flex-col gap-14"
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex flex-col gap-10 items-center">
-          <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col items-center">
+          <div className="flex flex-col w-full gap-5">
             <InputWithLabel
-              value={loginInfo.email}
-              onChange={(e) =>
-                setLoginInfo((prev) => ({ ...prev, email: e.target.value }))
-              }
-              id="adminEmail"
-              placeholder="이메일"
-              labelName="이메일"
+              {...register("email", {
+                required: true
+              })}
+              title="이메일"
+              id="email"
+              placeholder="이메일을 입력해주세요."
               type="email"
             />
-          </div>
-          <div className="flex flex-col w-full">
             <InputWithLabel
-              value={loginInfo.pw}
-              onChange={(e) =>
-                setLoginInfo((prev) => ({ ...prev, pw: e.target.value }))
-              }
-              id="centerPassword"
-              placeholder="비밀번호"
-              labelName="비밀번호"
+              {...register("pw", {
+                required: true
+              })}
+              title="비밀번호"
+              id="pw"
+              placeholder="비밀번호를 입력해주세요."
               type="password"
             />
             {error != "" ? <div className="flex justify-end items-center gap-1">
@@ -87,12 +85,12 @@ const FirstAuth = () => {
               <Button
                 type="submit"
                 className="primaryButtonDefault"
-                onClick={handleLoginSubmit}
               >
-                다음
+                로그인
               </Button>
           }
           <div className="text-red-500 underline text-[10.5px]">{error}</div>
+          <LoginHelp />
         </div>
       </form>
     </div>

@@ -38,9 +38,13 @@ body {
 }
 
 .authHeader {
-  @apply h-32 flex justify-center items-center headerFont text-center;
+  @apply h-16 flex justify-center items-center headerFont text-center;
 }
 
 .mainBackGround {
   @apply bg-gradient-to-b from-white to-[#ECF9EF];
+}
+
+.custom-page-name {
+  @apply font-bold text-3xl mb-2;
 }
