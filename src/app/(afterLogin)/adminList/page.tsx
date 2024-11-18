@@ -1,16 +1,14 @@
 // Compo
 import CreateAdminForm from "@/components/Layout/CreateAdminForm";
+import Link from "next/link";
 // Utils
 //Types
 
 const Page = () => {
   return (
-    <div className="flex flex-col items center justify-center">
-      <h1 className="authHeader">
-        관리자 생성
-      </h1>
-      <CreateAdminForm />
-
+    <div>
+      리스트
+      <Link href={"/adminList/createAdmin"}>관리자 생성</Link>
     </div>
   )
 }

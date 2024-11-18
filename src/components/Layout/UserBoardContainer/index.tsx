@@ -35,7 +35,6 @@ const UserBoardContainer = () => {
     () => get(homelessPeopleListData, "items", []),
     [homelessPeopleListData],
   );
-  console.log(userItemList)
   return (
     <div>
       <UserManagementProvider>

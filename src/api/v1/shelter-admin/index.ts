@@ -21,7 +21,10 @@ import { userDataFormType } from "@/components/Layout/AddUserForm";
 import { AdminDataType } from "@/components/Layout/CreateAdminForm";
 
 export function createAdminAccount(adminData: AdminDataType) {
-  return POST({url: ROUTES.CREATE_ADMIN_ACCOUNT, data: adminData });
+  return POST({url: ROUTES.CREATE_ADMIN_ACCOUNT, data: adminData })
+  .catch((error) => {
+    throw new Error("* 관리자 생성에 실패했습니다.");
+  });
 }
 
 export function login(loginData: LoginBodyType): Promise<LoginSuccessType> {

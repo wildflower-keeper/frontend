@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LogoutButton from "@/components/Composition/LogoutButton";
 import { IoSettingsOutline } from "react-icons/io5";
+import { MdPersonOutline } from "react-icons/md";
 // Utils
 import React from "react";
 import { PAGE_ROUTE } from "./index.const";
@@ -42,7 +43,8 @@ const AfterLoginSideBar = () => {
         })}
       </div>
       <div className="flex flex-col items-start gap-4 w-full border-t border-solid border-gray-200 pb-5 pt-10 pl-10 text-sm">
-        <button className="flex gap-2 items-center"><IoSettingsOutline size={22} />설정</button>
+        <Link href="/adminList" className="flex gap-2 items-center"><MdPersonOutline size={22} />관리자 리스트</Link>
+        <Link href="" className="flex gap-2 items-center"><IoSettingsOutline size={22} />설정</Link>
         <LogoutButton />
       </div>
     </div>
