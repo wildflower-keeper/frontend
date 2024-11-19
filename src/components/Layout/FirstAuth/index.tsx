@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { firstAuth } from "@/api/v1/shelter-admin";
 import Link from "next/link";
 //Types
-import type { LoginBodyType } from "@/api/v1/shelter-admin/type";
+import type { LoginForm } from "@/api/v1/shelter-admin/type";
 import Loading from "@/components/Composition/Loading";
 import { useAuthContext } from "../AuthProvider";
 import { setCookie } from "@/utils/cookie";
@@ -18,10 +18,10 @@ import { useForm } from "react-hook-form";
 import LoginHelp from "./items/LoginHelp";
 
 const FirstAuth = () => {
-  const { register, handleSubmit, getValues } = useForm<LoginBodyType>();
+  const { register, handleSubmit, getValues } = useForm<LoginForm>();
   const { mutate, isPending } = useMutation({
     mutationKey: firstAuth.mutationKey(),
-    mutationFn: (loginData: LoginBodyType) => firstAuth(loginData),
+    mutationFn: (loginData: LoginForm) => firstAuth(loginData),
   });
 
   const authContext = useAuthContext();
@@ -29,7 +29,7 @@ const FirstAuth = () => {
 
   const [error, setError] = useState("");
 
-  const onSubmit = (loginData: LoginBodyType) => {
+  const onSubmit = (loginData: LoginForm) => {
     setError("");
     mutate(loginData, {
       onSuccess: (res) => {

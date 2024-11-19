@@ -100,7 +100,7 @@ export interface PinNumberResponseType {
   expiredAt: string;
 }
 
-export interface LoginBodyType {
+export interface LoginForm {
   email: string;
   pw: string;
 }

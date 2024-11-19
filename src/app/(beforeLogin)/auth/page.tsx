@@ -3,7 +3,7 @@
 // Compo
 import { useAuthContext } from "@/components/Layout/AuthProvider";
 import FirstAuth from "@/components/Layout/FirstAuth";
-import SecondAuth from "@/components/Layout/SecondAuth";
+import EmailAuthenticationForm from "@/components/Layout/EmailAuthenticationForm";
 // Utils
 import React from "react";
 
@@ -23,7 +23,7 @@ const Page = () => {
           !isSuccessFirstAuth ?
             <FirstAuth />
             :
-            <SecondAuth />
+            <EmailAuthenticationForm />
         }
       </div>
     </>
