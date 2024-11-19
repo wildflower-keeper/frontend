@@ -16,16 +16,12 @@ const DeleteButton = ({onCancelDeleteClick}: DeleteButtonProps) => {
         mutationFn: (id: number) => deleteUser(id)
     });
 
-    const closeDeleteUser = () => {
-        setIsOpenDeleteUser(false);
-    }
-
     const openDeleteSuccessMessage = () => {
         setIsDeleteSuccess(true);
     }
     
     const onDeleteClick = () => {
-        checkedUserList.forEach((id) => {
+        checkedUserList.map((id) => {
             mutate(id, {
                 onSuccess: (res) => {
                     queryClient.invalidateQueries({queryKey: [...homelessPeopleList.queryKey()]});
