@@ -121,15 +121,6 @@ export interface LoginErrorType {
 }
 export type LoginResponseType = LoginSuccessType | LoginErrorType;
 
-export type AdminId = number
-
-export interface CreateAdminErrorType {
-  errorCode: string
-  description: string
-}
-
-export type CreateAdminResponseType = AdminId | CreateAdminErrorType
-
 export type FilterValueType = string;
 
 export type FilterType = "NONE" | "NAME";
