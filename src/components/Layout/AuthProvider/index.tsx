@@ -2,14 +2,14 @@
 
 import { createContext, ReactNode, useContext, useState } from "react";
 
-interface authManagementType {
+interface AuthManagementType {
     isSuccessFirstAuth: boolean,
     setIsSuccessFirstAuth: React.Dispatch<React.SetStateAction<boolean>>;
     curAdminEmail: string
     setCurAdminEmail: React.Dispatch<React.SetStateAction<string>>;
 };
 
-    const authContext = createContext<authManagementType>({
+    const authContext = createContext<AuthManagementType>({
         isSuccessFirstAuth: false,
         setIsSuccessFirstAuth: () => {},
         curAdminEmail: "",

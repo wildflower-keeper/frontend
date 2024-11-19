@@ -5,11 +5,10 @@ import InputWithLabel from "@/components/Composition/InputWithLabel"
 // Utils
 import { useForm } from "react-hook-form";
 //Types
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { createAdminAccount } from "@/api/v1/shelter-admin";
+import { createAdminAccount } from "@/api/v2/shelter-admin";
 import { useRouter } from "next/navigation";
-import { error } from "console";
 
 export interface AdminDataType {
   email: string
@@ -28,14 +27,15 @@ const CreateAdminForm = ({ setIsSuccess }: Props) => {
   const { mutate } = useMutation({
     mutationKey: createAdminAccount.mutationKey(),
     mutationFn: (adminData: AdminDataType) => createAdminAccount(adminData)
-  })
+  });
+  const [error, setError] = useState("");
   const onSubmit = ((adminData: AdminDataType) => {
     mutate(adminData, {
       onSuccess: (res) => {
         setIsSuccess(true);
       },
       onError: (error) => {
-        console.log(error);
+        setError(error.message);
       }
     })
   });
@@ -97,6 +97,7 @@ const CreateAdminForm = ({ setIsSuccess }: Props) => {
         type="remark"
         error={errors.remark?.message}
       />
+      <span className="text-xs text-red-500">{error}</span>
       <div className="flex gap-5 text-white">
         <button type="button" onClick={() => router.back()} className="rounded-md w-[165px] py-1 bg-[#b7b7b7]">돌아가기</button>
         <button type="submit" className="rounded-md w-[165px] py-1 bg-[#00b226]">관리자 생성</button>

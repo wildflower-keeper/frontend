@@ -100,7 +100,7 @@ export interface PinNumberResponseType {
   expiredAt: string;
 }
 
-export interface LoginBodyType {
+export interface LoginForm {
   email: string;
   pw: string;
 }
@@ -120,6 +120,15 @@ export interface LoginErrorType {
   description: string;
 }
 export type LoginResponseType = LoginSuccessType | LoginErrorType;
+
+export type AdminId = number
+
+export interface CreateAdminErrorType {
+  errorCode: string
+  description: string
+}
+
+export type CreateAdminResponseType = AdminId | CreateAdminErrorType
 
 export type FilterValueType = string;
 

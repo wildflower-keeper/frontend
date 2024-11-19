@@ -10,7 +10,7 @@ interface Props {
   title: string,
   placeholder?: string,
   type?: string,
-  error: string | undefined
+  error?: string | undefined
 }
 
 const InputWithLabel = forwardRef<HTMLInputElement, Props>(({ id, title, placeholder, type, error, ...rest }, ref) => {
