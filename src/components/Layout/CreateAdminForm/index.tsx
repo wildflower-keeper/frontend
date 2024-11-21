@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { createAdminAccount } from "@/api/v2/shelter-admin";
 import { useRouter } from "next/navigation";
 
-export interface AdminDataType {
+export interface CreateAdminDataType {
   email: string
   password: string
   phoneNumber: number
@@ -23,13 +23,13 @@ interface Props {
 }
 
 const CreateAdminForm = ({ setIsSuccess }: Props) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<AdminDataType>();
+  const { register, handleSubmit, formState: { errors } } = useForm<CreateAdminDataType>();
   const { mutate } = useMutation({
     mutationKey: createAdminAccount.mutationKey(),
-    mutationFn: (adminData: AdminDataType) => createAdminAccount(adminData)
+    mutationFn: (adminData: CreateAdminDataType) => createAdminAccount(adminData)
   });
   const [error, setError] = useState("");
-  const onSubmit = ((adminData: AdminDataType) => {
+  const onSubmit = ((adminData: CreateAdminDataType) => {
     mutate(adminData, {
       onSuccess: (res) => {
         setIsSuccess(true);

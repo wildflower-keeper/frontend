@@ -46,5 +46,9 @@ body {
 }
 
 .custom-page-name {
-  @apply font-bold text-3xl mb-4;
+  @apply font-bold text-3xl mb-2;
+}
+
+.basicSidbarbutton {
+  @apply w-48 px-2 py-3 rounded-md
 }

@@ -4,6 +4,8 @@ import { TiMessages } from "react-icons/ti";
 import { PiFolderUserFill } from "react-icons/pi";
 import { PiSiren } from "react-icons/pi";
 import { PiChartLineUpLight } from "react-icons/pi";
+import { IoSettingsOutline } from "react-icons/io5";
+import { MdPersonOutline } from "react-icons/md";
 // Types
 import { IconType } from "react-icons/lib";
 
@@ -46,6 +48,19 @@ export const PAGE_ROUTE: Route[] = [
     name: situationPageName,
     path: "/check",
     Icon: PiChartLineUpLight,
+  }),
+];
+
+export const EXTRA_PAGE_ROUTE: Route[] = [
+  generate_Route({
+    name: "관리자 리스트",
+    path: "/adminList",
+    Icon: MdPersonOutline,
+  }),
+  generate_Route({
+    name: "설정",
+    path: "/setting",
+    Icon: IoSettingsOutline,
   }),
 ];
 

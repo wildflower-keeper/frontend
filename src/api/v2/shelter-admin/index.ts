@@ -1,13 +1,21 @@
-import { POST } from "@/api/axios";
+import { GET, POST } from "@/api/axios";
 import * as ROUTES from "./Routes.const";
-import { AdminDataType } from "@/components/Layout/CreateAdminForm";
+import { CreateAdminDataType } from "@/components/Layout/CreateAdminForm";
 import { generateSplitUrl } from "@/api/utils.const";
-import { CreateAdminResponseType } from "@/api/v2/shelter-admin/type";
+// Types
+import { AdminDataType, CreateAdminResponseType } from "@/api/v2/shelter-admin/type";
 
-export function createAdminAccount(adminData: AdminDataType): Promise<CreateAdminResponseType> {
-    return POST({ url: ROUTES.CREATE_ADMIN_ACCOUNT, data: adminData })
+export function adminList(): Promise<AdminDataType[]> {
+    return GET({url: ROUTES.ADMIN_LIST})
+    .catch((error) => {
+        throw error;
+    })
+}
+
+export function createAdminAccount(adminData: CreateAdminDataType): Promise<CreateAdminResponseType> {
+    return POST({ url: ROUTES.ADMIN_LIST, data: adminData })
         .then((res) => {
-            if(res.errorCode === "SHELTER_ACCOUNT_EMAIL_OR_PHONENUMBER_ALREADY_EXISTS") {
+            if (res.errorCode === "SHELTER_ACCOUNT_EMAIL_OR_PHONENUMBER_ALREADY_EXISTS") {
                 throw new Error(res.description);
             }
             return res.data;
@@ -20,4 +28,5 @@ export function createAdminAccount(adminData: AdminDataType): Promise<CreateAdmi
         });
 }
 
-createAdminAccount.mutationKey = () => generateSplitUrl(ROUTES.CREATE_ADMIN_ACCOUNT);
+adminList.queryKey = () => generateSplitUrl(ROUTES.ADMIN_LIST);
+createAdminAccount.mutationKey = () => generateSplitUrl(ROUTES.ADMIN_LIST);

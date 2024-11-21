@@ -12,7 +12,7 @@ import { get, map } from "lodash";
 import { formatDateString } from "@/utils/string/date";
 // Types
 import { GetSleepoverListParam } from "@/api/v1/shelter-admin/type";
-import { emergencyPageName } from "../AfterLoginLoyouts/index.const";
+import { emergencyPageName } from "../AfterLoginLayouts/index.const";
 
 interface EmergencyListItemType {
   name: string;

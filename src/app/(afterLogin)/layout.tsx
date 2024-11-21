@@ -1,5 +1,5 @@
 // Compo
-import Sidebar from "@/components/Layout/AfterLoginLoyouts/SideBar";
+import Sidebar from "@/components/Layout/AfterLoginLayouts/SideBar";
 import { AdminInfomation } from "./layout.compo";
 // Utils
 import React, { ReactNode } from "react";

@@ -24,15 +24,13 @@ const LogoutButton = () => {
     };
 
     return (
-        <div
-            className="flex flex-row items-center cursor-pointer gap-2"
-            onClick={handleLogout}
-        >
-            <LiaPowerOffSolid size={22} className="m-auto" />
+        <button
+            className="flex flex-row items-center gap-2 basicSidbarbutton" onClick={handleLogout}>
+            <LiaPowerOffSolid size={22} />
             <div className="text-md">
                 로그아웃
             </div>
-        </div>
+        </button>
     )
 }
 
