@@ -13,10 +13,10 @@ import { useQuery } from "@tanstack/react-query";
 import { v4 as uuidv4 } from "uuid";
 //Types
 import type { Dispatch, SetStateAction } from "react";
-import type { LoginBodyType } from "@/api/v1/shelter-admin/type";
+import type { LoginForm } from "@/api/v1/shelter-admin/type";
 
 interface Props {
-  shelterChange: Dispatch<SetStateAction<LoginBodyType>>;
+  shelterChange: Dispatch<SetStateAction<LoginForm>>;
 }
 
 interface BoxParams {
