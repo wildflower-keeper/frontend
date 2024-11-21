@@ -39,16 +39,16 @@ export const PAGE_ROUTE: Route[] = [
     path: "/management",
     Icon: PiFolderUserFill,
   }),
-  generate_Route({
-    name: emergencyPageName,
-    path: "/emergency",
-    Icon: PiSiren,
-  }),
-  generate_Route({
-    name: situationPageName,
-    path: "/check",
-    Icon: PiChartLineUpLight,
-  }),
+  // generate_Route({
+  //   name: emergencyPageName,
+  //   path: "/emergency",
+  //   Icon: PiSiren,
+  // }),
+  // generate_Route({
+  //   name: situationPageName,
+  //   path: "/check",
+  //   Icon: PiChartLineUpLight,
+  // }),
 ];
 
 export const EXTRA_PAGE_ROUTE: Route[] = [
