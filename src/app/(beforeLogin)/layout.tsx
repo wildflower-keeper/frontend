@@ -10,7 +10,7 @@ interface Props {
 
 const NotLoginedLayout: React.FC<Props> = ({ children }) => {
   return (
-    <div className="flex flex-col items-center mt-[10%]">
+    <div className="flex flex-col items-center mt-32">
       <div className="w-40 h-10 m-3">
         <Image
           key={1}

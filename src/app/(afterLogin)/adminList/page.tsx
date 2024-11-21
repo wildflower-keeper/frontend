@@ -1,14 +1,12 @@
 // Compo
-import CreateAdminForm from "@/components/Layout/CreateAdminForm";
-import Link from "next/link";
+import Admin from "@/components/Layout/Admin";
 // Utils
 //Types
 
 const Page = () => {
   return (
-    <div>
-      리스트
-      <Link href={"/adminList/createAdmin"}>관리자 생성</Link>
+    <div className="flex justify-between">
+        <Admin />
     </div>
   )
 }

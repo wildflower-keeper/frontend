@@ -24,10 +24,10 @@ const AfterLoginSideBar = () => {
         />
       </div>
       <div className="grow flex flex-col items-start mt-10">
-        {PAGE_ROUTE.map(({ name, path, Icon }) => {
+        {PAGE_ROUTE.map(({ name, path, Icon }, index) => {
           const selected = pathname === path;
           return (
-            <div className="flex w-full relative">
+            <div key={index} className="flex w-full relative">
               {selected && <span className="absolute left-[-20px] bg-[#3f3f3f] w-1 h-full rounded-r-full" />}
               <Link href={path} key={path} className={`basicSidbarbutton ${selected && 'bg-[#3f3f3f]'}`}>
                 {Icon && (
@@ -45,10 +45,10 @@ const AfterLoginSideBar = () => {
       </div>
       <div className="flex flex-col items-start w-full border-t border-solid border-gray-200 pb-5 pt-10 text-sm">
         {
-          EXTRA_PAGE_ROUTE.map(({ name, path, Icon }) => {
+          EXTRA_PAGE_ROUTE.map(({ name, path, Icon }, index) => {
             const selected = pathname === path;
             return (
-            <div className="flex w-full relative">
+            <div key={index} className="flex w-full relative">
               {selected && <span className="absolute left-[-20px] bg-[#3f3f3f] w-1 h-full rounded-r-full" />}
               <Link href={path} className={`flex gap-2 items-center basicSidbarbutton ${selected && "bg-[#3f3f3f] text-white"}`} >{Icon && <Icon size={22} />}{name}</Link>
             </div>
