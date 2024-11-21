@@ -7,8 +7,8 @@ import LogoutButton from "@/components/Composition/LogoutButton";
 
 // Utils
 import React from "react";
-import { EXTRA_PAGE_ROUTE, PAGE_ROUTE } from "./index.const";
 import { usePathname } from "next/navigation";
+import { EXTRA_PAGE_ROUTE, PAGE_ROUTE } from "./index.const";
 
 
 const AfterLoginSideBar = () => {

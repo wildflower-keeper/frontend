@@ -21,7 +21,7 @@ const FindPwdForm = () => {
         }}
       >
         <div className="flex flex-col gap-5">
-          <InputWithLabel
+          {/* <InputWithLabel
             id="adminName"
             placeholder="관리자 이름을 입력해주세요"
             labelName="이름"
@@ -48,7 +48,7 @@ const FindPwdForm = () => {
             placeholder="비밀번호를 다시 입력해주세요"
             labelName="비밀번호 확인"
             type="password"
-          />
+          /> */}
         </div>
 
         <Button
