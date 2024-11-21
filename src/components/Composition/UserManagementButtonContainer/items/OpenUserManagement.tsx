@@ -1,19 +1,15 @@
-import { ReactNode } from "react"
-
 interface openUserManagementProps {
-    children: ReactNode
     type: String
     selected: boolean
     onClick: () => void
 }
 
-export const buttonStyle = "h-9 w-24 px-1.5 pl-3 py-2 rounded-[10px] border border-solid border-[#dfdfdf] items-center gap-3 justify-center inline-flex"
+export const buttonStyle = "rounded-3xl px-3 py-1 border w-[75px] border-solid border-neutral-200 flex justify-center"
 
-const OpenUserManagement = ({children, type, selected, onClick}: openUserManagementProps) => {
+const OpenUserManagement = ({type, selected, onClick}: openUserManagementProps) => {
     return (
-        <button onClick={onClick} className={`${buttonStyle} ${selected ? 'bg-[#b7b7b7]' : 'bg-white'} text-[#999999] hover:bg-[#efefef]`}
+        <button onClick={onClick} className={`${buttonStyle} ${selected ? 'bg-[#3f3f3f] text-white' : null}`}
         >
-            {children}
             <div className="w-9 text-base font-medium font-['Pretendard'] leading-normal">{type}</div>
         </button>
     )

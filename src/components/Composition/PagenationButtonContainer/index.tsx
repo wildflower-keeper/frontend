@@ -34,7 +34,7 @@ const PagenationButtonContainer = ({
   if (!pageButtonList) return <></>;
 
   return (
-    <div className="w-full flex justify-between px-12">
+    <div className="flex px-12 text-sm">
       <Button
         onClick={() => pageNumberHandler(pageNumber - 1)}
         disabled={pageNumber === 1}
@@ -56,11 +56,8 @@ const PagenationButtonContainer = ({
               }}
               disabled={pageNumber === value}
             >
-              <p
-                className={`text-[#828282] ${pageNumber === value && "font-bold text-black"}`}
-              >
-                {value}
-              </p>
+              <p className={`${pageNumber === value ? "font-bold text-[#19C23D]" : ""}`}>{value}</p>
+
             </Button>
           );
         })}

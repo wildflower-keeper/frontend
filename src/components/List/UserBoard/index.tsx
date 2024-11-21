@@ -8,70 +8,29 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 // Types
 import type {
-  AddSituationSleepoverType,
   UserItemType,
 } from "@/api/v1/shelter-admin/type";
 
-type Props = {
-  size?: "default" | "large";
-  userItemList?: UserItemType[];
-  sleepoverList?: AddSituationSleepoverType[];
-};
-
-const UserBoard = ({
-  size = "default",
-  userItemList,
-  sleepoverList,
-}: Props) => {
+const UserBoard = ({ userItemList }: { userItemList: UserItemType[] }) => {
   return (
-    <div
-      className={` ${size === "default" && "w-[560px]"} ${size === "large" && "w-full"}`}
-    >
-      <UserBoardHeader size={size} />
+    <div className="mb-4">
+      <UserBoardHeader />
       <div>
-        <ul className="flex flex-col gap-4 h-[420px]">
-          {size === "default" &&
+        <ul className="flex flex-col gap-4">
+          {
             userItemList?.map(
-              ({ id, name, lastLocationStatus, room, phoneNumber }) => {
+              ({ id, lastLocationStatus, name, phoneNumber, room, emergencyContact, reason, targetDateSleepover }, index) => {
                 return (
                   <li key={id}>
                     <UserBoardItem
+                      index={index + 1}
                       id={id}
-                      name={name}
                       lastLocationStatus={lastLocationStatus}
-                      size={size}
+                      name={name}
                       room={room}
                       phoneNumber={phoneNumber}
-                    />
-                  </li>
-                );
-              },
-            )}
-          {size === "large" &&
-            sleepoverList?.map(
-              ({
-                homelessId,
-                homelessName,
-                homelessPhoneNumber,
-                homelessRoom,
-                emergencyContact,
-                reason,
-                startDate,
-                endDate,
-                sleepoverSituation,
-              }) => {
-                return (
-                  <li key={uuidv4()}>
-                    <UserBoardItem
-                      id={homelessId}
-                      sleepoverSituation={sleepoverSituation}
-                      name={homelessName}
-                      size={size}
-                      room={homelessRoom}
-                      phoneNumber={homelessPhoneNumber}
-                      startDate={startDate}
+                      targetDateSleepover={targetDateSleepover}
                       reason={reason}
-                      endDate={endDate}
                       emergencyContact={emergencyContact}
                     />
                   </li>

@@ -17,7 +17,7 @@ const CurrentCard = memo(({ count, description, type, isSelected, onClick }: Pro
   if (!cardStyle) return <></>;
 
   return (
-    <button onClick={onClick} className={`flex justify-between w-[262px] h-[120px] bg-white rounded-lg p-4 ${isSelected && `outline outline-[3px] ${cardStyle.oulineColor}`}`}>
+    <button onClick={onClick} className={`flex justify-between w-[262px] h-[120px] bg-white shadow-md rounded-lg p-4 ${isSelected && `outline outline-[3px] ${cardStyle.oulineColor}`}`}>
       <div className="flex flex-col gap-3 text-black items-start">
         <p className="text-base">{description}</p>
         <p className="text-3xl font-bold">{count}</p>

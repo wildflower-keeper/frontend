@@ -1,33 +1,21 @@
-import { useUserContext } from "@/components/Layout/UserManagementProvider";
 import React from "react";
 
-type Props = {
-  size: "default" | "large";
-};
-
-const UserBoardHeader = ({ size }: Props) => {
-  const userContext = useUserContext();
-  const {isOpenDeleteUser} = userContext;
+const UserBoardHeader = () => {
+  const userDataTypeList = [
+    "NO.",
+    "상태",
+    "이름",
+    "호실",
+    "전화번호",
+    "외박기간",
+    "외박사유",
+    "비상연락망"
+  ]
   return (
-    <div
-      className={` py-3 grid px-7 ${size === "default" && "grid-cols-5"} ${size === "large" && "grid-cols-8"}`}
-    >
-      {<div className="h-fit my-auto text-center">{isOpenDeleteUser ? "체크" : "상태"}</div>}
-
-      <div className="h-fit my-auto text-center">이름</div>
-      <div className="h-fit my-auto text-center">호실</div>
-      <div
-        className={`h-fit my-auto text-center ${size === "default" && "col-span-2"}`}
-      >
-        전화번호
-      </div>
-      {size === "large" && (
-        <>
-          <div className="h-fit my-auto text-center col-span-2">외박기간</div>
-          <div className="h-fit my-auto text-center">외박사유</div>
-          <div className="h-fit my-auto text-center">비상연락망</div>
-        </>
-      )}
+    <div className="py-3 grid grid-cols-8 bg-neutral-100 rounded-md font-bold">
+      {userDataTypeList.map((type, index) => (
+        <div key={index} className="h-fit my-auto text-center">{type}</div>
+      ))}
     </div>
   );
 };

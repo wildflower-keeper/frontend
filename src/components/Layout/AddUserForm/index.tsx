@@ -6,17 +6,21 @@ import { useUserContext } from "../UserManagementProvider";
 
 export interface userDataFormType {
     name: string
-    location: string
-    phone: string
-    secondPhone: string | null
+    room: string
+    phoneNumber: string
+    birthDate: string,
+    memo: string,
+    emergencyContact: string | null
 }
+
+const baseButtonStyle = "px-3 py-1 rounded-3xl border border-[#dfdfdf]";
 
 const AddUserForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<userDataFormType>();
     const queryClient = useQueryClient();
     const { mutate } = useMutation({
         mutationKey: addUser.mutationKey(),
-        mutationFn: (userData: any) => addUser(userData)
+        mutationFn: (userData: userDataFormType) => addUser(userData)
     });
     const userContext = useUserContext();
     const {setIsOpenAddUser, setIsAddSuccess} = userContext;
@@ -27,17 +31,11 @@ const AddUserForm = () => {
         setIsAddSuccess(true);
     }
     const onSubmit = (userData: userDataFormType) => {
-        console.log(userData)
-        mutate(/*userData,*/{
-            "name": userData.name,
-            "shelterId": 1,
-            "shelterPin": "1234",
-            "room": userData.location,
-            "birthDate": "1970-05-15",
-            "phoneNumber": userData.phone,
-            "admissionDate": "2024-08-01",
-            "memo": "알러지 존재"
-          }, {
+        mutate({
+            ...userData,
+            birthDate: "",
+            memo: "",
+        }, {
             onSuccess: (res) => {
                 queryClient.invalidateQueries({ queryKey: [...homelessPeopleList.queryKey()] });
                 closeAddUser();
@@ -62,41 +60,41 @@ const AddUserForm = () => {
                 error={errors.name ? true : false}
             />
             <UserDataInput
-                {...register('location', { 
+                {...register('room', { 
                         required: true 
                     })}
-                id="location"
+                id="room"
                 title="거주동,호실"
                 placeholder="이용자가 거주하는 곳을 입력해주세요. (필수)"
                 type="text"
                 maxLength={10}
-                error={errors.location ? true : false}
+                error={errors.room ? true : false}
             />
             <UserDataInput
-                {...register('phone', {
+                {...register('phoneNumber', {
                     required: true,
                 })
                 }
-                id="phone"
+                id="phoneNumber"
                 title="핸드폰 번호"
                 placeholder="이용자 핸드폰 번호를 입력해주세요. (필수)"
                 type="number"
                 maxLength={11}
-                error={errors.phone ? true : false}
+                error={errors.phoneNumber ? true : false}
             />
             <UserDataInput
-                {...register('secondPhone',)}
-                id="secondPhone"
+                {...register('emergencyContact',)}
+                id="emergencyContact"
                 title="비상 연락망"
                 placeholder="비상 연락망을 입력해주세요. (선택)"
                 type="number"
                 maxLength={11}
-                error={errors.secondPhone ? true : false}
+                error={errors.emergencyContact ? true : false}
             />
             <div className="flex flex-row gap-2 items-center justify-end">
                 {Object.keys(errors).length != 0 ? <div className="justify-start text-[#ff3d00] text-base mr-24">필수적인 정보를 모두 입력해주세요.</div> : null}
-                <button type="submit" className="px-3 py-1 bg-black text-white rounded-[10px] border border-[#dfdfdf]">저장</button>
-                <button onClick={closeAddUser} className="px-3 py-1 bg-white rounded-[10px] border border-[#dfdfdf]">취소</button>
+                <button type="submit" className={`bg-black text-white ${baseButtonStyle}`}>저장</button>
+                <button onClick={closeAddUser} className={`bg-white ${baseButtonStyle}`}>취소</button>
             </div>
         </form>
     )
