@@ -1,18 +1,21 @@
-import { HiOutlineTrash } from "react-icons/hi2";
 import OpenUserManagement from "./OpenUserManagement";
 import { useUserContext } from "@/components/Layout/UserManagementProvider";
 
 //삭제 버튼
 const OpenDeleteButton = () => {
     const userContext = useUserContext();
-    const {isOpenDeleteUser, setIsOpenDeleteUser} = userContext;
+    const {isOpenDeleteUser, setIsOpenDeleteUser, checkedUserList} = userContext;
     const openDeleteUser = () => {
-        setIsOpenDeleteUser(prev => !prev);
+        if(isOpenDeleteUser && checkedUserList.length === 0) {
+            setIsOpenDeleteUser(false);
+            return;
+        }
+        if(!isOpenDeleteUser) {
+            setIsOpenDeleteUser(true);
+        }
     }
     return (
-        <OpenUserManagement type={"삭제"} selected={isOpenDeleteUser} onClick={openDeleteUser}>
-            <HiOutlineTrash className="size-6" />
-        </OpenUserManagement>
+        <OpenUserManagement type={"삭제"} selected={isOpenDeleteUser} onClick={openDeleteUser} />
     )
 };
 
