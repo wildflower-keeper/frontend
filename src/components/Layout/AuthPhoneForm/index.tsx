@@ -12,7 +12,7 @@ const AuthPhoneForm = () => {
           <InputWithLabel
             type="tel"
             id="verificationCode"
-            labelName="인증번호"
+            title="인증번호"
             placeholder="전송받은 인증번호를 입력해주세요"
           />
           <Button className="primaryButtonSmall">확인</Button>
