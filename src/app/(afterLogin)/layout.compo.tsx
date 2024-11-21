@@ -11,6 +11,7 @@ const ADMIN_INFOMATION_AVAILABLE_PATHS = [
   "/notice",
   "/management",
   "/emergency",
+  "/adminList"
 ];
 
 export const AdminInfomation = () => {

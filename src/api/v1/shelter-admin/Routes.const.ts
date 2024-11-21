@@ -4,7 +4,6 @@ export const BASE_PATH = genreateBasePath("shelter-admin");
 
 export const SHELTER = generatePathByBase(BASE_PATH, "shelter");
 export const PIN = generatePathByBase(BASE_PATH, "pin");
-export const LOGIN = generatePathByBase(BASE_PATH, "login");
 export const FIRST_AUTH = generatePathByBase(BASE_PATH, "verification-code");
 export const SECOND_AUTH = generatePathByBase(BASE_PATH, "auth-token");
 export const LOGOUT = generatePathByBase(BASE_PATH, "logout");
