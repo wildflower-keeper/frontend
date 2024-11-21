@@ -9,7 +9,7 @@ import type {
   HomelessPeopleListParam,
   HomelessPeopleListResponseType,
   LocationStatusType,
-  LoginBodyType,
+  LoginForm,
   LoginSuccessType,
   PinNumberResponseType,
   SecondAuthType,
@@ -19,7 +19,7 @@ import type {
 } from "./type";
 import { userDataFormType } from "@/components/Layout/AddUserForm";
 
-export function login(loginData: LoginBodyType): Promise<LoginSuccessType> {
+export function login(loginData: LoginForm): Promise<LoginSuccessType> {
   return customAxios.post(ROUTES.LOGIN, loginData).then(({ data }) => {
     if (!data) { // 입력 데이터가 부족할 경우
       throw new Error("* 인증을 위한 정보가 부족합니다. 모든 정보를 입력해주세요");
@@ -31,8 +31,9 @@ export function login(loginData: LoginBodyType): Promise<LoginSuccessType> {
   });
 }
 
-export function firstAuth(loginData: LoginBodyType): Promise<LoginSuccessType> {
-  return customAxios.post(ROUTES.FIRST_AUTH, loginData).then(({ data }) => {
+export function firstAuth(loginData: LoginForm): Promise<LoginSuccessType> {
+  return customAxios.post(ROUTES.FIRST_AUTH, loginData)
+  .then(({ data }) => {
     if (!data) { // 입력 데이터가 부족할 경우
       throw new Error("* 인증을 위한 정보가 부족합니다. 모든 정보를 입력해주세요");
     }
@@ -40,11 +41,23 @@ export function firstAuth(loginData: LoginBodyType): Promise<LoginSuccessType> {
       throw new Error("* 비밀번호가 틀렸습니다. 올바른 비밀번호로 다시 입력해주세요.");
     }
     if ("authToken" in data && "expiredAt" in data) return data;
-  });
+  })
+  .catch((error) => {
+    throw new Error("로그인에 실패했습니다.");
+  })
 }
 
 export function secondAuth(secondAuthData: SecondAuthType) {
-  return POST({ url: ROUTES.SECOND_AUTH, data: secondAuthData });
+  return POST({ url: ROUTES.SECOND_AUTH, data: secondAuthData })
+  .then((res) => {
+    if(res.errorCode === "SHELTER_ADMIN_LOGIN_CODE_INVALID") {
+      throw new Error("* 잘못된 인증 코드입니다.");
+    } 
+    return res;
+  })
+  .catch((error) => {
+    throw new Error("인증에 실패했습니다.");
+  })
 }
 
 export function addUser(userData: userDataFormType) {
