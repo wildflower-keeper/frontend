@@ -10,7 +10,7 @@ export interface FilterHandlerType {
 }
 
 const initValues: FilterValuesType = {
-  filterType: "NONE",
+  filterType: "NAME",
   filterValue: "",
 };
 

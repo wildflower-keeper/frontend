@@ -11,9 +11,7 @@ const OpenAddButton = () => {
         setIsOpenAddUser(prev => !prev);
     }, [])
     return (
-        <OpenUserManagement type={"추가"} selected={isOpenAddUser} onClick={openAddUser}>
-            <BsPlusLg className="size-6" />
-        </OpenUserManagement>
+        <OpenUserManagement type={"추가"} selected={isOpenAddUser} onClick={openAddUser} />
     )
 }
 
