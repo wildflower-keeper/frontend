@@ -13,6 +13,9 @@ export function createAdminAccount(adminData: AdminDataType): Promise<CreateAdmi
             return res.data;
         })
         .catch((error) => {
+            if (error.response.status === 403) {
+                throw new Error("일반 관리자는 관리자를 생성할 수 없습니다.");
+            }
             throw error;
         });
 }
