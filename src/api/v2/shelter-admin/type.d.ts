@@ -3,6 +3,7 @@ export interface AdminDataType {
   id: number
   name: string
   phoneNumber: string
+  hasAdminRole: boolean
   remark: string
 }
 

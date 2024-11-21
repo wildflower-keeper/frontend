@@ -12,14 +12,14 @@ const AdminList = ({data}: {data: AdminDataType[] | undefined}) => {
     return (
         <>
             {
-                data?.map(({ id, createdAt, name, phoneNumber, remark }: AdminDataType, index) => (
+                data?.map(({ id, createdAt, name, phoneNumber, remark, hasAdminRole }: AdminDataType, index) => (
                     <div key={id} className={`py-3 bg-white grid grid-cols-7 place-items-cente text-sm 
                     rounded-md ${selectedIndex === index ? "border-2 border-solid border-green-500 shadow-2xl" : "border-b border-solid border-neutral-200"}`}
                         style={{
                             gridTemplateColumns: gridCol
                         }}>
                         <div className={baseRowStyle}>{index + 1}</div>
-                        <div className={`${baseRowStyle} bg-[#777777] text-white rounded-md py-1 w-12`}>일반</div>
+                        <div className={`${baseRowStyle} ${hasAdminRole ? "bg-[#19C23D]" : "bg-[#777777]"} text-white rounded-md py-1 w-12`}>{hasAdminRole ? "마스터" : "일반"}</div>
                         <div className={baseRowStyle}>{formatDateString(createdAt, "yyyy. MM. dd")}</div>
                         <div className={baseRowStyle}>{name}</div>
                         <div className={baseRowStyle}>{remark}</div>
