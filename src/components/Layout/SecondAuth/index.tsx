@@ -6,7 +6,7 @@ import { useAuthContext } from "../AuthProvider";
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { secondAuth } from "@/api/v1/shelter-admin";
-import { SecondAuthType } from "@/api/v1/shelter-admin/type";
+import { EmailAuthenticationForm  } from "@/api/v1/shelter-admin/type";
 import { setCookie } from "@/utils/cookie";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -16,7 +16,7 @@ const SecondAuth = () => {
     const {register, handleSubmit} = useForm<{code: string}>();
     const { mutate, isPending } = useMutation({
         mutationKey: secondAuth.mutationKey(),
-        mutationFn: (authData: SecondAuthType) => secondAuth(authData),
+        mutationFn: (authData: EmailAuthenticationForm ) => secondAuth(authData),
       });
 
     const authContext = useAuthContext();

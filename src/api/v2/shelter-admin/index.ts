@@ -1,4 +1,4 @@
-import { GET, POST } from "@/api/axios";
+import { DELETE, GET, POST } from "@/api/axios";
 import * as ROUTES from "./Routes.const";
 import { CreateAdminDataType } from "@/components/Layout/CreateAdminForm";
 import { generateSplitUrl } from "@/api/utils.const";
@@ -28,5 +28,10 @@ export function createAdminAccount(adminData: CreateAdminDataType): Promise<Crea
         });
 }
 
+export function deleteAdmin(id: number) {
+    return DELETE({ url: ROUTES.DELETE_ADMIN + '/' + id });
+}
+
 adminList.queryKey = () => generateSplitUrl(ROUTES.ADMIN_LIST);
 createAdminAccount.mutationKey = () => generateSplitUrl(ROUTES.ADMIN_LIST);
+deleteAdmin.mutationKey = () => generateSplitUrl(ROUTES.DELETE_ADMIN);

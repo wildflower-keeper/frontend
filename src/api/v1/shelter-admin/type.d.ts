@@ -112,7 +112,7 @@ export interface LoginForm {
   pw: string;
 }
 
-export interface SecondAuthType {
+export interface EmailAuthenticationForm  {
   email: string;
   code: string;
 }
