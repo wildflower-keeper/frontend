@@ -17,10 +17,6 @@ const SearchBar = ({ submitHandler }: Props) => {
   const { filterValues, filterHandler, isSubmitDisabled } = useSearch();
   return (
     <>
-      <SearchSelector
-        filterHandler={filterHandler}
-        value={filterValues.filterType}
-      />
       <SearchInput
         value={filterValues.filterValue}
         disabled={isSubmitDisabled}

@@ -22,18 +22,25 @@ export interface CurrentUserInfo {
   emergencyCount: emergencyCountType;
 }
 
-export type LocationStatusType = "OUT_SHELTER" | "IN_SHELTER" | null;
+export type LocationStatusType = "OUT_SHELTER" | "IN_SHELTER" | "UNCONFIRMED" | "OVERNIGHT_STAY" | null;
 
 export interface UserItemType {
   id: number;
+  lastLocationStatus: LocationStatusType;
   name: string;
   room: string;
-  birthDate: string;
-  targetDateSleepover: boolean;
-  lastLocationStatus: LocationStatusType;
-  lastLocationTrackedAt: string;
+  birthDate?: string;
   phoneNumber: string;
-  admissionDate: string;
+  admissionDate?: string;
+  targetDateSleepover?: boolean;
+  sleepoverStartDate?: string;
+  sleepoverEndDate?: string;
+  reason?: string;
+  emergencyContact?: string;
+}
+
+export interface UserBoardItemType extends UserItemType {
+  index: number
 }
 
 export interface PaginationType {
@@ -93,18 +100,20 @@ export interface AddSituationSleepoverType extends SleepoverItemType {
   sleepoverSituation: SleepoverSituation;
 }
 
+export type StatusCountType = number[]
+
 export interface PinNumberResponseType {
   pin: string;
   expiredAt: string;
 }
 
-export interface LoginBodyType {
-  id: number;
+export interface LoginForm {
+  email: string;
   pw: string;
 }
 
-export interface SecondAuthType {
-  id: number;
+export interface EmailAuthenticationForm  {
+  email: string;
   code: string;
 }
 
@@ -119,9 +128,17 @@ export interface LoginErrorType {
 }
 export type LoginResponseType = LoginSuccessType | LoginErrorType;
 
+export type StatusType = "ALL" | "IN_SHELTER" | "OUT_SHELTER" | "OVERNIGHT_STAY" | "UNCONFIRMED" | null ;
+
+export interface StatusFilterType {
+    name: "전체" | "외출" | "외박" | "재실" | "미확인",
+    type: StatusType,
+    isSelected: boolean
+}
+
 export type FilterValueType = string;
 
-export type FilterType = "NONE" | "NAME";
+export type FilterType = "NONE" | "NAME" | 'InOutStatus';
 
 export interface FilterValuesType {
   filterType: FilterType;

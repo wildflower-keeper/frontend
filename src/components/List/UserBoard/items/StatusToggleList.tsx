@@ -8,10 +8,10 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 
 interface StatusToggleListProps {
     id: number, 
-    closeList: () => void
+    onStatusClick: () => void
 }
 
-const StatusToggleList = ({id, closeList}: StatusToggleListProps) => {
+const StatusToggleList = ({id, onStatusClick}: StatusToggleListProps) => {
     const [selectedStauts, setSelectedStatus] = useState(-1);
     const statusList: LocationStatusType[] = ["IN_SHELTER", "OUT_SHELTER"];
 
@@ -28,6 +28,7 @@ const StatusToggleList = ({id, closeList}: StatusToggleListProps) => {
         }, {
             onSuccess: async (res) => {
                 queryClient.invalidateQueries({ queryKey: [...homelessPeopleList.queryKey()] });
+                onStatusClick();
             },
             onError: (error) => {
                 console.error(error);
@@ -37,7 +38,7 @@ const StatusToggleList = ({id, closeList}: StatusToggleListProps) => {
         })
     }
     return (
-        <div className="absolute flex items-center gap-2 z-10 top-10 p-3 bg-white rounded-[20px] border border-solid border-[#e7e7e7]">
+        <div className="absolute right-[-20px] top-[-9px] flex items-center gap-2 z-10 p-2 bg-white rounded-[20px] border border-solid border-[#e7e7e7]">
             {
                 statusList.map((status, index) => (
                     isPending && selectedStauts === index ?
@@ -47,7 +48,6 @@ const StatusToggleList = ({id, closeList}: StatusToggleListProps) => {
                             <StatusBadge lastLocationStatus={status} />
                         </button>
                 ))}
-            <MdKeyboardArrowUp onClick={closeList} className="text-gray-400 cursor-pointer" size={24} />
         </div>
     )
 };

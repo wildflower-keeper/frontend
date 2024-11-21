@@ -1,18 +1,21 @@
 export const LAST_LOCATION_STATUS = {
   COLOR: {
     OUT_SHELTER: "#FFC200",
-    UNKNOWN: "#D9D9D9",
+    UNCONFIRMED: "#D9D9D9",
     IN_SHELTER: "#00B226",
+    "OVERNIGHT_STAY": "#FFC200",
   },
   STATUS: {
     OUT_SHELTER: "외출",
-    UNKNOWN: "불명",
+    UNCONFIRMED: "미 확인",
     IN_SHELTER: "재실",
+    "OVERNIGHT_STAY": "외박"
   },
   CLASSNAME: {
-    OUT_SHELTER: "bg-[#FFC200]/10 text-[#FFC200] border-[#FFC200]",
-    UNKNOWN: "bg-[#D9D9D9]/10 text-[#D9D9D9] border-[#D9D9D9]",
-    IN_SHELTER: "bg-[#00B226]/10 text-[#00B226] border-[#00B226]",
+    OUT_SHELTER: "bg-[#4d73ff]/10 text-[#4d73ff]",
+    UNCONFIRMED: "bg-[#ff3d00]/10 text-[#ff3d00]",
+    IN_SHELTER: "bg-[#00B226]/10 text-[#00B226]",
+    "OVERNIGHT_STAY": "bg-[#FFC200]/10 text-[#FFC200]",
   },
 };
 

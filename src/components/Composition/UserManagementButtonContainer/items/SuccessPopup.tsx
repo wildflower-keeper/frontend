@@ -13,8 +13,8 @@ const SuccessPopup = ({ Message, closeMessage }: SuccessPopupProps) => {
     }, []);
     return (
         <>
-            <div className="w-[224px] h-[44px]" />
-            <div className="absolute flex gap-2 items-center text-base w-[306px] h-11 px-[18px] py-3 bg-[#353535] rounded-lg text-white">
+            <div className="w-[224px] h-[41px]" />
+            <div className="absolute right-56 flex gap-2 items-center text-base w-[306px] h-11 px-[18px] py-3 bg-[#353535] rounded-3xl text-white">
                 <IoCheckmark size={22} />{Message}
             </div>
         </>
