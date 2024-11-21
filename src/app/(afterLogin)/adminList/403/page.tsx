@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 const Page = () => {
     return (
         <div className="flex items-center gap-2 text-[#949494] mt-[20%] min-w-900px">
@@ -13,7 +11,6 @@ const Page = () => {
                 </div>
             </p>
             <span className='absolute w-40 h-40 right-0 bottom-0'>
-            <Image src="/assets/logos/wildflower_logo_errorPage.svg" alt='error' width={100} height={100} />
             </span>
         </div>
     )
