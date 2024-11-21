@@ -12,7 +12,7 @@ import type {
   LoginForm,
   LoginSuccessType,
   PinNumberResponseType,
-  SecondAuthType,
+  EmailAuthenticationForm ,
   ShelterInfoType,
   SleepoversResponseType,
   StatusCountType,
@@ -29,7 +29,7 @@ export function firstAuth(loginData: LoginForm): Promise<LoginSuccessType> {
     })
 }
 
-export function secondAuth(secondAuthData: SecondAuthType) {
+export function secondAuth(secondAuthData: EmailAuthenticationForm ) {
   return POST({ url: ROUTES.SECOND_AUTH, data: secondAuthData })
     .catch((error) => {
       throw new Error("인증에 실패했습니다.");
