@@ -19,8 +19,8 @@ const AdminList = ({data}: {data: AdminDataType[] | undefined}) => {
                             gridTemplateColumns: gridCol
                         }}>
                         <div className={baseRowStyle}>{index + 1}</div>
-                        <div className={baseRowStyle}>일반</div>
-                        <div className={baseRowStyle}>{formatDateString(createdAt, "yyyy년 MM월 dd일")}</div>
+                        <div className={`${baseRowStyle} bg-[#777777] text-white rounded-md py-1 w-12`}>일반</div>
+                        <div className={baseRowStyle}>{formatDateString(createdAt, "yyyy. MM. dd")}</div>
                         <div className={baseRowStyle}>{name}</div>
                         <div className={baseRowStyle}>{remark}</div>
                         <div className={baseRowStyle}>{formatPhoneNumber(phoneNumber)}</div>
