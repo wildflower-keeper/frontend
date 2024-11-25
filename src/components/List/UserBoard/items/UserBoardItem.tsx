@@ -22,7 +22,6 @@ const UserBoardItem = ({
   reason,
   targetDateSleepover
 }: UserBoardItemType) => {
-  const baseStyle = "h-fit my-auto text-center"
   const [isOpenStatusList, setIsOpenStatusList] = useState(false);
   const onStatusClick = () => {
     setIsOpenStatusList((prev) => !prev);
@@ -30,7 +29,7 @@ const UserBoardItem = ({
   return (
     <div className="py-3 bg-white grid grid-cols-8 place-items-cente text-sm border-b border-solid border-neutral-200">
       <NumberOrCheckbox id={id} index={index} />
-      <div className={`${baseStyle} relative`}>
+      <div className="basicRowStyle relative">
         {
           isOpenStatusList ?
             <StatusToggleList id={id} onStatusClick={onStatusClick} />
@@ -43,12 +42,12 @@ const UserBoardItem = ({
           />
         </StatusControllerOpenToggle>
       </div>
-      <div className={`${baseStyle} truncate`}>{name}</div>
-      <div className={`${baseStyle} truncate`}>{room}</div>
-      <div className={`${baseStyle} min-w-[102px]`}>{formatPhoneNumber(phoneNumber)}</div>
-      <div className={baseStyle}>{targetDateSleepover}</div>
-      <div className={baseStyle}>{reason}</div>
-      <div className={baseStyle}>{emergencyContact}</div>
+      <div className="basicRowStyle truncate">{name}</div>
+      <div className="basicRowStyle truncate">{room}</div>
+      <div className="basicRowStyle min-w-[102px]">{formatPhoneNumber(phoneNumber)}</div>
+      <div className="basicRowStyle">{targetDateSleepover}</div>
+      <div className="basicRowStyle">{reason}</div>
+      <div className="basicRowStyle">{emergencyContact}</div>
     </div>
   );
 };

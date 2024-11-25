@@ -1,10 +1,14 @@
-import NoticeForm from "../NoticeForm";
+import NoticeAddForm from "../NoticeAddForm";
+import Notice from "./items/Notice";
 
 const NoticeContainer = () => {
     return (
         <div>
             <div className="custom-page-name">공지사항</div>
-            <NoticeForm />
+            <div className="flex items-start justify-between gap-20 w-full">
+                <NoticeAddForm />
+                <Notice />
+            </div>
         </div>
     )
 }

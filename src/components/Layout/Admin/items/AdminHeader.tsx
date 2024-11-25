@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { adminDataTypeList, baseRowStyle, gridCol } from "./admin.const"
+import { adminDataTypeList, gridCol } from "./admin.const"
 
 const AdminHeader = () => {
     return (
@@ -13,7 +13,7 @@ const AdminHeader = () => {
                 }}>
                 {
                     adminDataTypeList.map((type, index) => (
-                        <div key={index} className={baseRowStyle}>{type}</div>
+                        <div key={index} className="basicRowStyle">{type}</div>
                     ))
                 }
             </div>
