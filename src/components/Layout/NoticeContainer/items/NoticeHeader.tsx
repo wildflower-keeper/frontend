@@ -2,7 +2,7 @@ import { gridCol, noticeDataTypeList } from "./notice.const";
 
 const NoticeHeader = () => {
     return (
-        <div className="py-3 grid grid-cols-4 bg-neutral-200" style={{
+        <div className="py-3 grid grid-cols-4 bg-neutral-200 min-w-[500px]" style={{
             gridTemplateColumns: gridCol
         }}>
             {noticeDataTypeList.map((type, index) => (

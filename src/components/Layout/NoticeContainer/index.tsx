@@ -5,7 +5,7 @@ const NoticeContainer = () => {
     return (
         <div>
             <div className="custom-page-name">공지사항</div>
-            <div className="flex items-start justify-between gap-20 w-full">
+            <div className="flex items-start justify-between gap-10 w-full">
                 <NoticeAddForm />
                 <Notice />
             </div>

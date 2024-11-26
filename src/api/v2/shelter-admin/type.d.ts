@@ -15,3 +15,8 @@ export interface CreateAdminErrorType {
 }
 
 export type CreateAdminResponseType = AdminId | CreateAdminErrorType
+
+export interface NoticeListParam {
+  pageNumber: number;
+  pageSize: number;
+}
