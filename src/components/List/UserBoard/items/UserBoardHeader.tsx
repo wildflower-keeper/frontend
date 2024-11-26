@@ -12,7 +12,10 @@ const UserBoardHeader = () => {
     "비상연락망"
   ]
   return (
-    <div className="py-3 grid grid-cols-8 bg-neutral-100 rounded-md font-bold">
+    <div className="py-3 grid grid-cols-8 bg-neutral-100 rounded-md font-bold"
+      style={{
+        gridTemplateColumns: "1fr 1fr 1fr 1fr 2fr 2fr 2fr 2fr"
+      }}>
       {userDataTypeList.map((type, index) => (
         <div key={index} className="h-fit my-auto text-center">{type}</div>
       ))}

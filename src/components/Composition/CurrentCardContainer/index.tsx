@@ -94,10 +94,10 @@ const CurrentCardContainer = () => {
 
   const [selectedStatusCount, setSelectedStatusCount] = useState<SelectedStatusType>(
     {
-      inShelterCount: false,
-      outingCount: false,
-      sleepoverCount: false,
-      emergencyCount: false
+      inShelterCount: true,
+      outingCount: true,
+      sleepoverCount: true,
+      emergencyCount: true
     }
   );
 

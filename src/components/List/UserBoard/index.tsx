@@ -19,7 +19,7 @@ const UserBoard = ({ userItemList }: { userItemList: UserItemType[] }) => {
         <ul className="flex flex-col gap-4">
           {
             userItemList?.map(
-              ({ id, lastLocationStatus, name, phoneNumber, room, emergencyContact, reason, targetDateSleepover }, index) => {
+              ({ id, lastLocationStatus, name, phoneNumber, room, emergencyContact, reason, targetDateSleepover, sleepoverStartDate, sleepoverEndDate }, index) => {
                 return (
                   <li key={id}>
                     <UserBoardItem
@@ -32,6 +32,8 @@ const UserBoard = ({ userItemList }: { userItemList: UserItemType[] }) => {
                       targetDateSleepover={targetDateSleepover}
                       reason={reason}
                       emergencyContact={emergencyContact}
+                      sleepoverStartDate={sleepoverStartDate}
+                      sleepoverEndDate={sleepoverStartDate}
                     />
                   </li>
                 );
