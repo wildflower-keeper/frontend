@@ -4,6 +4,7 @@ import PagenationButtonContainer from "@/components/Composition/PagenationButton
 import { gridCol } from "./notice.const";
 import { useState } from "react";
 import { NoticeListParam } from "@/api/v2/shelter-admin/type";
+import { useReceptionStatusContext } from "../../ReceptionStatusProvider";
 
 const data = [
     {
@@ -33,14 +34,25 @@ const NoticeList = () => {
         pageNumber: 1,
         pageSize: 5,
     });
+    const receptionStatusContext = useReceptionStatusContext();
+    const { setIsOpenReceptionStatusPopup, setSelectedNotice } = receptionStatusContext;
+    const onNoticeClick = (index: number) => {
+        setIsOpenReceptionStatusPopup(true);
+        setSelectedNotice(index);
+    }
     return (
         <div className="flex flex-col items-center gap-5">
             <div className="w-full">
                 {
                     data.map(({ createdAt, title, content }, index) => (
-                        <div key={index} className="py-3 grid grid-cols-4 border-b border-solid border-neutral-200" style={{
+                        <div 
+                        onClick={() => onNoticeClick(index)}
+                        key={index} 
+                        className="cursor-pointer py-3 grid grid-cols-4 border-b border-solid border-neutral-200" 
+                        style={{
                             gridTemplateColumns: gridCol
-                        }}>
+                        }}
+                        >
                             <div className="basicRowStyle">{index + 1}</div>
                             <div className="basicRowStyle">{createdAt}</div>
                             <div className="basicRowStyle">{title}</div>

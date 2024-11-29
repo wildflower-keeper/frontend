@@ -41,7 +41,7 @@ const UserStatusChart = ({ selectedStatusCount, statusCountData }: Props) => {
   }, [chartData]);
 
   return (
-    <div className='w-full h-full bg-white mt-4 rounded-md'>
+    <div className='w-full h-full bg-white mt-4 rounded-md shadow-md'>
       <div className='flex justify-between p-5'>
         <div className='text-2xl font-bold'>데이터 추이</div>
         <div>{new Date().getMonth() + 1}월</div>

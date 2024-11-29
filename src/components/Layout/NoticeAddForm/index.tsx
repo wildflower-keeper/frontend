@@ -18,7 +18,7 @@ const NoticeAddForm = () => {
 
     const error = Boolean(errors.title || errors.content);
     return (
-        <div className="min-w-[320px]">
+        <div className="min-w-[350px]">
             <div className="flex items-center bg-neutral-300 p-3 gap-2 rounded-md mb-5">
                 <div className="w-6 h-6 bg-white rounded-md p-1">
                     <Image

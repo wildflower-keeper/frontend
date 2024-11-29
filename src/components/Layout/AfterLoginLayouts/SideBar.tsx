@@ -14,7 +14,7 @@ import { EXTRA_PAGE_ROUTE, PAGE_ROUTE } from "./index.const";
 const AfterLoginSideBar = () => {
   const pathname = usePathname();
   return (
-    <div className="flex flex-col h-min-full bg-neutral-100 py-5 w-64 border-r border-solid border-gray-200 pl-5">
+    <div className="flex flex-col h-min-full bg-neutral-50 py-5 w-64 border-r border-solid border-gray-200 pl-5 min-w-[260px]">
       <div className=" w-40 h-10 mx-auto">
         <Image
           src="/assets/logos/wildflower_logo_with_name.png"
