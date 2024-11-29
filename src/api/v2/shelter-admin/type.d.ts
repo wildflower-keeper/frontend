@@ -20,3 +20,19 @@ export interface NoticeListParam {
   pageNumber: number;
   pageSize: number;
 }
+
+export interface NoticeParams {
+  pageNumber: number;
+  pageSize: number;
+}
+
+export interface NoticeResponseType {
+  contents: string
+  id: number
+  sendAt: string
+  title: string
+}
+
+export interface NoticeListResponseType {
+  items: NoticeResponseType[],
+}

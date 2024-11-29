@@ -3,7 +3,7 @@ import * as ROUTES from "./Routes.const";
 import { CreateAdminDataType } from "@/components/Layout/CreateAdminForm";
 import { generateSplitUrl } from "@/api/utils.const";
 // Types
-import { AdminDataType, CreateAdminResponseType } from "@/api/v2/shelter-admin/type";
+import { AdminDataType, CreateAdminResponseType, NoticeListResponseType, NoticeParams } from "@/api/v2/shelter-admin/type";
 
 export function adminList(): Promise<AdminDataType[]> {
     return GET({url: ROUTES.ADMIN_LIST})
@@ -32,6 +32,11 @@ export function deleteAdmin(id: number) {
     return DELETE({ url: ROUTES.DELETE_ADMIN + '/' + id });
 }
 
+export function noticeList(opt: NoticeParams): Promise<NoticeListResponseType> {
+    return GET({url: ROUTES.NOTICE_LIST, params: opt});
+}
+
 adminList.queryKey = () => generateSplitUrl(ROUTES.ADMIN_LIST);
+noticeList.queryKey = () => generateSplitUrl(ROUTES.NOTICE_LIST);
 createAdminAccount.mutationKey = () => generateSplitUrl(ROUTES.ADMIN_LIST);
 deleteAdmin.mutationKey = () => generateSplitUrl(ROUTES.DELETE_ADMIN);

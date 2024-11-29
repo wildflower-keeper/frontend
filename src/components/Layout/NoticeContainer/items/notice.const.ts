@@ -5,4 +5,4 @@ export const noticeDataTypeList = [
     "내용",
 ];
 
-export const gridCol = "1fr 1fr 1fr 3fr";
+export const gridCol = "1fr 2fr 1fr 3fr";
