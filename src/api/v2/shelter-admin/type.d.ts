@@ -36,3 +36,8 @@ export interface NoticeResponseType {
 export interface NoticeListResponseType {
   items: NoticeResponseType[],
 }
+
+export interface NoticeDataType{
+  title: string
+  content: string
+}

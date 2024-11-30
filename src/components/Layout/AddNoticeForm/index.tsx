@@ -1,19 +1,33 @@
 "use client"
 
+import { noticeList, postNotice } from "@/api/v2/shelter-admin";
+import { NoticeDataType } from "@/api/v2/shelter-admin/type";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-interface NoticeDataType {
-    title: string
-    content: string
-}
-
 const NoticeAddForm = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<NoticeDataType>();
+    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm<NoticeDataType>();
+    const queryClient = useQueryClient();
 
+    const { mutate } = useMutation({
+        mutationKey: postNotice.mutationKey(),
+        mutationFn: (data: NoticeDataType) => postNotice(data)
+    })
     const onSubmit = (data: NoticeDataType) => {
-
+        mutate(data,
+            {
+                onSuccess: (res) => {
+                    queryClient.invalidateQueries({queryKey: [...noticeList.queryKey()]});
+                    reset();
+                    console.log(res);
+                },
+                onError: (error) => {
+                    console.error(error);
+                }
+            }
+        )
     }
 
     const error = Boolean(errors.title || errors.content);

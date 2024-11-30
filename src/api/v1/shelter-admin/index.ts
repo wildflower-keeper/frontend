@@ -16,8 +16,8 @@ import type {
   ShelterInfoType,
   SleepoversResponseType,
   StatusCountType,
+  userDataFormType,
 } from "./type";
-import { userDataFormType } from "@/components/Layout/AddUserForm";
 
 export function firstAuth(loginData: LoginForm): Promise<LoginSuccessType> {
   return customAxios.post(ROUTES.FIRST_AUTH, loginData)
