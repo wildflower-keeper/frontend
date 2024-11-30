@@ -1,5 +1,5 @@
 import NoticeAddForm from "../NoticeAddForm";
-import ReceptionStatusProvier from "../ReceptionStatusProvider";
+import NoticeProvider from "../NoticeProvider";
 import Notice from "./items/Notice";
 import ReceptionStatus from "./items/Reception/ReceptionStatus";
 
@@ -8,11 +8,11 @@ const NoticeContainer = () => {
         <div>
             <div className="custom-page-name">공지사항</div>
             <div className="flex items-start justify-between gap-10 w-full relative">
-                <ReceptionStatusProvier>
+                <NoticeProvider>
                     <NoticeAddForm />
                     <Notice />
                     <ReceptionStatus />
-                </ReceptionStatusProvier>
+                </NoticeProvider>
 
             </div>
         </div>

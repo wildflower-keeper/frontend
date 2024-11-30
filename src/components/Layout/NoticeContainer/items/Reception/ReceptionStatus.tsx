@@ -3,7 +3,7 @@
 import { IoCloseOutline } from "react-icons/io5";
 import TotalStatus from "./TotalStatus";
 import StatusList from "./StatusList";
-import { useReceptionStatusContext } from "@/components/Layout/ReceptionStatusProvider";
+import { useReceptionStatusContext } from "@/components/Layout/NoticeProvider";
 
 const ReceptionStatus = () => {
     const receptionStatusContext = useReceptionStatusContext();

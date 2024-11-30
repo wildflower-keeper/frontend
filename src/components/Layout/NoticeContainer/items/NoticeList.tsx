@@ -4,7 +4,7 @@ import PagenationButtonContainer from "@/components/Composition/PagenationButton
 import { gridCol } from "./notice.const";
 import { useState } from "react";
 import { NoticeListParam } from "@/api/v2/shelter-admin/type";
-import { useReceptionStatusContext } from "../../ReceptionStatusProvider";
+import { useReceptionStatusContext } from "../../NoticeProvider";
 
 const data = [
     {

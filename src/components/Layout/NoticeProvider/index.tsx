@@ -2,27 +2,27 @@
 
 import { createContext, ReactNode, useContext, useState } from "react";
 
-interface receptionStatusContextStoreType {
+interface NoticeContextStoreType {
     selectedNotice: number,
     setSelectedNotice: React.Dispatch<React.SetStateAction<number>>,
     isOpenReceptionStatusPopup: boolean,
     setIsOpenReceptionStatusPopup: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-export const receptionStatusContext = createContext<receptionStatusContextStoreType>({
+export const noticeContext = createContext<NoticeContextStoreType>({
     selectedNotice: 0,
     setSelectedNotice: () => { },
     isOpenReceptionStatusPopup: false,
     setIsOpenReceptionStatusPopup: () => { }
 })
 
-export const useReceptionStatusContext = () => useContext(receptionStatusContext);
+export const useReceptionStatusContext = () => useContext(noticeContext);
 
-function ReceptionStatusProvier({ children }: { children: ReactNode }) {
+function NoticeProvier({ children }: { children: ReactNode }) {
     const [selectedNotice, setSelectedNotice] = useState(0);
     const [isOpenReceptionStatusPopup, setIsOpenReceptionStatusPopup] = useState(false);
     return (
-        <receptionStatusContext.Provider
+        <noticeContext.Provider
             value={{
                 selectedNotice,
                 setSelectedNotice,
@@ -31,8 +31,8 @@ function ReceptionStatusProvier({ children }: { children: ReactNode }) {
             }}
         >
             {children}
-        </receptionStatusContext.Provider>
+        </noticeContext.Provider>
     )
 }
 
-export default ReceptionStatusProvier;
+export default NoticeProvier;
