@@ -5,9 +5,7 @@ import Admin from "@/components/Layout/Admin";
 
 const Page = () => {
   return (
-    <div className="flex justify-between">
-        <Admin />
-    </div>
+    <Admin />
   )
 }
 

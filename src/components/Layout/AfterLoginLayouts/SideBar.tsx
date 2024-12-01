@@ -29,7 +29,7 @@ const AfterLoginSideBar = () => {
           return (
             <div key={index} className="flex w-full relative">
               {selected && <span className="absolute left-[-20px] bg-[#3f3f3f] w-1 h-full rounded-r-full" />}
-              <Link href={path} key={path} className={`basicSidbarbutton ${selected && 'bg-[#3f3f3f]'}`}>
+              <Link href={path} key={path} className={`basicSidebarbutton ${selected && 'bg-[#3f3f3f]'}`}>
                 {Icon && (
                   <div className={`flex flex-row gap-4 ${selected ? 'text-white' : 'text-black'}`}>
                     <Icon
@@ -50,7 +50,7 @@ const AfterLoginSideBar = () => {
             return (
             <div key={index} className="flex w-full relative">
               {selected && <span className="absolute left-[-20px] bg-[#3f3f3f] w-1 h-full rounded-r-full" />}
-              <Link href={path} className={`flex gap-2 items-center basicSidbarbutton ${selected && "bg-[#3f3f3f] text-white"}`} >{Icon && <Icon size={22} />}{name}</Link>
+              <Link href={path} className={`flex gap-2 items-center basicSidebarbutton ${selected && "bg-[#3f3f3f] text-white"}`} >{Icon && <Icon size={22} />}{name}</Link>
             </div>
             )
           })

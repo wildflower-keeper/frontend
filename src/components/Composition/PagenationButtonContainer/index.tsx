@@ -34,7 +34,7 @@ const PagenationButtonContainer = ({
   if (!pageButtonList) return <></>;
 
   return (
-    <div className="flex px-12 text-sm">
+    <div className="flex px-12 text-sm mt-2">
       <Button
         onClick={() => pageNumberHandler(pageNumber - 1)}
         disabled={pageNumber === 1}

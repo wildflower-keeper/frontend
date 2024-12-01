@@ -29,11 +29,11 @@ export const PAGE_ROUTE: Route[] = [
     path: "/dashboard",
     Icon: GoHome,
   }),
-  // generate_Route({
-  //   name: noticePageName,
-  //   path: "/notice",
-  //   Icon: TiMessages,
-  // }),
+  generate_Route({
+    name: noticePageName,
+    path: "/notice",
+    Icon: TiMessages,
+  }),
   generate_Route({
     name: managementPageName,
     path: "/management",
