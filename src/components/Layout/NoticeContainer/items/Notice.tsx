@@ -12,6 +12,7 @@ import { useMemo, useState } from "react";
 
 // Types
 import { NoticeListParam } from "@/api/v2/shelter-admin/type";
+import { get } from "lodash";
 
 const Notice = () => {
     const [param, setParam] = useState<NoticeListParam>({
@@ -22,19 +23,24 @@ const Notice = () => {
         return [...noticeList.queryKey(), ...Object.values(param)]
     }, [noticeList, param]);
 
-    const {data} = useQuery({
+    const {data: noticeData} = useQuery({
         queryKey,
         queryFn: () => noticeList(param)
     });
+
+    const noticeItemList = useMemo(
+        () => get(noticeData, "items", []),
+        [noticeData],
+      );
     return (
         <div className="w-full flex flex-col items-center">
             <NoticeHeader />
-            <NoticeList data={data?.items || []} />
+            <NoticeList data={noticeItemList} />
             <PagenationButtonContainer
                 pageNumberHandler={(v) =>
                     setParam((prev) => ({ ...prev, pageNumber: v }))
                 }
-                lastPageNumber={1}
+                lastPageNumber={noticeData?.pagination.lastPageNumber}
                 pageNumber={param.pageNumber}
             />
         </div>
