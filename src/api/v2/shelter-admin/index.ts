@@ -3,13 +3,13 @@ import * as ROUTES from "./Routes.const";
 import { CreateAdminDataType } from "@/components/Layout/CreateAdminForm";
 import { generateSplitUrl } from "@/api/utils.const";
 // Types
-import { AdminDataType, CreateAdminResponseType, NoticeDataType, NoticeListResponseType, NoticeParams } from "@/api/v2/shelter-admin/type";
+import { AdminDataType, CreateAdminResponseType, NoticeDataType, NoticeListResponseType, NoticeParams, NoticeRequestType } from "@/api/v2/shelter-admin/type";
 
 export function adminList(): Promise<AdminDataType[]> {
-    return GET({url: ROUTES.ADMIN_LIST})
-    .catch((error) => {
-        throw error;
-    })
+    return GET({ url: ROUTES.ADMIN_LIST })
+        .catch((error) => {
+            throw error;
+        })
 }
 
 export function createAdminAccount(adminData: CreateAdminDataType): Promise<CreateAdminResponseType> {
@@ -33,11 +33,11 @@ export function deleteAdmin(id: number) {
 }
 
 export function noticeList(opt: NoticeParams): Promise<NoticeListResponseType> {
-    return GET({url: ROUTES.NOTICE_LIST, params: opt});
+    return GET({ url: ROUTES.NOTICE_LIST, params: opt });
 }
 
-export function postNotice(noticeData: NoticeDataType): Promise<NoticeListResponseType> {
-    return POST({url: ROUTES.NOTICE_LIST, data: {...noticeData, targetHomelessIds: []}});
+export function postNotice(noticeData: NoticeRequestType): Promise<NoticeListResponseType> {
+    return POST({ url: ROUTES.NOTICE_LIST, data: { ...noticeData } });
 }
 
 adminList.queryKey = () => generateSplitUrl(ROUTES.ADMIN_LIST);

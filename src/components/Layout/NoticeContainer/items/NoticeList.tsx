@@ -1,6 +1,6 @@
 "use client"
 
-import { NoticeListResponseType, NoticeResponseType } from "@/api/v2/shelter-admin/type";
+import { NoticeResponseType } from "@/api/v2/shelter-admin/type";
 import { gridCol } from "./notice.const";
 import { formatDateString } from "@/utils/string/date";
 

@@ -35,9 +35,28 @@ export interface NoticeResponseType {
 
 export interface NoticeListResponseType {
   items: NoticeResponseType[],
+  pagination: PaginationType;
+
+}
+
+export interface PaginationType {
+  currentPageNumber: number;
+  nextPageNumber: number;
+  pageSize: number;
+  lastPageNumber: number;
 }
 
 export interface NoticeDataType{
   title: string
   content: string
+}
+
+export interface NoticeRequestType extends NoticeDataType {
+  targetHomelessIds: number[]
+}
+
+export interface UserItemType {
+  id: number
+  name: string
+  phoneNumber: string
 }
