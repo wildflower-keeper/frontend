@@ -44,8 +44,8 @@ const UserBoardContainer = () => {
         <div className="custom-page-name">이용자 관리</div>
         <div className="flex gap-4 justify-between items-center mb-2">
           <StatusFilter 
-          filterHandler={(status, filterType) => setParam((prev) => ({
-            ...prev, status, filterType
+          filterHandler={(status, filterType, page) => setParam((prev) => ({
+            ...prev, status, filterType, pageNumber: page
           }))} 
           />
           <div className="flex items-center relative">
