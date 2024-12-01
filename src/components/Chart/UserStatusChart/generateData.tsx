@@ -20,7 +20,7 @@ interface GenerateChartDataType {
 
 export const generateCountData = (countArray: number[] | undefined) => {
     const dataValueArray: ChartDataValueType[] = [];
-    (countArray || []).forEach((v, index) => {
+    (countArray || []).map((v, index) => {
         dataValueArray[index] = {
             "x": index + 1 + "일",
             "y": v

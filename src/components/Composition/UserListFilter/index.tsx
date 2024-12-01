@@ -2,7 +2,7 @@ import { FilterType, StatusFilterType, StatusType } from "@/api/v1/shelter-admin
 import { useEffect, useState } from "react";
 
 interface Props {
-    filterHandler: (status: StatusType, filterType: FilterType) => void
+    filterHandler: (status: StatusType, filterType: FilterType, page: number) => void
 }
 
 const initStatusFilters: StatusFilterType[] = [
@@ -51,8 +51,8 @@ const StatusFilter = ({ filterHandler }: Props) => {
     useEffect(() => {
         statusFilters.map((filter, index) => {
             if(filter.isSelected) {
-                if(index === 0) filterHandler(filter.type, 'NONE'); //전체 필터일 때는 필터 적용 X
-                else filterHandler(filter.type, 'InOutStatus');
+                if(index === 0) filterHandler(filter.type, 'NONE', 1); //전체 필터일 때는 필터 적용 X
+                else filterHandler(filter.type, 'InOutStatus', 1);
             }
         })
     }, [statusFilters]);
