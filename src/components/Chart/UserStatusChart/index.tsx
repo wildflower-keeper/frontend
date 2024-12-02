@@ -27,13 +27,16 @@ const UserStatusChart = ({ selectedStatusCount, statusCountData }: Props) => {
   }, [selectedStatusCount]);
 
   const chartData = useMemo(() => {
-    if(!visibleChartTypes.length) return null;
-    
-    return visibleChartTypes.map((type) => generateChartData({id: type, color: COLOR_MAP.get(type), countArray: statusCountData[type]}))
-  }, [visibleChartTypes]);
+    if (!visibleChartTypes.length) return null;
+    return visibleChartTypes.map((type) => generateChartData({ id: type, color: COLOR_MAP.get(type), countArray: statusCountData[type] }))
+  }, [visibleChartTypes, statusCountData]);
 
   const chartOptions = useMemo(() => {
-    if(!chartData) return null;
+    if (!chartData) return null;
+    const isAllZero = chartData.every(dataset =>
+      dataset.data.length === 0
+    );
+    if (isAllZero) return null;
     return {
       ...staticChartOption,
       data: chartData,
@@ -51,7 +54,8 @@ const UserStatusChart = ({ selectedStatusCount, statusCountData }: Props) => {
           chartOptions &&
           <ResponsiveLine
             {...chartOptions}
-          />}
+          />
+        }
       </div>
     </div>
 

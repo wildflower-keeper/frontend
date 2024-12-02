@@ -1,3 +1,4 @@
+import { HomelessReadInfoType } from "@/api/v2/shelter-admin/type";
 import { FaCheck } from "react-icons/fa6";
 
 const StatusTypes = [
@@ -7,48 +8,7 @@ const StatusTypes = [
     "수신여부"
 ]
 
-const data = [
-    {
-        name: "임동현",
-        phoneNumber: "010-5559-9654",
-        isReceived: true
-    },
-    {
-        name: "임동현",
-        phoneNumber: "010-5559-9654",
-        isReceived: true
-    },
-    {
-        name: "임동현",
-        phoneNumber: "010-5559-9654",
-        isReceived: false
-    }, {
-        name: "임동현",
-        phoneNumber: "010-5559-9654",
-        isReceived: false
-    }, {
-        name: "임동현",
-        phoneNumber: "010-5559-9654",
-        isReceived: true
-    },
-    {
-        name: "임동현",
-        phoneNumber: "010-5559-9654",
-        isReceived: false
-    },
-    {
-        name: "임동현",
-        phoneNumber: "010-5559-9654",
-        isReceived: false
-    },
-    {
-        name: "임동현",
-        phoneNumber: "010-5559-9654",
-        isReceived: false
-    }
-]
-
-const StatusList = () => {
+const StatusList = ({data}: {data: HomelessReadInfoType[]}) => {
     return (
         <div className="overflow-y-scroll">
             <h1 className="mb-1">수신 리스트</h1>
@@ -71,13 +31,13 @@ const StatusList = () => {
                         {index + 1}
                     </div>
                     <div className="basicRowStyle">
-                        {userData.name}
+                        {userData.homelessName}
                     </div>
                     <div className="basicRowStyle">
-                        {userData.phoneNumber}
+                        {userData.homelessPhoneNumber}
                     </div>
                     <div className="basicRowStyle">
-                        <span className="flex justify-center items-center w-6 h-6 bg-[#FFF0F0]"><FaCheck className={`${userData.isReceived ? "text-neutral-300" : "text-green-500"}`} /></span>
+                        <span className="flex justify-center items-center w-6 h-6 bg-[#FFF0F0]"><FaCheck className={`${userData.read ? "text-green-500" : "text-neutral-300"}`} /></span>
                     </div>
                 </div>
             ))}

@@ -3,15 +3,7 @@ import UserDataInput from "@/components/Composition/AddUserModal/items/UserDataI
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form"
 import { useUserContext } from "../UserManagementProvider";
-
-export interface userDataFormType {
-    name: string
-    room: string
-    phoneNumber: string
-    birthDate: string,
-    memo: string,
-    emergencyContact: string | null
-}
+import { userDataFormType } from "@/api/v1/shelter-admin/type";
 
 const baseButtonStyle = "px-3 py-1 rounded-3xl border border-[#dfdfdf]";
 

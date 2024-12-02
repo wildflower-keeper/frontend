@@ -3,33 +3,36 @@
 import { IoCloseOutline } from "react-icons/io5";
 import TotalStatus from "./TotalStatus";
 import StatusList from "./StatusList";
-import { useReceptionStatusContext } from "@/components/Layout/NoticeProvider";
+import { useNoticeContext } from "@/components/Layout/NoticeProvider";
+import { useQuery } from "@tanstack/react-query";
+import { getNoticeRecipient } from "@/api/v2/shelter-admin";
 
 const ReceptionStatus = () => {
-    const receptionStatusContext = useReceptionStatusContext();
-    const { isOpenReceptionStatusPopup, setIsOpenReceptionStatusPopup } = receptionStatusContext;
+    const noticeContext = useNoticeContext();
+    const { setIsOpenReceptionStatusPopup, selectedNoticeId } = noticeContext;
     const onCloseClick = () => {
         setIsOpenReceptionStatusPopup(false);
     }
+
+    const { data } = useQuery({
+        queryFn: () => getNoticeRecipient(selectedNoticeId),
+        queryKey: [selectedNoticeId, ...getNoticeRecipient.queryKey()]
+    });
+    console.log(data);
     return (
         <div>
-            {
-                isOpenReceptionStatusPopup ?
-                    (<div className="absolute flex flex-col gap-4 left-0 top-20 p-5 bg-white min-w-[320px] h-full rounded-2xl shadow-xl">
-                        < div className="flex flex-row justify-between" >
-                            <h1>수신 현황</h1>
-                            <button
-                                onClick={onCloseClick}
-                                className="flex justify-center items-center w-6 h-6 bg-[#FFF0F0]">
-                                <IoCloseOutline size={30} />
-                            </button>
-                        </div >
-                        <TotalStatus />
-                        <StatusList />
-                    </div >)
-                    :
-                    null
-            }
+            <div className="absolute flex flex-col gap-4 left-0 top-0 p-5 bg-white min-w-[400px] h-full rounded-2xl shadow-xl">
+                < div className="flex flex-row justify-between" >
+                    <h1>수신 현황</h1>
+                    <button
+                        onClick={onCloseClick}
+                        className="flex justify-center items-center w-6 h-6 bg-[#FFF0F0]">
+                        <IoCloseOutline size={30} />
+                    </button>
+                </div >
+                <TotalStatus noticeReadInfo={data?.noticeReadInfo} />
+                <StatusList data={data?.items || []} />
+            </div >
         </div>
 
     )

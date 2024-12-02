@@ -20,14 +20,19 @@ const UserBoardItem = ({
   room,
   emergencyContact,
   reason,
-  targetDateSleepover
+  sleepoverStartDate,
+  sleepoverEndDate
 }: UserBoardItemType) => {
   const [isOpenStatusList, setIsOpenStatusList] = useState(false);
   const onStatusClick = () => {
     setIsOpenStatusList((prev) => !prev);
   }
+  const sleepoverPeriod = sleepoverStartDate && sleepoverEndDate ? `${sleepoverStartDate}~${sleepoverEndDate}` : "";
   return (
-    <div className="py-3 bg-white grid grid-cols-8 place-items-cente text-sm border-b border-solid border-neutral-200">
+    <div className="py-3 bg-white grid grid-cols-8 place-items-cente text-sm border-b border-solid border-neutral-200"
+      style={{
+        gridTemplateColumns: "1fr 1fr 1fr 1fr 2fr 2fr 2fr 2fr"
+      }}>
       <NumberOrCheckbox id={id} index={index} />
       <div className="basicRowStyle relative">
         {
@@ -44,8 +49,8 @@ const UserBoardItem = ({
       </div>
       <div className="basicRowStyle truncate">{name}</div>
       <div className="basicRowStyle truncate">{room}</div>
-      <div className="basicRowStyle min-w-[102px]">{formatPhoneNumber(phoneNumber)}</div>
-      <div className="basicRowStyle">{targetDateSleepover}</div>
+      <div className="basicRowStyle truncate min-w-[102px]">{formatPhoneNumber(phoneNumber)}</div>
+      <div className="basicRowStyle">{sleepoverPeriod}</div>
       <div className="basicRowStyle">{reason}</div>
       <div className="basicRowStyle">{emergencyContact}</div>
     </div>

@@ -172,3 +172,12 @@ export interface GetEmergencyResponseType {
   result: string;
   logs: EmergencyLogItemType[];
 }
+
+export interface userDataFormType {
+  name: string
+  room: string
+  phoneNumber: string
+  birthDate: string,
+  memo: string,
+  emergencyContact: string | null
+}

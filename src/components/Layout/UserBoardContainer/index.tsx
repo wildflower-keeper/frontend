@@ -26,7 +26,7 @@ const UserBoardContainer = () => {
     pageSize: 5,
   });
   const queryKey = useMemo(() => {
-    const queryKey = [...homelessPeopleList.queryKey(), ...Object.values(param)];
+    const queryKey = [...homelessPeopleList.queryKey(), param.filterType, param.filterValue, param.pageNumber];
     return queryKey;
   }, [homelessPeopleList, param]);
   const { data: homelessPeopleListData } = useQuery({
@@ -38,15 +38,14 @@ const UserBoardContainer = () => {
     () => get(homelessPeopleListData, "items", []),
     [homelessPeopleListData],
   );
-
   return (
     <div className="w-full h-full">
       <UserManagementProvider>
         <div className="custom-page-name">이용자 관리</div>
         <div className="flex gap-4 justify-between items-center mb-2">
           <StatusFilter 
-          filterHandler={(status, filterType) => setParam((prev) => ({
-            ...prev, status, filterType
+          filterHandler={(status, filterType, page) => setParam((prev) => ({
+            ...prev, status, filterType, pageNumber: page
           }))} 
           />
           <div className="flex items-center relative">
