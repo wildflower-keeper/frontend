@@ -1,8 +1,11 @@
 import NoticeContainer from "@/components/Layout/NoticeContainer"
+import NoticeProvider from "@/components/Layout/NoticeProvider"
 
 const Page = () => {
     return (
-        <NoticeContainer />
+        <NoticeProvider>
+            <NoticeContainer />
+        </NoticeProvider>
     )
 }
 

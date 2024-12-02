@@ -33,17 +33,34 @@ export interface NoticeResponseType {
   title: string
 }
 
-export interface NoticeListResponseType {
-  items: NoticeResponseType[],
-  pagination: PaginationType;
-
-}
-
 export interface PaginationType {
   currentPageNumber: number;
   nextPageNumber: number;
   pageSize: number;
   lastPageNumber: number;
+}
+
+export interface NoticeListResponseType {
+  items: NoticeResponseType[],
+  pagination: PaginationType;
+}
+
+export interface HomelessReadInfoType {
+  homelessId: number,
+  homelessName: string,
+  homelessPhoneNumber: string,
+  read: boolean
+}
+
+export interface NoticeReadInfoType {
+  totalCount: number
+  readCount: number
+  unReadCount: number
+}
+
+export interface NoticeRecipientResponseType {
+  items: HomelessReadInfoType[]
+  noticeReadInfo: NoticeReadInfoType
 }
 
 export interface NoticeDataType{

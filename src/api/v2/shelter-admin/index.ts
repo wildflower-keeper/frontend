@@ -3,7 +3,7 @@ import * as ROUTES from "./Routes.const";
 import { CreateAdminDataType } from "@/components/Layout/CreateAdminForm";
 import { generateSplitUrl } from "@/api/utils.const";
 // Types
-import { AdminDataType, CreateAdminResponseType, NoticeDataType, NoticeListResponseType, NoticeParams, NoticeRequestType } from "@/api/v2/shelter-admin/type";
+import { AdminDataType, CreateAdminResponseType, NoticeDataType, NoticeListResponseType, NoticeParams, NoticeRecipientResponseType, NoticeRequestType } from "@/api/v2/shelter-admin/type";
 
 export function adminList(): Promise<AdminDataType[]> {
     return GET({ url: ROUTES.ADMIN_LIST })
@@ -40,8 +40,14 @@ export function postNotice(noticeData: NoticeRequestType): Promise<NoticeListRes
     return POST({ url: ROUTES.NOTICE_LIST, data: { ...noticeData } });
 }
 
+export function getNoticeRecipient(id: number): Promise<NoticeRecipientResponseType> {
+    return GET({url: ROUTES.NOTICE_RECIPIENT + '/' + id});
+}
+
 adminList.queryKey = () => generateSplitUrl(ROUTES.ADMIN_LIST);
 noticeList.queryKey = () => generateSplitUrl(ROUTES.NOTICE_LIST);
+getNoticeRecipient.queryKey = () => generateSplitUrl(ROUTES.NOTICE_RECIPIENT);
+
 createAdminAccount.mutationKey = () => generateSplitUrl(ROUTES.ADMIN_LIST);
 deleteAdmin.mutationKey = () => generateSplitUrl(ROUTES.DELETE_ADMIN);
 postNotice.mutationKey = () => generateSplitUrl(ROUTES.ADMIN_LIST);

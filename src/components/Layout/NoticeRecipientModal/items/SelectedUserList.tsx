@@ -16,9 +16,9 @@ const SelectedUserList = () => {
                     <h1 className="font-bold">이용자 선택</h1>
                     <span className="text-neutral-400">{noticeTarget.length}/{totalUserNumber}</span>
                 </div>
-                <CloseButton onClick={onCloseClick} size={6} />
+                <CloseButton onClick={onCloseClick} size={5} />
             </div >
-            <div className="overflow-y-scroll overflow-x-hidden grid grid-cols-5 gap-1 h-[50px]">
+            <div className="overflow-y-scroll overflow-x-hidden grid grid-cols-5 gap-1 h-[50px] mt-2">
                 {noticeTarget.map((userData) => {
                     const id = +Object.keys(userData)[0];
                     const name = Object.values(userData)[0];
