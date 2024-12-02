@@ -49,6 +49,10 @@ body {
   @apply font-bold text-3xl mb-2;
 }
 
-.basicSidbarbutton {
+.basicSidebarbutton {
   @apply w-48 px-2 py-3 rounded-md
+}
+
+.basicRowStyle {
+  @apply h-fit my-auto mx-auto text-center
 }

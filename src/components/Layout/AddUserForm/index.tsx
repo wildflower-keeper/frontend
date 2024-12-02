@@ -3,15 +3,7 @@ import UserDataInput from "@/components/Composition/AddUserModal/items/UserDataI
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form"
 import { useUserContext } from "../UserManagementProvider";
-
-export interface userDataFormType {
-    name: string
-    room: string
-    phoneNumber: string
-    birthDate: string,
-    memo: string,
-    emergencyContact: string | null
-}
+import { userDataFormType } from "@/api/v1/shelter-admin/type";
 
 const baseButtonStyle = "px-3 py-1 rounded-3xl border border-[#dfdfdf]";
 
@@ -57,7 +49,7 @@ const AddUserForm = () => {
                 placeholder="이용자 이름을 입력해주세요. (필수)"
                 type="text"
                 maxLength={10}
-                error={errors.name ? true : false}
+                error={Boolean(errors.name)}
             />
             <UserDataInput
                 {...register('room', { 
@@ -68,7 +60,7 @@ const AddUserForm = () => {
                 placeholder="이용자가 거주하는 곳을 입력해주세요. (필수)"
                 type="text"
                 maxLength={10}
-                error={errors.room ? true : false}
+                error={Boolean(errors.room)}
             />
             <UserDataInput
                 {...register('phoneNumber', {
@@ -80,7 +72,7 @@ const AddUserForm = () => {
                 placeholder="이용자 핸드폰 번호를 입력해주세요. (필수)"
                 type="number"
                 maxLength={11}
-                error={errors.phoneNumber ? true : false}
+                error={Boolean(errors.phoneNumber)}
             />
             <UserDataInput
                 {...register('emergencyContact',)}
@@ -89,7 +81,7 @@ const AddUserForm = () => {
                 placeholder="비상 연락망을 입력해주세요. (선택)"
                 type="number"
                 maxLength={11}
-                error={errors.emergencyContact ? true : false}
+                error={Boolean(errors.emergencyContact)}
             />
             <div className="flex flex-row gap-2 items-center justify-end">
                 {Object.keys(errors).length != 0 ? <div className="justify-start text-[#ff3d00] text-base mr-24">필수적인 정보를 모두 입력해주세요.</div> : null}

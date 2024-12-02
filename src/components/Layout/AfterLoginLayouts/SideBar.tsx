@@ -14,7 +14,7 @@ import { EXTRA_PAGE_ROUTE, PAGE_ROUTE } from "./index.const";
 const AfterLoginSideBar = () => {
   const pathname = usePathname();
   return (
-    <div className="flex flex-col h-min-full bg-neutral-100 py-5 w-64 border-r border-solid border-gray-200 pl-5">
+    <div className="flex flex-col h-min-full bg-white py-5 w-64 border-r border-solid border-gray-200 pl-5 min-w-[230px]">
       <div className=" w-40 h-10 mx-auto">
         <Image
           src="/assets/logos/wildflower_logo_with_name.png"
@@ -29,7 +29,7 @@ const AfterLoginSideBar = () => {
           return (
             <div key={index} className="flex w-full relative">
               {selected && <span className="absolute left-[-20px] bg-[#3f3f3f] w-1 h-full rounded-r-full" />}
-              <Link href={path} key={path} className={`basicSidbarbutton ${selected && 'bg-[#3f3f3f]'}`}>
+              <Link href={path} key={path} className={`basicSidebarbutton ${selected && 'bg-[#3f3f3f]'}`}>
                 {Icon && (
                   <div className={`flex flex-row gap-4 ${selected ? 'text-white' : 'text-black'}`}>
                     <Icon
@@ -50,7 +50,7 @@ const AfterLoginSideBar = () => {
             return (
             <div key={index} className="flex w-full relative">
               {selected && <span className="absolute left-[-20px] bg-[#3f3f3f] w-1 h-full rounded-r-full" />}
-              <Link href={path} className={`flex gap-2 items-center basicSidbarbutton ${selected && "bg-[#3f3f3f] text-white"}`} >{Icon && <Icon size={22} />}{name}</Link>
+              <Link href={path} className={`flex gap-2 items-center basicSidebarbutton ${selected && "bg-[#3f3f3f] text-white"}`} >{Icon && <Icon size={22} />}{name}</Link>
             </div>
             )
           })

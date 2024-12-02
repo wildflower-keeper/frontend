@@ -26,7 +26,7 @@ const UserBoardContainer = () => {
     pageSize: 5,
   });
   const queryKey = useMemo(() => {
-    const queryKey = [...homelessPeopleList.queryKey(), ...Object.values(param)];
+    const queryKey = [...homelessPeopleList.queryKey(), param.filterType, param.filterValue, param.pageNumber];
     return queryKey;
   }, [homelessPeopleList, param]);
   const { data: homelessPeopleListData } = useQuery({
@@ -38,7 +38,6 @@ const UserBoardContainer = () => {
     () => get(homelessPeopleListData, "items", []),
     [homelessPeopleListData],
   );
-  console.log(userItemList)
   return (
     <div className="w-full h-full">
       <UserManagementProvider>
