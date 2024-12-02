@@ -7,7 +7,7 @@ import { useNoticeContext } from "../../NoticeProvider";
 
 const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {
     const noticeContext = useNoticeContext();
-    const { setIsOpenReceptionStatusPopup, setSelectedNoticeId, selectedNoticeId } = noticeContext;
+    const { setIsOpenReceptionStatusPopup, setSelectedNoticeId, selectedNoticeId, isOpenReceptionStatusPopup } = noticeContext;
     const onNoticeClick = (id: number) => {
         setIsOpenReceptionStatusPopup(true);
         setSelectedNoticeId(id);
@@ -20,7 +20,7 @@ const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {
                     <div
                         onClick={() => onNoticeClick(id)}
                         key={id}
-                        className={`cursor-pointer py-3 grid grid-cols-4 border-b border-solid border-neutral-200 ${selectedNoticeId === id && "bg-neutral-200"}`}
+                        className={`cursor-pointer py-3 grid grid-cols-4 border-b border-solid border-neutral-200 ${isOpenReceptionStatusPopup && selectedNoticeId === id && "bg-neutral-200"}`}
                         style={{
                             gridTemplateColumns: gridCol
                         }}>

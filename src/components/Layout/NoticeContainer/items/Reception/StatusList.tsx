@@ -37,7 +37,7 @@ const StatusList = ({data}: {data: HomelessReadInfoType[]}) => {
                         {userData.homelessPhoneNumber}
                     </div>
                     <div className="basicRowStyle">
-                        <span className="flex justify-center items-center w-6 h-6 bg-[#FFF0F0]"><FaCheck className={`${userData.read ? "text-green-500" : "text-neutral-300"}`} /></span>
+                        <span className="flex justify-center items-center w-6 h-6 bg-[#FFF0F0]"><FaCheck className={`size-4 ${userData.read ? "text-green-500" : "text-neutral-300"}`} /></span>
                     </div>
                 </div>
             ))}

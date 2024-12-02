@@ -18,7 +18,6 @@ const ReceptionStatus = () => {
         queryFn: () => getNoticeRecipient(selectedNoticeId),
         queryKey: [selectedNoticeId, ...getNoticeRecipient.queryKey()]
     });
-    console.log(data);
     return (
         <div>
             <div className="absolute flex flex-col gap-4 left-0 top-0 p-5 bg-white min-w-[400px] h-full rounded-2xl shadow-xl">
