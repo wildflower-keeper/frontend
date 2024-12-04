@@ -40,7 +40,7 @@ const UserManagementButtonContainer = () => {
     return (
         <div className="flex flex-row gap-2 px-3 py-1 relative">
             <OpenAddButton />
-            <OpenDeleteButton />
+            {/* <OpenDeleteButton /> */}
             {isChecked && <DeleteButton onCancelDeleteClick={onCancelDeleteClick} />}
         </div>
     )
