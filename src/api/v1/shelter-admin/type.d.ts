@@ -153,6 +153,7 @@ export interface HomelessPeopleListParam
   extends FilterValuesType,
     GetSleepoverListParam {
   sleepoverTargetDate: string;
+  status: string | null
 }
 
 export interface LocationType {
