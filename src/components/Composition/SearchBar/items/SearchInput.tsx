@@ -12,7 +12,7 @@ import type {
 
 interface Props {
   value: FilterValueType;
-  filterHandler: (key: keyof FilterValuesType, value: FilterValueType) => void;
+  filterHandler: (value: FilterValueType) => void;
   submitHandler: () => void;
   disabled: boolean;
 }
@@ -44,7 +44,7 @@ const SearchInput = ({
           className=" w-40 placeholder:text-fontWeak focus:outline-none"
           value={value}
           onChange={(e) => {
-            filterHandler("filterValue", e.target.value);
+            filterHandler(e.target.value);
           }}
         />
       </form>

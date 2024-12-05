@@ -11,6 +11,7 @@ const UserListContainer = () => {
     const [param, setParam] = useState<HomelessPeopleListParam>({
         filterType: "NAME",
         filterValue: "",
+        status: "",
         sleepoverTargetDate: new Date().toISOString(),
         pageNumber: 1,
         pageSize: 1000,

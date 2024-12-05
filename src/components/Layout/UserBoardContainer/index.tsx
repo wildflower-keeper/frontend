@@ -21,14 +21,15 @@ const UserBoardContainer = () => {
   const [param, setParam] = useState<HomelessPeopleListParam>({
     filterType: "NAME",
     filterValue: "",
+    status: "",
     sleepoverTargetDate: new Date().toISOString(),
     pageNumber: 1,
     pageSize: 5,
   });
   const queryKey = useMemo(() => {
-    const queryKey = [...homelessPeopleList.queryKey(), param.filterType, param.filterValue, param.pageNumber];
+    const queryKey = [...homelessPeopleList.queryKey(), param.filterType, param.filterValue, param.pageNumber, param.status];
     return queryKey;
-  }, [homelessPeopleList, param]);
+  }, [param]);
   const { data: homelessPeopleListData } = useQuery({
     queryFn: () => homelessPeopleList(param),
     queryKey,
