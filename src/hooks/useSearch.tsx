@@ -19,7 +19,8 @@ export const useSearch = () => {
     useState<FilterValuesType>(initValues);
 
   const filterHandler: FilterHandlerType = (key, value) => {
-    setFilterValues((prev) => ({ ...prev, [key]: value }));
+    const filterType = value === "" ? "NONE" : "NAME";
+    setFilterValues((prev) => ({ filterType, filterValue: value }));
   };
 
   const isSubmitDisabled =
