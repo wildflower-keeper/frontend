@@ -6,7 +6,7 @@ import type { FilterType, FilterValuesType } from "@/api/v1/shelter-admin/type";
 export type FilterHandlerValue = string | FilterType;
 
 export interface FilterHandlerType {
-  (key: keyof FilterValuesType, value: FilterHandlerValue): void;
+  (value: FilterHandlerValue): void;
 }
 
 const initValues: FilterValuesType = {
@@ -18,9 +18,9 @@ export const useSearch = () => {
   const [filterValues, setFilterValues] =
     useState<FilterValuesType>(initValues);
 
-  const filterHandler: FilterHandlerType = (key, value) => {
+  const filterHandler: FilterHandlerType = (value) => {
     const filterType = value === "" ? "NONE" : "NAME";
-    setFilterValues((prev) => ({ filterType, filterValue: value }));
+    setFilterValues({ filterType, filterValue: value });
   };
 
   const isSubmitDisabled =
