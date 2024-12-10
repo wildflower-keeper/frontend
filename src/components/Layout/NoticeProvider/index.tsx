@@ -20,8 +20,8 @@ interface NoticeContextStoreType {
     setTotalUserNumber: React.Dispatch<React.SetStateAction<number>>
     selectedNoticeId: number,
     setSelectedNoticeId: React.Dispatch<React.SetStateAction<number>>,
-    isOpenReceptionStatusPopup: boolean,
-    setIsOpenReceptionStatusPopup: React.Dispatch<React.SetStateAction<boolean>>,
+    isOpenNoticeDetailPopup: boolean,
+    setIsOpenNoticeDetailPopup: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 export const noticeContext = createContext<NoticeContextStoreType>({
@@ -38,15 +38,15 @@ export const noticeContext = createContext<NoticeContextStoreType>({
     setTotalUserNumber: () => {},
     selectedNoticeId: 0,
     setSelectedNoticeId: () => { },
-    isOpenReceptionStatusPopup: false,
-    setIsOpenReceptionStatusPopup: () => { }
+    isOpenNoticeDetailPopup: false,
+    setIsOpenNoticeDetailPopup: () => { }
 })
 
 export const useNoticeContext = () => useContext(noticeContext);
 
 function NoticeProvier({ children }: { children: ReactNode }) {
     const [selectedNoticeId, setSelectedNoticeId] = useState(0);
-    const [isOpenReceptionStatusPopup, setIsOpenReceptionStatusPopup] = useState(false);
+    const [isOpenNoticeDetailPopup, setIsOpenNoticeDetailPopup] = useState(false);
     const [isEntirety, setIsEntirety] = useState(true);
     const [noticeTarget, setNoticeTarget] = useState<UserData[]>([]);
     const [isOpenUserSelectModal, setIsOpenUserSelectModal] = useState(false);
@@ -89,8 +89,8 @@ function NoticeProvier({ children }: { children: ReactNode }) {
                 setTotalUserNumber,
                 selectedNoticeId,
                 setSelectedNoticeId,
-                isOpenReceptionStatusPopup,
-                setIsOpenReceptionStatusPopup
+                isOpenNoticeDetailPopup,
+                setIsOpenNoticeDetailPopup
             }}
         >
             {children}

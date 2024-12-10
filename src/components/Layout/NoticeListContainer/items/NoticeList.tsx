@@ -10,9 +10,9 @@ import { FaCheck } from "react-icons/fa6";
 
 const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {
     const noticeContext = useNoticeContext();
-    const { setIsOpenReceptionStatusPopup, setSelectedNoticeId, selectedNoticeId, isOpenReceptionStatusPopup } = noticeContext;
+    const { setIsOpenNoticeDetailPopup, setSelectedNoticeId, selectedNoticeId, isOpenNoticeDetailPopup } = noticeContext;
     const onNoticeClick = (id: number) => {
-        setIsOpenReceptionStatusPopup(true);
+        setIsOpenNoticeDetailPopup(true);
         setSelectedNoticeId(id);
     }
 
@@ -21,9 +21,8 @@ const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {
             {
                 data.map(({ sendAt, title, contents, id }, index) => (
                     <div
-                        onClick={() => onNoticeClick(id)}
                         key={id}
-                        className={`cursor-pointer py-3 grid grid-cols-7 border-b border-solid border-neutral-200 ${isOpenReceptionStatusPopup && selectedNoticeId === id && "bg-neutral-200"}`}
+                        className={`py-3 grid grid-cols-7 border-b border-solid border-neutral-200 ${isOpenNoticeDetailPopup && selectedNoticeId === id && "bg-neutral-200"}`}
                         style={{
                             gridTemplateColumns: gridCol
                         }}>
@@ -38,7 +37,7 @@ const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {
                         <div className="basicRowStyle flex flex-col items-center">
                             <span>개별공지</span><span>8/16</span>
                         </div>
-                        <button className="basicRowStyle bg-[#19c23d] text-white p-2 rounded-xl">상세보기</button>
+                        <button onClick={() => onNoticeClick(id)} className="basicRowStyle bg-[#19c23d] text-white p-2 rounded-xl">상세보기</button>
                     </div>
                 ))
             }

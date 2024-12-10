@@ -1,12 +1,6 @@
 import FilterButton from "@/components/Composition/FilterButton";
 
-const NoticeFilterList = [
-    {
-        title: "ㅁ"
-    }
-]
-
-const NoticeFilterContainer = () => {
+const RecipientFilterConainer = () => {
     return (
         <div className="flex gap-3 mb-3">
             <FilterButton size="size-22" name="모두보기" onClick={() => {}} />
@@ -16,4 +10,4 @@ const NoticeFilterContainer = () => {
     )
 }
 
-export default NoticeFilterContainer;
+export default RecipientFilterConainer;
