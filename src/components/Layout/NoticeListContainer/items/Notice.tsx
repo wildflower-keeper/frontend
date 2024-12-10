@@ -1,8 +1,6 @@
 "use client"
 
 // Compo
-import NoticeList from "./NoticeList";
-import NoticeHeader from "./NoticeHeader";
 import PagenationButtonContainer from "@/components/Composition/PagenationButtonContainer";
 
 // Utils
@@ -13,6 +11,8 @@ import { useMemo, useState } from "react";
 // Types
 import { NoticeListParam } from "@/api/v2/shelter-admin/type";
 import { get } from "lodash";
+import NoticeHeader from "@/components/Layout/NoticeListContainer/items/NoticeHeader";
+import NoticeList from "@/components/Layout/NoticeListContainer/items/NoticeList";
 
 const Notice = () => {
     const [param, setParam] = useState<NoticeListParam>({
@@ -33,7 +33,7 @@ const Notice = () => {
         [noticeData],
       );
     return (
-        <div className="w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center text-sm">
             <NoticeHeader />
             <NoticeList data={noticeItemList} />
             <PagenationButtonContainer

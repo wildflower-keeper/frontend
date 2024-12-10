@@ -1,9 +1,11 @@
-const Page = () => {
+"use client"
+
+import NoticeListContainer from "@/components/Layout/NoticeListContainer";
+
+const NoticeList = () => {
     return (
-        <div>
-            리스트
-        </div>
+        <NoticeListContainer />
     )
 }
 
-export default Page;
+export default NoticeList;
