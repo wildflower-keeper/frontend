@@ -6,14 +6,16 @@ import Link from "next/link";
 import LogoutButton from "@/components/Composition/LogoutButton";
 
 // Utils
-import React from "react";
+import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { EXTRA_PAGE_ROUTE, PAGE_ROUTE } from "./index.const";
 import PinNumber from "./items/PinNumber";
+import PageList from "./items/PageList";
 
 
 const AfterLoginSideBar = () => {
   const pathname = usePathname();
+  const [isOpenNotice, setIsOpenNotice] = useState(false);
   return (
     <div className="flex flex-col h-min-full bg-white py-5 w-64 border-r border-solid border-gray-200 min-w-[230px]">
       <div className=" w-40 h-10 mx-auto">
@@ -24,26 +26,7 @@ const AfterLoginSideBar = () => {
           height={300}
         />
       </div>
-      <div className="grow flex flex-col items-start mt-10 pl-5">
-        {PAGE_ROUTE.map(({ name, path, Icon }, index) => {
-          const selected = pathname === path;
-          return (
-            <div key={index} className="flex w-full relative">
-              {selected && <span className="absolute left-[-20px] bg-[#3f3f3f] w-1 h-full rounded-r-full" />}
-              <Link href={path} key={path} className={`basicSidebarbutton ${selected && 'bg-[#3f3f3f]'}`}>
-                {Icon && (
-                  <div className={`flex flex-row gap-4 ${selected ? 'text-white' : 'text-black'}`}>
-                    <Icon
-                      size={26}
-                    />
-                    {name}
-                  </div>
-                )}
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+      <PageList />
       <div className="flex justify-center w-full">
       <PinNumber />
       </div>

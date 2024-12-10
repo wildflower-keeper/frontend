@@ -6,13 +6,16 @@ import { PiSiren } from "react-icons/pi";
 import { PiChartLineUpLight } from "react-icons/pi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdPersonOutline } from "react-icons/md";
+import { LuDot } from "react-icons/lu";
 // Types
 import { IconType } from "react-icons/lib";
 
 interface Route {
   name: string;
   path: string;
-  Icon?: IconType;
+  Icon: IconType;
+  isNoticeToggle?: boolean;
+  isNoticeDropdown?: boolean
 }
 
 export const generate_Route = (arg: Route) => ({ ...arg });
@@ -38,6 +41,19 @@ export const PAGE_ROUTE: Route[] = [
     name: noticePageName,
     path: "/notice",
     Icon: TiMessages,
+    isNoticeToggle: true,
+  }),
+  generate_Route({
+    name: "공지사항 발송",
+    path: "/notice/send",
+    Icon: LuDot,
+    isNoticeDropdown: true,
+  }),
+  generate_Route({
+    name: "공지사항 이력",
+    path: "/notice/list",
+    Icon: LuDot,
+    isNoticeDropdown: true,
   }),
   generate_Route({
     name: "관리자 리스트",
