@@ -30,14 +30,19 @@ export const PAGE_ROUTE: Route[] = [
     Icon: GoHome,
   }),
   generate_Route({
+    name: managementPageName,
+    path: "/management",
+    Icon: PiFolderUserFill,
+  }),
+  generate_Route({
     name: noticePageName,
     path: "/notice",
     Icon: TiMessages,
   }),
   generate_Route({
-    name: managementPageName,
-    path: "/management",
-    Icon: PiFolderUserFill,
+    name: "관리자 리스트",
+    path: "/adminList",
+    Icon: MdPersonOutline,
   }),
   // generate_Route({
   //   name: emergencyPageName,
@@ -52,11 +57,6 @@ export const PAGE_ROUTE: Route[] = [
 ];
 
 export const EXTRA_PAGE_ROUTE: Route[] = [
-  generate_Route({
-    name: "관리자 리스트",
-    path: "/adminList",
-    Icon: MdPersonOutline,
-  }),
   generate_Route({
     name: "설정",
     path: "/setting",

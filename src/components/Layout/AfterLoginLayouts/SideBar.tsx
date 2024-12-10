@@ -9,12 +9,13 @@ import LogoutButton from "@/components/Composition/LogoutButton";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { EXTRA_PAGE_ROUTE, PAGE_ROUTE } from "./index.const";
+import PinNumber from "./items/PinNumber";
 
 
 const AfterLoginSideBar = () => {
   const pathname = usePathname();
   return (
-    <div className="flex flex-col h-min-full bg-white py-5 w-64 border-r border-solid border-gray-200 pl-5 min-w-[230px]">
+    <div className="flex flex-col h-min-full bg-white py-5 w-64 border-r border-solid border-gray-200 min-w-[230px]">
       <div className=" w-40 h-10 mx-auto">
         <Image
           src="/assets/logos/wildflower_logo_with_name.png"
@@ -23,7 +24,7 @@ const AfterLoginSideBar = () => {
           height={300}
         />
       </div>
-      <div className="grow flex flex-col items-start mt-10">
+      <div className="grow flex flex-col items-start mt-10 pl-5">
         {PAGE_ROUTE.map(({ name, path, Icon }, index) => {
           const selected = pathname === path;
           return (
@@ -43,7 +44,10 @@ const AfterLoginSideBar = () => {
           );
         })}
       </div>
-      <div className="flex flex-col items-start w-full border-t border-solid border-gray-200 pb-5 pt-10 text-sm">
+      <div className="flex justify-center w-full">
+      <PinNumber />
+      </div>
+      <div className="flex flex-col items-start w-full border-t border-solid border-gray-200 pb-5 pt-10 text-sm pl-5">
         {
           EXTRA_PAGE_ROUTE.map(({ name, path, Icon }, index) => {
             const selected = pathname === path;

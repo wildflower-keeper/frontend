@@ -1,7 +1,6 @@
 "use client";
 
 // Compo
-import PinNumberInfo from "./PinNumberInfo";
 // Utils
 import React, { useEffect, useState } from "react";
 import useUpdateTimer from "@/store/useUpdateTimer";
@@ -10,14 +9,14 @@ import { ko } from "date-fns/locale";
 
 const DateInfo = () => {
   const [timeStamp, setTimeStamp] = useState<string>(
-    format(new Date(), "M월 d일 (EEE) HH:mm", { locale: ko }),
+    format(new Date(), "yyyy년 M월 d일", { locale: ko }),
   );
   const { updateTimer } = useUpdateTimer();
 
   useEffect(() => {
     const tick = setTimeout(
       () =>
-        setTimeStamp(format(new Date(), "M월 d일 (EEE) HH:mm", { locale: ko })),
+        setTimeStamp(format(new Date(), "yyyy년 M월 d일", { locale: ko })),
       1000,
     );
 
@@ -26,11 +25,8 @@ const DateInfo = () => {
 
   return (
     <div className="flex flex-col h-fit my-auto gap-3">
-      <PinNumberInfo />
       <p>
-        {updateTimer
-          ? `${updateTimer}에 업데이트 되었습니다.`
-          : "업데이트 시간을 나타냅니다."}
+        {updateTimer}
       </p>
     </div>
   );
