@@ -2,7 +2,6 @@
 
 // Compo
 import ManagerInfo from "./items/ManagerInfo";
-import DateInfo from "./items/DateInfo";
 import { PiLineVerticalThin } from "react-icons/pi";
 // Utils
 import React, { useEffect, useMemo } from "react";
@@ -61,10 +60,9 @@ const AdminInfoContainer = () => {
       ),
     };
   }, [adminInfo]);
-
   return (
-    <div className="flex flex-row w-full justify-between items-start bg-neutral-100 px-5 py-3 rounded-md">
-      <DateInfo />
+    <div className="flex flex-row w-full justify-between items-start p-4">
+      <span className="font-bold">{formatDateString(new Date(), "yyyy년 MM월 dd일 (EEEE)")}</span>
       <div className="flex flex-row gap-2 items-center">
         <div className="font-semibold text-xl">{adminUsers.shelterName}</div>
         <PiLineVerticalThin />
