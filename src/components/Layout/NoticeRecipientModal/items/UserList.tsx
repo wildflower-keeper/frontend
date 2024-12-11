@@ -18,13 +18,14 @@ const UserList = ({ userItemList }: { userItemList: UserItemType[] }) => {
     
     useEffect(() => {
         setTotalUserNumber(userItemList.length);
-    }, [userItemList])
+    }, [userItemList]);
+    console.log(noticeTarget)
     return (
-        <div className="overflow-y-scroll h-[200px]">
+        <div className="overflow-y-scroll h-[250px]">
             {userItemList.map(({ id, name, phoneNumber }, index) => {
-                const checked = noticeTarget.some((item) => +Object.keys(item)[0] === id);
+                const selected = noticeTarget.some((item) => +Object.keys(item)[0] === id);
                 return (
-                <div key={id} className="py-3 bg-white grid grid-cols-4 text-sm border-b border-solid border-neutral-200"
+                <div key={id} className={`py-3 grid grid-cols-4 text-sm border-b border-solid border-neutral-200  ${selected && 'bg-neutral-100'}`}
                     style={{
                         gridTemplateColumns: "1fr 1fr 2fr 1fr"
                     }}
@@ -32,13 +33,11 @@ const UserList = ({ userItemList }: { userItemList: UserItemType[] }) => {
                     <div className="basicRowStyle">{index + 1}</div>
                     <div className="basicRowStyle">{name}</div>
                     <div className="basicRowStyle">{phoneNumber}</div>
-                    <div className="basicRowStyle">
-                        <Checkbox
-                            sx={checkBoxStyle}
-                            onChange={() => setNoticeTarget(id, name)}
-                            checked={checked}
-                        />
-                    </div>
+                    <button 
+                    onClick={() => setNoticeTarget(id, name)}
+                    className={`basicRowStyle px-2 border-2 border-solid rounded-md ${selected ? "border-[#19C23D]" : "border-neutral-400"}`}>
+                        {selected ? "선택취소" : "선택하기"}
+                    </button>
                 </div>
             )})}
         </div>

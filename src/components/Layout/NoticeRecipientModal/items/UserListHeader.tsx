@@ -7,7 +7,7 @@ const userDataTypeList = [
 
 const UserListHeader = () => {
     return (
-        <div className="py-3 grid grid-cols-4 bg-neutral-100 rounded-md font-bold text-sm"
+        <div className="py-3 grid grid-cols-4 rounded-md font-bold text-sm"
             style={{
                 gridTemplateColumns: "1fr 1fr 2fr 1fr"
             }}
