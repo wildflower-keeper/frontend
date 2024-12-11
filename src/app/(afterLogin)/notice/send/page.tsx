@@ -1,9 +1,9 @@
-const Page = () => {
+import NoticeSendContainer from "@/components/Layout/NoticeSendContainer";
+
+const NoticeSend = () => {
     return (
-        <div>
-            전송
-        </div>
+        <NoticeSendContainer />
     )
 }
 
-export default Page;
+export default NoticeSend;
