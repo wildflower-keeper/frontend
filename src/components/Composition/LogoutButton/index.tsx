@@ -28,7 +28,7 @@ const LogoutButton = () => {
     return (
         <button
             className="flex flex-row items-center p-2 gap-2 basicSidebarbutton" onClick={handleLogout}>
-            <LiaPowerOffSolid size={22} />
+            <LiaPowerOffSolid size={26} />
             <div className="text-md">
                 로그아웃
             </div>
