@@ -2,6 +2,7 @@ import Link from "next/link";
 import { EXTRA_PAGE_ROUTE } from "../index.const";
 import LogoutButton from "@/components/Composition/LogoutButton";
 import { usePathname } from "next/navigation";
+import RouteItem from "./RouteItem";
 
 const ExtraPageList = () => {
     const pathname = usePathname();
@@ -13,7 +14,11 @@ const ExtraPageList = () => {
                     return (
                         <div key={index} className="flex w-full relative">
                             {selected && <span className="absolute left-[-20px] bg-[#3f3f3f] w-1 h-full rounded-r-full" />}
-                            <Link href={path} className={`flex gap-2 items-center basicSidebarbutton ${selected && "bg-[#3f3f3f] text-white"}`} >{Icon && <Icon size={22} />}{name}</Link>
+                            <Link
+                                href={path}
+                                className={`basicSidebarbutton ${selected && "bg-[#3f3f3f] text-white"}`}>
+                                <RouteItem Icon={Icon} name={name} selected={selected} />
+                            </Link>
                         </div>
                     )
                 })

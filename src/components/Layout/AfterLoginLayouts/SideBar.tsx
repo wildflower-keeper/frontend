@@ -12,7 +12,7 @@ import ExtraPageList from "./items/ExtraPageList";
 
 const AfterLoginSideBar = () => {
   return (
-    <div className="flex flex-col h-min-full bg-white py-5 w-64 border-r border-solid border-gray-200 min-w-[230px]">
+    <div className="flex flex-col h-min-full bg-white py-5 w-[250px] flex-shrink-0 border-r border-solid border-gray-200">
       <div className=" w-40 h-10 mx-auto">
         <Image
           src="/assets/logos/wildflower_logo_with_name.png"

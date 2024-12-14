@@ -19,25 +19,26 @@ const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {
     return (
         <div className="w-full">
             {
-                data.map(({ sendAt, title, contents, id }, index) => (
+                data.map(({ noticeId, title, contents, createdAt, readCount, totalCount, isSurvey, imageUrl }, index) => (
                     <div
-                        key={id}
-                        className={`py-3 grid grid-cols-7 border-b border-solid border-neutral-200 ${isOpenNoticeDetailPopup && selectedNoticeId === id && "bg-neutral-200"}`}
+                        onClick={() => onNoticeClick(noticeId)}
+                        key={noticeId}
+                        className={`cursor-pointer py-3 grid grid-cols-7 border-b border-solid border-neutral-200 ${isOpenNoticeDetailPopup && selectedNoticeId === noticeId && "bg-neutral-200"}`}
                         style={{
                             gridTemplateColumns: gridCol
                         }}>
                         <div className="basicRowStyle">{index + 1}</div>
-                        <div className="basicRowStyle">{formatDateString(sendAt, "yyyy.MM.dd HH:mm")}</div>
+                        <div className="basicRowStyle">{formatDateString(createdAt, "yyyy.MM.dd HH:mm")}</div>
                         <div className="basicRowStyle">{title}</div>
                         <div className="h-fit flex items-center text-left">{contents}</div>
                         <div className="basicRowStyle flex flex-col items-center">
                             <span>참여조사</span>
-                            {true ? <FaCheck className="size-6 text-[#19c23d]" /> : <IoClose className="size-6 text-neutral-400" />}
+                            {isSurvey ? <FaCheck className="size-6 text-[#19c23d]" /> : <IoClose className="size-6 text-neutral-400" />}
                         </div>  
                         <div className="basicRowStyle flex flex-col items-center">
-                            <span>개별공지</span><span>8/16</span>
+                            <span>개별공지</span><span>{readCount}/{totalCount}</span>
                         </div>
-                        <button onClick={() => onNoticeClick(id)} className="basicRowStyle bg-[#19c23d] text-white p-2 rounded-xl">상세보기</button>
+                        <button onClick={() => onNoticeClick(noticeId)} className="basicRowStyle bg-[#19c23d] text-white p-2 rounded-xl">상세보기</button>
                     </div>
                 ))
             }

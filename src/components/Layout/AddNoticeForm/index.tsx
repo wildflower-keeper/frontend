@@ -10,7 +10,7 @@ const NoticeAddForm = () => {
             <NotificationTypeSelector />
             <div className="flex gap-10">
                 <AddText />
-                <UploadImage />
+                {/* <UploadImage /> */}
             </div>
         </div>
     )
