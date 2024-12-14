@@ -9,6 +9,9 @@ import NoticeRecipientModal from "../../NoticeRecipientModal";
 import OpenSelectUserButton from "./OpenSelectUserButton";
 import SelectedUserList from "./SelectedUserList";
 import { Checkbox } from "@mui/material";
+import { useState } from "react";
+import Loading from "@/components/Composition/Loading";
+import FinalCheckButton from "./FinalCheckButton";
 
 const checkBoxStyle = {
     color: '#bebebe',
@@ -19,15 +22,16 @@ const checkBoxStyle = {
 
 const AddText = () => {
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm<NoticeDataType>();
+    const [isIncludeSurvey, setIsIncludeSurvey] = useState(false);
     const queryClient = useQueryClient();
     const noticeContext = useNoticeContext();
-    const { isEntirety, isOpenUserSelectModal, noticeTarget, setIsOpenSuccessPopup } = noticeContext;
-    const { mutate } = useMutation({
+    const { isEntirety, isOpenUserSelectModal, noticeTarget, setIsOpenSuccessPopup, setIsOpenFinalCheckButton } = noticeContext;
+    const { mutate, isPending } = useMutation({
         mutationKey: postNotice.mutationKey(),
         mutationFn: (data: NoticeRequestType) => postNotice(data)
     })
     const onSubmit = (data: NoticeDataType) => {
-        const noticeData = { ...data, targetHomelessIds: [] as number[] }
+        const noticeData = { ...data, targetHomelessIds: [] as number[], isSurvey: isIncludeSurvey, ImageUrl: "" }
         if (!isEntirety) {
             noticeData.targetHomelessIds = noticeTarget.map((item) => +Object.keys(item)[0]);
         }
@@ -35,12 +39,13 @@ const AddText = () => {
             {
                 onSuccess: (res) => {
                     setIsOpenSuccessPopup(true);
+                    setIsOpenFinalCheckButton(false);
                     queryClient.invalidateQueries({ queryKey: [...noticeList.queryKey()] });
                     reset();
                 },
                 onError: (error) => {
                     console.error(error);
-                }
+                },
             }
         )
     }
@@ -82,11 +87,17 @@ const AddText = () => {
                 </div>
                 <OpenSelectUserButton />
                 <SelectedUserList />
+                <FinalCheckButton isPending={isPending} />
                 <div className="flex justify-between items-center bg-neutral-200 rounded-xl px-2 border-2 border-solid border-neutral-300">
                     참여 여부 조사
-                    <Checkbox sx={checkBoxStyle} />
+                    <Checkbox
+                        onChange={() => setIsIncludeSurvey(prev => !prev)}
+                        checked={isIncludeSurvey}
+                        sx={checkBoxStyle}
+                    />
                 </div>
-                <button type="submit"
+                <button type="button"
+                    onClick={() => setIsOpenFinalCheckButton(true)}
                     disabled={error}
                     className={`${error ? "bg-neutral-200" : "bg-[#00bf40]"} text-white py-2 mt-4 rounded-xl`}>
                     보내기

@@ -27,10 +27,14 @@ export interface NoticeParams {
 }
 
 export interface NoticeResponseType {
-  contents: string
-  id: number
-  sendAt: string
+  noticeId: number
   title: string
+  contents: string
+  createdAt: string
+  readCount: number
+  totalCount: number
+  isSurvey: boolean
+  imageUrl: string
 }
 
 export interface PaginationType {
@@ -70,6 +74,8 @@ export interface NoticeDataType{
 
 export interface NoticeRequestType extends NoticeDataType {
   targetHomelessIds: number[]
+  isSurvey: boolean
+  ImageUrl: string
 }
 
 export interface UserItemType {

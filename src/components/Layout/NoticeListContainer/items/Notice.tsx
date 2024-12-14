@@ -32,6 +32,8 @@ const Notice = () => {
         () => get(noticeData, "items", []),
         [noticeData],
       );
+
+      console.log(noticeItemList);
     return (
         <div className="w-full flex flex-col items-center text-sm">
             <NoticeHeader />
