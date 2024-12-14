@@ -19,7 +19,7 @@ const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {
     return (
         <div className="w-full">
             {
-                data.map(({ noticeId, title, contents, createdAt, readCount, totalCount, isSurvey, imageUrl }, index) => (
+                data.map(({ noticeId, title, contents, createdAt, readCount, totalCount, isSurvey, isGlobal, imageUrl }, index) => (
                     <div
                         onClick={() => onNoticeClick(noticeId)}
                         key={noticeId}
@@ -36,7 +36,7 @@ const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {
                             {isSurvey ? <FaCheck className="size-6 text-[#19c23d]" /> : <IoClose className="size-6 text-neutral-400" />}
                         </div>  
                         <div className="basicRowStyle flex flex-col items-center">
-                            <span>개별공지</span><span>{readCount}/{totalCount}</span>
+                            <span>{isGlobal ? "전체 공지" : "개별 공지"}</span><span>{readCount}/{totalCount}</span>
                         </div>
                         <button className="basicRowStyle bg-[#19c23d] text-white p-2 rounded-xl">상세보기</button>
                     </div>

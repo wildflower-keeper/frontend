@@ -1,17 +1,39 @@
+import { NoticeFilterType } from "@/api/v2/shelter-admin/type";
 import FilterButton from "./FilterButton";
+import { useEffect, useState } from "react";
+import { noticeFilterType } from "./notice.const";
 
-const NoticeFilterList = [
-    {
-        title: "ㅁ"
-    }
-]
+interface Props {
+    filterHandler: (filterType: NoticeFilterType, isGlobal: boolean) => void
+}
 
-const NoticeFilterContainer = () => {
+const NoticeFilterContainer = ({ filterHandler }: Props) => {
+    const [noticeFilterIndex, setNoticeFilterIndex] = useState(0);
+    useEffect(() => {
+        switch (noticeFilterIndex) {
+            case 0:
+                filterHandler("NONE", false);
+                break;
+            case 1:
+                filterHandler("GLOBAL_TYPE", true);
+                break;
+            case 2:
+                filterHandler("GLOBAL_TYPE", false);
+                break;
+        }
+    }, [noticeFilterIndex]);
     return (
         <div className="flex gap-3 mb-3">
-            <FilterButton name="모두보기" onClick={() => {}} />
-            <FilterButton name="전체 공지" onClick={() => {}} />
-            <FilterButton name="개별 공지" onClick={() => {}} />
+            {
+                noticeFilterType.map((noticeType, index) => (
+                    <FilterButton
+                        selected={noticeFilterIndex === index}
+                        key={noticeType}
+                        name={noticeType}
+                        onClick={() => { setNoticeFilterIndex(index) }}
+                    />
+                ))
+            }
         </div>
     )
 }

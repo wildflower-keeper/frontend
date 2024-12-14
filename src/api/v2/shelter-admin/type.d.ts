@@ -16,9 +16,13 @@ export interface CreateAdminErrorType {
 
 export type CreateAdminResponseType = AdminId | CreateAdminErrorType
 
+export type NoticeFilterType = "NONE" | "GLOBAL_TYPE"
+
 export interface NoticeListParam {
   pageNumber: number;
   pageSize: number;
+  filterType: NoticeFilterType;
+  isGlobal: boolean
 }
 
 export interface NoticeParams {
@@ -35,6 +39,7 @@ export interface NoticeResponseType {
   totalCount: number
   isSurvey: boolean
   imageUrl: string
+  isGlobal: boolean
 }
 
 export interface PaginationType {
