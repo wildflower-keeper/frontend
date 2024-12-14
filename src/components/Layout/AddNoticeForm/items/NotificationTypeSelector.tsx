@@ -20,26 +20,4 @@ const NotificationTypeSelector = () => {
     )
 }
 
-
-
-// <div className="flex justify-between mb-3">
-//             <div className="flex items-center gap-1">
-//                 <Checkbox
-//                     id="entirety"
-//                     sx={checkBoxStyle}
-//                     checked={isEntirety}
-//                     onClick={() => setIsEntirety(true)}
-//                 />
-//                 <label htmlFor="entirety">전체발송</label>
-//             </div>
-//             <div className="flex items-center mr-5 gap-1">
-//                 <Checkbox
-//                     id="individual"
-//                     sx={checkBoxStyle}
-//                     checked={!isEntirety}
-//                     onClick={() => setIsEntirety(false)}
-//                 />
-//                 <label htmlFor="individual">개별발송</label>
-//             </div>
-//         </div>
 export default NotificationTypeSelector;
