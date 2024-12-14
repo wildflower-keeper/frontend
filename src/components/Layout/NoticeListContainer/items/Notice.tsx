@@ -39,8 +39,8 @@ const Notice = () => {
         <div className="w-full flex flex-col items-center text-sm">
             <div className="w-full flex justify-start">
                 <NoticeFilterContainer filterHandler={
-                    (filterType, isGlobal) => setParam((prev) => ({
-                        ...prev, filterType, isGlobal
+                    (filterType, isGlobal, pageNumber) => setParam((prev) => ({
+                        ...prev, filterType, isGlobal, pageNumber
                     }))
                 } />
             </div>

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { noticeFilterType } from "./notice.const";
 
 interface Props {
-    filterHandler: (filterType: NoticeFilterType, isGlobal: boolean) => void
+    filterHandler: (filterType: NoticeFilterType, isGlobal: boolean, pageNumber: number) => void
 }
 
 const NoticeFilterContainer = ({ filterHandler }: Props) => {
@@ -12,13 +12,13 @@ const NoticeFilterContainer = ({ filterHandler }: Props) => {
     useEffect(() => {
         switch (noticeFilterIndex) {
             case 0:
-                filterHandler("NONE", false);
+                filterHandler("NONE", false, 1);
                 break;
             case 1:
-                filterHandler("GLOBAL_TYPE", true);
+                filterHandler("GLOBAL_TYPE", true, 1);
                 break;
             case 2:
-                filterHandler("GLOBAL_TYPE", false);
+                filterHandler("GLOBAL_TYPE", false, 1);
                 break;
         }
     }, [noticeFilterIndex]);
