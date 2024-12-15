@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { LocationStatusType } from "@/api/v1/shelter-admin/type";
 
 interface StatusControllerOpenToggleProps { 

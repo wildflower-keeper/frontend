@@ -1,14 +1,19 @@
+// Compo
 import UserList from "./UserList";
 import UserListHeader from "./UserListHeader";
 import SearchBar from "@/components/Composition/SearchBar";
+import FilterButton from "@/components/Composition/FilterButton";
+import { IoIosClose } from "react-icons/io";
+
+// Utils
 import { homelessPeopleList } from "@/api/v1/shelter-admin";
-import { HomelessPeopleListParam } from "@/api/v1/shelter-admin/type";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { get } from "lodash";
-import { IoIosClose } from "react-icons/io";
-import FilterButton from "@/components/Composition/FilterButton";
 import { useNoticeContext } from "../../NoticeProvider";
+
+// Types
+import { HomelessPeopleListParam } from "@/api/v1/shelter-admin/type";
 
 const UserListContainer = () => {
     const [isTotalSelected, setIsTotalSelected] = useState(true);
