@@ -7,15 +7,6 @@ import { useEffect } from "react";
 // Types
 import { UserItemType } from "@/api/v2/shelter-admin/type"
 
-const checkBoxStyle = {
-    color: '#c8ccd5', // 기본 색상 (연두색)
-    '&.Mui-checked': {
-        color: '#34c01f', // 체크된 색상 (연두색)
-    },
-    margin: 0, // 마진을 0으로 설정
-    padding: 0, // 패딩을 0으로 설정
-}
-
 const UserList = ({ userItemList, isTotalSelected }: { userItemList: UserItemType[], isTotalSelected: boolean }) => {
     const noticeContext = useNoticeContext();
     const { setNoticeTarget, noticeTarget, setTotalUserNumber } = noticeContext;

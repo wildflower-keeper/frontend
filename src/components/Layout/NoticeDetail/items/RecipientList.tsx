@@ -2,7 +2,7 @@
 import RecipientFilterConainer from "./RecipientFilterConainer";
 
 // Utils
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useMemo } from "react";
 
 // Types
 import { HomelessReadInfoType } from "@/api/v2/shelter-admin/type";
@@ -22,7 +22,10 @@ interface Props {
 }
 
 const RecipientList = ({ data, selectedUserList, userType, setUserType }: Props) => {
-    const filteredData = userType === 0 ? data : data.filter(item => selectedUserList.includes(item.homelessId));
+    const filteredData = useMemo(() =>
+        userType === 0 ? data : data.filter(item => selectedUserList.includes(item.homelessId)),
+        [data, userType, selectedUserList]
+    );
     return (
         <div>
             <RecipientFilterConainer userType={userType} setUserType={setUserType} />

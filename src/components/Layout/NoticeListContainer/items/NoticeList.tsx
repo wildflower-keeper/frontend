@@ -11,17 +11,16 @@ import { useNoticeContext } from "../../NoticeProvider";
 
 // Types
 import { NoticeResponseType } from "@/api/v2/shelter-admin/type";
-
-
+import { useCallback } from "react";
 
 
 const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {
     const noticeContext = useNoticeContext();
     const { setIsOpenNoticeDetailPopup, setSelectedNoticeId, selectedNoticeId, isOpenNoticeDetailPopup } = noticeContext;
-    const onNoticeClick = (id: number) => {
+    const onNoticeClick = useCallback((id: number) => {
         setIsOpenNoticeDetailPopup(true);
         setSelectedNoticeId(id);
-    }
+    }, []);
 
     return (
         <div className="w-full">

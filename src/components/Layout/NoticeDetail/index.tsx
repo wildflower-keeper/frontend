@@ -14,12 +14,6 @@ import { useEffect, useState } from "react";
 
 // Types
 
-
-
-
-
-
-
 const NoticeDetail = () => {
     const [selectedUserList, setSelectedUserList] = useState<number[]>([]);
     const [userType, setUserType] = useState(0);
@@ -45,7 +39,6 @@ const NoticeDetail = () => {
         }
     }, [userType]);
 
-    console.log(noticeDetailData);
     return (
         <div className="fixed w-full max-w-[800px] min-w-[600px] h-[600px] flex flex-col gap-4 right-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/4 p-3 bg-white rounded-2xl shadow-xl top-56">
             < div className="flex flex-row justify-between" >

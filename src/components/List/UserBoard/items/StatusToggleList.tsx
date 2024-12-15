@@ -4,7 +4,6 @@ import Loading from "@/components/Composition/Loading";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import StatusBadge from "./StatusBadge";
-import { MdKeyboardArrowUp } from "react-icons/md";
 
 interface StatusToggleListProps {
     id: number, 
