@@ -1,11 +1,18 @@
 "use client"
 
-import { NoticeResponseType } from "@/api/v2/shelter-admin/type";
+// Compo
+import { IoClose } from "react-icons/io5";
+import { FaCheck } from "react-icons/fa6";
+
+// Utils
 import { gridCol } from "./notice.const";
 import { formatDateString } from "@/utils/string/date";
 import { useNoticeContext } from "../../NoticeProvider";
-import { IoClose } from "react-icons/io5";
-import { FaCheck } from "react-icons/fa6";
+
+// Types
+import { NoticeResponseType } from "@/api/v2/shelter-admin/type";
+
+
 
 
 const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {

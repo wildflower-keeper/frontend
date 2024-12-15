@@ -1,7 +1,14 @@
-import { NoticeFilterType } from "@/api/v2/shelter-admin/type";
-import FilterButton from "./FilterButton";
-import { useEffect, useState } from "react";
+// Compo
+import FilterButton from "@/components/Composition/FilterButton";
+
+// Utils
 import { noticeFilterType } from "./notice.const";
+import { useEffect, useState } from "react";
+
+// Types
+import { NoticeFilterType } from "@/api/v2/shelter-admin/type";
+
+
 
 interface Props {
     filterHandler: (filterType: NoticeFilterType, isGlobal: boolean, pageNumber: number) => void
@@ -27,6 +34,7 @@ const NoticeFilterContainer = ({ filterHandler }: Props) => {
             {
                 noticeFilterType.map((noticeType, index) => (
                     <FilterButton
+                        size=""
                         selected={noticeFilterIndex === index}
                         key={noticeType}
                         name={noticeType}

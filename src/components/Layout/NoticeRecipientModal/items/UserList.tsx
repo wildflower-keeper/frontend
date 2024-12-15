@@ -1,7 +1,11 @@
-import { UserItemType } from "@/api/v2/shelter-admin/type"
-import { Checkbox } from "@mui/material";
+// Compo
 import { useNoticeContext } from "../../NoticeProvider";
+
+// Utils
 import { useEffect } from "react";
+
+// Types
+import { UserItemType } from "@/api/v2/shelter-admin/type"
 
 const checkBoxStyle = {
     color: '#c8ccd5', // 기본 색상 (연두색)

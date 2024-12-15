@@ -1,13 +1,24 @@
 "use client"
 
-import { IoCloseOutline } from "react-icons/io5";
-import { useNoticeContext } from "@/components/Layout/NoticeProvider";
-import { useQuery } from "@tanstack/react-query";
-import { getNoticeDetail, getNoticeRecipient } from "@/api/v2/shelter-admin";
+// Compo
 import RecipientList from "./items/RecipientList";
 import NoticeDetailHeader from "./items/NoticeDetailHeader";
 import NoticeImage from "./items/NoticeImage";
+import { IoCloseOutline } from "react-icons/io5";
+
+// Utils
+import { useNoticeContext } from "@/components/Layout/NoticeProvider";
+import { useQuery } from "@tanstack/react-query";
+import { getNoticeDetail, getNoticeRecipient } from "@/api/v2/shelter-admin";
 import { useEffect, useState } from "react";
+
+// Types
+
+
+
+
+
+
 
 const NoticeDetail = () => {
     const [selectedUserList, setSelectedUserList] = useState<number[]>([]);

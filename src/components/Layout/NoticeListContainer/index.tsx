@@ -1,9 +1,14 @@
 "use client"
 
+// Compo
 import Notice from "@/components/Layout/NoticeListContainer/items/Notice";
-import { useNoticeContext } from "@/components/Layout/NoticeProvider";
-import NoticeFilterContainer from "./items/NoticeFilterContainer";
 import NoticeDetail from "../NoticeDetail";
+
+// Utils
+import { useNoticeContext } from "@/components/Layout/NoticeProvider";
+
+// Types
+
 
 const NoticeListContainer = () => {
     const noticeContext = useNoticeContext();

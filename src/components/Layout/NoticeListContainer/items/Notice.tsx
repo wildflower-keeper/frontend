@@ -1,7 +1,9 @@
 "use client";
 
 // Compo
-import PagenationButtonContainer from "@/components/Composition/PagenationButtonContainer";
+import NoticeHeader from "@/components/Layout/NoticeListContainer/items/NoticeHeader";
+import NoticeList from "@/components/Layout/NoticeListContainer/items/NoticeList";
+import NoticeFilterContainer from "./NoticeFilterContainer";
 
 // Utils
 import { noticeList } from "@/api/v2/shelter-admin";
@@ -11,9 +13,7 @@ import { useEffect, useState, useMemo } from "react";
 // Types
 import { NoticeListParam, NoticeListResponseType } from "@/api/v2/shelter-admin/type";
 import { get } from "lodash";
-import NoticeHeader from "@/components/Layout/NoticeListContainer/items/NoticeHeader";
-import NoticeList from "@/components/Layout/NoticeListContainer/items/NoticeList";
-import NoticeFilterContainer from "./NoticeFilterContainer";
+
 
 const Notice = () => {
     const [param, setParam] = useState<NoticeListParam>({
@@ -62,7 +62,7 @@ const Notice = () => {
             <NoticeHeader />
             <NoticeList data={noticeItemList} />
             <button
-                className="w-[400px] bg-neutral-200 py-2 rounded-md border border-solid border-neutral-400 mt-2"
+                className="w-[400px] bg-neutral-100 py-2 rounded-md border border-solid border-neutral-400 mt-2"
                 onClick={() =>
                     setParam((prev) => ({ ...prev, pageSize: prev.pageSize + 5 }))
                 }

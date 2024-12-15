@@ -1,4 +1,9 @@
+// Compo
+
+// Utils
 import { gridCol, noticeDataTypeList } from "./notice.const";
+
+// Types
 
 const NoticeHeader = () => {
     return (

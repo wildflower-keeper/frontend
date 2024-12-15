@@ -1,7 +1,12 @@
-import { HomelessReadInfoType } from "@/api/v2/shelter-admin/type";
-import { FaCheck } from "react-icons/fa6";
+// Compo
 import RecipientFilterConainer from "./RecipientFilterConainer";
+
+// Utils
 import { Dispatch, SetStateAction } from "react";
+
+// Types
+import { HomelessReadInfoType } from "@/api/v2/shelter-admin/type";
+
 
 const StatusTypes = [
     "NO.",
