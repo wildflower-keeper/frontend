@@ -1,4 +1,4 @@
-import NoticeContainer from "@/components/Layout/NoticeContainer"
+import NoticeContainer from "@/components/Layout/NoticeListContainer"
 import NoticeProvider from "@/components/Layout/NoticeProvider"
 
 const Page = () => {

@@ -13,7 +13,7 @@ import { simpleGenerateSecond } from "@/utils/number/time";
 import UserManagementProvider from "../UserManagementProvider";
 
 // Types
-import type { HomelessPeopleListParam, UserItemType } from "@/api/v1/shelter-admin/type";
+import type { HomelessPeopleListParam } from "@/api/v1/shelter-admin/type";
 import UserManagementButtonContainer from "@/components/Composition/UserManagementButtonContainer";
 import AddUserModal from "@/components/Composition/AddUserModal";
 

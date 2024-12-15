@@ -1,6 +1,6 @@
 "use client"
 
-import { useNoticeContext } from "../../NoticeProvider";
+import { useNoticeContext } from "../NoticeProvider";
 
 const SuccessPopup = () => {
     const noticeContext = useNoticeContext();

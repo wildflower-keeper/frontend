@@ -46,7 +46,7 @@ body {
 }
 
 .custom-page-name {
-  @apply font-bold text-3xl mb-2;
+  @apply font-bold text-3xl my-5;
 }
 
 .basicSidebarbutton {
