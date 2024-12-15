@@ -12,18 +12,18 @@ const checkBoxStyle = {
     padding: 0, // 패딩을 0으로 설정
 }
 
-const UserList = ({ userItemList }: { userItemList: UserItemType[] }) => {
+const UserList = ({ userItemList, isTotalSelected }: { userItemList: UserItemType[], isTotalSelected: boolean }) => {
     const noticeContext = useNoticeContext();
     const { setNoticeTarget, noticeTarget, setTotalUserNumber } = noticeContext;
     
     useEffect(() => {
         setTotalUserNumber(userItemList.length);
     }, [userItemList]);
-    console.log(noticeTarget)
     return (
         <div className="overflow-y-scroll h-[250px]">
             {userItemList.map(({ id, name, phoneNumber }, index) => {
                 const selected = noticeTarget.some((item) => +Object.keys(item)[0] === id);
+                if(!isTotalSelected && !selected) return null;
                 return (
                 <div key={id} className={`py-3 grid grid-cols-4 text-sm border-b border-solid border-neutral-200  ${selected && 'bg-neutral-100'}`}
                     style={{

@@ -11,6 +11,7 @@ import FilterButton from "@/components/Composition/FilterButton";
 import { useNoticeContext } from "../../NoticeProvider";
 
 const UserListContainer = () => {
+    const [isTotalSelected, setIsTotalSelected] = useState(true);
     const noticeContext = useNoticeContext();
     const { setIsOpenUserSelectModal } = noticeContext;
     const [param, setParam] = useState<HomelessPeopleListParam>({
@@ -41,8 +42,8 @@ const UserListContainer = () => {
             </div>
             <div className="flex justify-between mb-3">
                 <div className="flex gap-3">
-                    <FilterButton name="전체인원" size="size-18" onClick={() => { }} />
-                    <FilterButton name="선택인원" size="size-18" onClick={() => { }} />
+                    <FilterButton name="전체인원" size="size-18" onClick={() => setIsTotalSelected(true)} selected={isTotalSelected} />
+                    <FilterButton name="선택인원" size="size-18" onClick={() => setIsTotalSelected(false)} selected={!isTotalSelected} />
                 </div>
                 <span className="scale-75 flex gap-2">
                     <SearchBar
@@ -53,7 +54,7 @@ const UserListContainer = () => {
                 </span>
             </div>
             <UserListHeader />
-            <UserList userItemList={userItemList} />
+            <UserList userItemList={userItemList} isTotalSelected={isTotalSelected} />
         </div>
     )
 }

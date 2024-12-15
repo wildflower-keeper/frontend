@@ -2,6 +2,8 @@
 
 import AddText from "./items/AddText";
 import NotificationTypeSelector from "./items/NotificationTypeSelector";
+import OpenSelectUserButton from "./items/OpenSelectUserButton";
+import SelectedUserList from "./items/SelectedUserList";
 import UploadImage from "./items/UploadImage";
 
 const NoticeAddForm = () => {
@@ -10,7 +12,7 @@ const NoticeAddForm = () => {
             <NotificationTypeSelector />
             <div className="flex gap-10">
                 <AddText />
-                {/* <UploadImage /> */}
+                <SelectedUserList />
             </div>
         </div>
     )
