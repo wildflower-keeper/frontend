@@ -14,7 +14,6 @@ const PageList = () => {
         <div className="grow flex flex-col items-start mt-10 pl-5">
             {PAGE_ROUTE.map(({ name, path, Icon, subMenu }, index) => {
                 let selected = pathname === path;
-                console.log(pathname, path)
                 return (
                     <div key={path} className="flex w-full relative">
                         {selected && <span className="absolute left-[-20px] bg-[#3f3f3f] w-1 h-full rounded-r-full" />}
