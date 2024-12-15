@@ -1,18 +1,18 @@
 import { useNoticeContext } from "../NoticeProvider";
-import SelectedUserList from "./items/SelectedUserList";
 import UserListContainer from "./items/UserListContainer";
 
 const NoticeRecipientModal = () => {
     const noticeContext = useNoticeContext();
-    const { setIsOpenUserSelectModal } = noticeContext;
+    const { setIsOpenUserSelectModal, noticeTarget } = noticeContext;
+    const selected = !(noticeTarget.length === 0);
     return (
-        <div className="absolute flex flex-col p-3 bg-white shadow-2xl h-[500px] rounded-xl w-full z-10">
-            <SelectedUserList />
+        <div className="absolute w-[500px] h-[500px] top-[-100px] flex flex-col justify-between p-3 bg-white shadow-2xl rounded-xl z-10">
             <UserListContainer />
             <div className="w-full flex flex-col items-center">
                 <button
+                    disabled={!selected}
                     onClick={() => setIsOpenUserSelectModal(false)}
-                    className="bg-[#00bf40] text-white w-[300px] rounded-md py-2 mt-8">
+                    className={`text-white w-full rounded-md py-2 mt-8 ${selected ? "bg-[#00bf40]" : "bg-neutral-300"}`}>
                     확인
                 </button>
             </div>

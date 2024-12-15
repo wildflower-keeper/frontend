@@ -5,12 +5,8 @@ import { NoticeDataType, NoticeRequestType } from "@/api/v2/shelter-admin/type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNoticeContext } from "../../NoticeProvider";
-import NoticeRecipientModal from "../../NoticeRecipientModal";
-import OpenSelectUserButton from "./OpenSelectUserButton";
-import SelectedUserList from "./SelectedUserList";
 import { Checkbox } from "@mui/material";
 import { useState } from "react";
-import Loading from "@/components/Composition/Loading";
 import FinalCheckButton from "./FinalCheckButton";
 
 const checkBoxStyle = {
@@ -25,7 +21,7 @@ const AddText = () => {
     const [isIncludeSurvey, setIsIncludeSurvey] = useState(false);
     const queryClient = useQueryClient();
     const noticeContext = useNoticeContext();
-    const { isEntirety, isOpenUserSelectModal, noticeTarget, setIsOpenSuccessPopup, setIsOpenFinalCheckButton } = noticeContext;
+    const { isEntirety, noticeTarget, setIsOpenSuccessPopup, setIsOpenFinalCheckButton } = noticeContext;
     const { mutate, isPending } = useMutation({
         mutationKey: postNotice.mutationKey(),
         mutationFn: (data: NoticeRequestType) => postNotice(data)
@@ -52,8 +48,7 @@ const AddText = () => {
 
     const error = Boolean(errors.title || errors.content || !watch().content || !watch().title);
     return (
-        <div className="relative min-w-[400px]">
-            {isOpenUserSelectModal && <NoticeRecipientModal />}
+        <div className="min-w-[400px]">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
                 <div>
                     <label htmlFor="title">제목</label>
@@ -85,8 +80,6 @@ const AddText = () => {
                         <div className="text-red-400">{errors.content?.message}</div>
                     </div>
                 </div>
-                <OpenSelectUserButton />
-                <SelectedUserList />
                 <FinalCheckButton isPending={isPending} />
                 <div className="flex justify-between items-center bg-neutral-200 rounded-xl px-2 border-2 border-solid border-neutral-300">
                     참여 여부 조사

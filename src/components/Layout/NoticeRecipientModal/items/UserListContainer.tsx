@@ -6,8 +6,14 @@ import { HomelessPeopleListParam } from "@/api/v1/shelter-admin/type";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { get } from "lodash";
+import { IoIosClose } from "react-icons/io";
+import FilterButton from "@/components/Composition/FilterButton";
+import { useNoticeContext } from "../../NoticeProvider";
 
 const UserListContainer = () => {
+    const [isTotalSelected, setIsTotalSelected] = useState(true);
+    const noticeContext = useNoticeContext();
+    const { setIsOpenUserSelectModal } = noticeContext;
     const [param, setParam] = useState<HomelessPeopleListParam>({
         filterType: "NAME",
         filterValue: "",
@@ -32,8 +38,15 @@ const UserListContainer = () => {
         <div>
             <div className="flex items-center justify-between mb-3">
                 <h1 className="font-bold">이용자 리스트</h1>
+                <IoIosClose onClick={() => setIsOpenUserSelectModal(false)} size={30} />
+            </div>
+            <div className="flex justify-between mb-3">
+                <div className="flex gap-3">
+                    <FilterButton name="전체인원" size="size-18" onClick={() => setIsTotalSelected(true)} selected={isTotalSelected} />
+                    <FilterButton name="선택인원" size="size-18" onClick={() => setIsTotalSelected(false)} selected={!isTotalSelected} />
+                </div>
                 <span className="scale-75 flex gap-2">
-                <SearchBar
+                    <SearchBar
                         submitHandler={(filters, page) => {
                             setParam((prev) => ({ ...prev, ...filters, pageNumber: page }));
                         }}
@@ -41,7 +54,7 @@ const UserListContainer = () => {
                 </span>
             </div>
             <UserListHeader />
-            <UserList userItemList={userItemList} />
+            <UserList userItemList={userItemList} isTotalSelected={isTotalSelected} />
         </div>
     )
 }
