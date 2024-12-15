@@ -13,17 +13,20 @@ import { NoticeListParam } from "@/api/v2/shelter-admin/type";
 import { get } from "lodash";
 import NoticeHeader from "@/components/Layout/NoticeListContainer/items/NoticeHeader";
 import NoticeList from "@/components/Layout/NoticeListContainer/items/NoticeList";
+import NoticeFilterContainer from "./NoticeFilterContainer";
 
 const Notice = () => {
     const [param, setParam] = useState<NoticeListParam>({
         pageNumber: 1,
         pageSize: 5,
+        filterType: "NONE",
+        isGlobal: true,
     });
     const queryKey = useMemo(() => {
         return [...noticeList.queryKey(), ...Object.values(param)]
     }, [noticeList, param]);
 
-    const {data: noticeData} = useQuery({
+    const { data: noticeData } = useQuery({
         queryKey,
         queryFn: () => noticeList(param)
     });
@@ -31,11 +34,16 @@ const Notice = () => {
     const noticeItemList = useMemo(
         () => get(noticeData, "items", []),
         [noticeData],
-      );
-
-      console.log(noticeItemList);
+    );
     return (
         <div className="w-full flex flex-col items-center text-sm">
+            <div className="w-full flex justify-start">
+                <NoticeFilterContainer filterHandler={
+                    (filterType, isGlobal, pageNumber) => setParam((prev) => ({
+                        ...prev, filterType, isGlobal, pageNumber
+                    }))
+                } />
+            </div>
             <NoticeHeader />
             <NoticeList data={noticeItemList} />
             <PagenationButtonContainer
