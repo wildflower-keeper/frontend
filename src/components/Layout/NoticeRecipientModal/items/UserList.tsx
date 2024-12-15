@@ -9,7 +9,7 @@ import { UserItemType } from "@/api/v2/shelter-admin/type"
 
 const UserList = ({ userItemList, isTotalSelected }: { userItemList: UserItemType[], isTotalSelected: boolean }) => {
     const noticeContext = useNoticeContext();
-    const { setNoticeTarget, noticeTarget, setTotalUserNumber } = noticeContext;
+    const { checkUser, noticeTarget, setTotalUserNumber } = noticeContext;
     
     useEffect(() => {
         setTotalUserNumber(userItemList.length);
@@ -29,7 +29,7 @@ const UserList = ({ userItemList, isTotalSelected }: { userItemList: UserItemTyp
                     <div className="basicRowStyle">{name}</div>
                     <div className="basicRowStyle">{phoneNumber}</div>
                     <button 
-                    onClick={() => setNoticeTarget(id, name)}
+                    onClick={() => checkUser(id, name)}
                     className={`basicRowStyle px-2 border-2 border-solid rounded-md ${selected ? "border-[#19C23D]" : "border-neutral-400"}`}>
                         {selected ? "선택취소" : "선택하기"}
                     </button>

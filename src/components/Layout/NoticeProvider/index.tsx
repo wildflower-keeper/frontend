@@ -10,7 +10,7 @@ interface NoticeContextStoreType {
     isEntirety: boolean,
     setIsEntirety: React.Dispatch<React.SetStateAction<boolean>>
     noticeTarget: UserData[]
-    setNoticeTarget: (id: number, name: string) => void
+    checkUser: (id: number, name: string) => void
     isOpenUserSelectModal: boolean
     setIsOpenUserSelectModal: React.Dispatch<React.SetStateAction<boolean>>
     targetInit: () => void,
@@ -24,13 +24,14 @@ interface NoticeContextStoreType {
     setIsOpenNoticeDetailPopup: React.Dispatch<React.SetStateAction<boolean>>,
     isOpenFinalCheckButton: boolean,
     setIsOpenFinalCheckButton: React.Dispatch<React.SetStateAction<boolean>>,
+    setNoticeTarget: React.Dispatch<React.SetStateAction<UserData[]>>
 }
 
 export const noticeContext = createContext<NoticeContextStoreType>({
     isEntirety: true,
     setIsEntirety: () => { },
     noticeTarget: [],
-    setNoticeTarget: () => { },
+    checkUser: () => { },
     isOpenUserSelectModal: false,
     setIsOpenUserSelectModal: () => { },
     targetInit: () => { },
@@ -43,7 +44,8 @@ export const noticeContext = createContext<NoticeContextStoreType>({
     isOpenNoticeDetailPopup: false,
     setIsOpenNoticeDetailPopup: () => { },
     isOpenFinalCheckButton: false,
-    setIsOpenFinalCheckButton: () => { }
+    setIsOpenFinalCheckButton: () => { },
+    setNoticeTarget: () => { }
 })
 
 export const useNoticeContext = () => useContext(noticeContext);
@@ -84,7 +86,7 @@ function NoticeProvier({ children }: { children: ReactNode }) {
                 isEntirety,
                 setIsEntirety,
                 noticeTarget,
-                setNoticeTarget: checkUser,
+                checkUser,
                 isOpenUserSelectModal,
                 setIsOpenUserSelectModal,
                 targetInit,
@@ -97,7 +99,8 @@ function NoticeProvier({ children }: { children: ReactNode }) {
                 isOpenNoticeDetailPopup,
                 setIsOpenNoticeDetailPopup,
                 isOpenFinalCheckButton,
-                setIsOpenFinalCheckButton
+                setIsOpenFinalCheckButton,
+                setNoticeTarget
             }}
         >
             {children}
