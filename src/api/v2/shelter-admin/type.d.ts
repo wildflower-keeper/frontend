@@ -79,6 +79,8 @@ export interface NoticeDataType{
 
 export interface NoticeRequestType extends NoticeDataType {
   targetHomelessIds: number[]
+  isSurvey: boolean
+  ImageUrl: string
 }
 
 export interface UserItemType {

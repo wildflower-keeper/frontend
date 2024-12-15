@@ -10,9 +10,9 @@ import { FaCheck } from "react-icons/fa6";
 
 const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {
     const noticeContext = useNoticeContext();
-    const { setIsOpenReceptionStatusPopup, setSelectedNoticeId, selectedNoticeId, isOpenReceptionStatusPopup } = noticeContext;
+    const { setIsOpenNoticeDetailPopup, setSelectedNoticeId, selectedNoticeId, isOpenNoticeDetailPopup } = noticeContext;
     const onNoticeClick = (id: number) => {
-        setIsOpenReceptionStatusPopup(true);
+        setIsOpenNoticeDetailPopup(true);
         setSelectedNoticeId(id);
     }
 
@@ -25,7 +25,7 @@ const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {
                         key={noticeId}
                         className={`cursor-pointer py-3 grid grid-cols-7 border-2 border-solid mt-2 rounded-xl
                             ${readCount !== totalCount ? "border-[#19C23D]" : "border-neutral-200"}
-                            ${isOpenReceptionStatusPopup && selectedNoticeId === noticeId && "bg-neutral-200"}`}
+                            ${isOpenNoticeDetailPopup && selectedNoticeId === noticeId && "bg-neutral-200"}`}
                         style={{
                             gridTemplateColumns: gridCol
                         }}>
@@ -40,7 +40,7 @@ const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {
                         <div className="basicRowStyle flex flex-col items-center">
                             <div>{isGlobal ? "전체 공지" : "개별 공지"}</div><div><span className={`${readCount !== totalCount && "text-[#19c23d]"}`}>{readCount}</span>/{totalCount}</div>
                         </div>
-                        <button className="basicRowStyle bg-[#19c23d] text-white p-2 rounded-xl">상세보기</button>
+                        <button onClick={() => onNoticeClick(noticeId)} className="basicRowStyle bg-[#19c23d] text-white p-2 rounded-xl">상세보기</button>
                     </div>
                 ))
             }
