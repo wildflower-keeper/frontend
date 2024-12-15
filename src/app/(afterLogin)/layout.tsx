@@ -13,8 +13,9 @@ const LoginedLayout: React.FC<Props> = ({ children }: Props) => {
     <div className="flex w-full min-h-screen m-auto bg-neutral-50">
       <Sidebar />
       <div className="grow flex-col h-full">
-        <div className="grow h-full px-16 py-5 flex flex-col gap-8">
-          <AdminInfomation />
+        <AdminInfomation />
+        <div className="border-b inset-0 border-solid border-neutral-200 w-full h-full" />
+        <div className="grow h-full px-8 py-3 flex flex-col gap-8">
           {children}
         </div>
       </div>

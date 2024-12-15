@@ -20,38 +20,43 @@ interface NoticeContextStoreType {
     setTotalUserNumber: React.Dispatch<React.SetStateAction<number>>
     selectedNoticeId: number,
     setSelectedNoticeId: React.Dispatch<React.SetStateAction<number>>,
-    isOpenReceptionStatusPopup: boolean,
-    setIsOpenReceptionStatusPopup: React.Dispatch<React.SetStateAction<boolean>>,
+    isOpenNoticeDetailPopup: boolean,
+    setIsOpenNoticeDetailPopup: React.Dispatch<React.SetStateAction<boolean>>,
+    isOpenFinalCheckButton: boolean,
+    setIsOpenFinalCheckButton: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 export const noticeContext = createContext<NoticeContextStoreType>({
     isEntirety: true,
-    setIsEntirety: () => {},
+    setIsEntirety: () => { },
     noticeTarget: [],
-    setNoticeTarget: () => {},
+    setNoticeTarget: () => { },
     isOpenUserSelectModal: false,
-    setIsOpenUserSelectModal: () => {},
-    targetInit: () => {},
+    setIsOpenUserSelectModal: () => { },
+    targetInit: () => { },
     isOpenSuccessPopup: false,
-    setIsOpenSuccessPopup: () => {},
+    setIsOpenSuccessPopup: () => { },
     totalUserNumber: 0,
-    setTotalUserNumber: () => {},
+    setTotalUserNumber: () => { },
     selectedNoticeId: 0,
     setSelectedNoticeId: () => { },
-    isOpenReceptionStatusPopup: false,
-    setIsOpenReceptionStatusPopup: () => { }
+    isOpenNoticeDetailPopup: false,
+    setIsOpenNoticeDetailPopup: () => { },
+    isOpenFinalCheckButton: false,
+    setIsOpenFinalCheckButton: () => { }
 })
 
 export const useNoticeContext = () => useContext(noticeContext);
 
 function NoticeProvier({ children }: { children: ReactNode }) {
     const [selectedNoticeId, setSelectedNoticeId] = useState(0);
-    const [isOpenReceptionStatusPopup, setIsOpenReceptionStatusPopup] = useState(false);
+    const [isOpenNoticeDetailPopup, setIsOpenNoticeDetailPopup] = useState(false);
     const [isEntirety, setIsEntirety] = useState(true);
     const [noticeTarget, setNoticeTarget] = useState<UserData[]>([]);
     const [isOpenUserSelectModal, setIsOpenUserSelectModal] = useState(false);
     const [isOpenSuccessPopup, setIsOpenSuccessPopup] = useState(false);
     const [totalUserNumber, setTotalUserNumber] = useState(0);
+    const [isOpenFinalCheckButton, setIsOpenFinalCheckButton] = useState(false);
 
     const checkUser = useCallback((id: number, name: string) => {
         setNoticeTarget((prev) => {
@@ -72,7 +77,7 @@ function NoticeProvier({ children }: { children: ReactNode }) {
     const targetInit = useCallback(() => {
         setNoticeTarget([]);
     }, [])
-    
+
     return (
         <noticeContext.Provider
             value={{
@@ -89,8 +94,10 @@ function NoticeProvier({ children }: { children: ReactNode }) {
                 setTotalUserNumber,
                 selectedNoticeId,
                 setSelectedNoticeId,
-                isOpenReceptionStatusPopup,
-                setIsOpenReceptionStatusPopup
+                isOpenNoticeDetailPopup,
+                setIsOpenNoticeDetailPopup,
+                isOpenFinalCheckButton,
+                setIsOpenFinalCheckButton
             }}
         >
             {children}

@@ -9,6 +9,8 @@ import { usePathname } from "next/navigation";
 const ADMIN_INFOMATION_AVAILABLE_PATHS = [
   "/dashboard",
   "/notice",
+  "/notice/send",
+  "/notice/list",
   "/management",
   "/emergency",
   "/adminList"

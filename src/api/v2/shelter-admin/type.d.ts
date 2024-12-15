@@ -16,9 +16,13 @@ export interface CreateAdminErrorType {
 
 export type CreateAdminResponseType = AdminId | CreateAdminErrorType
 
+export type NoticeFilterType = "NONE" | "GLOBAL_TYPE"
+
 export interface NoticeListParam {
   pageNumber: number;
   pageSize: number;
+  filterType: NoticeFilterType;
+  isGlobal: boolean
 }
 
 export interface NoticeParams {
@@ -27,10 +31,15 @@ export interface NoticeParams {
 }
 
 export interface NoticeResponseType {
-  contents: string
-  id: number
-  sendAt: string
+  noticeId: number
   title: string
+  contents: string
+  createdAt: string
+  readCount: number
+  totalCount: number
+  isSurvey: boolean
+  imageUrl: string
+  isGlobal: boolean
 }
 
 export interface PaginationType {
@@ -63,6 +72,18 @@ export interface NoticeRecipientResponseType {
   noticeReadInfo: NoticeReadInfoType
 }
 
+export interface NoticeDetailResponseType {
+  noticeId: number
+  title: string
+  contents: string
+  createdAt: string
+  isSurvey: boolean
+  imageUrl: string
+  notParticipateHomelessIds: number[]
+  unreadHomelessIds: number[]
+  readHomelessIds: number[]
+}
+
 export interface NoticeDataType{
   title: string
   content: string
@@ -70,6 +91,8 @@ export interface NoticeDataType{
 
 export interface NoticeRequestType extends NoticeDataType {
   targetHomelessIds: number[]
+  isSurvey: boolean
+  ImageUrl: string
 }
 
 export interface UserItemType {

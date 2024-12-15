@@ -1,16 +1,18 @@
 import { useNoticeContext } from "../../NoticeProvider";
+import NoticeRecipientModal from "../../NoticeRecipientModal";
 
 const SelectedUserList = () => {
     const noticeContext = useNoticeContext();
-    const { isEntirety, noticeTarget, setIsOpenUserSelectModal, totalUserNumber } = noticeContext;
-    if(isEntirety || noticeTarget.length === 0) return null;
+    const { isEntirety, noticeTarget, setIsOpenUserSelectModal, totalUserNumber, isOpenUserSelectModal } = noticeContext;
+    if (isEntirety) return null;
     return (
-        <div>
+        <div className="relative w-[400px] flex flex-col gap-2">
+            {isOpenUserSelectModal && <NoticeRecipientModal />}
             <div className="flex items-center gap-2">
-                    <h1 className="font-bold">이용자 선택</h1>
-                    <span className="text-neutral-400">{noticeTarget.length}/{totalUserNumber}</span>
-                </div>
-            <div className="overflow-y-scroll overflow-x-hidden grid grid-cols-5 gap-1 h-[50px]">
+                <h1 className="font-bold">이용자 선택</h1>
+                <span className="text-neutral-400">{noticeTarget.length}/{totalUserNumber}</span>
+            </div>
+            <div className="overflow-y-scroll overflow-x-hidden grid grid-cols-5 gap-1 h-[100px] border border-solid border-neutral-400 rounded-xl p-1">
                 {noticeTarget.map((userData) => {
                     const id = +Object.keys(userData)[0];
                     const name = Object.values(userData)[0];
@@ -24,12 +26,13 @@ const SelectedUserList = () => {
                     )
                 })}
             </div>
-            <div className="w-full flex justify-end m-2">
-                <button 
+            <button
                 onClick={() => setIsOpenUserSelectModal(true)}
-                type="button" 
-                className="text-[#19C23D] border border-solid border-[#19C23D] rounded-xl px-1">수정</button>
-            </div>
+                type="button"
+                className={`w-full rounded-xl px-1 py-2
+                    ${noticeTarget.length === 0 ? "bg-[#19C23D] text-white" : "text-[#19C23D] border border-solid border-[#19C23D]"}`}>
+                {noticeTarget.length === 0 ? "추가" : "수정"}
+            </button>
         </div>
     )
 }
