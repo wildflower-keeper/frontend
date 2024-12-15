@@ -18,7 +18,8 @@ const SelectedUserList = () => {
                     const name = Object.values(userData)[0];
                     return (
                         <span
-                            className="text-sm border border-solid border-neutral-300 rounded-xl flex items-center justify-around gap-1 max-h-[22px]"
+                            className="text-sm border border-solid border-neutral-300 rounded-xl px-1
+                            flex items-center justify-around gap-1 max-h-[22px] overflow-hidden text-ellipsis whitespace-nowrap"
                             key={id}
                         >
                             {name}
