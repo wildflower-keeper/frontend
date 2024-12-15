@@ -13,7 +13,7 @@ const PageList = () => {
     return (
         <div className="grow flex flex-col items-start mt-10 pl-5">
             {PAGE_ROUTE.map(({ name, path, Icon, subMenu }, index) => {
-                const selected = pathname === path;
+                let selected = pathname === path;
                 return (
                     <div key={path} className="flex w-full relative">
                         {selected && <span className="absolute left-[-20px] bg-[#3f3f3f] w-1 h-full rounded-r-full" />}
@@ -29,6 +29,7 @@ const PageList = () => {
                                     {
                                         dropDonwIndex === index &&
                                         subMenu.map(({ name, path, Icon }) => {
+                                            selected = pathname === path;
                                             return (
                                                 <Link href={path} key={path} className={`basicSidebarbutton ${selected && 'bg-[#3f3f3f]'}`}>
                                                     <RouteItem Icon={Icon} name={name} selected={selected} />
@@ -49,4 +50,4 @@ const PageList = () => {
     )
 }
 
-export default PageList;
+export default PageList;    

@@ -22,24 +22,28 @@ interface NoticeContextStoreType {
     setSelectedNoticeId: React.Dispatch<React.SetStateAction<number>>,
     isOpenNoticeDetailPopup: boolean,
     setIsOpenNoticeDetailPopup: React.Dispatch<React.SetStateAction<boolean>>,
+    isOpenFinalCheckButton: boolean,
+    setIsOpenFinalCheckButton: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 export const noticeContext = createContext<NoticeContextStoreType>({
     isEntirety: true,
-    setIsEntirety: () => {},
+    setIsEntirety: () => { },
     noticeTarget: [],
-    setNoticeTarget: () => {},
+    setNoticeTarget: () => { },
     isOpenUserSelectModal: false,
-    setIsOpenUserSelectModal: () => {},
-    targetInit: () => {},
+    setIsOpenUserSelectModal: () => { },
+    targetInit: () => { },
     isOpenSuccessPopup: false,
-    setIsOpenSuccessPopup: () => {},
+    setIsOpenSuccessPopup: () => { },
     totalUserNumber: 0,
-    setTotalUserNumber: () => {},
+    setTotalUserNumber: () => { },
     selectedNoticeId: 0,
     setSelectedNoticeId: () => { },
     isOpenNoticeDetailPopup: false,
-    setIsOpenNoticeDetailPopup: () => { }
+    setIsOpenNoticeDetailPopup: () => { },
+    isOpenFinalCheckButton: false,
+    setIsOpenFinalCheckButton: () => { }
 })
 
 export const useNoticeContext = () => useContext(noticeContext);
@@ -52,6 +56,7 @@ function NoticeProvier({ children }: { children: ReactNode }) {
     const [isOpenUserSelectModal, setIsOpenUserSelectModal] = useState(false);
     const [isOpenSuccessPopup, setIsOpenSuccessPopup] = useState(false);
     const [totalUserNumber, setTotalUserNumber] = useState(0);
+    const [isOpenFinalCheckButton, setIsOpenFinalCheckButton] = useState(false);
 
     const checkUser = useCallback((id: number, name: string) => {
         setNoticeTarget((prev) => {
@@ -72,7 +77,7 @@ function NoticeProvier({ children }: { children: ReactNode }) {
     const targetInit = useCallback(() => {
         setNoticeTarget([]);
     }, [])
-    
+
     return (
         <noticeContext.Provider
             value={{
@@ -90,7 +95,9 @@ function NoticeProvier({ children }: { children: ReactNode }) {
                 selectedNoticeId,
                 setSelectedNoticeId,
                 isOpenNoticeDetailPopup,
-                setIsOpenNoticeDetailPopup
+                setIsOpenNoticeDetailPopup,
+                isOpenFinalCheckButton,
+                setIsOpenFinalCheckButton
             }}
         >
             {children}
