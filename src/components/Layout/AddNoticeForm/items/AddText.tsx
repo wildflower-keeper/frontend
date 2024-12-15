@@ -21,7 +21,7 @@ const AddText = () => {
     const [isIncludeSurvey, setIsIncludeSurvey] = useState(false);
     const queryClient = useQueryClient();
     const noticeContext = useNoticeContext();
-    const { isEntirety, noticeTarget, setIsOpenSuccessPopup, setIsOpenFinalCheckButton } = noticeContext;
+    const { isEntirety, noticeTarget, setIsOpenSuccessPopup, setIsOpenFinalCheckButton, setNoticeTarget } = noticeContext;
     const { mutate, isPending } = useMutation({
         mutationKey: postNotice.mutationKey(),
         mutationFn: (data: NoticeRequestType) => postNotice(data)
@@ -36,6 +36,7 @@ const AddText = () => {
                 onSuccess: (res) => {
                     setIsOpenSuccessPopup(true);
                     setIsOpenFinalCheckButton(false);
+                    setNoticeTarget([]);
                     queryClient.invalidateQueries({ queryKey: [...noticeList.queryKey()] });
                     reset();
                 },
