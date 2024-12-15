@@ -11,7 +11,6 @@ const NoticeListContainer = () => {
     return (
         <div>
             <div className="custom-page-name">공지사항 이력</div>
-            <NoticeFilterContainer />
             <div className="relative flex items-start justify-between gap-10 w-full">
                     <Notice />
                     {isOpenNoticeDetailPopup && <NoticeDetail />}
