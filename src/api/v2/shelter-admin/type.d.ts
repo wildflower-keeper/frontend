@@ -72,6 +72,18 @@ export interface NoticeRecipientResponseType {
   noticeReadInfo: NoticeReadInfoType
 }
 
+export interface NoticeDetailResponseType {
+  noticeId: number
+  title: string
+  contents: string
+  createdAt: string
+  isSurvey: boolean
+  imageUrl: string
+  notParticipateHomelessIds: number[]
+  unreadHomelessIds: number[]
+  readHomelessIds: number[]
+}
+
 export interface NoticeDataType{
   title: string
   content: string

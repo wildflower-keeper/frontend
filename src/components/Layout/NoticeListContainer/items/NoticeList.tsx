@@ -21,9 +21,8 @@ const NoticeList = ({ data }: { data: NoticeResponseType[] | [] }) => {
             {
                 data.map(({ noticeId, title, contents, createdAt, readCount, totalCount, isSurvey, isGlobal, imageUrl }, index) => (
                     <div
-                        onClick={() => onNoticeClick(noticeId)}
                         key={noticeId}
-                        className={`cursor-pointer py-3 grid grid-cols-7 border-2 border-solid mt-2 rounded-xl
+                        className={`py-3 grid grid-cols-7 border-2 border-solid mt-2 rounded-xl
                             ${readCount !== totalCount ? "border-[#19C23D]" : "border-neutral-200"}
                             ${isOpenNoticeDetailPopup && selectedNoticeId === noticeId && "bg-neutral-200"}`}
                         style={{

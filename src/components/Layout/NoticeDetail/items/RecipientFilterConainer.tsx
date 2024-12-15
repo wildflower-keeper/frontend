@@ -1,11 +1,20 @@
 import FilterButton from "@/components/Composition/FilterButton";
+import { Dispatch, SetStateAction } from "react";
 
-const RecipientFilterConainer = () => {
+const filterTypeList = [
+    "전체 인원",
+    "미확인 인원",
+    "미참여 인원"
+]
+
+const RecipientFilterConainer = ({ setUserType, userType }: { setUserType: Dispatch<SetStateAction<number>>, userType: number }) => {
     return (
         <div className="flex gap-3 mb-3">
-            <FilterButton size="size-22" name="모두보기" onClick={() => {}} />
-            <FilterButton size="size-22" name="전체 공지" onClick={() => {}} />
-            <FilterButton  size="size-22" name="개별 공지" onClick={() => {}} />
+            {
+                filterTypeList.map((type, index) => (
+                    <FilterButton key={type} size="size-22" name={type} onClick={() => setUserType(index)} selected={index === userType} />
+                ))
+            }
         </div>
     )
 }

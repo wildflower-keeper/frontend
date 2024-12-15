@@ -1,6 +1,7 @@
 import { HomelessReadInfoType } from "@/api/v2/shelter-admin/type";
 import { FaCheck } from "react-icons/fa6";
 import RecipientFilterConainer from "./RecipientFilterConainer";
+import { Dispatch, SetStateAction } from "react";
 
 const StatusTypes = [
     "NO.",
@@ -8,10 +9,18 @@ const StatusTypes = [
     "전화번호",
 ]
 
-const RecipientList = ({ data }: { data: HomelessReadInfoType[] }) => {
+interface Props {
+    data: HomelessReadInfoType[]
+    selectedUserList: number[]
+    userType: number
+    setUserType: Dispatch<SetStateAction<number>>
+}
+
+const RecipientList = ({ data, selectedUserList, userType, setUserType }: Props) => {
+    const filteredData = userType === 0 ? data : data.filter(item => selectedUserList.includes(item.homelessId));
     return (
         <div>
-            <RecipientFilterConainer />
+            <RecipientFilterConainer userType={userType} setUserType={setUserType} />
             <div className="h-[300px] w-[400px] overflow-y-scroll">
                 <div className="grid grid-cols-3 bg-neutral-100 pr-2" style={{
                     gridTemplateColumns: "1fr 1fr 3fr"
@@ -24,7 +33,7 @@ const RecipientList = ({ data }: { data: HomelessReadInfoType[] }) => {
                         ))
                     }
                 </div>
-                {data.map((userData, index) => (
+                {filteredData.map((userData, index) => (
                     <div key={index} className="grid grid-cols-3 border-t-[1px] border-solid border-neutral-200 text-[15px] py-1" style={{
                         gridTemplateColumns: "1fr 1fr 3fr"
                     }}>
