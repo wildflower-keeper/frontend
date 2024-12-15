@@ -3,7 +3,6 @@
 import Notice from "@/components/Layout/NoticeListContainer/items/Notice";
 import { useNoticeContext } from "@/components/Layout/NoticeProvider";
 import NoticeFilterContainer from "./items/NoticeFilterContainer";
-import NoticeDetail from "../NoticeDetail";
 
 const NoticeListContainer = () => {
     const noticeContext = useNoticeContext();
@@ -14,7 +13,6 @@ const NoticeListContainer = () => {
             <NoticeFilterContainer />
             <div className="relative flex items-start justify-between gap-10 w-full">
                     <Notice />
-                    {isOpenNoticeDetailPopup && <NoticeDetail />}
             </div>
         </div>
     )
