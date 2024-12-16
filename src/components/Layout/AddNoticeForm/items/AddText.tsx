@@ -48,6 +48,7 @@ const AddText = () => {
     }
 
     const error = Boolean(errors.title || errors.content || !watch().content || !watch().title);
+    const notUserSelected = !isEntirety && noticeTarget.length === 0;
     return (
         <div className="min-w-[400px]">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
@@ -92,8 +93,8 @@ const AddText = () => {
                 </div>
                 <button type="button"
                     onClick={() => setIsOpenFinalCheckButton(true)}
-                    disabled={error}
-                    className={`${error ? "bg-neutral-200" : "bg-[#00bf40]"} text-white py-2 mt-4 rounded-xl`}>
+                    disabled={error || notUserSelected}
+                    className={`${error || notUserSelected ? "bg-neutral-200" : "bg-[#00bf40]"} text-white py-2 mt-4 rounded-xl`}>
                     보내기
                 </button>
             </form>
