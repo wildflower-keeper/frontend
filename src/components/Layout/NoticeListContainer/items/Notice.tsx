@@ -8,10 +8,10 @@ import NoticeFilterContainer from "./NoticeFilterContainer";
 // Utils
 import { noticeList } from "@/api/v2/shelter-admin";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 
 // Types
-import { NoticeListParam, NoticeListResponseType } from "@/api/v2/shelter-admin/type";
+import { NoticeFilterType, NoticeListParam, NoticeListResponseType } from "@/api/v2/shelter-admin/type";
 import { get } from "lodash";
 
 
@@ -45,18 +45,19 @@ const Notice = () => {
         [noticeData, previousData],
     );
 
+    const noticeFilterHandler = useCallback((filterType: NoticeFilterType, isGlobal: boolean) =>
+        setParam((prev) => ({
+            ...prev,
+            filterType,
+            isGlobal,
+            pageNumber: 1,
+        })), []);
+
     return (
         <div className="w-full flex flex-col items-center text-sm">
             <div className="w-full flex justify-start">
                 <NoticeFilterContainer
-                    filterHandler={(filterType, isGlobal) =>
-                        setParam((prev) => ({
-                            ...prev,
-                            filterType,
-                            isGlobal,
-                            pageNumber: 1,
-                        }))
-                    }
+                    filterHandler={noticeFilterHandler}
                 />
             </div>
             <NoticeHeader />

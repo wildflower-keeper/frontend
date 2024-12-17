@@ -3,18 +3,16 @@ import FilterButton from "@/components/Composition/FilterButton";
 
 // Utils
 import { noticeFilterType } from "./notice.const";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 // Types
 import { NoticeFilterType } from "@/api/v2/shelter-admin/type";
-
-
 
 interface Props {
     filterHandler: (filterType: NoticeFilterType, isGlobal: boolean, pageNumber: number) => void
 }
 
-const NoticeFilterContainer = ({ filterHandler }: Props) => {
+const NoticeFilterContainer = memo(({ filterHandler }: Props) => {
     const [noticeFilterIndex, setNoticeFilterIndex] = useState(0);
     useEffect(() => {
         switch (noticeFilterIndex) {
@@ -44,6 +42,6 @@ const NoticeFilterContainer = ({ filterHandler }: Props) => {
             }
         </div>
     )
-}
+})
 
 export default NoticeFilterContainer;
