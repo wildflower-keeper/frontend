@@ -43,7 +43,7 @@ const SecondAuth = () => {
         });
     };
 
-    const [time, setTime] = useState(180);
+    const [time, setTime] = useState(300);
     useEffect(() => {
         const intervalId = setInterval(() => {
             setTime(prev => prev - 1);
