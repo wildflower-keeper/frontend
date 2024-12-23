@@ -74,7 +74,7 @@ const AddText = () => {
                             {
                                 required: true,
                                 maxLength: {
-                                    value: 50, message: "50자 이내로 작성해주세요."
+                                    value: 100, message: "100자 이내로 작성해주세요."
                                 }
                             })}
                             placeholder="내용을 입력해주세요." id="content" className={`border border-1 border-solid border-neutral-300 w-full rounded-md px-4 py-1 h-[100px] ${errors.content && "text-red-400 border-red-400"}`}
