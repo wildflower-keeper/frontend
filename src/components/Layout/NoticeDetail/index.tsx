@@ -65,7 +65,7 @@ const NoticeDetail = () => {
                 />
                 {/* <NoticeImage /> */}
             </div>
-            <div className="w-full flex justify-center items-center">
+            <div className="absolute bottom-3 w-full flex justify-center items-center">
                 <button onClick={onCloseClick} className="w-[500px] py-1 bg-[#19C23D] text-white rounded-xl">확인</button>
             </div>
         </div >

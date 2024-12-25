@@ -29,7 +29,7 @@ const RecipientList = ({ data, selectedUserList, userType, setUserType }: Props)
     return (
         <div>
             <RecipientFilterConainer userType={userType} setUserType={setUserType} />
-            <div className="h-[300px] w-[400px] overflow-y-scroll">
+            <div className="h-[280px] w-[400px] overflow-y-scroll">
                 <div className="grid grid-cols-3 bg-neutral-100 pr-2" style={{
                     gridTemplateColumns: "1fr 1fr 3fr"
                 }}>
