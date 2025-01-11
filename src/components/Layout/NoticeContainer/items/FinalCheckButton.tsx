@@ -1,7 +1,7 @@
 import Loading from "@/components/Composition/Loading";
 import { useNoticeContext } from "../../NoticeProvider";
 
-const FinalCheckButton = ({ isPending }: { isPending: boolean }) => {
+const FinalCheckButton = ({ isLoading }: { isLoading: boolean }) => {
     const noticeContext = useNoticeContext();
     const { setIsOpenFinalCheckButton, isOpenFinalCheckButton } = noticeContext;
     if (!isOpenFinalCheckButton) return null;
@@ -10,7 +10,7 @@ const FinalCheckButton = ({ isPending }: { isPending: boolean }) => {
             <h1>전송 하시겠습니까?</h1>
             <div className="flex gap-3 text-white w-[200px] py-2 rounded-md">
                 {
-                    isPending ?
+                    isLoading ?
                         <Loading loadingStyle="size-4 bg-green-500 mx-[39px]" />
                         :
                         <button type="submit" className="bg-[#00b226] p-1 rounded-xl w-[100px]">확인</button>

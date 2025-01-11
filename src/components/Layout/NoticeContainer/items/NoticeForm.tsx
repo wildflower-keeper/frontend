@@ -18,10 +18,11 @@ const checkBoxStyle = {
 
 const NoticeForm = () => {
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm<NoticeDataType>();
+    const [loading, setLoading] = useState(false);
     const [isIncludeSurvey, setIsIncludeSurvey] = useState(false);
     const queryClient = useQueryClient();
     const noticeContext = useNoticeContext();
-    const { isEntirety, noticeTarget, setIsOpenSuccessPopup, setIsOpenFinalCheckButton, setNoticeTarget, uploadedImage } = noticeContext;
+    const { isEntirety, noticeTarget, setIsOpenSuccessPopup, setIsOpenFinalCheckButton, setNoticeTarget, uploadedImage, setUploadedImage } = noticeContext;
 
     const { mutateAsync } = useMutation({
         mutationKey: uploadImage.mutationKey(),
@@ -45,11 +46,12 @@ const NoticeForm = () => {
         }
     };
 
-    const { mutate, isPending } = useMutation({
+    const { mutate } = useMutation({
         mutationKey: postNotice.mutationKey(),
         mutationFn: (data: NoticeRequestType) => postNotice(data)
     });
     const onSubmit = async (data: NoticeDataType) => {
+        setLoading(true);
         let image = "";
         if (uploadedImage) {
             const result = await handleImageSubmit(uploadedImage);
@@ -68,12 +70,16 @@ const NoticeForm = () => {
                     setIsOpenSuccessPopup(true);
                     setIsOpenFinalCheckButton(false);
                     setNoticeTarget([]);
+                    setUploadedImage(null);
                     queryClient.invalidateQueries({ queryKey: [...noticeList.queryKey()] });
                     reset();
                 },
                 onError: (error) => {
                     console.error(error);
                 },
+                onSettled: () => {
+                    setLoading(false);
+                }
             }
         )
     }
@@ -113,7 +119,7 @@ const NoticeForm = () => {
                         <div className="text-red-400">{errors.content?.message}</div>
                     </div>
                 </div>
-                <FinalCheckButton isPending={isPending} />
+                <FinalCheckButton isLoading={loading} />
                 <div className="flex justify-between items-center bg-neutral-200 rounded-xl px-2 border-2 border-solid border-neutral-300">
                     참여 여부 조사
                     <Checkbox

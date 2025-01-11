@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineDocumentAdd } from "react-icons/hi";
 import NoticeRecipientModal from "../../NoticeRecipientModal";
 import { useNoticeContext } from "../../NoticeProvider";
@@ -7,7 +7,7 @@ const UploadImage = () => {
   const [preview, setPreview] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const noticeContext = useNoticeContext();
-  const { isOpenUserSelectModal, setUploadedImage } = noticeContext;
+  const { isOpenUserSelectModal, setUploadedImage, uploadedImage } = noticeContext;
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const file = event.target.files[0];
@@ -17,6 +17,10 @@ const UploadImage = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if(!uploadedImage) setPreview("");
+  }, [uploadedImage]);
 
   const handleDrop = (event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
