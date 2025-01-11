@@ -18,6 +18,14 @@ const customAxios = axios.create({
   },
 });
 
+export const fileSendAxios = axios.create({
+  baseURL: "https://api.wildflower-gardening.com",
+  headers: {
+    accept: "*/*",
+    "Content-Type": "multipart/form-data",
+  },
+});
+
 const requestInterceptor: Interceptor<InternalAxiosRequestConfig> = {
   onFulfilled: (config) => {
     const { method, url } = config;
@@ -65,6 +73,15 @@ customAxios.interceptors.request.use(
   requestInterceptor.onRejected,
 );
 customAxios.interceptors.response.use(
+  responseInterceptor.onFulfilled,
+  responseInterceptor.onRejected,
+);
+
+fileSendAxios.interceptors.request.use(
+  requestInterceptor.onFulfilled,
+  requestInterceptor.onRejected,
+);
+fileSendAxios.interceptors.response.use(
   responseInterceptor.onFulfilled,
   responseInterceptor.onRejected,
 );

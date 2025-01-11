@@ -1,6 +1,6 @@
 "use client"
 
-import { noticeList, postNotice } from "@/api/v2/shelter-admin";
+import { noticeList, postNotice, uploadImage } from "@/api/v2/shelter-admin";
 import { NoticeDataType, NoticeRequestType } from "@/api/v2/shelter-admin/type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -16,18 +16,49 @@ const checkBoxStyle = {
     },
 }
 
-const AddText = () => {
+const NoticeForm = () => {
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm<NoticeDataType>();
     const [isIncludeSurvey, setIsIncludeSurvey] = useState(false);
     const queryClient = useQueryClient();
     const noticeContext = useNoticeContext();
-    const { isEntirety, noticeTarget, setIsOpenSuccessPopup, setIsOpenFinalCheckButton, setNoticeTarget } = noticeContext;
+    const { isEntirety, noticeTarget, setIsOpenSuccessPopup, setIsOpenFinalCheckButton, setNoticeTarget, uploadedImage } = noticeContext;
+
+    const { mutateAsync } = useMutation({
+        mutationKey: uploadImage.mutationKey(),
+        mutationFn: (image: FormData) => uploadImage(image)
+    });
+
+    const handleImageSubmit = async (uploadedImage: File) => {
+        if (!uploadedImage) {
+            alert("파일을 선택하세요!");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("multipartFile", uploadedImage);
+
+        try {
+            const response = await mutateAsync(formData);
+            return response;
+        } catch (error) {
+            console.error("업로드 실패:", error);
+        }
+    };
+
     const { mutate, isPending } = useMutation({
         mutationKey: postNotice.mutationKey(),
         mutationFn: (data: NoticeRequestType) => postNotice(data)
-    })
-    const onSubmit = (data: NoticeDataType) => {
-        const noticeData = { ...data, targetHomelessIds: [] as number[], isSurvey: isIncludeSurvey, ImageUrl: "" }
+    });
+    const onSubmit = async (data: NoticeDataType) => {
+        let image = "";
+        if (uploadedImage) {
+            const result = await handleImageSubmit(uploadedImage);
+            if (result) {
+                const { data: { imageUrl } } = result;
+                image = imageUrl;
+            }
+        }
+        const noticeData = { ...data, targetHomelessIds: [] as number[], isSurvey: isIncludeSurvey, imageUrl: image }
         if (!isEntirety) {
             noticeData.targetHomelessIds = noticeTarget.map((item) => +Object.keys(item)[0]);
         }
@@ -102,4 +133,4 @@ const AddText = () => {
     )
 }
 
-export default AddText;
+export default NoticeForm;
