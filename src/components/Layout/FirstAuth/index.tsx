@@ -34,10 +34,6 @@ const FirstAuth = () => {
       onSuccess: (res) => {
         setCurAdminEmail(getValues().email);
         setIsSuccessFirstAuth(true);
-        setCookie("authToken", res.authToken, {
-          path: "/",
-          expires: new Date(res.expiredAt),
-        });
       },
       onError: (error) => {
         setError(error.message);

@@ -44,7 +44,6 @@ const Notice = () => {
         () => get(noticeData, "items", previousData?.items || []),
         [noticeData, previousData],
     );
-
     return (
         <div className="w-full flex flex-col items-center text-sm">
             <div className="w-full flex justify-start">

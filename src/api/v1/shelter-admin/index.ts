@@ -19,7 +19,7 @@ import type {
   userDataFormType,
 } from "./type";
 
-export function firstAuth(loginData: LoginForm): Promise<LoginSuccessType> {
+export function firstAuth(loginData: LoginForm) {
   return customAxios.post(ROUTES.FIRST_AUTH, loginData)
     .then(({ data }) => {
       if ("authToken" in data && "expiredAt" in data) return data;
@@ -29,7 +29,7 @@ export function firstAuth(loginData: LoginForm): Promise<LoginSuccessType> {
     })
 }
 
-export function secondAuth(secondAuthData: EmailAuthenticationForm ) {
+export function secondAuth(secondAuthData: EmailAuthenticationForm ): Promise<LoginSuccessType> {
   return POST({ url: ROUTES.SECOND_AUTH, data: secondAuthData })
     .catch((error) => {
       throw new Error("인증에 실패했습니다.");

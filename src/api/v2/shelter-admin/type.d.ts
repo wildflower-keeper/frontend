@@ -84,7 +84,7 @@ export interface NoticeDetailResponseType {
   readHomelessIds: number[]
 }
 
-export interface NoticeDataType{
+export interface NoticeDataType {
   title: string
   content: string
 }
@@ -92,11 +92,15 @@ export interface NoticeDataType{
 export interface NoticeRequestType extends NoticeDataType {
   targetHomelessIds: number[]
   isSurvey: boolean
-  ImageUrl: string
+  imageUrl: string
 }
 
 export interface UserItemType {
   id: number
   name: string
   phoneNumber: string
+}
+
+export interface UploadImageResponseType {
+  data: { imageUrl: string }
 }

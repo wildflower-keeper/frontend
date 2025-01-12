@@ -1,9 +1,9 @@
-import { DELETE, GET, POST } from "@/api/axios";
+import { DELETE, fileSendAxios, GET, POST } from "@/api/axios";
 import * as ROUTES from "./Routes.const";
 import { CreateAdminDataType } from "@/components/Layout/CreateAdminForm";
 import { generateSplitUrl } from "@/api/utils.const";
 // Types
-import { AdminDataType, CreateAdminResponseType, NoticeDataType, NoticeListResponseType, NoticeParams, NoticeDetailResponseType, NoticeRequestType, NoticeRecipientResponseType } from "@/api/v2/shelter-admin/type";
+import { AdminDataType, CreateAdminResponseType, NoticeListResponseType, NoticeParams, NoticeDetailResponseType, NoticeRequestType, NoticeRecipientResponseType, UploadImageResponseType } from "@/api/v2/shelter-admin/type";
 
 export function adminList(): Promise<AdminDataType[]> {
     return GET({ url: ROUTES.ADMIN_LIST })
@@ -40,6 +40,10 @@ export function postNotice(noticeData: NoticeRequestType): Promise<NoticeListRes
     return POST({ url: ROUTES.NOTICE_LIST, data: { ...noticeData } });
 }
 
+export function uploadImage(file: FormData): Promise<UploadImageResponseType> {
+    return fileSendAxios.post(ROUTES.IMAGE, file);
+}
+
 export function getNoticeRecipient(id: number): Promise<NoticeRecipientResponseType> {
     return GET({url: ROUTES.NOTICE_RECIPIENT + '/' + id});
 }
@@ -55,3 +59,4 @@ getNoticeDetail.queryKey = () => generateSplitUrl(ROUTES.NOTICE_LIST);
 createAdminAccount.mutationKey = () => generateSplitUrl(ROUTES.ADMIN_LIST);
 deleteAdmin.mutationKey = () => generateSplitUrl(ROUTES.DELETE_ADMIN);
 postNotice.mutationKey = () => generateSplitUrl(ROUTES.ADMIN_LIST);
+uploadImage.mutationKey = () => generateSplitUrl(ROUTES.IMAGE);

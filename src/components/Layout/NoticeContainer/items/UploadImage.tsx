@@ -1,45 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineDocumentAdd } from "react-icons/hi";
-import SelectedUserList from "./SelectedUserList";
 import NoticeRecipientModal from "../../NoticeRecipientModal";
 import { useNoticeContext } from "../../NoticeProvider";
 
 const UploadImage = () => {
-  const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const noticeContext = useNoticeContext();
-  const {isOpenUserSelectModal} = noticeContext;
+  const { isOpenUserSelectModal, setUploadedImage, uploadedImage } = noticeContext;
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const file = event.target.files[0];
       if (file) {
-        setFile(file);
+        setUploadedImage(file);
         setPreview(URL.createObjectURL(file));
       }
     }
   };
 
-  const handleSubmit = async () => {
-    if (!file) {
-      alert("파일을 선택하세요!");
-      return;
-    }
+  useEffect(() => {
+    if(!uploadedImage) setPreview("");
+  }, [uploadedImage]);
 
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-      const response = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-      const result = await response.json();
-      console.log("업로드 결과:", result);
-    } catch (error) {
-      console.error("업로드 실패:", error);
-    }
-  };
   const handleDrop = (event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
@@ -56,8 +38,7 @@ const UploadImage = () => {
     setIsDragging(false);
   };
   return (
-    <div className="flex flex-col gap-5 relative w-full">
-      <SelectedUserList />
+    <div className="mt-5">
       {isOpenUserSelectModal && <NoticeRecipientModal />}
       <h1>공지사항 이미지 추가하기</h1>
       <label
