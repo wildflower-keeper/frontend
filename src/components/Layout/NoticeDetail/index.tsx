@@ -38,7 +38,6 @@ const NoticeDetail = () => {
             setSelectedUserList(noticeDetailData?.notParticipateHomelessIds || []);
         }
     }, [userType]);
-
     return (
         <div className="fixed w-full max-w-[800px] min-w-[600px] h-[600px] flex flex-col gap-4 right-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/4 p-3 bg-white rounded-2xl shadow-xl top-56">
             < div className="flex flex-row justify-between" >
@@ -63,7 +62,7 @@ const NoticeDetail = () => {
                 userType={userType} 
                 setUserType={setUserType}
                 />
-                {/* <NoticeImage /> */}
+                <NoticeImage imageUrl={noticeDetailData?.imageUrl} />
             </div>
             <div className="absolute bottom-3 w-full flex justify-center items-center">
                 <button onClick={onCloseClick} className="w-[500px] py-1 bg-[#19C23D] text-white rounded-xl">확인</button>

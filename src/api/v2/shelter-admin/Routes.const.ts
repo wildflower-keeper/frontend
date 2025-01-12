@@ -7,3 +7,4 @@ export const DELETE_ADMIN = generatePathByBase(BASE_PATH, "shelter-account");
 
 export const NOTICE_LIST = generatePathByBase(BASE_PATH, "notice");
 export const NOTICE_RECIPIENT = generatePathByBase(BASE_PATH, "notice-recipient");
+export const IMAGE = generatePathByBase(BASE_PATH, "image");

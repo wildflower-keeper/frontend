@@ -1,6 +1,6 @@
 "use client"
 
-import { noticeList, postNotice } from "@/api/v2/shelter-admin";
+import { noticeList, postNotice, uploadImage } from "@/api/v2/shelter-admin";
 import { NoticeDataType, NoticeRequestType } from "@/api/v2/shelter-admin/type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -16,18 +16,51 @@ const checkBoxStyle = {
     },
 }
 
-const AddText = () => {
+const NoticeForm = () => {
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm<NoticeDataType>();
+    const [loading, setLoading] = useState(false);
     const [isIncludeSurvey, setIsIncludeSurvey] = useState(false);
     const queryClient = useQueryClient();
     const noticeContext = useNoticeContext();
-    const { isEntirety, noticeTarget, setIsOpenSuccessPopup, setIsOpenFinalCheckButton, setNoticeTarget } = noticeContext;
-    const { mutate, isPending } = useMutation({
+    const { isEntirety, noticeTarget, setIsOpenSuccessPopup, setIsOpenFinalCheckButton, setNoticeTarget, uploadedImage, setUploadedImage } = noticeContext;
+
+    const { mutateAsync } = useMutation({
+        mutationKey: uploadImage.mutationKey(),
+        mutationFn: (image: FormData) => uploadImage(image)
+    });
+
+    const handleImageSubmit = async (uploadedImage: File) => {
+        if (!uploadedImage) {
+            alert("파일을 선택하세요!");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("multipartFile", uploadedImage);
+
+        try {
+            const response = await mutateAsync(formData);
+            return response;
+        } catch (error) {
+            console.error("업로드 실패:", error);
+        }
+    };
+
+    const { mutate } = useMutation({
         mutationKey: postNotice.mutationKey(),
         mutationFn: (data: NoticeRequestType) => postNotice(data)
-    })
-    const onSubmit = (data: NoticeDataType) => {
-        const noticeData = { ...data, targetHomelessIds: [] as number[], isSurvey: isIncludeSurvey, ImageUrl: "" }
+    });
+    const onSubmit = async (data: NoticeDataType) => {
+        setLoading(true);
+        let image = "";
+        if (uploadedImage) {
+            const result = await handleImageSubmit(uploadedImage);
+            if (result) {
+                const { data: { imageUrl } } = result;
+                image = imageUrl;
+            }
+        }
+        const noticeData = { ...data, targetHomelessIds: [] as number[], isSurvey: isIncludeSurvey, imageUrl: image }
         if (!isEntirety) {
             noticeData.targetHomelessIds = noticeTarget.map((item) => +Object.keys(item)[0]);
         }
@@ -37,12 +70,16 @@ const AddText = () => {
                     setIsOpenSuccessPopup(true);
                     setIsOpenFinalCheckButton(false);
                     setNoticeTarget([]);
+                    setUploadedImage(null);
                     queryClient.invalidateQueries({ queryKey: [...noticeList.queryKey()] });
                     reset();
                 },
                 onError: (error) => {
                     console.error(error);
                 },
+                onSettled: () => {
+                    setLoading(false);
+                }
             }
         )
     }
@@ -82,7 +119,7 @@ const AddText = () => {
                         <div className="text-red-400">{errors.content?.message}</div>
                     </div>
                 </div>
-                <FinalCheckButton isPending={isPending} />
+                <FinalCheckButton isLoading={loading} />
                 <div className="flex justify-between items-center bg-neutral-200 rounded-xl px-2 border-2 border-solid border-neutral-300">
                     참여 여부 조사
                     <Checkbox
@@ -102,4 +139,4 @@ const AddText = () => {
     )
 }
 
-export default AddText;
+export default NoticeForm;

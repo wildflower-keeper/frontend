@@ -24,7 +24,9 @@ interface NoticeContextStoreType {
     setIsOpenNoticeDetailPopup: React.Dispatch<React.SetStateAction<boolean>>,
     isOpenFinalCheckButton: boolean,
     setIsOpenFinalCheckButton: React.Dispatch<React.SetStateAction<boolean>>,
-    setNoticeTarget: React.Dispatch<React.SetStateAction<UserData[]>>
+    setNoticeTarget: React.Dispatch<React.SetStateAction<UserData[]>>,
+    uploadedImage: File | null,
+    setUploadedImage: React.Dispatch<React.SetStateAction<File | null>>
 }
 
 export const noticeContext = createContext<NoticeContextStoreType>({
@@ -45,7 +47,9 @@ export const noticeContext = createContext<NoticeContextStoreType>({
     setIsOpenNoticeDetailPopup: () => { },
     isOpenFinalCheckButton: false,
     setIsOpenFinalCheckButton: () => { },
-    setNoticeTarget: () => { }
+    setNoticeTarget: () => { },
+    uploadedImage: null,
+    setUploadedImage: () => { }
 })
 
 export const useNoticeContext = () => useContext(noticeContext);
@@ -59,6 +63,7 @@ function NoticeProvier({ children }: { children: ReactNode }) {
     const [isOpenSuccessPopup, setIsOpenSuccessPopup] = useState(false);
     const [totalUserNumber, setTotalUserNumber] = useState(0);
     const [isOpenFinalCheckButton, setIsOpenFinalCheckButton] = useState(false);
+    const [uploadedImage, setUploadedImage] = useState<File | null>(null);
 
     const checkUser = useCallback((id: number, name: string) => {
         setNoticeTarget((prev) => {
@@ -100,7 +105,9 @@ function NoticeProvier({ children }: { children: ReactNode }) {
                 setIsOpenNoticeDetailPopup,
                 isOpenFinalCheckButton,
                 setIsOpenFinalCheckButton,
-                setNoticeTarget
+                setNoticeTarget,
+                uploadedImage,
+                setUploadedImage
             }}
         >
             {children}
